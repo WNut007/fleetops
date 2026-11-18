@@ -513,34 +513,65 @@ test('create record starts configured lifecycles at their initial activity and n
         ->and((bool) $connection->table('orders')->value('adhoc'))->toBeFalse();
 });
 
-test('create record gives the tracking number the pickup country once the payload exists', function () {
+test('syncing gives a default-region tracking number the pickup country', function () {
     $connection = fleetopsInternalOrderCreateBoot();
     $connection->getSchemaBuilder()->table('places', function ($blueprint) {
         $blueprint->string('country')->nullable();
     });
-    $connection->table('places')->insert([
-        'uuid'         => '66666666-6666-4666-8666-666666666666',
-        'public_id'    => 'place_pickup',
-        'company_uuid' => 'company-1',
-        'name'         => 'Navanakorn DC',
-        'country'      => 'TH',
+    $connection->table('places')->insert(['uuid' => 'place-th', 'public_id' => 'place_th', 'company_uuid' => 'company-1', 'name' => 'Navanakorn DC', 'country' => 'TH']);
+    $connection->table('payloads')->insert(['uuid' => 'payload-th', 'public_id' => 'payload_th', 'company_uuid' => 'company-1', 'pickup_uuid' => 'place-th', 'type' => 'transport']);
+    $connection->table('tracking_numbers')->insert([
+        'uuid'            => 'tracking-sg',
+        'public_id'       => 'track_sg',
+        'company_uuid'    => 'company-1',
+        'tracking_number' => 'ACM0000000001SG',
+        'region'          => 'SG',
+        'owner_uuid'      => 'order-th',
+        'owner_type'      => Fleetbase\FleetOps\Models\Order::class,
+        'qr_code'         => 'old-qr',
+        'barcode'         => 'old-barcode',
     ]);
+    $connection->table('orders')->insert(['uuid' => 'order-th', 'public_id' => 'order_th', 'company_uuid' => 'company-1', 'payload_uuid' => 'payload-th', 'tracking_number_uuid' => 'tracking-sg']);
 
-    $result = (new OrderController())->createRecord(Request::create('/int/v1/orders', 'POST', [
-        'order' => [
-            'dispatched' => false,
-            'payload'    => ['type' => 'transport', 'pickup_uuid' => '66666666-6666-4666-8666-666666666666'],
-        ],
-    ]));
+    // The label codes come from the barcode facades; record what they are asked to render.
+    $rendered = new ArrayObject();
+    foreach (['DNS2D', 'DNS1D'] as $facade) {
+        app()->instance($facade, new class($facade, $rendered) {
+            public function __construct(private string $facade, private ArrayObject $rendered)
+            {
+            }
 
-    $trackingNumber = $connection->table('tracking_numbers')->first();
+            public function getBarcodePNG(...$arguments)
+            {
+                $this->rendered[] = [$this->facade, $arguments[0]];
 
-    expect($result)->toBeArray()->toHaveKey('order')
-        ->and($connection->table('tracking_numbers')->count())->toBe(1)
-        ->and($trackingNumber->region)->toBe('TH')
-        ->and($trackingNumber->tracking_number)->toEndWith('TH')
-        ->and($trackingNumber->barcode)->toContain($trackingNumber->tracking_number)
-        ->and($result['order']->resource->trackingNumber->tracking_number)->toBe($trackingNumber->tracking_number);
+                return $this->facade . '-png';
+            }
+        });
+        Illuminate\Support\Facades\Facade::clearResolvedInstance($facade);
+    }
+
+    try {
+        $order = Fleetbase\FleetOps\Models\Order::where('uuid', 'order-th')->first();
+        $order->syncTrackingNumberWithPickup();
+        // A second sync finds the region already right and changes nothing.
+        $order->syncTrackingNumberWithPickup();
+    } finally {
+        foreach (['DNS2D', 'DNS1D'] as $facade) {
+            app()->forgetInstance($facade);
+            Illuminate\Support\Facades\Facade::clearResolvedInstance($facade);
+        }
+    }
+
+    $trackingNumber = $connection->table('tracking_numbers')->where('uuid', 'tracking-sg')->first();
+
+    expect($trackingNumber->region)->toBe('TH')
+        ->and($trackingNumber->tracking_number)->toStartWith('ACM')->toEndWith('TH')
+        ->and($trackingNumber->qr_code)->toBe('DNS2D-png')
+        ->and($trackingNumber->barcode)->toBe('DNS1D-png')
+        ->and($order->trackingNumber->tracking_number)->toBe($trackingNumber->tracking_number)
+        ->and($rendered->count())->toBe(2)
+        ->and($rendered[1])->toBe(['DNS1D', $trackingNumber->tracking_number]);
 });
 
 test('the tracking number default region comes from config and falls back to SG', function () {
