@@ -36,7 +36,8 @@
         "rlanvin/php-rrule": "^2.6",
         "toin0u/geocoder-laravel": "^13.0",
         "webit/eval-math": "^1.0",
-        "spatie/icalendar-generator": "^2.8"
+        "spatie/icalendar-generator": "^2.8",
+        "spatie/laravel-pdf": "^1.9"
     },
     "require-dev": {
         "illuminate/encryption": "^12.69",

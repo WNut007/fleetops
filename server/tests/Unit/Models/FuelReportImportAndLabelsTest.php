@@ -149,9 +149,9 @@ test('entity labels render views and stream pdf output', function () {
             return $this;
         }
 
-        public function stream()
+        public function output()
         {
-            return 'entity-pdf-stream';
+            return '%PDF-entity-label';
         }
 
         public function __call($method, $arguments)
@@ -161,9 +161,14 @@ test('entity labels render views and stream pdf output', function () {
     };
     Illuminate\Container\Container::getInstance()->instance('dompdf.wrapper', $wrapper);
     app()->instance('dompdf.wrapper', $wrapper);
+    Barryvdh\DomPDF\Facade\Pdf::clearResolvedInstance('dompdf.wrapper');
+    config(['fleetops.labels.pdf_renderer' => 'dompdf']);
 
-    expect($entity->pdfLabel())->toBe($wrapper)
-        ->and($entity->pdfLabelStream())->toBe('entity-pdf-stream');
+    $stream = $entity->pdfLabelStream();
+    expect($entity->pdfLabel())->toBeInstanceOf(Fleetbase\FleetOps\Support\LabelDocument::class)
+        ->and($stream->getContent())->toBe('%PDF-entity-label')
+        ->and($stream->headers->get('Content-Type'))->toBe('application/pdf');
+    config(['fleetops.labels.pdf_renderer' => null]);
 });
 
 test('issue imports resolve drivers vehicles and locations', function () {

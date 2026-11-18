@@ -350,7 +350,7 @@ class Order extends Model
     }
 
     /**
-     * @return \Barryvdh\DomPDF\PDF
+     * @return \Fleetbase\FleetOps\Support\LabelDocument
      */
     public function pdfLabel()
     {

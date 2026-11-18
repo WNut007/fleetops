@@ -14,9 +14,9 @@ use Fleetbase\Support\Utils;
 
 <style>
     body {
-        font-family: "DejaVu Sans", "Noto Sans", "Noto Sans Arabic", "Noto Sans CJK SC", "Noto Sans CJK JP", sans-serif;
+        font-family: "Sarabun", "Noto Sans Thai Looped", "DejaVu Sans", "Noto Sans", "Noto Sans Arabic", "Noto Sans CJK SC", "Noto Sans CJK JP", sans-serif;
         font-size: 12px;
-        line-height: 1.35;
+        line-height: 1.5;
     }
 
     .group:after {

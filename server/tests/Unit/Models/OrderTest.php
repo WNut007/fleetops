@@ -879,9 +879,9 @@ test('order labels render views and stream pdf output', function () {
             return $this;
         }
 
-        public function stream()
+        public function output()
         {
-            return 'order-pdf-stream';
+            return '%PDF-order-label';
         }
 
         public function __call($method, $arguments)
@@ -891,9 +891,15 @@ test('order labels render views and stream pdf output', function () {
     };
     Illuminate\Container\Container::getInstance()->instance('dompdf.wrapper', $wrapper);
     app()->instance('dompdf.wrapper', $wrapper);
+    Barryvdh\DomPDF\Facade\Pdf::clearResolvedInstance('dompdf.wrapper');
+    config(['fleetops.labels.pdf_renderer' => 'dompdf']);
 
-    expect($order->pdfLabel())->toBe($wrapper)
-        ->and($order->pdfLabelStream())->toBe('order-pdf-stream');
+    $stream = $order->pdfLabelStream();
+    expect($order->pdfLabel())->toBeInstanceOf(Fleetbase\FleetOps\Support\LabelDocument::class)
+        ->and($order->pdfLabel()->output())->toBe('%PDF-order-label')
+        ->and($stream->getContent())->toBe('%PDF-order-label')
+        ->and($stream->headers->get('Content-Type'))->toBe('application/pdf');
+    config(['fleetops.labels.pdf_renderer' => null]);
 
     // Uuid-referenced order configs resolve with the order context applied
     $schema->create('order_configs', function ($blueprint) {

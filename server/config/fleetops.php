@@ -306,6 +306,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Label PDF Rendering
+    |--------------------------------------------------------------------------
+    |
+    | "chromium" renders order, waypoint and entity labels through
+    | spatie/laravel-pdf (Browsershot + headless Chromium), which shapes complex
+    | scripts such as Thai correctly. DomPDF is still used when Chromium fails.
+    | "dompdf" skips Chromium altogether.
+    |
+    */
+    'labels' => [
+        'pdf_renderer' => env('FLEETOPS_LABEL_PDF_RENDERER', 'chromium'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | API/Webhook Versions
     |--------------------------------------------------------------------------
     */

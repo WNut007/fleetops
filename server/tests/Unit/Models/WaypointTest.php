@@ -348,9 +348,9 @@ test('waypoint labels render views and stream pdf output', function () {
             return $this;
         }
 
-        public function stream()
+        public function output()
         {
-            return 'pdf-stream';
+            return '%PDF-waypoint-label';
         }
 
         public function __call($method, $arguments)
@@ -361,7 +361,12 @@ test('waypoint labels render views and stream pdf output', function () {
     Illuminate\Container\Container::getInstance()->instance('dompdf.wrapper', $wrapper);
     app()->instance('dompdf.wrapper', $wrapper);
     Barryvdh\DomPDF\Facade\Pdf::clearResolvedInstance('dompdf.wrapper');
+    config(['fleetops.labels.pdf_renderer' => 'dompdf']);
 
-    expect($waypoint->pdfLabel())->toBe($wrapper)
-        ->and($waypoint->pdfLabelStream())->toBe('pdf-stream');
+    $stream = $waypoint->pdfLabelStream();
+    expect($waypoint->pdfLabel())->toBeInstanceOf(Fleetbase\FleetOps\Support\LabelDocument::class)
+        ->and($stream->getContent())->toBe('%PDF-waypoint-label')
+        ->and($stream->headers->get('Content-Type'))->toBe('application/pdf')
+        ->and($wrapper->loadedHtml[0][1])->toBe('UTF-8');
+    config(['fleetops.labels.pdf_renderer' => null]);
 });
