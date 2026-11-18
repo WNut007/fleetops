@@ -11,6 +11,7 @@ export default class ModalsUpdateOrderActivityComponent extends Component {
     @service intl;
     @service notifications;
     @service modalsManager;
+    @service abilities;
     @tracked activityOptions = [];
     @tracked order;
     @tracked selectedActivity;
@@ -100,6 +101,27 @@ export default class ModalsUpdateOrderActivityComponent extends Component {
 
     get selectedActivityRequiresPod() {
         return Boolean(this.selectedActivityRecord?.require_pod);
+    }
+
+    /**
+     * The proof the order asks for (photo, signature or scan). The console can
+     * only take a photo, so for signature or scan the photo stands in for it,
+     * e.g. a photo of the signed delivery note.
+     */
+    get requiredPodMethod() {
+        return this.selectedActivityRecord?.pod_method ?? this.order?.pod_method ?? 'photo';
+    }
+
+    get requiredPodMethodIsPhoto() {
+        return this.requiredPodMethod === 'photo';
+    }
+
+    /**
+     * Bypassing proof is restricted to users with "fleet-ops bypass-proof order"
+     * (administrators always have it). The API enforces the same rule.
+     */
+    get canBypassProof() {
+        return this.abilities.can('fleet-ops bypass-proof order');
     }
 
     get acceptedProofFileTypes() {

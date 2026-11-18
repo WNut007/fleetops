@@ -31,7 +31,7 @@ class FleetOps
     public array $resources = [
         [
             'name'    => 'order',
-            'actions' => ['schedule', 'dispatch', 'cancel', 'optimize', 'export', 'import', 'assign-driver-for', 'assign-vehicle-for', 'update-route-for'],
+            'actions' => ['schedule', 'dispatch', 'cancel', 'optimize', 'export', 'import', 'assign-driver-for', 'assign-vehicle-for', 'update-route-for', 'bypass-proof'],
         ],
         [
             'name'    => 'order-config',

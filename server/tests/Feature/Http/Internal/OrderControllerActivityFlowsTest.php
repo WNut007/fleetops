@@ -733,3 +733,22 @@ test('orders with a configured lifecycle start their tracking at the initial act
     fleetopsInternalActivityUseLifecycle($connection, ['initial' => 'nowhere']);
     expect($order->getInitialTrackingStatus())->toBeNull();
 });
+
+test('bypassing proof of delivery is refused without the bypass-proof permission', function () {
+    $connection = fleetopsInternalActivityBoot();
+    fleetopsInternalActivitySeedOrder($connection, ['driver_assigned_uuid' => 'driver-1', 'started' => 1, 'status' => 'started']);
+
+    $controller = new class extends OrderController {
+        protected function canBypassProof(): bool
+        {
+            return false;
+        }
+    };
+
+    $activity = ['key' => 'completed', 'code' => 'completed', 'status' => 'Completed', 'details' => 'Done', 'complete' => true];
+    $refused  = $controller->updateActivity('order_internal', Request::create('/x', 'POST', ['activity' => $activity, 'bypass_proof' => 1]));
+
+    expect($refused->getStatusCode())->toBe(403)
+        ->and($refused->getData(true)['error'])->toContain('bypass proof of delivery')
+        ->and($connection->table('tracking_statuses')->where('code', 'COMPLETED')->count())->toBe(0);
+});

@@ -274,6 +274,19 @@ class OrderController extends FleetOpsController
     }
 
     /**
+     * Completing an order without its proof of delivery needs
+     * "fleet-ops bypass-proof order"; administrators always have it. A request
+     * without a signed-in user (internal calls, tests) is not restricted here:
+     * the console routes are already behind authentication.
+     */
+    protected function canBypassProof(): bool
+    {
+        $user = Auth::getUserFromSession();
+
+        return !$user || $user->isAdmin() || Auth::can('fleet-ops bypass-proof order');
+    }
+
+    /**
      * Resolve the concrete polymorphic customer type from the submitted UUID.
      */
     protected function normalizeCustomerType(array &$input): void
@@ -960,6 +973,10 @@ class OrderController extends FleetOpsController
 
         $proof       = $request->input('proof');
         $bypassProof = $request->boolean('bypass_proof');
+        if ($bypassProof && !$this->canBypassProof()) {
+            return response()->error('You are not allowed to bypass proof of delivery.', 403);
+        }
+
         $activity    = $request->inputArray('activity');
         $activity    = new Activity($activity, $order->getConfigFlow());
 
