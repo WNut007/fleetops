@@ -134,6 +134,21 @@ return [
     | back to the straight-line estimate; these values only tune behaviour.
     |--------------------------------------------------------------------------
     */
+    /*
+    |--------------------------------------------------------------------------
+    | Tracking Numbers
+    |--------------------------------------------------------------------------
+    |
+    | Tracking numbers end with the pickup's country code (ACM1234567890TH).
+    | default_region is used when the pickup has no country, province or
+    | district, and for records that have no pickup at all. Set it to the
+    | country you operate in, e.g. TH.
+    |--------------------------------------------------------------------------
+    */
+    'tracking_number' => [
+        'default_region' => env('FLEETOPS_TRACKING_NUMBER_DEFAULT_REGION', 'SG'),
+    ],
+
     'tracking' => [
         'traffic_enabled'                  => env('TRACKING_TRAFFIC_ENABLED', true),
         'cache_ttl_seconds'                => env('TRACKING_CACHE_TTL_SECONDS', 60),

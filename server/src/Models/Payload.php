@@ -985,7 +985,7 @@ class Payload extends Model
     {
         $pickup = $this->getPickupOrCurrentWaypoint();
 
-        return $pickup->country ?? $pickup->province ?? $pickup->district ?? 'SG';
+        return $pickup->country ?? $pickup->province ?? $pickup->district ?? TrackingNumber::defaultRegion();
     }
 
     public function getCountryCode(): string

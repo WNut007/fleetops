@@ -380,7 +380,7 @@ trait ResolvesOrderServiceStops
 
         $trackingNumberUuid = TrackingNumber::insertGetUuid([
             'company_uuid' => $payload->company_uuid ?? $order->company_uuid,
-            'region'       => strtoupper($place->country ?: $place->province ?: 'SG'),
+            'region'       => strtoupper($place->country ?: $place->province ?: TrackingNumber::defaultRegion()),
             'location'     => Utils::parsePointToWkt($this->serviceStopLocationPoint($place)),
         ], $place);
 

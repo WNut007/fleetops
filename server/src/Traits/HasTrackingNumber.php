@@ -149,7 +149,7 @@ trait HasTrackingNumber
             }
         }
 
-        return 'SG';
+        return TrackingNumber::defaultRegion();
     }
 
     public function getPickupLocation()

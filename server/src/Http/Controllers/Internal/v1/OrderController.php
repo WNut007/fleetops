@@ -212,6 +212,9 @@ class OrderController extends FleetOpsController
                         ->insertWaypoints($waypoints)
                         ->insertEntities($entities);
 
+                    // the tracking number was made before the payload existed
+                    $order->syncTrackingNumberWithPickup();
+
                     // If order creation includes files assosciate each to this order
                     $order->attachFiles($uploads);
 

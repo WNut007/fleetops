@@ -512,3 +512,62 @@ test('create record starts configured lifecycles at their initial activity and n
         ->and((bool) $connection->table('orders')->value('dispatched'))->toBeFalse()
         ->and((bool) $connection->table('orders')->value('adhoc'))->toBeFalse();
 });
+
+test('create record gives the tracking number the pickup country once the payload exists', function () {
+    $connection = fleetopsInternalOrderCreateBoot();
+    $connection->getSchemaBuilder()->table('places', function ($blueprint) {
+        $blueprint->string('country')->nullable();
+    });
+    $connection->table('places')->insert([
+        'uuid'         => '66666666-6666-4666-8666-666666666666',
+        'public_id'    => 'place_pickup',
+        'company_uuid' => 'company-1',
+        'name'         => 'Navanakorn DC',
+        'country'      => 'TH',
+    ]);
+
+    $result = (new OrderController())->createRecord(Request::create('/int/v1/orders', 'POST', [
+        'order' => [
+            'dispatched' => false,
+            'payload'    => ['type' => 'transport', 'pickup_uuid' => '66666666-6666-4666-8666-666666666666'],
+        ],
+    ]));
+
+    $trackingNumber = $connection->table('tracking_numbers')->first();
+
+    expect($result)->toBeArray()->toHaveKey('order')
+        ->and($connection->table('tracking_numbers')->count())->toBe(1)
+        ->and($trackingNumber->region)->toBe('TH')
+        ->and($trackingNumber->tracking_number)->toEndWith('TH')
+        ->and($trackingNumber->barcode)->toContain($trackingNumber->tracking_number)
+        ->and($result['order']->resource->trackingNumber->tracking_number)->toBe($trackingNumber->tracking_number);
+});
+
+test('the tracking number default region comes from config and falls back to SG', function () {
+    $previous = config('fleetops.tracking_number.default_region');
+
+    config(['fleetops.tracking_number.default_region' => ' th ']);
+    $configured = [
+        Fleetbase\FleetOps\Models\TrackingNumber::defaultRegion(),
+        Fleetbase\FleetOps\Models\TrackingNumber::trackingNumberSuffix(''),
+        Fleetbase\FleetOps\Models\TrackingNumber::trackingNumberSuffix(null),
+    ];
+
+    config(['fleetops.tracking_number.default_region' => '-']);
+    $empty = Fleetbase\FleetOps\Models\TrackingNumber::defaultRegion();
+
+    config(['fleetops.tracking_number.default_region' => $previous]);
+
+    expect($configured)->toBe(['TH', 'TH', 'TH'])
+        ->and($empty)->toBe('SG');
+});
+
+test('syncing the tracking number is a no-op for an order without one', function () {
+    $connection = fleetopsInternalOrderCreateBoot();
+    $connection->table('orders')->insert(['uuid' => 'order-no-tracking', 'public_id' => 'order_no_tracking', 'company_uuid' => 'company-1']);
+
+    $order = Fleetbase\FleetOps\Models\Order::where('uuid', 'order-no-tracking')->first();
+
+    expect($order->syncTrackingNumberWithPickup())->toBe($order)
+        ->and($connection->table('tracking_numbers')->count())->toBe(0);
+});

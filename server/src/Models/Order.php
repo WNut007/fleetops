@@ -491,6 +491,31 @@ class Order extends Model
         return $this->belongsTo(TrackingNumber::class)->without(['owner']);
     }
 
+    /**
+     * The tracking number is created with the order, before the console has
+     * attached the payload, so it takes the default region instead of the
+     * pickup's (an order picked up in Thailand ended in SG). Once the payload
+     * is in place, give a still-unshared tracking number the pickup's region.
+     */
+    public function syncTrackingNumberWithPickup(): self
+    {
+        $this->load(['trackingNumber', 'payload']);
+
+        $trackingNumber = $this->trackingNumber;
+        if (!$trackingNumber instanceof TrackingNumber) {
+            return $this;
+        }
+
+        $region = TrackingNumber::trackingNumberSuffix($this->getPickupRegion());
+        if ($region === TrackingNumber::trackingNumberSuffix($trackingNumber->region)) {
+            return $this;
+        }
+
+        $trackingNumber->regenerateForRegion($region);
+
+        return $this;
+    }
+
     public function trackingStatuses(): HasMany
     {
         return $this->hasMany(TrackingStatus::class, 'tracking_number_uuid', 'tracking_number_uuid');

@@ -182,7 +182,7 @@ class TrackingNumber extends Model
      *
      * @var string
      */
-    public static function generateTrackingNumber($region = 'SG', $length = 10): string
+    public static function generateTrackingNumber($region = null, $length = 10): string
     {
         $company = \Fleetbase\Models\Company::where('uuid', session('company'))->withoutGlobalScopes()->first();
         $number  = static::trackingNumberPrefix($company ? $company->name : null);
@@ -208,14 +208,48 @@ class TrackingNumber extends Model
 
     /**
      * The tracking number suffix for a region: its letters and digits,
-     * upper-cased, or SG when it has none. A region can be a province or
+     * upper-cased, or the default region when it has none (see defaultRegion()). A region can be a province or
      * district name when the pickup has no country ("New York" gives NEWYORK).
      */
     public static function trackingNumberSuffix(?string $region): string
     {
         $suffix = static::trackingNumberCharacters($region);
 
-        return $suffix !== '' ? $suffix : 'SG';
+        return $suffix !== '' ? $suffix : static::defaultRegion();
+    }
+
+    /**
+     * The region used when a record has no usable pickup region:
+     * fleetops.tracking_number.default_region (FLEETOPS_TRACKING_NUMBER_DEFAULT_REGION),
+     * reduced to its letters and digits, or SG when that leaves nothing.
+     */
+    public static function defaultRegion(): string
+    {
+        $region = static::trackingNumberCharacters((string) config('fleetops.tracking_number.default_region', 'SG'));
+
+        return $region !== '' ? $region : 'SG';
+    }
+
+    /**
+     * Give this tracking number a new number, codes and region, e.g. once the
+     * owner's real pickup is known. It must only be used before the number
+     * has been shared: the old number stops resolving. Written with a query
+     * update, like insertGetUuid(), so no model events or webhooks fire.
+     */
+    public function regenerateForRegion(?string $region): self
+    {
+        $region = static::trackingNumberSuffix($region);
+        $number = static::generateNumber($region);
+        $values = array_merge(
+            ['region' => $region, 'tracking_number' => $number],
+            static::codeImages($number, data_get($this, 'owner.public_id'))
+        );
+
+        static::where('uuid', $this->uuid)->update($values);
+        $this->forceFill($values)->syncOriginal();
+        ApiModelCache::invalidateModelCache($this, $this->company_uuid);
+
+        return $this;
     }
 
     /**
@@ -232,7 +266,7 @@ class TrackingNumber extends Model
      *
      * @var string
      */
-    public static function generateNumber($region = 'SG', $length = 10)
+    public static function generateNumber($region = null, $length = 10)
     {
         $n  = static::generateTrackingNumber($region, $length);
         $tr = static::where('tracking_number', $n)
@@ -382,7 +416,7 @@ class TrackingNumber extends Model
             $values['owner_type'] = Utils::getMutationType($owner);
         }
 
-        $values['tracking_number'] = static::newTrackingNumber($values['region'] ?? 'SG');
+        $values['tracking_number'] = static::newTrackingNumber($values['region'] ?? static::defaultRegion());
         $values                    = array_merge($values, static::codeImages($values['tracking_number'], $ownerPublicId));
 
         if (isset($values['meta']) && (is_object($values['meta']) || is_array($values['meta']))) {
