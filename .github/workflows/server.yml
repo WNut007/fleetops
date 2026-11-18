@@ -1,8 +1,9 @@
 name: PHP CI
 
 on:
+  workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [ main, 'feat/**' ]
     tags:
       - 'v*'
   pull_request:
@@ -11,6 +12,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GH_AUTH_TOKEN: ${{ secrets._GITHUB_AUTH_TOKEN }}
 
     steps:
     - name: Checkout code
@@ -28,8 +31,25 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y libzip-dev libgd-dev libfreetype6-dev libjpeg-dev libpng-dev imagemagick libmagickwand-dev libmemcached-dev libgeos-dev libgmp-dev default-mysql-client libicu-dev
       
+    # Label PDFs render through Chromium (spatie/laravel-pdf + Browsershot). Without
+    # Chromium and Puppeteer the Browsershot tests skip and that path counts as
+    # uncovered, which fails the 100% coverage gate below.
+    - name: Install Chromium, Puppeteer and Thai fonts for label rendering
+      run: |
+        # GitHub's ubuntu runners ship Google Chrome; only the Thai fonts are missing.
+        sudo apt-get install -y --no-install-recommends fonts-thai-tlwg fontconfig
+        CHROME_BIN="$(command -v google-chrome || command -v google-chrome-stable)"
+        echo "Using Chrome at $CHROME_BIN"; "$CHROME_BIN" --version
+        mkdir -p "$RUNNER_TEMP/pdf-renderer" && cd "$RUNNER_TEMP/pdf-renderer"
+        PUPPETEER_SKIP_DOWNLOAD=true npm install --no-audit --no-fund puppeteer@24
+        echo "LARAVEL_PDF_CHROME_PATH=$CHROME_BIN" >> "$GITHUB_ENV"
+        echo "LARAVEL_PDF_NODE_MODULES_PATH=$RUNNER_TEMP/pdf-renderer/node_modules" >> "$GITHUB_ENV"
+        echo "LARAVEL_PDF_NO_SANDBOX=true" >> "$GITHUB_ENV"
+
+    # Forks don't have the upstream secret; skip instead of failing the step.
     - name: Configure Composer Auth for Github
-      run: composer config --global github-oauth.github.com ${{ secrets._GITHUB_AUTH_TOKEN }}
+      if: ${{ env.GH_AUTH_TOKEN != '' }}
+      run: composer config --global github-oauth.github.com "$GH_AUTH_TOKEN"
 
     - name: Validate composer.json and composer.lock
       run: composer validate
