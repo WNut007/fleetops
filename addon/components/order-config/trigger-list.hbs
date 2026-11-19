@@ -1,5 +1,7 @@
 <div class="oc-triggers flex flex-col gap-3" ...attributes>
-    {{#each this.cards as |card|}}
+    {{!-- key="@index": the cards are rebuilt on every keystroke in the editor; without a key the
+         editor's inputs were re-rendered and lost focus after each character. --}}
+    {{#each this.cards key="@index" as |card|}}
         {{#if card.isEditing}}
             <div class="oc-card oc-trigger-editor {{if this.missingAction 'oc-trigger-editor--error'}}" data-test-trigger-editor>
                 <div class="oc-line__sentence">
@@ -53,7 +55,7 @@
                     </div>
                 {{/if}}
 
-                {{#each this.draftParameters as |parameter|}}
+                {{#each this.draftParameters key="name" as |parameter|}}
                     <InputGroup @name={{smart-humanize parameter.name}} @helpText={{parameter.description}}>
                         <input class="form-input w-full" value={{parameter.value}} aria-label={{smart-humanize parameter.name}} {{on "input" (fn this.setParam parameter.name)}} />
                     </InputGroup>

@@ -5,6 +5,13 @@ import { underscore, capitalize, w } from '@ember/string';
 import { task } from 'ember-concurrency';
 import { inject as service } from '@ember/service';
 
+/** "arrived_port" -> "Arrived Port"; the status suggested for a code. */
+export function statusFromCode(code) {
+    return w(String(code ?? '').replace(/_/g, ' '))
+        .map(capitalize)
+        .join(' ');
+}
+
 /**
  * A step of an order config's flow, in its side panel: Details (status, code, details, whether it
  * completes the order and needs proof of delivery), What happens here (the triggers that run when
@@ -88,15 +95,22 @@ export default class ActivityFormComponent extends Component {
 
     /**
      * Action method to set the activity code. It uses the underscore function to format
-     * the code and updates the status by capitalizing each word.
+     * the code and, while the status is still empty or still the one generated from the
+     * previous code, fills the status in from the code ("arrived_port" -> "Arrived Port").
+     * A status the user typed themselves (e.g. a Thai name) is left alone.
      * @param {Event} event - The event object containing the new activity code.
      * @action
      */
     @action setActivityCode(event) {
         const value = event.target.value;
         const code = underscore(value);
-        this.args.resource.set('code', code);
-        this.args.resource.set('status', w(value.replace(/_/g, ' ')).map(capitalize).join(' '));
+        const resource = this.args.resource;
+        const status = resource.get('status');
+
+        if (!status || status === statusFromCode(resource.get('code'))) {
+            resource.set('status', statusFromCode(value));
+        }
+        resource.set('code', code);
     }
 
     /**
