@@ -233,11 +233,14 @@ export default class TrackingPageFullViewComponent extends Component {
 
     get timezoneNote() {
         try {
-            const format = new Intl.DateTimeFormat(this.locale, { timeZoneName: 'short' });
+            const format = new Intl.DateTimeFormat(this.locale, { timeZoneName: 'short', timeZone: this.timeZone });
             const parts = format.formatToParts(new Date());
             const zone = parts.find((part) => part.type === 'timeZoneName')?.value;
+            if (!zone) {
+                return null;
+            }
 
-            return zone ? this.intl.t('tracking-page.page.timezone', { zone }) : null;
+            return this.timeZone ? this.intl.t('tracking-page.page.timezone-company', { zone }) : this.intl.t('tracking-page.page.timezone', { zone });
         } catch {
             return null;
         }
@@ -431,12 +434,36 @@ export default class TrackingPageFullViewComponent extends Component {
         return this.intl.primaryLocale ?? 'en-us';
     }
 
+    /**
+     * The company's time zone (e.g. Asia/Bangkok) when it has a valid one: times on the page
+     * are then the same for every customer, whatever their device is set to. Otherwise
+     * undefined, which keeps the device's own time zone.
+     */
+    get timeZone() {
+        const zone = this.args.company?.timezone;
+        if (!zone) {
+            return undefined;
+        }
+
+        try {
+            new Intl.DateTimeFormat('en-US', { timeZone: zone });
+            return zone;
+        } catch {
+            return undefined;
+        }
+    }
+
     time(value) {
-        return value ? new Intl.DateTimeFormat(this.locale, { hour: 'numeric', minute: '2-digit' }).format(new Date(value)) : '';
+        return value ? new Intl.DateTimeFormat(this.locale, { hour: 'numeric', minute: '2-digit', timeZone: this.timeZone }).format(new Date(value)) : '';
     }
 
     date(value) {
-        return value ? new Intl.DateTimeFormat(this.locale, { weekday: 'short', day: 'numeric', month: 'short' }).format(new Date(value)) : '';
+        return value ? new Intl.DateTimeFormat(this.locale, { weekday: 'short', day: 'numeric', month: 'short', timeZone: this.timeZone }).format(new Date(value)) : '';
+    }
+
+    /** The calendar day of a moment in the page's time zone, as YYYY-MM-DD. */
+    dayKey(value) {
+        return new Intl.DateTimeFormat('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: this.timeZone }).format(new Date(value));
     }
 
     dateTime(value) {
@@ -448,14 +475,13 @@ export default class TrackingPageFullViewComponent extends Component {
             return '';
         }
 
-        const day = new Date(value);
-        const today = new Date();
-        const yesterday = new Date(today.getTime() - 86400000);
-        if (day.toDateString() === today.toDateString()) {
+        const day = this.dayKey(value);
+        const now = Date.now();
+        if (day === this.dayKey(now)) {
             return this.intl.t('tracking-page.page.today');
         }
 
-        if (day.toDateString() === yesterday.toDateString()) {
+        if (day === this.dayKey(now - 86400000)) {
             return this.intl.t('tracking-page.page.yesterday');
         }
 

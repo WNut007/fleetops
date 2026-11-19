@@ -69,7 +69,17 @@ class TrackingView
             'theme'          => $branding['theme'] ?? 'system',
             'default_locale' => $branding['default_locale'] ?? 'en-us',
             'locales'        => $branding['locales'] ?? TrackingPageConfig::LOCALES,
+            'timezone'       => static::timezone(data_get($company, 'timezone')),
         ];
+    }
+
+    /**
+     * The company's time zone when it is a valid IANA name (e.g. Asia/Bangkok), so the page
+     * shows the same times to every customer; null keeps each customer's device time zone.
+     */
+    protected static function timezone(mixed $zone): ?string
+    {
+        return is_string($zone) && in_array($zone, \DateTimeZone::listIdentifiers(), true) ? $zone : null;
     }
 
     /**

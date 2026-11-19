@@ -4261,6 +4261,7 @@ tracking-page:
     live: "Live"
     reconnecting: "Reconnecting... live updates paused"
     timezone: "Times in your time zone ({zone})"
+    timezone-company: "Times in {zone}"
     progress: "Delivery progress"
     step-created: "Created"
     step-dispatched: "Dispatched"

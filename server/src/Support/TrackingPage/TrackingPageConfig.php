@@ -26,7 +26,7 @@ class TrackingPageConfig
     /**
      * The FleetOps locales a tracking page can be shown in.
      */
-    public const LOCALES = ['en-us', 'ar-ae', 'bg-bg', 'es-pa', 'fr-fr', 'mn-mn', 'pt-br', 'ru-ru', 'uk-ua', 'vi-vn'];
+    public const LOCALES = ['en-us', 'ar-ae', 'bg-bg', 'es-pa', 'fr-fr', 'mn-mn', 'pt-br', 'ru-ru', 'uk-ua', 'vi-vn', 'th-th'];
 
     /**
      * Slugs a company can't take: they would read as part of the page's own URLs.

@@ -477,3 +477,16 @@ test('stops, the tracker, items and proofs come from their real sources', functi
         ->and($call('findProof', 'proof_one')?->uuid)->toBe('p-1')
         ->and($call('updateFor', $order, $scopeA, trackingViewStops(), [])->ownStops()->count())->toBe(1);
 });
+
+test('branding carries the company time zone only when it is a valid one', function () {
+    $view = new TrackingView();
+
+    $bangkok = $view->branding([], (object) ['name' => 'ShipCode', 'timezone' => 'Asia/Bangkok']);
+    $unknown = $view->branding([], (object) ['name' => 'ShipCode', 'timezone' => 'Mars/Olympus_Mons']);
+    $none    = $view->branding([], null, 'https://instance.example/logo.png');
+
+    expect($bangkok['timezone'])->toBe('Asia/Bangkok')
+        ->and($unknown['timezone'])->toBeNull()
+        ->and($none['timezone'])->toBeNull()
+        ->and(TrackingPageConfig::LOCALES)->toContain('th-th');
+});

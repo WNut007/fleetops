@@ -19,6 +19,7 @@ export const TRACKING_PAGE_LOCALES = [
     { code: 'ru-ru', label: 'Русский' },
     { code: 'uk-ua', label: 'Українська' },
     { code: 'vi-vn', label: 'Tiếng Việt' },
+    { code: 'th-th', label: 'ไทย' },
 ];
 
 /**
