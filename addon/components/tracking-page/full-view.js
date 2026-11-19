@@ -209,6 +209,12 @@ export default class TrackingPageFullViewComponent extends Component {
             return this.timeline[0]?.status ?? null;
         }
 
+        if (this.stage === 'in_transit') {
+            // On its way without an arrival estimate (e.g. before the customer verifies): saying
+            // "we'll let you know when it's on its way" contradicted the headline.
+            return t('sub-in-transit');
+        }
+
         return this.stage === 'dispatched' ? t('sub-dispatched') : t('sub-preparing');
     }
 

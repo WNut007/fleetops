@@ -213,6 +213,7 @@ tracking-page:
     sub-delivered: "{when}"
     sub-dispatched: "การติดตามสดจะเริ่มเมื่อคนขับออกเดินทาง"
     sub-preparing: "เราจะแจ้งให้ทราบเมื่อสินค้าออกเดินทาง"
+    sub-in-transit: "สินค้าออกเดินทางแล้ว กำลังมาหาคุณ"
     delayed-title: "ล่าช้า"
     delayed-help: "เราจะอัปเดตเวลาที่จะถึงให้เป็นปัจจุบันเสมอ"
     stop-of: "การจัดส่งของคุณคือจุดที่ {position} จาก {total} จุด"

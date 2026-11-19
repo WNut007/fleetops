@@ -4284,6 +4284,7 @@ tracking-page:
     sub-delivered: "{when}"
     sub-dispatched: "Live tracking starts as soon as they're on the way."
     sub-preparing: "We'll let you know when it's on its way."
+    sub-in-transit: "Your order has left and is on its way to you."
     delayed-title: "Running late."
     delayed-help: "We'll keep your arrival time up to date."
     stop-of: "Your delivery is stop {position} of {total}"
