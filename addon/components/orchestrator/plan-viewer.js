@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { addMinutes } from 'date-fns';
 import toCalendarDate from '../../utils/to-calendar-date';
+import escapeHtml from '../../utils/escape-html';
 
 /**
  * Orchestrator::PlanViewer
@@ -243,8 +244,8 @@ export default class OrchestratorPlanViewerComponent extends Component {
 
         return {
             html: `<div style="width:100%;box-sizing:border-box;padding:4px 8px;border-left:3px solid ${color};">
-                <div style="font-size:0.72rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%;">${primaryLabel}</div>
-                ${secondaryLabel ? `<div style="font-size:0.65rem;color:#9ca3af;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${secondaryLabel}</div>` : ''}
+                <div style="font-size:0.72rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%;">${escapeHtml(primaryLabel)}</div>
+                ${secondaryLabel ? `<div style="font-size:0.65rem;color:#9ca3af;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(secondaryLabel)}</div>` : ''}
                 <div style="font-size:0.62rem;color:#6b7280;margin-top:1px;">${stopCount} stop${stopCount !== 1 ? 's' : ''}</div>
             </div>`,
         };
@@ -270,17 +271,17 @@ export default class OrchestratorPlanViewerComponent extends Component {
             html: `<div style="display:flex;flex-direction:column;gap:2px;padding:3px 0;overflow:hidden;height:100%;">
                 <div style="display:flex;align-items:center;gap:4px;flex-wrap:nowrap;">
                     <span style="width:7px;height:7px;border-radius:50%;background:#ffffff;opacity:0.9;flex-shrink:0;"></span>
-                    <span style="font-size:0.72rem;font-weight:700;color:#ffffff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0;">${title}</span>
+                    <span style="font-size:0.72rem;font-weight:700;color:#ffffff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0;">${escapeHtml(title)}</span>
                 </div>
-                ${timeRange ? `<div style="font-size:0.65rem;color:rgba(255,255,255,0.9);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.3;">${timeRange}</div>` : ''}
+                ${timeRange ? `<div style="font-size:0.65rem;color:rgba(255,255,255,0.9);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.3;">${escapeHtml(timeRange)}</div>` : ''}
                 ${
                     routeLine
-                        ? `<div style="font-size:0.62rem;color:rgba(255,255,255,0.8);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.3;word-break:break-word;">${routeLine}</div>`
+                        ? `<div style="font-size:0.62rem;color:rgba(255,255,255,0.8);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.3;word-break:break-word;">${escapeHtml(routeLine)}</div>`
                         : ''
                 }
                 ${
                     customerName
-                        ? `<div style="font-size:0.62rem;color:rgba(255,255,255,0.7);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.3;">${customerName}</div>`
+                        ? `<div style="font-size:0.62rem;color:rgba(255,255,255,0.7);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.3;">${escapeHtml(customerName)}</div>`
                         : ''
                 }
             </div>`,

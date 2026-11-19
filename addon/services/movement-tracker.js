@@ -33,6 +33,7 @@ export class EventBuffer {
     /** @type {import('./map-manager').default|null} */
     mapManager = null;
     latestPositionAt = null;
+    latestSentAt = null;
 
     constructor(model, { callback = null, waitTime = 1000 * 3, mapManager = null }) {
         this.model = model;
@@ -41,6 +42,16 @@ export class EventBuffer {
         this.mapManager = mapManager;
         const initialPosition = telemetryTimestamp(model?.telematics?.last_event_at);
         this.latestPositionAt = Number.isFinite(initialPosition) ? initialPosition : null;
+    }
+
+    /** Whether an event sent at `createdAt` is newer than every one applied so far. */
+    #isNewer(createdAt) {
+        const sentAt = new Date(createdAt).getTime();
+        if (!Number.isFinite(sentAt) || (this.latestSentAt !== null && sentAt < this.latestSentAt)) {
+            return false;
+        }
+        this.latestSentAt = sentAt;
+        return true;
     }
 
     /**
@@ -115,6 +126,12 @@ export class EventBuffer {
                 if (!Number.isFinite(observedAt) || (this.latestPositionAt !== null && observedAt < this.latestPositionAt)) continue;
                 this.latestPositionAt = observedAt;
                 this.model?.setProperties?.({ location: data.location, speed: data.speed, heading: data.heading });
+            } else if (data?.location && this.#isNewer(output.created_at)) {
+                // A location pushed by the driver app (/drivers/{id}/track) carries no telematics
+                // timestamp. Without this only the marker moved: tables showed the old location and
+                // "last seen" until the page was reloaded.
+                const sentAt = new Date(output.created_at);
+                this.model?.setProperties?.({ location: data.location, speed: data.speed, heading: data.heading, updated_at: sentAt });
             }
 
             // Resolve marker via adapter (provider-agnostic) or Leaflet fallback

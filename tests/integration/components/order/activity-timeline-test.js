@@ -1,26 +1,24 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'dummy/tests/helpers';
-import { render } from '@ember/test-helpers';
+import { render, settled } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+
+const status = (code, label) => ({ code, status: label, details: label, created_at: new Date('2026-11-20T00:00:00Z') });
 
 module('Integration | Component | order/activity-timeline', function (hooks) {
     setupRenderingTest(hooks);
 
-    test('it renders', async function (assert) {
-        // Set any properties with this.set('myProperty', 'value');
-        // Handle any actions with this.set('myAction', function(val) { ... });
+    test('a status recorded after the panel opened shows without a reload', async function (assert) {
+        this.set('resource', { status: 'created' });
+        this.set('activity', [status('CREATED', 'Order Created')]);
 
-        await render(hbs`<Order::ActivityTimeline />`);
+        await render(hbs`<Order::ActivityTimeline @resource={{this.resource}} @activity={{this.activity}} />`);
+        assert.dom('.timeline-items-container').includesText('Order Created');
+        assert.dom('.timeline-items-container').doesNotIncludeText('Order Dispatched');
 
-        assert.dom().hasText('');
+        this.set('activity', [status('CREATED', 'Order Created'), status('DISPATCHED', 'Order Dispatched')]);
+        await settled();
 
-        // Template block usage:
-        await render(hbs`
-      <Order::ActivityTimeline>
-        template block text
-      </Order::ActivityTimeline>
-    `);
-
-        assert.dom().hasText('template block text');
+        assert.dom('.timeline-items-container').includesText('Order Dispatched');
     });
 });

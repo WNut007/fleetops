@@ -11,6 +11,7 @@ import isJson from '@fleetbase/ember-core/utils/is-json';
 import createFullCalendarEventFromOrder from '../../../utils/create-full-calendar-event-from-order';
 import createFullCalendarEventFromScheduleItem from '../../../utils/create-full-calendar-event-from-schedule-item';
 import toCalendarDate from '../../../utils/to-calendar-date';
+import escapeHtml from '../../../utils/escape-html';
 
 // The ember-core socket service subscribes ~300 ms after listen() is called.
 const SOCKET_SUBSCRIBE_SETTLE_MS = 500;
@@ -244,7 +245,7 @@ export default class OperationsSchedulerIndexController extends Controller {
         const barColour = percentage >= 90 ? '#ef4444' : percentage >= 70 ? '#f59e0b' : '#6366f1';
         return {
             html: `<div class="ec-resource-label-inner" style="width:100%;box-sizing:border-box;padding:4px 8px;">
-                <div style="font-size:0.75rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%;">${driver.name ?? ''}</div>
+                <div style="font-size:0.75rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%;">${escapeHtml(driver.name)}</div>
                 <div style="display:flex;align-items:center;gap:4px;margin-top:3px;width:100%;">
                     <div style="flex:1;min-width:0;height:4px;background:#374151;border-radius:9999px;overflow:hidden;">
                         <div style="height:100%;width:${percentage}%;background:${barColour};border-radius:9999px;transition:width 0.3s;"></div>
@@ -274,11 +275,11 @@ export default class OperationsSchedulerIndexController extends Controller {
             html: `<div style="display:flex;flex-direction:column;gap:2px;padding:2px 0;overflow:hidden;height:100%;">
                 <div style="display:flex;align-items:center;gap:4px;flex-wrap:nowrap;">
                     <span style="width:7px;height:7px;border-radius:50%;background:#ffffff;opacity:0.9;flex-shrink:0;"></span>
-                    <span style="font-size:0.72rem;font-weight:700;color:#ffffff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0;">${tracking}</span>
-                    <span style="font-size:0.58rem;background:rgba(255,255,255,0.2);color:#ffffff;border-radius:3px;padding:1px 4px;white-space:nowrap;flex-shrink:0;">${statusLabel}</span>
+                    <span style="font-size:0.72rem;font-weight:700;color:#ffffff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0;">${escapeHtml(tracking)}</span>
+                    <span style="font-size:0.58rem;background:rgba(255,255,255,0.2);color:#ffffff;border-radius:3px;padding:1px 4px;white-space:nowrap;flex-shrink:0;">${escapeHtml(statusLabel)}</span>
                 </div>
-                ${metaLine ? `<div style="font-size:0.65rem;color:rgba(255,255,255,0.85);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${metaLine}</div>` : ''}
-                ${destination ? `<div style="font-size:0.65rem;color:rgba(255,255,255,0.7);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">→ ${destination}</div>` : ''}
+                ${metaLine ? `<div style="font-size:0.65rem;color:rgba(255,255,255,0.85);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(metaLine)}</div>` : ''}
+                ${destination ? `<div style="font-size:0.65rem;color:rgba(255,255,255,0.7);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">→ ${escapeHtml(destination)}</div>` : ''}
             </div>`,
         };
     }

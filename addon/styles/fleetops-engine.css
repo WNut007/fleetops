@@ -4754,6 +4754,12 @@ body[data-theme='dark'] #fleet-ops-scheduler-timeline .ec-sidebar {
     background-color: var(--ec-color-100);
 }
 
+/* A driver label is a name plus a workload bar (about 44px). The calendar sizes empty rows
+   to one line (18px), so without a floor each label spilled over the rows below it. */
+#fleet-ops-scheduler-timeline .ec-row-head {
+    min-height: 3rem;
+}
+
 #fleet-ops-scheduler-timeline .ec-resource {
     font-size: 0.75rem;
     font-weight: 500;
