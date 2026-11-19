@@ -485,12 +485,27 @@ export default class TrackingPageComponent extends Component {
         }
     }
 
+    /**
+     * Use ?lang= or the company's default language. The shared /~/track page first gets the
+     * instance's defaults from track/config, so the order's company default must be able to
+     * replace them once the order loads (a Thai company's page stayed in English). A language
+     * the customer picked in the selector, or one given with ?lang=, is never overridden.
+     */
     applyLocale(company) {
-        const preferred = this.urlSearchParams.get('lang') || company?.default_locale;
-        if (!this.localeApplied && preferred && company?.locales?.includes(preferred)) {
-            this.localeApplied = true;
-            this.intl.setLocale([preferred]);
+        const fromParam = this.urlSearchParams.get('lang');
+        const preferred = fromParam || company?.default_locale;
+        if (!preferred || !company?.locales?.includes(preferred)) {
+            return;
         }
+
+        const current = String(this.intl.primaryLocale ?? '').toLowerCase();
+        const pickedByCustomer = this.appliedLocale && current !== this.appliedLocale;
+        if (pickedByCustomer || this.appliedLocale === preferred || (this.appliedLocale && fromParam)) {
+            return;
+        }
+
+        this.appliedLocale = preferred;
+        this.intl.setLocale([preferred]);
     }
 
     watchColorScheme() {
