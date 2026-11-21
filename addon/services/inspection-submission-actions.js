@@ -192,7 +192,7 @@ export default class InspectionSubmissionActionsService extends ResourceActionSe
             acceptButtonText: this.intl.t('inspection.follow-up.create-issue-accept'),
             acceptButtonIcon: 'triangle-exclamation',
             endpoint: 'create-issue',
-            message: 'Issue created from failed inspection items.',
+            message: this.intl.t('fleetops-ui.js.services.inspection-submission-actions.issue-created-from-failed-inspection-items'),
         });
     }
 
@@ -205,7 +205,7 @@ export default class InspectionSubmissionActionsService extends ResourceActionSe
             acceptButtonIcon: 'clipboard-list',
             dueNote: this.dueNoteFor(submission),
             endpoint: 'create-work-order',
-            message: 'Work order created from failed inspection items.',
+            message: this.intl.t('fleetops-ui.js.services.inspection-submission-actions.work-order-created-from-failed-inspection'),
         });
     }
 
@@ -217,7 +217,7 @@ export default class InspectionSubmissionActionsService extends ResourceActionSe
             acceptButtonText: this.intl.t('inspection.follow-up.resolve-accept'),
             acceptButtonIcon: 'check',
             endpoint: 'resolve',
-            message: 'Inspection resolved.',
+            message: this.intl.t('fleetops-ui.js.services.inspection-submission-actions.inspection-resolved'),
         });
     }
 

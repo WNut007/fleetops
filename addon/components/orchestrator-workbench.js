@@ -414,7 +414,7 @@ export default class OrchestratorWorkbenchComponent extends Component {
         return {
             id: 'legacy',
             mode: 'allocate',
-            label: 'Allocate',
+            label: this.intl.t('fleetops-ui.js.components.orchestrator-workbench.allocate'),
             engine: null,
             allocationStrategy: 'route_aware',
             orderStatuses: ['created'],

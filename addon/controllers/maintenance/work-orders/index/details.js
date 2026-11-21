@@ -19,7 +19,13 @@ export default class MaintenanceWorkOrdersIndexDetailsController extends Control
 
     get actionButtons() {
         return [
-            { id: 'send-email', icon: 'paper-plane', fn: this.sendEmail, text: 'Send to Vendor', permission: 'fleet-ops update work-order' },
+            {
+                id: 'send-email',
+                icon: 'paper-plane',
+                fn: this.sendEmail,
+                text: this.intl.t('fleetops-ui.js.controllers.maintenance.work-orders.index.details.send-to-vendor'),
+                permission: 'fleet-ops update work-order',
+            },
             { id: 'edit', icon: 'edit', fn: this.edit, permission: 'fleet-ops update work-order' },
             { id: 'delete', icon: 'trash', fn: this.delete, type: 'danger', permission: 'fleet-ops delete work-order' },
         ];

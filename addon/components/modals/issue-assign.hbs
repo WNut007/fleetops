@@ -1,11 +1,14 @@
 <Modal::Default @modalIsOpened={{@modalIsOpened}} @options={{@options}} @confirm={{@onConfirm}} @decline={{@onDecline}}>
     <div class="modal-body-container">
-        <InputGroup @name="Assignee" @helpText="Choose the operator responsible for following up on this issue.">
+        <InputGroup
+            @name={{t "fleetops-ui.components.modals.issue-assign.assignee"}}
+            @helpText={{t "fleetops-ui.components.modals.issue-assign.choose-the-operator-responsible-for-following"}}
+        >
             <ModelSelect
                 @modelName="user"
                 @selectedItemComponent={{component "select-option/user" compact=true}}
                 @selectedModel={{this.selectedAssignee}}
-                @placeholder="Select assignee"
+                @placeholder={{t "fleetops-ui.components.modals.issue-assign.select-assignee"}}
                 @triggerClass="form-select form-input"
                 @infiniteScroll={{false}}
                 @renderInPlace={{true}}

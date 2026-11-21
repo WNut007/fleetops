@@ -1,5 +1,5 @@
 <Overlay @position="right" @noBackdrop={{true}} @width="580px" @fullHeight={{true}} @isResizable={{true}} as |overlay|>
-    <Overlay::Header @overlay={{overlay}} @title="New Order" @onPressCancel={{this.cancelOrderCreation}}>
+    <Overlay::Header @overlay={{overlay}} @title={{t "fleetops-ui.components.customer.order-form.new-order"}} @onPressCancel={{this.cancelOrderCreation}}>
         {{!-- <Button
             @icon="check"
             @type="primary"

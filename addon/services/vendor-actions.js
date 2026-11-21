@@ -50,7 +50,7 @@ export default class VendorActionsService extends ResourceActionService {
                 actionButtons: [{ icon: 'pencil', permission: 'fleet-ops update vendor', fn: () => closePanelsThen(this.resourceContextPanel, () => this.panel.edit(vendor)) }],
                 tabs: [
                     { key: 'overview', id: 'overview', label: this.intl.t('common.overview'), component: 'vendor/details' },
-                    { key: 'personnel', id: 'personnel', label: 'Personnel', component: 'vendor/personnel-tab' },
+                    { key: 'personnel', id: 'personnel', label: this.intl.t('fleetops-ui.js.services.vendor-actions.personnel'), component: 'vendor/personnel-tab' },
                 ],
                 ...PANEL_DEFAULTS,
                 ...options,
@@ -94,7 +94,7 @@ export default class VendorActionsService extends ResourceActionService {
     @action createVendorIntegration(provider, opts = {}) {
         const normalized = normalizeProvider(provider);
         if (!normalized) {
-            this.notifications.error('Invalid vendor provider configuration.');
+            this.notifications.error(this.intl.t('fleetops-ui.js.services.vendor-actions.invalid-vendor-provider-configuration'));
             return null;
         }
 
@@ -104,7 +104,7 @@ export default class VendorActionsService extends ResourceActionService {
         if (opts.autoSave) {
             // Return a promise if caller wants immediate persistence
             return record.save().catch((e) => {
-                this.notifications.error('Failed to create integration.');
+                this.notifications.error(this.intl.t('fleetops-ui.js.services.vendor-actions.failed-to-create-integration'));
                 // bubble up so caller can handle
                 throw e;
             });

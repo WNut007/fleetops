@@ -3,28 +3,28 @@
         <div class="issue-close-modal-summary">
             {{#if this.vehicleLabel}}
                 <div>
-                    <span>Vehicle</span>
+                    <span>{{t "fleetops-ui.components.modals.issue-close.vehicle"}}</span>
                     <strong>{{this.vehicleLabel}}</strong>
                 </div>
             {{/if}}
             {{#if this.orderLabel}}
                 <div>
-                    <span>Order</span>
+                    <span>{{t "fleetops-ui.components.modals.issue-close.order"}}</span>
                     <strong>{{this.orderLabel}}</strong>
                 </div>
             {{/if}}
             <div>
-                <span>Summary</span>
+                <span>{{t "fleetops-ui.components.modals.issue-close.summary"}}</span>
                 <strong>{{n-a this.issue.title}}</strong>
             </div>
             <div>
-                <span>Description</span>
+                <span>{{t "fleetops-ui.components.modals.issue-close.description"}}</span>
                 <strong>{{n-a this.issue.report "No report was provided."}}</strong>
             </div>
         </div>
 
-        <InputGroup @name="Close Note" @helpText="Describe why this issue is being closed.">
-            <Textarea @value={{this.note}} class="form-input w-full" rows={{5}} placeholder="Resolution note" />
+        <InputGroup @name={{t "fleetops-ui.components.modals.issue-close.close-note"}} @helpText={{t "fleetops-ui.components.modals.issue-close.describe-why-this-issue-is-being"}}>
+            <Textarea @value={{this.note}} class="form-input w-full" rows={{5}} placeholder={{t "fleetops-ui.components.modals.issue-close.resolution-note"}} />
         </InputGroup>
     </div>
 </Modal::Default>

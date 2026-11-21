@@ -40,7 +40,7 @@ export default class AnalyticsReportsIndexController extends Controller {
         return [
             {
                 id: 'bulk-delete',
-                label: 'Delete selected...',
+                label: this.intl.t('fleetops-ui.js.controllers.analytics.reports.index.delete-selected'),
                 class: 'text-red-500',
                 fn: this.reportActions.bulkDelete,
                 permission: 'iam delete report',
@@ -53,7 +53,7 @@ export default class AnalyticsReportsIndexController extends Controller {
             {
                 id: 'title',
                 sticky: true,
-                label: 'Title',
+                label: this.intl.t('fleetops-ui.js.controllers.analytics.reports.index.title'),
                 valuePath: 'title',
                 cellComponent: 'table/cell/anchor',
                 action: this.reportActions.transition.view,
@@ -64,7 +64,7 @@ export default class AnalyticsReportsIndexController extends Controller {
             },
             {
                 id: 'public-id',
-                label: 'ID',
+                label: this.intl.t('fleetops-ui.js.controllers.analytics.reports.index.id'),
                 valuePath: 'public_id',
                 cellComponent: 'click-to-copy',
                 resizable: true,
@@ -88,13 +88,13 @@ export default class AnalyticsReportsIndexController extends Controller {
                 actions: [
                     {
                         id: 'view',
-                        label: 'View report...',
+                        label: this.intl.t('fleetops-ui.js.controllers.analytics.reports.index.view-report'),
                         fn: this.reportActions.transition.view,
                         permission: 'iam view report',
                     },
                     {
                         id: 'edit',
-                        label: 'Edit report...',
+                        label: this.intl.t('fleetops-ui.js.controllers.analytics.reports.index.edit-report'),
                         fn: this.reportActions.transition.edit,
                         permission: 'iam update report',
                     },
@@ -103,7 +103,7 @@ export default class AnalyticsReportsIndexController extends Controller {
                     },
                     {
                         id: 'delete',
-                        label: 'Delete report...',
+                        label: this.intl.t('fleetops-ui.js.controllers.analytics.reports.index.delete-report'),
                         fn: this.reportActions.delete,
                         permission: 'iam delete report',
                     },

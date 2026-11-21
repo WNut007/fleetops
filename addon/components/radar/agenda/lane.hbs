@@ -18,7 +18,10 @@
                         >
                             <span class="fleet-ops-radar-avatar is-user">{{initials entry.driver.label}}</span>
                             <span class="fleet-ops-radar-agenda-shift-label">{{entry.driver.label}}</span>
-                            <span class="fleet-ops-radar-agenda-shift-meta">{{entry.label}} · {{t (concat "radar.agenda.shift-states." entry.state)}}{{#if entry.active_orders}} · {{entry.active_orders}} orders{{/if}}</span>
+                            <span class="fleet-ops-radar-agenda-shift-meta">{{entry.label}}
+                                ·
+                                {{t (concat "radar.agenda.shift-states." entry.state)}}{{#if entry.active_orders}}
+                                    {{t "fleetops-ui.components.radar.agenda.lane.orders" active_orders=entry.active_orders}}{{/if}}</span>
                             {{#if entry.handover_key}}<FaIcon @icon="right-left" class="ml-1" />{{/if}}
                         </button>
                     {{else}}

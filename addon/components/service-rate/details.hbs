@@ -1,5 +1,5 @@
 <div class="details-wrapper" ...attributes>
-    <ContentPanel @title="Details" @open={{true}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.service-rate.details.details"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
             <div class="field-info-container">
                 <div class="field-name">{{t "service-rate.fields.service-name"}}</div>
@@ -33,7 +33,7 @@
         </div>
     </ContentPanel>
 
-    <ContentPanel @title="Terms" @open={{true}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.service-rate.details.terms"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
             {{#if @resource.isParcelService}}
                 <div class="field-info-container">
@@ -57,7 +57,7 @@
                         <div class="field-value">{{n-a @resource.max_distance}}</div>
                     </div>
                     <div class="field-info-container">
-                        <div class="field-name">Max Distance Unit</div>
+                        <div class="field-name">{{t "fleetops-ui.components.service-rate.details.max-distance-unit"}}</div>
                         <div class="field-value">
                             {{#let (find-by "value" @resource.max_distance_unit (get-fleet-ops-options "longDistanceUnits")) as |unit|}}
                                 {{#if unit}}
@@ -88,7 +88,7 @@
                                 </tr>
                             {{else}}
                                 <tr>
-                                    <td colspan="2" class="text-center text-gray-500 italic">No rate fees defined</td>
+                                    <td colspan="2" class="text-center text-gray-500 italic">{{t "fleetops-ui.components.service-rate.details.no-rate-fees-defined"}}</td>
                                 </tr>
                             {{/each}}
                         </tbody>
@@ -116,7 +116,7 @@
                             </tr>
                         {{else}}
                             <tr>
-                                <td colspan="3" class="text-center text-gray-500 italic">No per drop fees defined</td>
+                                <td colspan="3" class="text-center text-gray-500 italic">{{t "fleetops-ui.components.service-rate.details.no-per-drop-fees-defined"}}</td>
                             </tr>
                         {{/each}}
                     </tbody>
@@ -124,17 +124,17 @@
             </div>
         </ContentPanel>
     {{else if @resource.isMultiZoneDistance}}
-        <ContentPanel @title="Multi-zone Distance" @open={{true}} @wrapperClass="bordered-top" @panelBodyWrapperClass="p-0i">
+        <ContentPanel @title={{t "fleetops-ui.components.service-rate.details.multi-zone-distance"}} @open={{true}} @wrapperClass="bordered-top" @panelBodyWrapperClass="p-0i">
             <div class="next-table-wrapper h-auto table-fluid rounded-none overflow-x-auto">
                 <table class="table table-fixed w-full">
                     <thead>
                         <tr>
-                            <th>Label</th>
-                            <th>Geography Type</th>
-                            <th>Geography</th>
-                            <th>Priority</th>
-                            <th>Rate</th>
-                            <th>Unit</th>
+                            <th>{{t "fleetops-ui.components.service-rate.details.label"}}</th>
+                            <th>{{t "fleetops-ui.components.service-rate.details.geography-type"}}</th>
+                            <th>{{t "fleetops-ui.components.service-rate.details.geography"}}</th>
+                            <th>{{t "fleetops-ui.components.service-rate.details.priority"}}</th>
+                            <th>{{t "fleetops-ui.components.service-rate.details.rate"}}</th>
+                            <th>{{t "fleetops-ui.components.service-rate.details.unit"}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -144,11 +144,23 @@
                                 <td>{{smart-humanize rateFee.geography_type}}</td>
                                 <td>
                                     {{#if (eq rateFee.geography_type "zone")}}
-                                        <Zone::Pill @zone={{resource-relation rateFee "zone"}} @titleFallback={{n-a rateFee.zone.name}} @imageSize="20" @imageClass="w-5 h-5" @subtitle={{null}} />
+                                        <Zone::Pill
+                                            @zone={{resource-relation rateFee "zone"}}
+                                            @titleFallback={{n-a rateFee.zone.name}}
+                                            @imageSize="20"
+                                            @imageClass="w-5 h-5"
+                                            @subtitle={{null}}
+                                        />
                                     {{else if (eq rateFee.geography_type "fallback")}}
-                                        Unmatched route distance
+                                        {{t "fleetops-ui.components.service-rate.details.unmatched-route-distance"}}
                                     {{else}}
-                                        <ServiceArea::Pill @serviceArea={{resource-relation rateFee "service_area"}} @titleFallback={{n-a rateFee.service_area.name}} @imageSize="20" @imageClass="w-5 h-5" @subtitle={{null}} />
+                                        <ServiceArea::Pill
+                                            @serviceArea={{resource-relation rateFee "service_area"}}
+                                            @titleFallback={{n-a rateFee.service_area.name}}
+                                            @imageSize="20"
+                                            @imageClass="w-5 h-5"
+                                            @subtitle={{null}}
+                                        />
                                     {{/if}}
                                 </td>
                                 <td>{{n-a rateFee.priority}}</td>
@@ -157,7 +169,7 @@
                             </tr>
                         {{else}}
                             <tr>
-                                <td colspan="6" class="text-center text-gray-500 italic">No geographic pricing rules defined</td>
+                                <td colspan="6" class="text-center text-gray-500 italic">{{t "fleetops-ui.components.service-rate.details.no-geographic-pricing-rules-defined"}}</td>
                             </tr>
                         {{/each}}
                     </tbody>
@@ -186,7 +198,7 @@
                 </div>
 
                 <div class="field-info-container col-span-2">
-                    <div class="field-name">Calculation Formula</div>
+                    <div class="field-name">{{t "fleetops-ui.components.service-rate.details.calculation-formula"}}</div>
                     <div class="field-value">
                         <code class="dark:text-gray-100">({{@resource.per_meter_flat_rate_fee}}
                             * {distance}
@@ -199,9 +211,11 @@
     {{else if @resource.isAlgorithm}}
         <ContentPanel @title={{t "service-rate.fields.custom-algorithm-title"}} @open={{true}} @wrapperClass="bordered-top">
             <div class="field-info-container">
-                <div class="field-name">Algorithm Code</div>
+                <div class="field-name">{{t "fleetops-ui.components.service-rate.details.algorithm-code"}}</div>
                 <div class="field-value">
-                    <pre class="bg-gray-100 dark:bg-gray-900 font-mono p-3 rounded text-xs overflow-x-auto"><code class="font-mono text-xs whitespace-break-spaces">{{n-a @resource.algorithm}}</code></pre>
+                    <pre class="bg-gray-100 dark:bg-gray-900 font-mono p-3 rounded text-xs overflow-x-auto"><code class="font-mono text-xs whitespace-break-spaces">{{n-a
+                                @resource.algorithm
+                            }}</code></pre>
                 </div>
             </div>
         </ContentPanel>
@@ -214,7 +228,12 @@
                     <div class="dark:text-gray-100">
                         <div class="grid grid-cols-7">
                             <div class="flex flex-col items-start justify-start pt-3">
-                                <img src={{parcel-box-image parcelFee.size}} alt="parcel size {{parcelFee.size}}" width="44" class="w-11" />
+                                <img
+                                    src={{parcel-box-image parcelFee.size}}
+                                    alt={{t "fleetops-ui.components.service-rate.details.parcel-size" size=parcelFee.size}}
+                                    width="44"
+                                    class="w-11"
+                                />
                                 <div class="mt-2 text-sm font-medium">
                                     {{humanize parcelFee.size}}
                                 </div>
@@ -294,7 +313,7 @@
                     </div>
                 {{else}}
                     <div class="col-span-2">
-                        <span class="text-gray-500 text-sm italic">No parcel fees configured</span>
+                        <span class="text-gray-500 text-sm italic">{{t "fleetops-ui.components.service-rate.details.no-parcel-fees-configured"}}</span>
                     </div>
                 {{/each}}
             </div>
@@ -321,10 +340,10 @@
         </div>
     </ContentPanel>
 
-    <ContentPanel @title="Additional Fees" @open={{true}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.service-rate.details.additional-fees"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
             <div class="field-info-container">
-                <div class="field-name">Cash on Delivery (COD)</div>
+                <div class="field-name">{{t "fleetops-ui.components.service-rate.details.cash-on-delivery-cod"}}</div>
                 <div class="field-value">
                     {{#if @resource.cod_calculation_method}}
                         {{#let (find-by "value" @resource.cod_calculation_method (get-fleet-ops-options "serviceRateCodCalculationMethods")) as |method|}}
@@ -334,19 +353,19 @@
                                     {{#if @resource.hasCodFlatFee}}
                                         <div class="mt-1">{{format-currency @resource.cod_flat_fee @resource.currency}}</div>
                                     {{else if @resource.hasCodPercentageFee}}
-                                        <div class="mt-1">{{@resource.cod_percent}}% of order value</div>
+                                        <div class="mt-1">{{t "fleetops-ui.components.service-rate.details.of-order-value" cod_percent=@resource.cod_percent}}</div>
                                     {{/if}}
                                 </div>
                             {{/if}}
                         {{/let}}
                     {{else}}
-                        <span class="text-gray-500 italic">Not configured</span>
+                        <span class="text-gray-500 italic">{{t "fleetops-ui.components.service-rate.details.not-configured"}}</span>
                     {{/if}}
                 </div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Peak Hours Surcharge</div>
+                <div class="field-name">{{t "fleetops-ui.components.service-rate.details.peak-hours-surcharge"}}</div>
                 <div class="field-value">
                     {{#if @resource.peak_hours_calculation_method}}
                         {{#let (find-by "value" @resource.peak_hours_calculation_method (get-fleet-ops-options "serviceRatePeakHourCalculationMethods")) as |method|}}
@@ -356,13 +375,13 @@
                                     {{#if @resource.hasPeakHoursFlatFee}}
                                         <div class="mt-1">{{format-currency @resource.peak_hours_flat_fee @resource.currency}}</div>
                                     {{else if @resource.hasPeakHoursPercentageFee}}
-                                        <div class="mt-1">{{@resource.peak_hours_percent}}% surcharge</div>
+                                        <div class="mt-1">{{t "fleetops-ui.components.service-rate.details.surcharge" peak_hours_percent=@resource.peak_hours_percent}}</div>
                                     {{/if}}
                                 </div>
                             {{/if}}
                         {{/let}}
                     {{else}}
-                        <span class="text-gray-500 italic">Not configured</span>
+                        <span class="text-gray-500 italic">{{t "fleetops-ui.components.service-rate.details.not-configured"}}</span>
                     {{/if}}
                 </div>
             </div>

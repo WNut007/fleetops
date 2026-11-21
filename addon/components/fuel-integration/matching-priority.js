@@ -1,3 +1,5 @@
+import { localizeOptions } from '../../utils/fleet-ops-options';
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 
@@ -68,7 +70,8 @@ const LEGACY_FIELD_ALIASES = {
 };
 
 export default class FuelIntegrationMatchingPriorityComponent extends Component {
-    fields = MATCHING_FIELDS;
+    @service intl;
+    fields = localizeOptions(this.intl, 'local.components.fuel-integration.matching-priority.MATCHING_FIELDS', MATCHING_FIELDS);
 
     get order() {
         if (Array.isArray(this.args.order)) {

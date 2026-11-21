@@ -2,7 +2,7 @@
     @resource={{this.sensor}}
     @controller={{this}}
     @actionButtons={{this.actionButtons}}
-    @headerTitle="Create a new sensor"
+    @headerTitle={{t "fleetops-ui.templates.connectivity.sensors.index.new.create-a-new-sensor"}}
     @saveTask={{this.save}}
     @onPressCancel={{transition-to "connectivity.sensors.index"}}
     @onOverlayReady={{fn (mut this.overlay)}}

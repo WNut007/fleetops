@@ -1,6 +1,11 @@
-import { helper } from '@ember/component/helper';
+import Helper from '@ember/component/helper';
+import { inject as service } from '@ember/service';
 import fleetOpsOptions from '../utils/fleet-ops-options';
 
-export default helper(function getFleetOpsOptions([key]) {
-    return fleetOpsOptions(key);
-});
+export default class GetFleetOpsOptionsHelper extends Helper {
+    @service intl;
+
+    compute([key]) {
+        return fleetOpsOptions(key, this.intl);
+    }
+}

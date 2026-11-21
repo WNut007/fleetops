@@ -8,6 +8,7 @@ import copyToClipboard from '@fleetbase/ember-core/utils/copy-to-clipboard';
 const SENSITIVE_METADATA_KEYS = ['password', 'secret', 'session', 'token'];
 
 export default class TelematicFormComponent extends Component {
+    @service intl;
     @service fetch;
     @service notifications;
     @tracked providers = [];
@@ -23,31 +24,31 @@ export default class TelematicFormComponent extends Component {
         return [
             {
                 icon: 'plug',
-                label: 'Provider',
+                label: this.intl.t('fleetops-ui.js.components.telematic.form.provider'),
                 complete: this.activeStep > 0 && this.isProviderStepValid,
                 active: this.activeStep === 0,
             },
             {
                 icon: 'key',
-                label: 'Credentials',
+                label: this.intl.t('fleetops-ui.js.components.telematic.form.credentials'),
                 complete: this.activeStep > 1 && this.areCredentialsValid,
                 active: this.activeStep === 1,
             },
             {
                 icon: 'circle-check',
-                label: 'Test',
+                label: this.intl.t('fleetops-ui.js.components.telematic.form.test'),
                 complete: this.activeStep > 2 && this.isTestStepValid,
                 active: this.activeStep === 2,
             },
             {
                 icon: 'link',
-                label: 'Webhook',
+                label: this.intl.t('fleetops-ui.js.components.telematic.form.webhook'),
                 complete: this.activeStep > 3 && this.isIntegrationStepValid,
                 active: this.activeStep === 3,
             },
             {
                 icon: 'clipboard-check',
-                label: 'Review',
+                label: this.intl.t('fleetops-ui.js.components.telematic.form.review'),
                 complete: false,
                 active: this.activeStep === 4,
             },
@@ -262,7 +263,7 @@ export default class TelematicFormComponent extends Component {
             entries.push({
                 time: this.formatDiagnosticTime(),
                 tone: 'muted',
-                text: 'Credential test has not been run yet',
+                text: this.intl.t('fleetops-ui.js.components.telematic.form.credential-test-has-not-been-run'),
             });
             return entries;
         }
@@ -270,14 +271,14 @@ export default class TelematicFormComponent extends Component {
         entries.push({
             time: this.formatDiagnosticTime(startedAt),
             tone: 'info',
-            text: 'Sending provider credential test request',
+            text: this.intl.t('fleetops-ui.js.components.telematic.form.sending-provider-credential-test-request'),
         });
 
         if (this.connectionState === 'testing') {
             entries.push({
                 time: this.formatDiagnosticTime(),
                 tone: 'info',
-                text: 'Awaiting provider response',
+                text: this.intl.t('fleetops-ui.js.components.telematic.form.awaiting-provider-response'),
             });
             return entries;
         }
@@ -285,7 +286,7 @@ export default class TelematicFormComponent extends Component {
         entries.push({
             time: this.formatDiagnosticTime(completedAt),
             tone: 'info',
-            text: 'Provider response received',
+            text: this.intl.t('fleetops-ui.js.components.telematic.form.provider-response-received'),
         });
 
         if (this.hasConnectionMetadata) {
@@ -300,7 +301,7 @@ export default class TelematicFormComponent extends Component {
             entries.push({
                 time: this.formatDiagnosticTime(completedAt),
                 tone: 'success',
-                text: 'Connection verified',
+                text: this.intl.t('fleetops-ui.js.components.telematic.form.connection-verified'),
             });
             return entries;
         }
@@ -383,7 +384,7 @@ export default class TelematicFormComponent extends Component {
             {
                 size: 'xs',
                 icon: 'plug',
-                text: 'Test Connection',
+                text: this.intl.t('fleetops-ui.js.components.telematic.form.test-connection'),
                 onClick: () => this.testConnection.perform(),
                 isLoading: this.testConnection.isRunning,
             },
@@ -466,10 +467,10 @@ export default class TelematicFormComponent extends Component {
     @action copyConnectionDiagnostics() {
         copyToClipboard(this.connectionDiagnosticText)
             .then(() => {
-                this.notifications.success('Connection diagnostics copied.');
+                this.notifications.success(this.intl.t('fleetops-ui.js.components.telematic.form.connection-diagnostics-copied'));
             })
             .catch(() => {
-                this.notifications.error('Unable to copy connection diagnostics.');
+                this.notifications.error(this.intl.t('fleetops-ui.js.components.telematic.form.unable-to-copy-connection-diagnostics'));
             });
     }
 
@@ -505,22 +506,22 @@ export default class TelematicFormComponent extends Component {
 
     validateStep(index) {
         if (index === 0 && !this.isProviderStepValid) {
-            this.notifications.warning('Choose a provider to continue.');
+            this.notifications.warning(this.intl.t('fleetops-ui.js.components.telematic.form.choose-a-provider-to-continue'));
             return false;
         }
 
         if (index === 1 && !this.areCredentialsValid) {
-            this.notifications.warning('Enter the required provider credentials to continue.');
+            this.notifications.warning(this.intl.t('fleetops-ui.js.components.telematic.form.enter-the-required-provider-credentials-to'));
             return false;
         }
 
         if (index === 3 && !this.isIntegrationStepValid) {
-            this.notifications.warning('Enter an integration name to continue.');
+            this.notifications.warning(this.intl.t('fleetops-ui.js.components.telematic.form.enter-an-integration-name-to-continue'));
             return false;
         }
 
         if (index === 4 && !this.isReviewStepValid) {
-            this.notifications.warning('Complete the required setup steps before saving.');
+            this.notifications.warning(this.intl.t('fleetops-ui.js.components.telematic.form.complete-the-required-setup-steps-before'));
             return false;
         }
 
@@ -564,7 +565,7 @@ export default class TelematicFormComponent extends Component {
             this.updateResourceConnectionTestMeta(result);
 
             if (result.success) {
-                this.notifications.success('Connection successful!');
+                this.notifications.success(this.intl.t('fleetops-ui.js.components.telematic.form.connection-successful'));
             } else {
                 this.notifications.error(result.message);
             }
@@ -575,7 +576,7 @@ export default class TelematicFormComponent extends Component {
                 message: error.message || 'Connection test failed',
             };
             this.updateResourceConnectionTestMeta(this.connectionTestResult);
-            this.notifications.error('Connection test failed');
+            this.notifications.error(this.intl.t('fleetops-ui.js.components.telematic.form.connection-test-failed'));
         }
     }
 

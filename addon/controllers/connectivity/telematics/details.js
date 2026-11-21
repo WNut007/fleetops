@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 import { task } from 'ember-concurrency';
 
 export default class ConnectivityTelematicsDetailsController extends Controller {
+    @service intl;
     @service hostRouter;
     @service fetch;
     @service modalsManager;
@@ -13,27 +14,27 @@ export default class ConnectivityTelematicsDetailsController extends Controller 
         return [
             {
                 route: 'connectivity.telematics.details.index',
-                label: 'Overview',
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.overview'),
             },
             {
                 route: 'connectivity.telematics.details.devices',
-                label: 'Devices',
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.devices-label'),
             },
             {
                 route: 'connectivity.telematics.details.attachments',
-                label: 'Vehicle Attachments',
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.vehicle-attachments'),
             },
             {
                 route: 'connectivity.telematics.details.sensors',
-                label: 'Sensors',
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.sensors-label'),
             },
             {
                 route: 'connectivity.telematics.details.events',
-                label: 'Events',
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.events-label'),
             },
             {
                 route: 'connectivity.telematics.details.logs',
-                label: 'Logs',
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.logs-label'),
             },
         ].map((tab) => ({
             ...tab,
@@ -45,12 +46,12 @@ export default class ConnectivityTelematicsDetailsController extends Controller 
         return [
             {
                 icon: 'plug',
-                text: 'Test',
+                text: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.test'),
                 onClick: () => this.openConnectionTestDialog(),
             },
             {
                 icon: 'satellite-dish',
-                text: 'Discover',
+                text: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.discover'),
                 onClick: () => this.discoverDevices.perform(),
                 isLoading: this.discoverDevices.isRunning,
             },
@@ -128,10 +129,10 @@ export default class ConnectivityTelematicsDetailsController extends Controller 
 
     @action openConnectionTestDialog() {
         this.modalsManager.show('modals/telematic-connection-diagnostics', {
-            title: 'Test Connection',
-            acceptButtonText: 'Run Test',
+            title: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.test-connection'),
+            acceptButtonText: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.run-test'),
             acceptButtonIcon: 'plug',
-            declineButtonText: 'Close',
+            declineButtonText: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.close'),
             telematic: this.model,
             onTested: () => this.hostRouter.refresh(),
         });

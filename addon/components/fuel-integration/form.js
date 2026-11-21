@@ -6,6 +6,7 @@ import { task } from 'ember-concurrency';
 import copyToClipboard from '@fleetbase/ember-core/utils/copy-to-clipboard';
 
 export default class FuelIntegrationFormComponent extends Component {
+    @service intl;
     @service fetch;
     @service notifications;
 
@@ -27,11 +28,11 @@ export default class FuelIntegrationFormComponent extends Component {
 
     get setupSteps() {
         return [
-            { key: 'provider', icon: 'gas-pump', label: 'Provider', complete: Boolean(this.selectedProvider) },
-            { key: 'credentials', icon: 'key', label: 'Credentials', complete: this.hasRequiredCredentials },
-            { key: 'test', icon: 'plug', label: 'Test', complete: this.connectionTestResult?.success === true },
-            { key: 'sync', icon: 'clock-rotate-left', label: 'Sync', complete: Boolean(this.syncSettings.window_days) },
-            { key: 'matching', icon: 'route', label: 'Matching', complete: this.matchingOrder.length > 0 },
+            { key: 'provider', icon: 'gas-pump', label: this.intl.t('fleetops-ui.js.components.fuel-integration.form.provider'), complete: Boolean(this.selectedProvider) },
+            { key: 'credentials', icon: 'key', label: this.intl.t('fleetops-ui.js.components.fuel-integration.form.credentials'), complete: this.hasRequiredCredentials },
+            { key: 'test', icon: 'plug', label: this.intl.t('fleetops-ui.js.components.fuel-integration.form.test'), complete: this.connectionTestResult?.success === true },
+            { key: 'sync', icon: 'clock-rotate-left', label: this.intl.t('fleetops-ui.js.components.fuel-integration.form.sync'), complete: Boolean(this.syncSettings.window_days) },
+            { key: 'matching', icon: 'route', label: this.intl.t('fleetops-ui.js.components.fuel-integration.form.matching'), complete: this.matchingOrder.length > 0 },
         ]
             .filter((step) => !this.isEditing || step.key !== 'provider')
             .map((step, index) => ({
@@ -194,12 +195,12 @@ export default class FuelIntegrationFormComponent extends Component {
 
     @task *testConnection() {
         if (!this.selectedProvider) {
-            this.notifications.warning('Choose a fuel integration provider first.');
+            this.notifications.warning(this.intl.t('fleetops-ui.js.components.fuel-integration.form.choose-a-fuel-integration-provider-first'));
             return;
         }
 
         if (!this.hasRequiredCredentials) {
-            this.notifications.warning('Enter the required credentials before testing.');
+            this.notifications.warning(this.intl.t('fleetops-ui.js.components.fuel-integration.form.enter-the-required-credentials-before-testing'));
             return;
         }
 
@@ -299,7 +300,7 @@ export default class FuelIntegrationFormComponent extends Component {
 
     @action copyDiagnostics() {
         copyToClipboard(this.diagnosticsText)
-            .then(() => this.notifications.success('Connection diagnostics copied.'))
-            .catch(() => this.notifications.error('Unable to copy diagnostics.'));
+            .then(() => this.notifications.success(this.intl.t('fleetops-ui.js.components.fuel-integration.form.connection-diagnostics-copied')))
+            .catch(() => this.notifications.error(this.intl.t('fleetops-ui.js.components.fuel-integration.form.unable-to-copy-diagnostics')));
     }
 }

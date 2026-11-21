@@ -2,33 +2,33 @@
     <div class="issue-detail-documents-header">
         <div class="issue-detail-documents-title">
             <FaIcon @icon="paperclip" />
-            <span>Attachments</span>
+            <span>{{t "fleetops-ui.components.issue.details.documents.attachments"}}</span>
         </div>
     </div>
 
     {{#if this.queueFile.isRunning}}
         <div class="issue-detail-dropzone is-loading">
-            <Spinner @loadingMessage="Uploading..." />
+            <Spinner @loadingMessage={{t "fleetops-ui.components.issue.details.documents.uploading"}} />
         </div>
     {{else}}
         {{#let (file-queue name="issue-files" onFileAdded=(perform this.queueFile) accept=(join "," this.acceptedFileTypes)) as |queue|}}
             <FileDropzone @queue={{queue}} class="issue-detail-dropzone file-dropzone" @disabled={{cannot-write @resource}} as |dropzone|>
                 {{#if dropzone.active}}
                     {{#if dropzone.valid}}
-                        Drop files to attach them to this issue.
+                        {{t "fleetops-ui.components.issue.details.documents.drop-files-to-attach-them-to"}}
                     {{else}}
-                        This file type is not supported.
+                        {{t "fleetops-ui.components.issue.details.documents.this-file-type-is-not-supported"}}
                     {{/if}}
                 {{else if queue.files.length}}
                     <div class="issue-detail-dropzone-ready">
                         <FaIcon @icon="folder-open" />
-                        <span>{{pluralize queue.files.length "file"}} ready for upload</span>
+                        <span>{{t "fleetops-ui.components.issue.details.documents.ready-for-upload" pluralize=(pluralize queue.files.length "file")}}</span>
                     </div>
                     <div class="issue-detail-dropzone-progress">{{queue.progress}}%</div>
                 {{else}}
                     <div class="issue-detail-dropzone-empty">
                         <FaIcon @icon="folder-open" />
-                        <span>Drop documents or images here</span>
+                        <span>{{t "fleetops-ui.components.issue.details.documents.drop-documents-or-images-here"}}</span>
                         <FileUpload
                             @name="issue-files"
                             @for="issue-files"
@@ -37,7 +37,7 @@
                             @onFileAdded={{perform this.queueFile}}
                             @disabled={{cannot-write @resource}}
                         >
-                            <a tabindex={{0}} class="btn btn-sm btn-default">select files</a>
+                            <a tabindex={{0}} class="btn btn-sm btn-default">{{t "fleetops-ui.components.issue.details.documents.select-files"}}</a>
                         </FileUpload>
                     </div>
                 {{/if}}

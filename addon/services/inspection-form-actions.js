@@ -87,8 +87,27 @@ export default class InspectionFormActionsService extends ResourceActionService 
         const isPublished = form?.is_published === true || form?.status === 'published';
 
         return [
-            ...(isPublished ? [] : [{ icon: 'check', fn: () => this.publish(form), text: 'Publish', type: 'success', permission: 'fleet-ops publish inspection-form' }]),
-            ...(isPublished ? [{ icon: 'link', fn: () => this.generateLink(form), text: 'Generate Link', permission: 'fleet-ops view inspection-form' }] : []),
+            ...(isPublished
+                ? []
+                : [
+                      {
+                          icon: 'check',
+                          fn: () => this.publish(form),
+                          text: this.intl.t('fleetops-ui.js.services.inspection-form-actions.publish'),
+                          type: 'success',
+                          permission: 'fleet-ops publish inspection-form',
+                      },
+                  ]),
+            ...(isPublished
+                ? [
+                      {
+                          icon: 'link',
+                          fn: () => this.generateLink(form),
+                          text: this.intl.t('fleetops-ui.js.services.inspection-form-actions.generate-link'),
+                          permission: 'fleet-ops view inspection-form',
+                      },
+                  ]
+                : []),
             { icon: 'edit', fn: () => (onEdit ? onEdit(form) : this.transition.edit(form)), permission: 'fleet-ops update inspection-form' },
             { icon: 'trash', fn: () => this.delete(form, { onConfirm: onDeleted }), type: 'danger', permission: 'fleet-ops delete inspection-form' },
         ];
@@ -133,7 +152,7 @@ export default class InspectionFormActionsService extends ResourceActionService 
     @action async publish(form) {
         try {
             await this.fetch.post(`inspection-forms/${form.id}/publish`);
-            this.notifications.success('Inspection form published.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.services.inspection-form-actions.inspection-form-published'));
             await this.refresh();
         } catch (error) {
             this.notifications.serverError(error);
@@ -143,7 +162,7 @@ export default class InspectionFormActionsService extends ResourceActionService 
     @action async archive(form) {
         try {
             await this.fetch.post(`inspection-forms/${form.id}/archive`);
-            this.notifications.success('Inspection form archived.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.services.inspection-form-actions.inspection-form-archived'));
             await this.refresh();
         } catch (error) {
             this.notifications.serverError(error);
@@ -187,10 +206,10 @@ export default class InspectionFormActionsService extends ResourceActionService 
         };
 
         return this.modalsManager.show('modals/inspection-link', {
-            title: 'Generate Inspection Link',
-            acceptButtonText: 'Generate Link',
+            title: this.intl.t('fleetops-ui.js.services.inspection-form-actions.generate-inspection-link'),
+            acceptButtonText: this.intl.t('fleetops-ui.js.services.inspection-form-actions.generate-link'),
             acceptButtonIcon: 'link',
-            declineButtonText: 'Close',
+            declineButtonText: this.intl.t('fleetops-ui.js.services.inspection-form-actions.close'),
             form,
             formState,
             confirm: async (modal) => {

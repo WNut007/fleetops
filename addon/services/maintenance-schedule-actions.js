@@ -90,7 +90,7 @@ export default class MaintenanceScheduleActionsService extends ResourceActionSer
         try {
             await this.fetch.post(`maintenance-schedules/${schedule.id}/pause`);
             schedule.set('status', 'paused');
-            this.notifications.success('Schedule paused successfully.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.services.maintenance-schedule-actions.schedule-paused-successfully'));
         } catch (error) {
             this.notifications.serverError(error);
         }
@@ -103,7 +103,7 @@ export default class MaintenanceScheduleActionsService extends ResourceActionSer
         try {
             await this.fetch.post(`maintenance-schedules/${schedule.id}/resume`);
             schedule.set('status', 'active');
-            this.notifications.success('Schedule resumed successfully.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.services.maintenance-schedule-actions.schedule-resumed-successfully'));
         } catch (error) {
             this.notifications.serverError(error);
         }
@@ -134,14 +134,24 @@ export default class MaintenanceScheduleActionsService extends ResourceActionSer
                 permission: 'fleet-ops update maintenance-schedule',
                 fn: () => (onEdit ? onEdit(schedule) : closePanelsThen(this.resourceContextPanel, () => this.panel.edit(schedule))),
             },
-            { icon: 'play', helpText: 'Trigger Work Order Now', permission: 'fleet-ops update maintenance-schedule', fn: () => this.triggerNow(schedule) },
+            {
+                icon: 'play',
+                helpText: this.intl.t('fleetops-ui.js.services.maintenance-schedule-actions.trigger-work-order-now'),
+                permission: 'fleet-ops update maintenance-schedule',
+                fn: () => this.triggerNow(schedule),
+            },
             {
                 icon: 'ellipsis-h',
                 iconPrefix: 'fas',
                 renderInPlace: true,
                 items: [
-                    { text: 'Download .ics', icon: 'download', iconPrefix: 'far', fn: () => this.downloadIcal(schedule) },
-                    { text: 'Add to Google Calendar', icon: 'calendar-plus', iconPrefix: 'fab', fn: () => this.addToGoogleCalendar(schedule) },
+                    { text: this.intl.t('fleetops-ui.js.services.maintenance-schedule-actions.download-ics'), icon: 'download', iconPrefix: 'far', fn: () => this.downloadIcal(schedule) },
+                    {
+                        text: this.intl.t('fleetops-ui.js.services.maintenance-schedule-actions.add-to-google-calendar'),
+                        icon: 'calendar-plus',
+                        iconPrefix: 'fab',
+                        fn: () => this.addToGoogleCalendar(schedule),
+                    },
                 ],
             },
             { icon: 'trash', type: 'danger', permission: 'fleet-ops delete maintenance-schedule', fn: () => this.delete(schedule, { onConfirm: onDeleted }) },

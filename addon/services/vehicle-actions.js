@@ -21,17 +21,17 @@ export default class VehicleActionsService extends ResourceActionService {
         return [
             {
                 key: 'overview',
-                label: 'Overview',
+                label: this.intl.t('fleetops-ui.js.services.vehicle-actions.overview'),
                 component: 'vehicle/details',
             },
             {
                 key: 'positions',
-                label: 'Positions',
+                label: this.intl.t('fleetops-ui.js.services.vehicle-actions.positions'),
                 component: 'positions-replay',
             },
             {
                 key: 'devices',
-                label: 'Devices',
+                label: this.intl.t('fleetops-ui.js.services.vehicle-actions.devices'),
                 component: 'device/manager',
             },
             {
@@ -46,17 +46,17 @@ export default class VehicleActionsService extends ResourceActionService {
             },
             {
                 key: 'schedules',
-                label: 'Schedules',
+                label: this.intl.t('fleetops-ui.js.services.vehicle-actions.schedules'),
                 component: 'vehicle/details/schedules',
             },
             {
                 key: 'work-orders',
-                label: 'Work Orders',
+                label: this.intl.t('fleetops-ui.js.services.vehicle-actions.work-orders'),
                 component: 'vehicle/details/work-orders',
             },
             {
                 key: 'maintenance-history',
-                label: 'Maintenance',
+                label: this.intl.t('fleetops-ui.js.services.vehicle-actions.maintenance'),
                 component: 'vehicle/details/maintenance-history',
             },
             {

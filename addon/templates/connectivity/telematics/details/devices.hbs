@@ -1,12 +1,16 @@
 <div class="flex flex-col gap-4 p-4 md:p-6">
     <div class="flex flex-col gap-1">
-        <h2 class="text-base font-bold text-gray-900 dark:text-gray-100">Device Inventory</h2>
-        <p class="text-sm text-gray-500 dark:text-gray-300">Review synced provider devices, connection state, and vehicle mapping from this connection.</p>
+        <h2 class="text-base font-bold text-gray-900 dark:text-gray-100">{{t "fleetops-ui.templates.connectivity.telematics.details.devices.device-inventory"}}</h2>
+        <p class="text-sm text-gray-500 dark:text-gray-300">{{t "fleetops-ui.templates.connectivity.telematics.details.devices.review-synced-provider-devices-connection-state"}}</p>
     </div>
 
     <section class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {{#each this.metrics as |metric|}}
-            <div class="fleet-ops-widget fleet-ops-kpi-tile fleetops-connectivity-kpi-tile {{metric.accentClass}} relative min-h-[102px] overflow-hidden rounded-md border bg-white shadow-sm dark:bg-gray-800">
+            <div
+                class="fleet-ops-widget fleet-ops-kpi-tile fleetops-connectivity-kpi-tile
+                    {{metric.accentClass}}
+                    relative min-h-[102px] overflow-hidden rounded-md border bg-white shadow-sm dark:bg-gray-800"
+            >
                 <div class="flex h-full items-start justify-between gap-3 p-3">
                     <div class="min-w-0">
                         <div class="truncate text-[10px] font-bold uppercase text-gray-500 dark:text-gray-400">{{metric.label}}</div>
@@ -23,12 +27,14 @@
     <section class="overflow-hidden rounded-md border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
         <div class="fleetops-provider-connections-header border-b border-gray-200 px-4 py-3 dark:border-gray-700">
             <div>
-                <h3 class="text-sm font-bold text-gray-900 dark:text-gray-100">Synced Devices</h3>
-                <p class="mt-1 text-xs leading-5 text-gray-500 dark:text-gray-300">Search provider identifiers, filter attachment state, and open devices for troubleshooting.</p>
+                <h3 class="text-sm font-bold text-gray-900 dark:text-gray-100">{{t "fleetops-ui.templates.connectivity.telematics.details.devices.synced-devices"}}</h3>
+                <p class="mt-1 text-xs leading-5 text-gray-500 dark:text-gray-300">{{t
+                        "fleetops-ui.templates.connectivity.telematics.details.devices.search-provider-identifiers-filter-attachment-state"
+                    }}</p>
             </div>
             <div class="fleetops-provider-connections-actions flex min-w-0 flex-wrap items-center gap-1 lg:ml-auto lg:flex-nowrap lg:justify-end">
                 <Layout::Resource::TabularActions
-                    @title="Synced Devices"
+                    @title={{t "fleetops-ui.templates.connectivity.telematics.details.devices.synced-devices"}}
                     @searchQuery={{this.query}}
                     @onSearch={{perform this.deviceActions.controllerSearchTask this}}
                     @columns={{this.columns}}
@@ -65,7 +71,7 @@
         {{else}}
             <Layout::Resource::Tabular
                 @resource="device"
-                @title="Synced Devices"
+                @title={{t "fleetops-ui.templates.connectivity.telematics.details.devices.synced-devices"}}
                 @data={{@model}}
                 @columns={{this.columns}}
                 @page={{this.page}}

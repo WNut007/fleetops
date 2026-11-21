@@ -27,7 +27,11 @@
                         </div>
                     {{/if}}
                 </div>
-                <Badge @status={{if @resource.online "online" "offline"}}>{{if @resource.online "Online" "Offline"}}</Badge>
+                <Badge @status={{if @resource.online "online" "offline"}}>{{if
+                        @resource.online
+                        (t "fleetops-ui.components.vehicle.panel-header.online")
+                        (t "fleetops-ui.components.vehicle.panel-header.offline")
+                    }}</Badge>
             </div>
         </div>
         <div class="next-view-header-right">

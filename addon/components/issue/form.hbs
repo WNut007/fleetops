@@ -1,7 +1,7 @@
 <div class="form-wrapper" ...attributes>
     <ContentPanel @title={{t "issue.fields.issue-report"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 gap-2 lg:grid-cols-2 lg:gap-2 no-input-group-padding text-xs">
-            <InputGroup @name="Title" @value={{@resource.title}} @wrapperClass="col-span-2" />
+            <InputGroup @name={{t "fleetops-ui.components.issue.form.title"}} @value={{@resource.title}} @wrapperClass="col-span-2" />
             <InputGroup @name={{t "issue.fields.reported-by"}}>
                 <ModelSelect
                     @modelName="user"
@@ -136,7 +136,7 @@
             <InputGroup @name={{t "issue.fields.report"}} @wrapperClass="col-span-2">
                 <Textarea
                     @value={{@resource.report}}
-                    aria-label="Issue Report"
+                    aria-label={{t "fleetops-ui.components.issue.form.issue-report"}}
                     class="w-full form-input"
                     disabled={{cannot-write @resource}}
                     placeholder={{t "issue.fields.report"}}

@@ -4,7 +4,7 @@
             <Image
                 src={{resource-image entry.photoUrl "customer"}}
                 @fallbackSrc={{(placeholder-image "customer")}}
-                alt={{or entry.name "Unknown customer"}}
+                alt={{or entry.name (t "fleetops-ui.components.order.customer-avatar-stack.unknown-customer")}}
                 class="{{this.sizeClass}} rounded-full ring-2 ring-gray-800 dark:ring-gray-700 shadow transition-shadow hover:shadow-md focus:shadow-md"
                 role="img"
                 tabindex="0"

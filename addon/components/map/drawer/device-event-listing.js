@@ -24,7 +24,7 @@ export default class MapDrawerDeviceEventListingComponent extends Component {
     get columns() {
         return [
             {
-                label: 'Event',
+                label: this.intl.t('fleetops-ui.js.components.map.drawer.device-event-listing.event'),
                 valuePath: 'event_type',
                 cellComponent: 'table/cell/anchor',
                 cellClassNames: 'uppercase',
@@ -37,7 +37,7 @@ export default class MapDrawerDeviceEventListingComponent extends Component {
                 filterComponent: 'filter/string',
             },
             {
-                label: 'Device',
+                label: this.intl.t('fleetops-ui.js.components.map.drawer.device-event-listing.device'),
                 valuePath: 'device.displayName',
                 cellComponent: 'cell/device-identity',
                 resourcePath: (event) => relationValue(event, 'device'),
@@ -52,7 +52,7 @@ export default class MapDrawerDeviceEventListingComponent extends Component {
                 model: 'device',
             },
             {
-                label: 'Provider',
+                label: this.intl.t('fleetops-ui.js.components.map.drawer.device-event-listing.provider'),
                 valuePath: 'provider',
                 resizable: true,
                 sortable: true,
@@ -61,7 +61,7 @@ export default class MapDrawerDeviceEventListingComponent extends Component {
                 filterComponent: 'filter/string',
             },
             {
-                label: 'Severity',
+                label: this.intl.t('fleetops-ui.js.components.map.drawer.device-event-listing.severity'),
                 valuePath: 'severity',
                 resizable: true,
                 sortable: true,
@@ -70,28 +70,28 @@ export default class MapDrawerDeviceEventListingComponent extends Component {
                 filterComponent: 'filter/string',
             },
             {
-                label: 'IDENT',
+                label: this.intl.t('fleetops-ui.js.components.map.drawer.device-event-listing.ident'),
                 valuePath: 'ident',
                 hidden: true,
                 resizable: true,
                 sortable: true,
             },
             {
-                label: 'Protocol',
+                label: this.intl.t('fleetops-ui.js.components.map.drawer.device-event-listing.protocol'),
                 valuePath: 'protocol',
                 hidden: true,
                 resizable: true,
                 sortable: true,
             },
             {
-                label: 'State',
+                label: this.intl.t('fleetops-ui.js.components.map.drawer.device-event-listing.state'),
                 valuePath: 'state',
                 hidden: true,
                 resizable: true,
                 sortable: true,
             },
             {
-                label: 'Code',
+                label: this.intl.t('fleetops-ui.js.components.map.drawer.device-event-listing.code'),
                 valuePath: 'code',
                 resizable: true,
                 sortable: true,

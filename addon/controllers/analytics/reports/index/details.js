@@ -3,15 +3,16 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
 export default class AnalyticsReportsIndexDetailsController extends Controller {
+    @service intl;
     @service hostRouter;
     @tracked tabs = [
         {
             route: 'analytics.reports.index.details.index',
-            label: 'Overview',
+            label: this.intl.t('fleetops-ui.js.controllers.analytics.reports.index.details.overview'),
         },
         {
             route: 'analytics.reports.index.details.result',
-            label: 'Result',
+            label: this.intl.t('fleetops-ui.js.controllers.analytics.reports.index.details.result'),
             icon: 'table',
         },
     ];

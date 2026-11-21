@@ -5,24 +5,25 @@ import { action } from '@ember/object';
 import { task } from 'ember-concurrency';
 
 export default class AdminRoutingSettingsComponent extends Component {
+    @service intl;
     @service fetch;
     @service notifications;
     @service routeEngine;
     @service routeOptimization;
     @tracked providerAccess = { google: false, valhalla: true, osrm: true, vroom: true };
     @tracked availableProviders = [
-        { key: 'google', label: 'Google' },
-        { key: 'valhalla', label: 'Valhalla' },
-        { key: 'osrm', label: 'OSRM' },
-        { key: 'vroom', label: 'VROOM' },
+        { key: 'google', label: this.intl.t('fleetops-ui.js.components.admin.routing-settings.google') },
+        { key: 'valhalla', label: this.intl.t('fleetops-ui.js.components.admin.routing-settings.valhalla') },
+        { key: 'osrm', label: this.intl.t('fleetops-ui.js.components.admin.routing-settings.osrm') },
+        { key: 'vroom', label: this.intl.t('fleetops-ui.js.components.admin.routing-settings.vroom') },
     ];
     @tracked defaultDisplayEngine = 'valhalla';
     @tracked defaultOptimizationEngine = 'valhalla';
     @tracked providerExceptions = [];
     @tracked serverRouting = 'road';
     serverRoutingOptions = [
-        { value: 'road', label: 'Road distance from the routing engine' },
-        { value: 'straight_line', label: 'Straight-line estimate (no routing calls)' },
+        { value: 'road', label: this.intl.t('fleetops-ui.js.components.admin.routing-settings.road-distance-from-the-routing-engine') },
+        { value: 'straight_line', label: this.intl.t('fleetops-ui.js.components.admin.routing-settings.straight-line-estimate-no-routing-calls') },
     ];
     @tracked trackingTrafficEnabled = true;
     @tracked trackingCacheTtlSeconds = 60;
@@ -64,7 +65,7 @@ export default class AdminRoutingSettingsComponent extends Component {
             const osrm = yield this.fetch.post('fleet-ops/settings/admin-osrm-settings', { api_host: this.osrmHost });
             this.applyOsrmSettings(osrm);
             yield this.fetch.post('fleet-ops/settings/admin-tracking-settings', this.trackingSettingsPayload);
-            this.notifications.success('Routing settings saved.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.components.admin.routing-settings.routing-settings-saved'));
         } catch (error) {
             this.notifications.serverError(error);
         }

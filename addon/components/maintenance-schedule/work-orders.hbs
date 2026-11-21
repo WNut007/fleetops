@@ -16,8 +16,7 @@
                             <div class="text-xs text-gray-500 dark:text-gray-400">
                                 {{workOrder.public_id}}
                                 {{#if workOrder.opened_at}}
-                                    &bull; Opened
-                                    {{format-date workOrder.opened_at "dd MMM yyyy"}}
+                                    {{t "fleetops-ui.components.maintenance-schedule.work-orders.bull-opened" formatdate=(format-date workOrder.opened_at "dd MMM yyyy")}}
                                 {{/if}}
                             </div>
                         </div>
@@ -32,8 +31,8 @@
     {{else}}
         <div class="flex flex-col items-center justify-center py-12 text-center text-gray-500 dark:text-gray-400">
             <FaIcon @icon="clipboard-list" class="mb-3 text-3xl text-gray-300 dark:text-gray-600" />
-            <p class="text-sm font-medium">No work orders yet</p>
-            <p class="mt-1 text-xs">Work orders will appear here when this schedule triggers.</p>
+            <p class="text-sm font-medium">{{t "fleetops-ui.components.maintenance-schedule.work-orders.no-work-orders-yet"}}</p>
+            <p class="mt-1 text-xs">{{t "fleetops-ui.components.maintenance-schedule.work-orders.work-orders-will-appear-here-when"}}</p>
         </div>
     {{/if}}
 </div>

@@ -5,6 +5,7 @@ import { action } from '@ember/object';
 import { task } from 'ember-concurrency';
 
 export default class ConnectivityFuelProvidersIndexNewController extends Controller {
+    @service intl;
     @service fuelIntegrationActions;
     @service hostRouter;
     @service notifications;
@@ -20,7 +21,7 @@ export default class ConnectivityFuelProvidersIndexNewController extends Control
             this.events.trackResourceCreated(connection);
             yield this.hostRouter.refresh();
             yield this.hostRouter.transitionTo('console.fleet-ops.connectivity.fuel-providers.details', connection);
-            this.notifications.success('Fuel integration connected.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.new.fuel-integration-connected'));
             this.resetForm();
         } catch (error) {
             this.notifications.serverError(error);

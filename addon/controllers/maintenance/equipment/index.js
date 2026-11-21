@@ -44,7 +44,7 @@ export default class MaintenanceEquipmentIndexController extends Controller {
                     },
                 ],
                 renderInPlace: true,
-                helpText: 'Change the layout',
+                helpText: this.intl.t('fleetops-ui.js.controllers.maintenance.equipment.index.change-the-layout'),
             },
             { id: 'refresh', icon: 'refresh', onClick: this.equipmentActions.refresh, helpText: this.intl.t('common.refresh') },
             { id: 'create', text: this.intl.t('common.new'), type: 'primary', icon: 'plus', onClick: this.equipmentActions.transition.create, permission: 'fleet-ops create equipment' },
@@ -62,7 +62,15 @@ export default class MaintenanceEquipmentIndexController extends Controller {
     }
 
     get bulkActions() {
-        return [{ id: 'bulk-delete', label: 'Delete selected...', class: 'text-red-500', fn: this.equipmentActions.bulkDelete, permission: 'fleet-ops delete equipment' }];
+        return [
+            {
+                id: 'bulk-delete',
+                label: this.intl.t('fleetops-ui.js.controllers.maintenance.equipment.index.delete-selected'),
+                class: 'text-red-500',
+                fn: this.equipmentActions.bulkDelete,
+                permission: 'fleet-ops delete equipment',
+            },
+        ];
     }
 
     get columns() {

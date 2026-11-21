@@ -1,13 +1,11 @@
 <div class="space-y-6">
     <InfoBlock @type="info" @icon="circle-info" class="mb-4">
-        Configure system-wide routing engine defaults here. Organizations can optionally override these values from their own routing settings, but only with providers that are switched on
-        below.
+        {{t "fleetops-ui.components.admin.routing-settings.configure-system-wide-routing-engine-defaults"}}
     </InfoBlock>
 
-    <ContentPanel @title="Provider Access" @open={{true}} @wrapperClass="bordered-classic">
+    <ContentPanel @title={{t "fleetops-ui.components.admin.routing-settings.provider-access"}} @open={{true}} @wrapperClass="bordered-classic">
         <p class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-            Choose which providers organizations may use for map routing, route optimization, order distance and tracking. A provider switched off here is never called, even if an
-            organization selected it; they fall back to the defaults below. Changes apply on every server within 30 seconds.
+            {{t "fleetops-ui.components.admin.routing-settings.choose-which-providers-organizations-may-use"}}
         </p>
         <div class="space-y-3">
             {{#each this.providerAccessRows as |provider|}}
@@ -15,7 +13,7 @@
                     <div>
                         <div class="text-sm font-semibold">{{provider.label}}</div>
                         {{#if provider.billed}}
-                            <div class="text-xs text-red-600 dark:text-red-400">Billed per request to the platform's Google Maps key.</div>
+                            <div class="text-xs text-red-600 dark:text-red-400">{{t "fleetops-ui.components.admin.routing-settings.billed-per-request-to-the-platform"}}</div>
                         {{/if}}
                     </div>
                     <Toggle @isToggled={{provider.enabled}} @onToggle={{fn this.toggleProvider provider.key}} />
@@ -24,10 +22,10 @@
         </div>
     </ContentPanel>
 
-    <ContentPanel @title="Routing Defaults" @open={{true}} @wrapperClass="bordered-classic">
+    <ContentPanel @title={{t "fleetops-ui.components.admin.routing-settings.routing-defaults"}} @open={{true}} @wrapperClass="bordered-classic">
         <InputGroup
-            @name="Default Routing Engine"
-            @helpText="Used for everything route, distance and time for organizations that have not chosen their own: map routes, each order's distance and time, and live ETAs while it is in progress."
+            @name={{t "fleetops-ui.components.admin.routing-settings.default-routing-engine"}}
+            @helpText={{t "fleetops-ui.components.admin.routing-settings.used-for-everything-route-distance-and"}}
         >
             <Select
                 class="w-full"
@@ -35,24 +33,27 @@
                 @options={{this.displayEngineOptions}}
                 @optionLabel="name"
                 @optionValue="key"
-                @placeholder="Select default routing engine"
+                @placeholder={{t "fleetops-ui.components.admin.routing-settings.select-default-routing-engine"}}
                 @onSelect={{fn (mut this.defaultDisplayEngine)}}
             />
         </InputGroup>
-        <InputGroup @name="Default Route Optimization Engine" @helpText="Decides the order stops are visited in, for organizations that have not chosen their own.">
+        <InputGroup
+            @name={{t "fleetops-ui.components.admin.routing-settings.default-route-optimization-engine"}}
+            @helpText={{t "fleetops-ui.components.admin.routing-settings.decides-the-order-stops-are-visited"}}
+        >
             <Select
                 class="w-full"
                 @value={{this.defaultOptimizationEngine}}
                 @options={{this.optimizationEngineOptions}}
                 @optionLabel="name"
                 @optionValue="key"
-                @placeholder="Select default route optimization engine"
+                @placeholder={{t "fleetops-ui.components.admin.routing-settings.select-default-route-optimization-engine"}}
                 @onSelect={{fn (mut this.defaultOptimizationEngine)}}
             />
         </InputGroup>
         <InputGroup
-            @name="Server-side Routing"
-            @helpText="Straight-line stops every routing call for order distance, time and live ETAs at once, for every organization. Map routes are not affected."
+            @name={{t "fleetops-ui.components.admin.routing-settings.server-side-routing"}}
+            @helpText={{t "fleetops-ui.components.admin.routing-settings.straight-line-stops-every-routing-call"}}
         >
             <Select
                 class="w-full"
@@ -66,15 +67,15 @@
         </InputGroup>
     </ContentPanel>
 
-    <ContentPanel @title="OSRM Server" @open={{true}} @wrapperClass="bordered-classic">
-        <InputGroup @name="OSRM Host" @helpText={{this.osrmHelpText}}>
+    <ContentPanel @title={{t "fleetops-ui.components.admin.routing-settings.osrm-server"}} @open={{true}} @wrapperClass="bordered-classic">
+        <InputGroup @name={{t "fleetops-ui.components.admin.routing-settings.osrm-host"}} @helpText={{this.osrmHelpText}}>
             <Input @value={{this.osrmHost}} placeholder="https://osrm.example.com" class="w-full form-input" data-test-osrm-host />
         </InputGroup>
     </ContentPanel>
 
-    <ContentPanel @title="Organization Exceptions" @open={{true}} @wrapperClass="bordered-classic">
+    <ContentPanel @title={{t "fleetops-ui.components.admin.routing-settings.organization-exceptions"}} @open={{true}} @wrapperClass="bordered-classic">
         <p class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-            Switch a provider on for specific organizations only, for example Google for a customer who pays for it.
+            {{t "fleetops-ui.components.admin.routing-settings.switch-a-provider-on-for-specific"}}
         </p>
         <div class="space-y-3">
             {{#each this.providerExceptionRows as |row|}}
@@ -85,7 +86,7 @@
                             @options={{this.exceptionProviderOptions}}
                             @selected={{row.selected}}
                             @onChange={{fn this.setExceptionProviders row.exception}}
-                            @placeholder="Select providers"
+                            @placeholder={{t "fleetops-ui.components.admin.routing-settings.select-providers"}}
                             @triggerClass="form-select form-input form-input-sm flex-1"
                             as |provider|
                         >
@@ -95,14 +96,14 @@
                     <Button @type="danger" @size="xs" @icon="trash" @onClick={{fn this.removeProviderException row.exception}} />
                 </div>
             {{else}}
-                <div class="text-sm text-gray-500">No exceptions. Every organization follows Provider Access.</div>
+                <div class="text-sm text-gray-500">{{t "fleetops-ui.components.admin.routing-settings.no-exceptions-every-organization-follows-provider"}}</div>
             {{/each}}
         </div>
-        <InputGroup @name="Add Organization" class="mt-4">
+        <InputGroup @name={{t "fleetops-ui.components.admin.routing-settings.add-organization"}} class="mt-4">
             <ModelSelect
                 @modelName="company"
                 @query={{hash view="admin"}}
-                @placeholder="Search organizations"
+                @placeholder={{t "fleetops-ui.components.admin.routing-settings.search-organizations"}}
                 @triggerClass="form-select form-input"
                 @infiniteScroll={{false}}
                 @renderInPlace={{true}}
@@ -114,35 +115,38 @@
         </InputGroup>
     </ContentPanel>
 
-    <ContentPanel @title="Tracking Behaviour" @open={{true}} @wrapperClass="bordered-classic">
+    <ContentPanel @title={{t "fleetops-ui.components.admin.routing-settings.tracking-behaviour"}} @open={{true}} @wrapperClass="bordered-classic">
         <p class="mb-2 text-sm text-gray-600 dark:text-gray-400">
-            Live ETAs, remaining distance and route lines come from each organization's routing engine. These settings only tune their behaviour.
+            {{t "fleetops-ui.components.admin.routing-settings.live-etas-remaining-distance-and-route"}}
         </p>
         <div class="flex justify-end">
             <Button
                 @type="default"
                 @size="xs"
                 @icon={{if this.showTrackingAdvancedSettings "chevron-up" "chevron-down"}}
-                @text="Advanced Settings"
+                @text={{t "fleetops-ui.components.admin.routing-settings.advanced-settings"}}
                 @onClick={{this.toggleTrackingAdvancedSettings}}
             />
         </div>
         {{#if this.showTrackingAdvancedSettings}}
             <div class="mt-4 space-y-4 rounded-md border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-800">
-                <InputGroup @name="Traffic-Aware ETA" @helpText="Use traffic-aware provider calculations when supported.">
+                <InputGroup
+                    @name={{t "fleetops-ui.components.admin.routing-settings.traffic-aware-eta"}}
+                    @helpText={{t "fleetops-ui.components.admin.routing-settings.use-traffic-aware-provider-calculations-when"}}
+                >
                     <Toggle @isToggled={{this.trackingTrafficEnabled}} @onToggle={{fn (mut this.trackingTrafficEnabled)}} />
                 </InputGroup>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <InputGroup @name="Summary Cache TTL">
+                    <InputGroup @name={{t "fleetops-ui.components.admin.routing-settings.summary-cache-ttl"}}>
                         <Input @type="number" @value={{this.trackingCacheTtlSeconds}} min="15" max="300" class="form-input w-full" />
                     </InputGroup>
-                    <InputGroup @name="Route Cache TTL">
+                    <InputGroup @name={{t "fleetops-ui.components.admin.routing-settings.route-cache-ttl"}}>
                         <Input @type="number" @value={{this.trackingRouteCacheTtlSeconds}} min="60" max="1800" class="form-input w-full" />
                     </InputGroup>
-                    <InputGroup @name="Stale Location Threshold">
+                    <InputGroup @name={{t "fleetops-ui.components.admin.routing-settings.stale-location-threshold"}}>
                         <Input @type="number" @value={{this.trackingStaleLocationThresholdSeconds}} min="30" max="3600" class="form-input w-full" />
                     </InputGroup>
-                    <InputGroup @name="Fallback Speed">
+                    <InputGroup @name={{t "fleetops-ui.components.admin.routing-settings.fallback-speed"}}>
                         <Input @type="number" @value={{this.trackingDefaultVehicleSpeedKph}} min="1" max="160" class="form-input w-full" />
                     </InputGroup>
                 </div>
@@ -163,7 +167,7 @@
         @type="primary"
         @size="sm"
         @icon="save"
-        @text="Save Changes"
+        @text={{t "fleetops-ui.components.admin.routing-settings.save-changes"}}
         @onClick={{perform this.saveSettings}}
         @isLoading={{or this.saveSettings.isRunning this.loadSettings.isRunning}}
         @disabled={{this.saveSettings.isRunning}}

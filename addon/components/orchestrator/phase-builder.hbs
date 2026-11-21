@@ -29,10 +29,20 @@
                             <p class="text-2xs text-gray-400 truncate">{{t "orchestrator.phase-n" n=(add index 1)}}</p>
                         </div>
                         <div class="flex flex-col gap-0.5 flex-shrink-0">
-                            <button type="button" class="text-gray-300 hover:text-gray-500 dark:hover:text-gray-200" {{on "click" (fn this.movePhaseUp index)}} title="Move up">
+                            <button
+                                type="button"
+                                class="text-gray-300 hover:text-gray-500 dark:hover:text-gray-200"
+                                {{on "click" (fn this.movePhaseUp index)}}
+                                title={{t "fleetops-ui.components.orchestrator.phase-builder.move-up"}}
+                            >
                                 <FaIcon @icon="chevron-up" @size="xs" />
                             </button>
-                            <button type="button" class="text-gray-300 hover:text-gray-500 dark:hover:text-gray-200" {{on "click" (fn this.movePhaseDown index)}} title="Move down">
+                            <button
+                                type="button"
+                                class="text-gray-300 hover:text-gray-500 dark:hover:text-gray-200"
+                                {{on "click" (fn this.movePhaseDown index)}}
+                                title={{t "fleetops-ui.components.orchestrator.phase-builder.move-down"}}
+                            >
                                 <FaIcon @icon="chevron-down" @size="xs" />
                             </button>
                         </div>

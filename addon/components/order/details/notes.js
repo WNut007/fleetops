@@ -14,7 +14,7 @@ export default class OrderDetailsNotesComponent extends Component {
         return [
             {
                 type: 'default',
-                text: 'Edit',
+                text: this.intl.t('fleetops-ui.js.components.order.details.notes.edit'),
                 icon: 'pencil',
                 iconPrefix: 'fas',
                 permission: 'fleet-ops update order',

@@ -13,11 +13,11 @@ export default class ManagementFleetsIndexDetailsController extends Controller {
         return [
             {
                 route: 'management.fleets.index.details.index',
-                label: 'Overview',
+                label: this.intl.t('fleetops-ui.js.controllers.management.fleets.index.details.overview'),
             },
             {
                 route: 'management.fleets.index.details.vehicles',
-                label: 'Vehicles',
+                label: this.intl.t('fleetops-ui.js.controllers.management.fleets.index.details.vehicles'),
             },
             {
                 route: 'management.fleets.index.details.drivers',

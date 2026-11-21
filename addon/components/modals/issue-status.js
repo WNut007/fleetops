@@ -3,6 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
 export default class ModalsIssueStatusComponent extends Component {
+    @service intl;
     @service notifications;
 
     @tracked options = {};
@@ -27,7 +28,7 @@ export default class ModalsIssueStatusComponent extends Component {
             try {
                 this.issue.status = this.selectedStatus?.value ?? this.issue.status;
                 await this.issue.save();
-                this.notifications.success('Issue status updated.');
+                this.notifications.success(this.intl.t('fleetops-ui.js.components.modals.issue-status.issue-status-updated'));
 
                 if (typeof this.options.onSaved === 'function') {
                     await this.options.onSaved(this.issue);

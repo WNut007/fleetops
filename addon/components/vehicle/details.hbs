@@ -4,7 +4,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 text-xs dark:text-gray-100">
             {{! Vehicle Identification }}
             <div class="col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-1">
-                Vehicle Identification
+                {{t "fleetops-ui.components.vehicle.details.vehicle-identification"}}
             </div>
 
             <div class="field-info-container">
@@ -43,33 +43,33 @@
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Trim</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.trim"}}</div>
                 <div class="field-value">{{n-a @resource.trim}}</div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Color</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.color"}}</div>
                 <div class="field-value">{{n-a @resource.color}}</div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Serial Number</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.serial-number"}}</div>
                 <div class="field-value">{{n-a @resource.serial_number}}</div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Fuel Card Number</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.fuel-card-number"}}</div>
                 <div class="field-value">{{n-a @resource.fuel_card_number}}</div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Class</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.class"}}</div>
                 <div class="field-value">{{n-a @resource.class}}</div>
             </div>
 
             {{! Assignment & Status }}
             <div class="col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-3">
-                Assignment & Status
+                {{t "fleetops-ui.components.vehicle.details.assignment-status"}}
             </div>
 
             <div class="field-info-container">
@@ -102,13 +102,13 @@
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Call Sign</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.call-sign"}}</div>
                 <div class="field-value">{{n-a @resource.call_sign}}</div>
             </div>
 
             {{! Location }}
             <div class="col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-3">
-                Location
+                {{t "fleetops-ui.components.vehicle.details.location"}}
             </div>
 
             <div class="field-info-container col-span-2">
@@ -123,28 +123,28 @@
     </ContentPanel>
 
     {{! MEASUREMENT, UNITS & ODOMETER }}
-    <ContentPanel @title="Measurement & Units" @open={{false}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.vehicle.details.measurement-units"}} @open={{false}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 text-xs dark:text-gray-100">
             <div class="col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-1">
-                Measurement & Units
+                {{t "fleetops-ui.components.vehicle.details.measurement-units"}}
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">System of Measurement</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.system-of-measurement"}}</div>
                 <div class="field-value">
                     {{n-a (get-fleet-ops-option-label "measurementSystems" @resource.measurement_system)}}
                 </div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Fuel Volume Unit</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.fuel-volume-unit"}}</div>
                 <div class="field-value">
                     {{n-a (get-fleet-ops-option-label "fuelVolumeUnits" @resource.fuel_volume_unit)}}
                 </div>
             </div>
 
             <div class="col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-3">
-                Odometer & Usage
+                {{t "fleetops-ui.components.vehicle.details.odometer-usage"}}
             </div>
 
             <div class="field-info-container">
@@ -157,63 +157,63 @@
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Odometer Unit</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.odometer-unit"}}</div>
                 <div class="field-value">
                     {{n-a (get-fleet-ops-option-label "odometerUnits" @resource.odometer_unit)}}
                 </div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Odometer at Purchase</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.odometer-at-purchase"}}</div>
                 <div class="field-value">{{n-a @resource.odometer_at_purchase}}</div>
             </div>
         </div>
     </ContentPanel>
 
     {{! BODY & USAGE }}
-    <ContentPanel @title="Body & Usage" @open={{false}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.vehicle.details.body-usage"}} @open={{false}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 text-xs dark:text-gray-100">
             <div class="col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-1">
-                Body & Usage
+                {{t "fleetops-ui.components.vehicle.details.body-usage"}}
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Body Type</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.body-type"}}</div>
                 <div class="field-value">
                     {{n-a (get-fleet-ops-option-label "vehicleBodyTypes" @resource.body_type)}}
                 </div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Body Subtype</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.body-subtype"}}</div>
                 <div class="field-value">
                     {{n-a (get-fleet-ops-option-label "vehicleBodySubTypes" @resource.body_sub_type)}}
                 </div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Usage Type</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.usage-type"}}</div>
                 <div class="field-value">
                     {{n-a (get-fleet-ops-option-label "vehicleUsageTypes" @resource.usage_type)}}
                 </div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Ownership Type</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.ownership-type"}}</div>
                 <div class="field-value">
                     {{n-a (get-fleet-ops-option-label "vehicleOwnershipTypes" @resource.ownership_type)}}
                 </div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Fuel Type</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.fuel-type"}}</div>
                 <div class="field-value">
                     {{n-a (get-fleet-ops-option-label "fuelTypes" @resource.fuel_type)}}
                 </div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Transmission</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.transmission"}}</div>
                 <div class="field-value">
                     {{n-a (get-fleet-ops-option-label "transmissionTypes" @resource.transmission)}}
                 </div>
@@ -222,51 +222,51 @@
     </ContentPanel>
 
     {{! TECHNICAL SPECIFICATIONS }}
-    <ContentPanel @title="Technical Specifications" @open={{false}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.vehicle.details.technical-specifications"}} @open={{false}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-2 text-xs dark:text-gray-100">
 
             {{! Powertrain & Engine }}
             <div class="col-span-3 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-1">
-                Powertrain & Engine
+                {{t "fleetops-ui.components.vehicle.details.powertrain-engine"}}
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Engine Number</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.engine-number"}}</div>
                 <div class="field-value">{{n-a @resource.engine_number}}</div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Engine Make</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.engine-make"}}</div>
                 <div class="field-value">{{n-a @resource.engine_make}}</div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Engine Model</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.engine-model"}}</div>
                 <div class="field-value">{{n-a @resource.engine_model}}</div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Engine Family</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.engine-family"}}</div>
                 <div class="field-value">{{n-a @resource.engine_family}}</div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Engine Configuration</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.engine-configuration"}}</div>
                 <div class="field-value">{{n-a @resource.engine_configuration}}</div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Cylinder Arrangement</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.cylinder-arrangement"}}</div>
                 <div class="field-value">{{n-a @resource.cylinder_arrangement}}</div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Number of Cylinders</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.number-of-cylinders"}}</div>
                 <div class="field-value">{{n-a @resource.number_of_cylinders}}</div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Engine Size</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.engine-size"}}</div>
                 <div class="field-value">
                     {{#if @resource.engine_size}}
                         {{@resource.engine_size}}
@@ -278,11 +278,10 @@
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Engine Displacement</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.engine-displacement"}}</div>
                 <div class="field-value">
                     {{#if @resource.engine_displacement}}
-                        {{@resource.engine_displacement}}
-                        cc
+                        {{t "fleetops-ui.components.vehicle.details.cc" engine_displacement=@resource.engine_displacement}}
                     {{else}}
                         {{n-a @resource.engine_displacement}}
                     {{/if}}
@@ -290,11 +289,10 @@
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Horsepower</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.horsepower"}}</div>
                 <div class="field-value">
                     {{#if @resource.horsepower}}
-                        {{@resource.horsepower}}
-                        hp
+                        {{t "fleetops-ui.components.vehicle.details.hp" horsepower=@resource.horsepower}}
                     {{else}}
                         {{n-a @resource.horsepower}}
                     {{/if}}
@@ -302,16 +300,15 @@
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Horsepower RPM</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.horsepower-rpm"}}</div>
                 <div class="field-value">{{n-a @resource.horsepower_rpm}}</div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Torque</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.torque"}}</div>
                 <div class="field-value">
                     {{#if @resource.torque}}
-                        {{@resource.torque}}
-                        Nm
+                        {{t "fleetops-ui.components.vehicle.details.nm" torque=@resource.torque}}
                     {{else}}
                         {{n-a @resource.torque}}
                     {{/if}}
@@ -319,17 +316,17 @@
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Torque RPM</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.torque-rpm"}}</div>
                 <div class="field-value">{{n-a @resource.torque_rpm}}</div>
             </div>
 
             {{! Capacity & Dimensions }}
             <div class="col-span-3 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-3">
-                Capacity & Dimensions
+                {{t "fleetops-ui.components.vehicle.details.capacity-dimensions"}}
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Fuel Capacity</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.fuel-capacity"}}</div>
                 <div class="field-value">
                     {{#if @resource.fuel_capacity}}
                         {{@resource.fuel_capacity}}
@@ -341,11 +338,10 @@
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Payload Capacity</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.payload-capacity"}}</div>
                 <div class="field-value">
                     {{#if @resource.payload_capacity}}
-                        {{@resource.payload_capacity}}
-                        kg
+                        {{t "fleetops-ui.components.vehicle.details.kg" payload_capacity=@resource.payload_capacity}}
                     {{else}}
                         {{n-a @resource.payload_capacity}}
                     {{/if}}
@@ -353,11 +349,10 @@
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Towing Capacity</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.towing-capacity"}}</div>
                 <div class="field-value">
                     {{#if @resource.towing_capacity}}
-                        {{@resource.towing_capacity}}
-                        kg
+                        {{t "fleetops-ui.components.vehicle.details.kg-2" towing_capacity=@resource.towing_capacity}}
                     {{else}}
                         {{n-a @resource.towing_capacity}}
                     {{/if}}
@@ -365,16 +360,15 @@
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Seating Capacity</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.seating-capacity"}}</div>
                 <div class="field-value">{{n-a @resource.seating_capacity}}</div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Vehicle Weight</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.vehicle-weight"}}</div>
                 <div class="field-value">
                     {{#if @resource.weight}}
-                        {{@resource.weight}}
-                        kg
+                        {{t "fleetops-ui.components.vehicle.details.kg-3" weight=@resource.weight}}
                     {{else}}
                         {{n-a @resource.weight}}
                     {{/if}}
@@ -382,11 +376,10 @@
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Length</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.length"}}</div>
                 <div class="field-value">
                     {{#if @resource.length}}
-                        {{@resource.length}}
-                        cm
+                        {{t "fleetops-ui.components.vehicle.details.cm" length=@resource.length}}
                     {{else}}
                         {{n-a @resource.length}}
                     {{/if}}
@@ -394,11 +387,10 @@
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Width</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.width"}}</div>
                 <div class="field-value">
                     {{#if @resource.width}}
-                        {{@resource.width}}
-                        cm
+                        {{t "fleetops-ui.components.vehicle.details.cm-2" width=@resource.width}}
                     {{else}}
                         {{n-a @resource.width}}
                     {{/if}}
@@ -406,11 +398,10 @@
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Height</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.height"}}</div>
                 <div class="field-value">
                     {{#if @resource.height}}
-                        {{@resource.height}}
-                        cm
+                        {{t "fleetops-ui.components.vehicle.details.cm-3" height=@resource.height}}
                     {{else}}
                         {{n-a @resource.height}}
                     {{/if}}
@@ -418,7 +409,7 @@
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Cargo Volume</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.cargo-volume"}}</div>
                 <div class="field-value">
                     {{#if @resource.cargo_volume}}
                         {{@resource.cargo_volume}}
@@ -430,7 +421,7 @@
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Payload Volume</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.payload-volume"}}</div>
                 <div class="field-value">
                     {{#if @resource.payload_capacity_volume}}
                         {{@resource.payload_capacity_volume}}
@@ -442,17 +433,17 @@
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Pallet Capacity</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.pallet-capacity"}}</div>
                 <div class="field-value">{{n-a @resource.payload_capacity_pallets}}</div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Parcel Capacity</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.parcel-capacity"}}</div>
                 <div class="field-value">{{n-a @resource.payload_capacity_parcels}}</div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Passenger Volume</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.passenger-volume"}}</div>
                 <div class="field-value">
                     {{#if @resource.passenger_volume}}
                         {{@resource.passenger_volume}}
@@ -464,7 +455,7 @@
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Interior Volume</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.interior-volume"}}</div>
                 <div class="field-value">
                     {{#if @resource.interior_volume}}
                         {{@resource.interior_volume}}
@@ -476,11 +467,10 @@
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Ground Clearance</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.ground-clearance"}}</div>
                 <div class="field-value">
                     {{#if @resource.ground_clearance}}
-                        {{@resource.ground_clearance}}
-                        cm
+                        {{t "fleetops-ui.components.vehicle.details.cm-4" ground_clearance=@resource.ground_clearance}}
                     {{else}}
                         {{n-a @resource.ground_clearance}}
                     {{/if}}
@@ -488,11 +478,10 @@
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Bed Length</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.bed-length"}}</div>
                 <div class="field-value">
                     {{#if @resource.bed_length}}
-                        {{@resource.bed_length}}
-                        cm
+                        {{t "fleetops-ui.components.vehicle.details.cm-5" bed_length=@resource.bed_length}}
                     {{else}}
                         {{n-a @resource.bed_length}}
                     {{/if}}
@@ -501,16 +490,16 @@
 
             {{! Regulatory & Compliance }}
             <div class="col-span-3 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-3">
-                Regulatory & Compliance
+                {{t "fleetops-ui.components.vehicle.details.regulatory-compliance"}}
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Emission Standard</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.emission-standard"}}</div>
                 <div class="field-value">{{n-a @resource.emission_standard}}</div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">DPF Equipped</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.dpf-equipped"}}</div>
                 <div class="field-value">
                     {{#if (eq @resource.dpf_equipped true)}}
                         {{t "common.yes"}}
@@ -523,7 +512,7 @@
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">SCR Equipped</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.scr-equipped"}}</div>
                 <div class="field-value">
                     {{#if (eq @resource.scr_equipped true)}}
                         {{t "common.yes"}}
@@ -539,8 +528,7 @@
                 <div class="field-name">GVWR</div>
                 <div class="field-value">
                     {{#if @resource.gvwr}}
-                        {{@resource.gvwr}}
-                        kg
+                        {{t "fleetops-ui.components.vehicle.details.kg-4" gvwr=@resource.gvwr}}
                     {{else}}
                         {{n-a @resource.gvwr}}
                     {{/if}}
@@ -551,8 +539,7 @@
                 <div class="field-name">GCWR</div>
                 <div class="field-value">
                     {{#if @resource.gcwr}}
-                        {{@resource.gcwr}}
-                        kg
+                        {{t "fleetops-ui.components.vehicle.details.kg-5" gcwr=@resource.gcwr}}
                     {{else}}
                         {{n-a @resource.gcwr}}
                     {{/if}}
@@ -562,91 +549,91 @@
     </ContentPanel>
 
     {{! FINANCIAL & LIFECYCLE }}
-    <ContentPanel @title="Financial & Lifecycle" @open={{false}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.vehicle.details.financial-lifecycle"}} @open={{false}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 text-xs dark:text-gray-100">
             <div class="col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-1">
-                Asset Values
+                {{t "fleetops-ui.components.vehicle.details.asset-values"}}
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Acquisition Cost</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.acquisition-cost"}}</div>
                 <div class="field-value">
                     {{format-currency @resource.acquisition_cost @resource.currency}}
                 </div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Current Value</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.current-value"}}</div>
                 <div class="field-value">
                     {{format-currency @resource.current_value @resource.currency}}
                 </div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Insurance Value</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.insurance-value"}}</div>
                 <div class="field-value">
                     {{format-currency @resource.insurance_value @resource.currency}}
                 </div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Depreciation Rate (%)</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.depreciation-rate"}}</div>
                 <div class="field-value">{{n-a @resource.depreciation_rate}}</div>
             </div>
 
             <div class="col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-3">
-                Lifecycle & Service Life
+                {{t "fleetops-ui.components.vehicle.details.lifecycle-service-life"}}
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Estimated Service Life (Distance)</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.estimated-service-life-distance"}}</div>
                 <div class="field-value">{{n-a @resource.estimated_service_life_distance}}</div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Service Life Distance Unit</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.service-life-distance-unit"}}</div>
                 <div class="field-value">
                     {{n-a (get-fleet-ops-option-label "odometerUnits" @resource.estimated_service_life_distance_unit)}}
                 </div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Estimated Service Life (Months)</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.estimated-service-life-months"}}</div>
                 <div class="field-value">{{n-a @resource.estimated_service_life_months}}</div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Purchase Date</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.purchase-date"}}</div>
                 <div class="field-value">
                     {{n-a (format-date-fns @resource.purchased_at "dd-MM-yyyy")}}
                 </div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Lease Expiry Date</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.lease-expiry-date"}}</div>
                 <div class="field-value">
                     {{n-a (format-date-fns @resource.lease_expires_at "dd-MM-yyyy")}}
                 </div>
             </div>
 
             <div class="col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-3">
-                Financing (Loan)
+                {{t "fleetops-ui.components.vehicle.details.financing-loan"}}
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Loan Amount</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.loan-amount"}}</div>
                 <div class="field-value">
                     {{format-currency @resource.loan_amount @resource.currency}}
                 </div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">Number of Payments</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.number-of-payments"}}</div>
                 <div class="field-value">{{n-a @resource.loan_number_of_payments}}</div>
             </div>
 
             <div class="field-info-container">
-                <div class="field-name">First Payment Date</div>
+                <div class="field-name">{{t "fleetops-ui.components.vehicle.details.first-payment-date"}}</div>
                 <div class="field-value">
                     {{n-a (format-date-fns @resource.loan_first_payment "dd-MM-yyyy")}}
                 </div>
@@ -659,27 +646,27 @@
 
     {{! ORCHESTRATOR CONSTRAINTS (read-only view) }}
     {{#if (or @resource.skills.length @resource.time_window_start @resource.time_window_end @resource.max_tasks)}}
-        <ContentPanel @title="Orchestrator Constraints" @open={{true}} @wrapperClass="bordered-top">
+        <ContentPanel @title={{t "fleetops-ui.components.vehicle.details.orchestrator-constraints"}} @open={{true}} @wrapperClass="bordered-top">
             <div class="grid grid-cols-2 gap-2 text-xs dark:text-gray-100">
                 {{#if @resource.skills.length}}
                     <div class="field-info-container col-span-2">
-                        <div class="field-name">Skills & Capabilities</div>
+                        <div class="field-name">{{t "fleetops-ui.components.vehicle.details.skills-capabilities"}}</div>
                         <div class="field-value">{{join @resource.skills ", "}}</div>
                     </div>
                 {{/if}}
                 {{#if (or @resource.time_window_start @resource.time_window_end)}}
                     <div class="field-info-container">
-                        <div class="field-name">Available From</div>
+                        <div class="field-name">{{t "fleetops-ui.components.vehicle.details.available-from"}}</div>
                         <div class="field-value">{{n-a @resource.time_window_start}}</div>
                     </div>
                     <div class="field-info-container">
-                        <div class="field-name">Available Until</div>
+                        <div class="field-name">{{t "fleetops-ui.components.vehicle.details.available-until"}}</div>
                         <div class="field-value">{{n-a @resource.time_window_end}}</div>
                     </div>
                 {{/if}}
                 {{#if @resource.max_tasks}}
                     <div class="field-info-container">
-                        <div class="field-name">Max Tasks</div>
+                        <div class="field-name">{{t "fleetops-ui.components.vehicle.details.max-tasks"}}</div>
                         <div class="field-value">{{@resource.max_tasks}}</div>
                     </div>
                 {{/if}}

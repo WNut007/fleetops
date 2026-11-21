@@ -57,10 +57,10 @@ export default class ConnectivityTelematicsEditController extends Controller {
 
     @action openConnectionTestDialog() {
         this.modalsManager.show('modals/telematic-connection-diagnostics', {
-            title: 'Test Connection',
-            acceptButtonText: 'Run Test',
+            title: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.edit.test-connection'),
+            acceptButtonText: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.edit.run-test'),
             acceptButtonIcon: 'plug',
-            declineButtonText: 'Close',
+            declineButtonText: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.edit.close'),
             telematic: this.model,
             onTested: () => this.hostRouter.refresh(),
         });

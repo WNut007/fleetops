@@ -46,7 +46,12 @@ export default class WorkOrderActionsService extends ResourceActionService {
                 title: workOrder?.code ?? workOrder?.subject,
                 header: 'work-order/panel-header',
                 actionButtons: [
-                    { icon: 'paper-plane', text: 'Send to Vendor', permission: 'fleet-ops update work-order', fn: () => this.sendEmail(workOrder) },
+                    {
+                        icon: 'paper-plane',
+                        text: this.intl.t('fleetops-ui.js.services.work-order-actions.send-to-vendor'),
+                        permission: 'fleet-ops update work-order',
+                        fn: () => this.sendEmail(workOrder),
+                    },
                     { icon: 'edit', permission: 'fleet-ops update work-order', fn: () => closePanelsThen(this.resourceContextPanel, () => this.panel.edit(workOrder)) },
                     { icon: 'trash', type: 'danger', permission: 'fleet-ops delete work-order', fn: () => this.delete(workOrder, { onConfirm: () => this.resourceContextPanel.closeAll() }) },
                 ],
@@ -111,11 +116,11 @@ export default class WorkOrderActionsService extends ResourceActionService {
         const vendorPhone = assignee?.phone ?? null;
 
         this.modalsManager.show('modals/send-work-order', {
-            title: 'Send Work Order to Vendor',
-            acceptButtonText: 'Send Work Order',
+            title: this.intl.t('fleetops-ui.js.services.work-order-actions.send-work-order-to-vendor'),
+            acceptButtonText: this.intl.t('fleetops-ui.js.services.work-order-actions.send-work-order'),
             acceptButtonIcon: 'paper-plane',
             acceptButtonDisabled: !vendorEmail,
-            declineButtonText: 'Cancel',
+            declineButtonText: this.intl.t('fleetops-ui.js.services.work-order-actions.cancel'),
             workOrder,
             vendorName,
             vendorEmail,

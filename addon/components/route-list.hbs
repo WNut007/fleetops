@@ -13,9 +13,9 @@
                         <Badge @status={{this.firstStop.statusCode}} />
                     {{/if}}
                     {{#if this.firstStop.showCompletedFlagBadge}}
-                        <Badge @status="success" @hideStatusDot={{true}}>Completed</Badge>
+                        <Badge @status="success" @hideStatusDot={{true}}>{{t "fleetops-ui.components.route-list.completed"}}</Badge>
                     {{else if this.firstStop.active}}
-                        <Badge @status="indigo" @hideStatusDot={{true}}>Current Stop</Badge>
+                        <Badge @status="indigo" @hideStatusDot={{true}}>{{t "fleetops-ui.components.route-list.current-stop"}}</Badge>
                     {{/if}}
                     {{#if this.firstStop.etaSeconds}}
                         <Badge @status="pending" @hideStatusDot={{true}}><span class="font-bold">ETA:</span> {{format-duration this.firstStop.etaSeconds}}</Badge>
@@ -48,9 +48,9 @@
                                 <Badge @status={{stop.statusCode}} />
                             {{/if}}
                             {{#if stop.showCompletedFlagBadge}}
-                                <Badge @status="success" @hideStatusDot={{true}}>Completed</Badge>
+                                <Badge @status="success" @hideStatusDot={{true}}>{{t "fleetops-ui.components.route-list.completed"}}</Badge>
                             {{else if stop.active}}
-                                <Badge @status="indigo" @hideStatusDot={{true}}>Current Stop</Badge>
+                                <Badge @status="indigo" @hideStatusDot={{true}}>{{t "fleetops-ui.components.route-list.current-stop"}}</Badge>
                             {{/if}}
                             {{#if stop.etaSeconds}}
                                 <Badge @status="pending" @hideStatusDot={{true}}><span class="font-bold">ETA:</span> {{format-duration stop.etaSeconds}}</Badge>
@@ -73,9 +73,9 @@
                             <Badge @status={{stop.statusCode}} />
                         {{/if}}
                         {{#if stop.showCompletedFlagBadge}}
-                            <Badge @status="success" @hideStatusDot={{true}}>Completed</Badge>
+                            <Badge @status="success" @hideStatusDot={{true}}>{{t "fleetops-ui.components.route-list.completed"}}</Badge>
                         {{else if stop.active}}
-                            <Badge @status="indigo" @hideStatusDot={{true}}>Current Stop</Badge>
+                            <Badge @status="indigo" @hideStatusDot={{true}}>{{t "fleetops-ui.components.route-list.current-stop"}}</Badge>
                         {{/if}}
                         {{#if stop.etaSeconds}}
                             <Badge @status="pending" @hideStatusDot={{true}}><span class="font-bold">ETA:</span> {{format-duration stop.etaSeconds}}</Badge>
@@ -101,9 +101,9 @@
                         <Badge @status={{this.lastStop.statusCode}} />
                     {{/if}}
                     {{#if this.lastStop.showCompletedFlagBadge}}
-                        <Badge @status="success" @hideStatusDot={{true}}>Completed</Badge>
+                        <Badge @status="success" @hideStatusDot={{true}}>{{t "fleetops-ui.components.route-list.completed"}}</Badge>
                     {{else if this.lastStop.active}}
-                        <Badge @status="indigo" @hideStatusDot={{true}}>Current Stop</Badge>
+                        <Badge @status="indigo" @hideStatusDot={{true}}>{{t "fleetops-ui.components.route-list.current-stop"}}</Badge>
                     {{/if}}
                     {{#if this.lastStop.etaSeconds}}
                         <Badge @status="pending" @hideStatusDot={{true}}><span class="font-bold">ETA:</span> {{format-duration this.lastStop.etaSeconds}}</Badge>

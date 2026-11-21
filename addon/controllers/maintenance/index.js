@@ -5,6 +5,7 @@ import { action } from '@ember/object';
 import { task } from 'ember-concurrency';
 
 export default class MaintenanceIndexController extends Controller {
+    @service intl;
     @service fetch;
     @service docsPanel;
 
@@ -54,7 +55,7 @@ export default class MaintenanceIndexController extends Controller {
         return [
             {
                 key: 'overdue_schedules',
-                label: 'Overdue Schedules',
+                label: this.intl.t('fleetops-ui.js.controllers.maintenance.index.overdue-schedules'),
                 value: '...',
                 caption: 'Loading recurring service risk.',
                 tone: 'rose',
@@ -63,7 +64,7 @@ export default class MaintenanceIndexController extends Controller {
             },
             {
                 key: 'upcoming_schedules',
-                label: 'Due This Week',
+                label: this.intl.t('fleetops-ui.js.controllers.maintenance.index.due-this-week'),
                 value: '...',
                 caption: 'Loading upcoming service windows.',
                 tone: 'blue',
@@ -72,14 +73,22 @@ export default class MaintenanceIndexController extends Controller {
             },
             {
                 key: 'open_work_orders',
-                label: 'Open Work Orders',
+                label: this.intl.t('fleetops-ui.js.controllers.maintenance.index.open-work-orders'),
                 value: '...',
                 caption: 'Loading active maintenance work.',
                 tone: 'amber',
                 icon: 'clipboard-list',
                 route: 'maintenance.work-orders',
             },
-            { key: 'low_stock_parts', label: 'Low Stock Parts', value: '...', caption: 'Loading parts inventory signals.', tone: 'amber', icon: 'cog', route: 'maintenance.parts' },
+            {
+                key: 'low_stock_parts',
+                label: this.intl.t('fleetops-ui.js.controllers.maintenance.index.low-stock-parts'),
+                value: '...',
+                caption: 'Loading parts inventory signals.',
+                tone: 'amber',
+                icon: 'cog',
+                route: 'maintenance.parts',
+            },
         ];
     }
 

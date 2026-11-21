@@ -63,7 +63,14 @@
                     </label>
                     <div class="mb-1.5 space-x-1 flex flex-row">
                         {{#if @resource.has_place}}
-                            <Button @type="danger" @size="xs" @icon="trash" @text="Remove" @onClick={{this.removePlace}} @disabled={{cannot-write @resource}} />
+                            <Button
+                                @type="danger"
+                                @size="xs"
+                                @icon="trash"
+                                @text={{t "fleetops-ui.components.customer.form.remove"}}
+                                @onClick={{this.removePlace}}
+                                @disabled={{cannot-write @resource}}
+                            />
                         {{/if}}
                         <Button
                             @type="default"

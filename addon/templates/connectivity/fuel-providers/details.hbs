@@ -18,22 +18,34 @@
 
                         </div>
                         <div class="mt-2 flex flex-wrap gap-2 text-xs text-gray-500 dark:text-gray-300">
-                            <span>Last test: {{n-a (format-date-fns @model.last_tested_at "dd MMM HH:mm")}}</span>
-                            <span>Last sync: {{n-a (format-date-fns @model.last_synced_at "dd MMM HH:mm")}}</span>
+                            <span>{{t "fleetops-ui.templates.connectivity.fuel-providers.details.last-test" na=(n-a (format-date-fns @model.last_tested_at "dd MMM HH:mm"))}}</span>
+                            <span>{{t "fleetops-ui.templates.connectivity.fuel-providers.details.last-sync" na=(n-a (format-date-fns @model.last_synced_at "dd MMM HH:mm"))}}</span>
                             {{#if this.totals}}
-                                <span>Transactions: {{this.totals.transactions}}</span>
-                                <span>Needs matching: {{this.totals.unmatched}}</span>
+                                <span>{{t "fleetops-ui.templates.connectivity.fuel-providers.details.transactions-label" transactions=this.totals.transactions}}</span>
+                                <span>{{t "fleetops-ui.templates.connectivity.fuel-providers.details.needs-matching" unmatched=this.totals.unmatched}}</span>
                             {{/if}}
                         </div>
                     </div>
                 </div>
 
                 <div class="flex max-w-full flex-shrink-0 flex-nowrap items-center gap-2 overflow-x-auto">
-                    <Button @icon="arrow-left" @text="Back" @size="xs" @wrapperClass="flex-shrink-0" @onClick={{transition-to "connectivity.fuel-providers.index"}} />
-                    <Button @icon="plug" @text="Test" @size="xs" @wrapperClass="flex-shrink-0" @onClick={{this.openConnectionTestDialog}} />
+                    <Button
+                        @icon="arrow-left"
+                        @text={{t "fleetops-ui.templates.connectivity.fuel-providers.details.back"}}
+                        @size="xs"
+                        @wrapperClass="flex-shrink-0"
+                        @onClick={{transition-to "connectivity.fuel-providers.index"}}
+                    />
+                    <Button
+                        @icon="plug"
+                        @text={{t "fleetops-ui.templates.connectivity.fuel-providers.details.test"}}
+                        @size="xs"
+                        @wrapperClass="flex-shrink-0"
+                        @onClick={{this.openConnectionTestDialog}}
+                    />
                     <Button
                         @icon="rotate"
-                        @text="Sync Transactions"
+                        @text={{t "fleetops-ui.templates.connectivity.fuel-providers.details.sync-transactions"}}
                         @type="primary"
                         @size="xs"
                         @wrapperClass="flex-shrink-0"
@@ -42,11 +54,20 @@
                         @isLoading={{this.syncTransactions.isRunning}}
                         @onClick={{perform this.syncTransactions}}
                     />
-                    <Button @icon="cog" @text="Settings" @size="xs" @wrapperClass="flex-shrink-0" @onClick={{transition-to "connectivity.fuel-providers.edit" @model}} />
+                    <Button
+                        @icon="cog"
+                        @text={{t "fleetops-ui.templates.connectivity.fuel-providers.details.settings"}}
+                        @size="xs"
+                        @wrapperClass="flex-shrink-0"
+                        @onClick={{transition-to "connectivity.fuel-providers.edit" @model}}
+                    />
                 </div>
             </div>
 
-            <nav class="mt-4 flex w-full gap-1 overflow-x-auto border-b border-gray-200 text-sm dark:border-gray-700" aria-label="Fuel integration sections">
+            <nav
+                class="mt-4 flex w-full gap-1 overflow-x-auto border-b border-gray-200 text-sm dark:border-gray-700"
+                aria-label={{t "fleetops-ui.templates.connectivity.fuel-providers.details.fuel-integration-sections"}}
+            >
                 {{#each this.tabs as |tab|}}
                     <LinkTo
                         @route={{tab.route}}
@@ -66,7 +87,7 @@
         {{#if this.activityError}}
             <div role="alert" class="m-4 rounded-md border border-red-300 bg-red-50 p-3 text-sm text-red-700 dark:border-red-800 dark:bg-red-900/20 dark:text-red-300">
                 {{this.activityError}}
-                <Button @text="Refresh" @size="xs" @onClick={{this.refreshActivity}} />
+                <Button @text={{t "fleetops-ui.templates.connectivity.fuel-providers.details.refresh"}} @size="xs" @onClick={{this.refreshActivity}} />
             </div>
         {{/if}}
         <section class="min-w-0">

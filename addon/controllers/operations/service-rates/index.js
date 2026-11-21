@@ -50,7 +50,7 @@ export default class OperationsServiceRatesIndexController extends Controller {
         return [
             {
                 id: 'bulk-delete',
-                label: 'Delete selected...',
+                label: this.intl.t('fleetops-ui.js.controllers.operations.service-rates.index.delete-selected'),
                 class: 'text-red-500',
                 fn: this.serviceRateActions.bulkDelete,
                 permission: 'fleet-ops delete service-rate',

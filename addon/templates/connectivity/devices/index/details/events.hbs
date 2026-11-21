@@ -1,12 +1,16 @@
 <div class="flex flex-col gap-3 p-3">
     <div class="flex flex-col gap-1">
-        <h2 class="text-base font-bold text-gray-900 dark:text-gray-100">Event Review + Triage</h2>
-        <p class="text-xs text-gray-500 dark:text-gray-300">Warning signals, diagnostics, and unprocessed telemetry.</p>
+        <h2 class="text-base font-bold text-gray-900 dark:text-gray-100">{{t "fleetops-ui.templates.connectivity.devices.index.details.events.event-review-triage"}}</h2>
+        <p class="text-xs text-gray-500 dark:text-gray-300">{{t "fleetops-ui.templates.connectivity.devices.index.details.events.warning-signals-diagnostics-and-unprocessed-telemetry"}}</p>
     </div>
 
     <section class="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
         {{#each this.metrics as |metric|}}
-            <div class="fleet-ops-widget fleet-ops-kpi-tile fleetops-connectivity-kpi-tile {{metric.accentClass}} relative min-h-[82px] overflow-hidden rounded-md border bg-white shadow-sm dark:bg-gray-800">
+            <div
+                class="fleet-ops-widget fleet-ops-kpi-tile fleetops-connectivity-kpi-tile
+                    {{metric.accentClass}}
+                    relative min-h-[82px] overflow-hidden rounded-md border bg-white shadow-sm dark:bg-gray-800"
+            >
                 <div class="flex h-full items-start justify-between gap-2 p-3">
                     <div class="min-w-0">
                         <div class="truncate text-[10px] font-bold uppercase text-gray-500 dark:text-gray-400">{{metric.label}}</div>
@@ -24,9 +28,9 @@
         <Telematic::TabEmptyState
             @tone="success"
             @icon="check"
-            @title="No warning or unprocessed events"
-            @message="Recent telemetry is reviewed and no warning-level events are currently visible for this device."
-            @primaryText="Refresh"
+            @title={{t "fleetops-ui.templates.connectivity.devices.index.details.events.no-warning-or-unprocessed-events"}}
+            @message={{t "fleetops-ui.templates.connectivity.devices.index.details.events.recent-telemetry-is-reviewed-and-no"}}
+            @primaryText={{t "fleetops-ui.templates.connectivity.devices.index.details.events.refresh"}}
             @primaryIcon="refresh"
             @primaryAction={{this.refresh}}
         />
@@ -35,12 +39,12 @@
     <section class="overflow-hidden rounded-md border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
         <div class="fleetops-provider-connections-header border-b border-gray-200 px-3 py-2 dark:border-gray-700">
             <div>
-                <h3 class="text-sm font-bold text-gray-900 dark:text-gray-100">Telemetry Events</h3>
-                <p class="mt-1 text-xs text-gray-500 dark:text-gray-300">Filter by type, severity, processed state, and date.</p>
+                <h3 class="text-sm font-bold text-gray-900 dark:text-gray-100">{{t "fleetops-ui.templates.connectivity.devices.index.details.events.telemetry-events"}}</h3>
+                <p class="mt-1 text-xs text-gray-500 dark:text-gray-300">{{t "fleetops-ui.templates.connectivity.devices.index.details.events.filter-by-type-severity-processed-state"}}</p>
             </div>
             <div class="fleetops-provider-connections-actions flex min-w-0 flex-wrap items-center gap-1 lg:ml-auto lg:flex-nowrap lg:justify-end">
                 <Layout::Resource::TabularActions
-                    @title="Telemetry Events"
+                    @title={{t "fleetops-ui.templates.connectivity.devices.index.details.events.telemetry-events"}}
                     @searchQuery={{this.events_query}}
                     @onSearch={{perform this.searchTask}}
                     @columns={{this.columns}}
@@ -60,7 +64,7 @@
 
         <Layout::Resource::Tabular
             @resource="device-event"
-            @title="Telemetry Events"
+            @title={{t "fleetops-ui.templates.connectivity.devices.index.details.events.telemetry-events"}}
             @data={{@model}}
             @columns={{this.columns}}
             @page={{this.events_page}}

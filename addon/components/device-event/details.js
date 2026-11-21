@@ -25,6 +25,7 @@ function prettyJson(value) {
 }
 
 export default class DeviceEventDetailsComponent extends Component {
+    @service intl;
     @service hostRouter;
 
     get resource() {
@@ -113,15 +114,26 @@ export default class DeviceEventDetailsComponent extends Component {
 
     get metrics() {
         return [
-            { label: 'Severity', value: this.severity, icon: 'triangle-exclamation', accentClass: this.severityAccentClass },
+            { label: this.intl.t('fleetops-ui.js.components.device-event.details.severity'), value: this.severity, icon: 'triangle-exclamation', accentClass: this.severityAccentClass },
             {
-                label: 'Processing',
+                label: this.intl.t('fleetops-ui.js.components.device-event.details.processing'),
                 value: this.processedLabel,
                 icon: this.isProcessed ? 'check' : 'clock',
                 accentClass: this.isProcessed ? 'fleetops-connectivity-kpi-accent-green' : 'fleetops-connectivity-kpi-accent-rose',
             },
-            { label: 'Device', value: this.deviceName, meta: this.deviceIdentifier, icon: 'microchip', accentClass: 'fleetops-connectivity-kpi-accent-blue' },
-            { label: 'Provider', value: this.providerLabel, icon: 'satellite-dish', accentClass: 'fleetops-connectivity-kpi-accent-green' },
+            {
+                label: this.intl.t('fleetops-ui.js.components.device-event.details.device'),
+                value: this.deviceName,
+                meta: this.deviceIdentifier,
+                icon: 'microchip',
+                accentClass: 'fleetops-connectivity-kpi-accent-blue',
+            },
+            {
+                label: this.intl.t('fleetops-ui.js.components.device-event.details.provider'),
+                value: this.providerLabel,
+                icon: 'satellite-dish',
+                accentClass: 'fleetops-connectivity-kpi-accent-green',
+            },
         ];
     }
 

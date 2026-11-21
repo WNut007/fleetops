@@ -55,14 +55,14 @@
         {{else}}
             <div class="fleetbase-ai-create-order-preview__empty-map">
                 <Spinner />
-                <span>Preparing map preview...</span>
+                <span>{{t "fleetops-ui.components.ai.route-preview-map.preparing-map-preview"}}</span>
             </div>
         {{/if}}
 
         {{#if this.isLoading}}
             <div class="fleetbase-ai-create-order-preview__map-status">
                 <Spinner />
-                <span>Rendering route...</span>
+                <span>{{t "fleetops-ui.components.ai.route-preview-map.rendering-route"}}</span>
             </div>
         {{else if this.routeErrorMessage}}
             <div class="fleetbase-ai-create-order-preview__map-status fleetbase-ai-create-order-preview__map-status--error">

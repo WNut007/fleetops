@@ -5,6 +5,7 @@ import { action } from '@ember/object';
 import { task } from 'ember-concurrency';
 
 export default class SettingsRoutingController extends Controller {
+    @service intl;
     @service fetch;
     @service notifications;
     @service currentUser;
@@ -29,8 +30,8 @@ export default class SettingsRoutingController extends Controller {
     @tracked osrmHost = '';
     @tracked osrmSystemHost = null;
     @tracked routingUnitOptions = [
-        { label: 'Kilometers', value: 'km' },
-        { label: 'Miles', value: 'mi' },
+        { label: this.intl.t('fleetops-ui.js.controllers.settings.routing.kilometers'), value: 'km' },
+        { label: this.intl.t('fleetops-ui.js.controllers.settings.routing.miles'), value: 'mi' },
     ];
     saveTasks = new Map();
 
@@ -74,7 +75,7 @@ export default class SettingsRoutingController extends Controller {
             const routingSettings = yield this.fetch.get('fleet-ops/settings/routing-settings');
             this.currentUser.setOption('routing', routingSettings);
             this.currentUser.setOption('tracking', trackingSettings);
-            this.notifications.success('Routing and tracking settings saved.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.controllers.settings.routing.routing-and-tracking-settings-saved'));
         } catch (error) {
             this.notifications.serverError(error);
         }

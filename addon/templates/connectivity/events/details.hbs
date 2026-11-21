@@ -9,19 +9,35 @@
                 </div>
                 <div class="mt-1 flex flex-wrap gap-2 text-xs text-gray-500 dark:text-gray-300">
                     <span>{{n-a this.event.public_id}}</span>
-                    <span class="inline-flex items-center gap-1">Device: <Device::Pill @device={{resource-relation this.event "device"}} @titleFallback={{n-a (or this.event.device_name this.event.device_id this.event.ident)}} @imageSize="16" @imageClass="w-4 h-4" @titleClass="text-xs" @subtitle={{null}} /></span>
-                    <span class="inline-flex items-center gap-1">Provider: <Telematic::Pill @telematic={{resource-relation this.event "telematic"}} @titleFallback={{n-a (or this.event.telematic_name this.event.provider)}} @imageSize="16" @imageClass="w-4 h-4" @titleClass="text-xs" @subtitle={{null}} /></span>
-                    <span>Occurred: {{n-a (format-date-fns this.event.occurred_at "dd MMM yyyy, HH:mm")}}</span>
+                    <span class="inline-flex items-center gap-1">{{t "fleetops-ui.templates.connectivity.events.details.device"}}
+                        <Device::Pill
+                            @device={{resource-relation this.event "device"}}
+                            @titleFallback={{n-a (or this.event.device_name this.event.device_id this.event.ident)}}
+                            @imageSize="16"
+                            @imageClass="w-4 h-4"
+                            @titleClass="text-xs"
+                            @subtitle={{null}}
+                        /></span>
+                    <span class="inline-flex items-center gap-1">{{t "fleetops-ui.templates.connectivity.events.details.provider"}}
+                        <Telematic::Pill
+                            @telematic={{resource-relation this.event "telematic"}}
+                            @titleFallback={{n-a (or this.event.telematic_name this.event.provider)}}
+                            @imageSize="16"
+                            @imageClass="w-4 h-4"
+                            @titleClass="text-xs"
+                            @subtitle={{null}}
+                        /></span>
+                    <span>{{t "fleetops-ui.templates.connectivity.events.details.occurred" na=(n-a (format-date-fns this.event.occurred_at "dd MMM yyyy, HH:mm"))}}</span>
                 </div>
             </div>
 
             <div class="flex shrink-0 flex-row flex-nowrap items-center gap-2 whitespace-nowrap">
-                <Button @icon="arrow-left" @text="Back" @size="xs" @wrapperClass="shrink-0" @onClick={{this.goBack}} />
-                <Button @icon="refresh" @text="Refresh" @size="xs" @wrapperClass="shrink-0" @onClick={{this.refresh}} />
+                <Button @icon="arrow-left" @text={{t "fleetops-ui.templates.connectivity.events.details.back"}} @size="xs" @wrapperClass="shrink-0" @onClick={{this.goBack}} />
+                <Button @icon="refresh" @text={{t "fleetops-ui.templates.connectivity.events.details.refresh"}} @size="xs" @wrapperClass="shrink-0" @onClick={{this.refresh}} />
                 {{#unless this.isProcessed}}
                     <Button
                         @icon="check"
-                        @text="Mark Processed"
+                        @text={{t "fleetops-ui.templates.connectivity.events.details.mark-processed"}}
                         @type="primary"
                         @size="xs"
                         @wrapperClass="shrink-0"

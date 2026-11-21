@@ -8,6 +8,7 @@ import copyToClipboard from '@fleetbase/ember-core/utils/copy-to-clipboard';
 const SENSITIVE_METADATA_KEYS = ['password', 'secret', 'session', 'token'];
 
 export default class ModalsTelematicConnectionDiagnosticsComponent extends Component {
+    @service intl;
     @service fetch;
     @service modalsManager;
     @service notifications;
@@ -124,14 +125,14 @@ export default class ModalsTelematicConnectionDiagnosticsComponent extends Compo
         entries.push({
             time: this.formatDiagnosticTime(startedAt),
             tone: 'info',
-            text: 'Sending saved provider connection test request',
+            text: this.intl.t('fleetops-ui.js.components.modals.telematic-connection-diagnostics.sending-saved-provider-connection-test-request'),
         });
 
         if (this.connectionState === 'testing') {
             entries.push({
                 time: this.formatDiagnosticTime(),
                 tone: 'info',
-                text: 'Awaiting provider response',
+                text: this.intl.t('fleetops-ui.js.components.modals.telematic-connection-diagnostics.awaiting-provider-response'),
             });
             return entries;
         }
@@ -140,7 +141,7 @@ export default class ModalsTelematicConnectionDiagnosticsComponent extends Compo
             entries.push({
                 time: this.formatDiagnosticTime(),
                 tone: 'muted',
-                text: 'Connection test has not been run yet',
+                text: this.intl.t('fleetops-ui.js.components.modals.telematic-connection-diagnostics.connection-test-has-not-been-run'),
             });
             return entries;
         }
@@ -148,7 +149,7 @@ export default class ModalsTelematicConnectionDiagnosticsComponent extends Compo
         entries.push({
             time: this.formatDiagnosticTime(completedAt),
             tone: 'info',
-            text: 'Provider response received',
+            text: this.intl.t('fleetops-ui.js.components.modals.telematic-connection-diagnostics.provider-response-received'),
         });
 
         if (this.hasConnectionMetadata) {
@@ -163,7 +164,7 @@ export default class ModalsTelematicConnectionDiagnosticsComponent extends Compo
             entries.push({
                 time: this.formatDiagnosticTime(completedAt),
                 tone: 'success',
-                text: 'Connection verified',
+                text: this.intl.t('fleetops-ui.js.components.modals.telematic-connection-diagnostics.connection-verified'),
             });
             return entries;
         }
@@ -228,10 +229,10 @@ export default class ModalsTelematicConnectionDiagnosticsComponent extends Compo
     copyConnectionDiagnostics() {
         copyToClipboard(this.connectionDiagnosticText)
             .then(() => {
-                this.notifications.success('Connection diagnostics copied.');
+                this.notifications.success(this.intl.t('fleetops-ui.js.components.modals.telematic-connection-diagnostics.connection-diagnostics-copied'));
             })
             .catch(() => {
-                this.notifications.error('Unable to copy connection diagnostics.');
+                this.notifications.error(this.intl.t('fleetops-ui.js.components.modals.telematic-connection-diagnostics.unable-to-copy-connection-diagnostics'));
             });
     }
 

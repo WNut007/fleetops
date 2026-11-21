@@ -18,7 +18,7 @@
     </div>
     <div class="grid grid-cols-2 gap-1">
         <div class="rounded bg-gray-900 shadow-md px-1.5 py-1 min-w-0">
-            <div class="text-[9px] font-semibold uppercase text-gray-400 leading-none">Vehicle #</div>
+            <div class="text-[9px] font-semibold uppercase text-gray-400 leading-none">{{t "fleetops-ui.components.map.marker-card.vehicle.vehicle"}}</div>
             <div class="text-[11px] text-white leading-tight whitespace-normal break-words">{{n-a
                     @vehicle.internal_id
                     @vehicle.public_id
@@ -28,7 +28,7 @@
                 }}</div>
         </div>
         <div class="rounded bg-gray-900 shadow-md px-1.5 py-1 min-w-0">
-            <div class="text-[9px] font-semibold uppercase text-gray-400 leading-none">Driver</div>
+            <div class="text-[9px] font-semibold uppercase text-gray-400 leading-none">{{t "fleetops-ui.components.map.marker-card.vehicle.driver"}}</div>
             <div class="text-[11px] text-white leading-tight whitespace-normal break-words">{{n-a @vehicle.driver_name}}</div>
         </div>
         <div class="rounded bg-gray-900 shadow-md px-1.5 py-1 min-w-0">
@@ -58,21 +58,20 @@
             </div>
         </div>
         <div class="rounded bg-gray-900 shadow-md px-1.5 py-1 min-w-0">
-            <div class="text-[9px] font-semibold uppercase text-gray-400 leading-none">Order</div>
+            <div class="text-[9px] font-semibold uppercase text-gray-400 leading-none">{{t "fleetops-ui.components.map.marker-card.vehicle.order"}}</div>
             <div class="text-[11px] text-white leading-tight whitespace-normal break-words">{{n-a @vehicle.meta.current_order_reference}}</div>
         </div>
         <div class="rounded bg-gray-900 shadow-md px-1.5 py-1 min-w-0">
-            <div class="text-[9px] font-semibold uppercase text-gray-400 leading-none">Speed</div>
+            <div class="text-[9px] font-semibold uppercase text-gray-400 leading-none">{{t "fleetops-ui.components.map.marker-card.vehicle.speed"}}</div>
             <div class="text-[11px] text-white leading-tight whitespace-normal break-words">{{n-a @vehicle.meta.speed_label}}</div>
         </div>
         <div class="rounded bg-gray-900 shadow-md px-1.5 py-1 min-w-0">
-            <div class="text-[9px] font-semibold uppercase text-gray-400 leading-none">Heading</div>
+            <div class="text-[9px] font-semibold uppercase text-gray-400 leading-none">{{t "fleetops-ui.components.map.marker-card.vehicle.heading"}}</div>
             <div class="text-[11px] text-white leading-tight whitespace-normal break-words">{{n-a @vehicle.meta.heading_label}}</div>
         </div>
         <div class="rounded bg-gray-900 shadow-md px-1.5 py-1 min-w-0">
-            <div class="text-[9px] font-semibold uppercase text-gray-400 leading-none">Location</div>
+            <div class="text-[9px] font-semibold uppercase text-gray-400 leading-none">{{t "fleetops-ui.components.map.marker-card.vehicle.location"}}</div>
             <div class="text-[11px] text-white leading-tight whitespace-normal break-words">{{n-a @vehicle.meta.location_coordinates}}</div>
         </div>
     </div>
 </div>
-

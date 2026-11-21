@@ -162,12 +162,12 @@ export default class ModalsUpdateOrderActivityComponent extends Component {
 
         if (this.selectedActivityRequiresPod && this.uploadProofFile.isRunning) {
             modal.stopLoading();
-            return this.notifications.warning('Photo proof of delivery is still uploading.');
+            return this.notifications.warning(this.intl.t('fleetops-ui.js.components.modals.update-order-activity.photo-proof-of-delivery-is-still'));
         }
 
         if (this.selectedActivityRequiresPod && !this.hasUploadedProof && !this.bypassProof) {
             modal.stopLoading();
-            return this.notifications.warning('Upload photo proof of delivery or choose to bypass proof of delivery.');
+            return this.notifications.warning(this.intl.t('fleetops-ui.js.components.modals.update-order-activity.upload-photo-proof-of-delivery-or'));
         }
 
         try {
@@ -235,7 +235,7 @@ export default class ModalsUpdateOrderActivityComponent extends Component {
 
         try {
             this.proof = this.normalizeProofResponse(yield this.capturePhotoProof.perform());
-            this.notifications.success('Photo proof of delivery uploaded.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.components.modals.update-order-activity.photo-proof-of-delivery-uploaded'));
         } catch (error) {
             this.proof = null;
             this.proofFiles = [];

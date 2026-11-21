@@ -44,7 +44,7 @@ export default class MaintenancePartsIndexController extends Controller {
                     },
                 ],
                 renderInPlace: true,
-                helpText: 'Change the layout',
+                helpText: this.intl.t('fleetops-ui.js.controllers.maintenance.parts.index.change-the-layout'),
             },
             { id: 'refresh', icon: 'refresh', onClick: this.partActions.refresh, helpText: this.intl.t('common.refresh') },
             { id: 'create', text: this.intl.t('common.new'), type: 'primary', icon: 'plus', onClick: this.partActions.transition.create, permission: 'fleet-ops create part' },
@@ -62,7 +62,15 @@ export default class MaintenancePartsIndexController extends Controller {
     }
 
     get bulkActions() {
-        return [{ id: 'bulk-delete', label: 'Delete selected...', class: 'text-red-500', fn: this.partActions.bulkDelete, permission: 'fleet-ops delete part' }];
+        return [
+            {
+                id: 'bulk-delete',
+                label: this.intl.t('fleetops-ui.js.controllers.maintenance.parts.index.delete-selected'),
+                class: 'text-red-500',
+                fn: this.partActions.bulkDelete,
+                permission: 'fleet-ops delete part',
+            },
+        ];
     }
 
     get columns() {

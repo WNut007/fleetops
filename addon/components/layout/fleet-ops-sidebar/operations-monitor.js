@@ -6,6 +6,7 @@ import { registerDestructor } from '@ember/destroyable';
 import { task } from 'ember-concurrency';
 
 export default class LayoutFleetOpsSidebarOperationsMonitorComponent extends Component {
+    @service intl;
     @service store;
     @service fetch;
     @service universe;
@@ -111,39 +112,39 @@ export default class LayoutFleetOpsSidebarOperationsMonitorComponent extends Com
         if (this.hasQuery) {
             return {
                 icon: 'magnifying-glass',
-                title: 'No resources match this search',
-                description: 'Try another driver, vehicle, fleet, public ID, status, or assignment.',
-                action: 'Clear filter',
+                title: this.intl.t('fleetops-ui.js.components.layout.fleet-ops-sidebar.operations-monitor.no-resources-match-this-search'),
+                description: this.intl.t('fleetops-ui.js.components.layout.fleet-ops-sidebar.operations-monitor.try-another-driver-vehicle-fleet-public'),
+                action: this.intl.t('fleetops-ui.js.components.layout.fleet-ops-sidebar.operations-monitor.clear-filter'),
             };
         }
 
         return {
             drivers: {
                 icon: 'id-card',
-                title: 'No drivers yet',
-                description: 'Create drivers so dispatchers can assign orders and track active work on the live map.',
-                action: 'Create driver',
+                title: this.intl.t('fleetops-ui.js.components.layout.fleet-ops-sidebar.operations-monitor.no-drivers-yet'),
+                description: this.intl.t('fleetops-ui.js.components.layout.fleet-ops-sidebar.operations-monitor.create-drivers-so-dispatchers-can-assign'),
+                action: this.intl.t('fleetops-ui.js.components.layout.fleet-ops-sidebar.operations-monitor.create-driver'),
             },
             vehicles: {
                 icon: 'truck',
-                title: 'No vehicles yet',
-                description: 'Add vehicles to power live map visibility, driver assignments, and fleet tracking.',
-                action: 'Create vehicle',
+                title: this.intl.t('fleetops-ui.js.components.layout.fleet-ops-sidebar.operations-monitor.no-vehicles-yet'),
+                description: this.intl.t('fleetops-ui.js.components.layout.fleet-ops-sidebar.operations-monitor.add-vehicles-to-power-live-map'),
+                action: this.intl.t('fleetops-ui.js.components.layout.fleet-ops-sidebar.operations-monitor.create-vehicle'),
             },
             fleets: {
                 icon: 'user-group',
-                title: 'No fleets yet',
-                description: 'Create fleets to organize drivers and vehicles into operational groups.',
-                action: 'Create fleet',
+                title: this.intl.t('fleetops-ui.js.components.layout.fleet-ops-sidebar.operations-monitor.no-fleets-yet'),
+                description: this.intl.t('fleetops-ui.js.components.layout.fleet-ops-sidebar.operations-monitor.create-fleets-to-organize-drivers-and'),
+                action: this.intl.t('fleetops-ui.js.components.layout.fleet-ops-sidebar.operations-monitor.create-fleet'),
             },
         }[this.activeTab];
     }
 
     get tabs() {
         return [
-            { id: 'fleets', label: 'Fleets' },
-            { id: 'drivers', label: 'Drivers' },
-            { id: 'vehicles', label: 'Vehicles' },
+            { id: 'fleets', label: this.intl.t('fleetops-ui.js.components.layout.fleet-ops-sidebar.operations-monitor.fleets') },
+            { id: 'drivers', label: this.intl.t('fleetops-ui.js.components.layout.fleet-ops-sidebar.operations-monitor.drivers') },
+            { id: 'vehicles', label: this.intl.t('fleetops-ui.js.components.layout.fleet-ops-sidebar.operations-monitor.vehicles') },
         ];
     }
 

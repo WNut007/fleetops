@@ -9,6 +9,7 @@ import { buildIdentityStub } from '../../../utils/identity-cell-resource';
 import relationValue from '../../../utils/relation-value';
 
 export default class SettingsPaymentsIndexController extends Controller {
+    @service intl;
     @service store;
     @service fetch;
     @tracked hasStripeConnectAccount = true;
@@ -20,18 +21,18 @@ export default class SettingsPaymentsIndexController extends Controller {
     queryParams = ['page', 'limit', 'sort', 'query'];
     columns = [
         {
-            label: 'Purchase Rate ID',
+            label: this.intl.t('fleetops-ui.js.controllers.settings.payments.index.purchase-rate-id'),
             valuePath: 'public_id',
             cellComponent: 'click-to-copy',
         },
         {
-            label: 'Service Quote',
+            label: this.intl.t('fleetops-ui.js.controllers.settings.payments.index.service-quote'),
             valuePath: 'service_quote_id',
             cellComponent: 'cell/service-quote-identity',
             resourcePath: (payment) => relationValue(payment, 'service_quote') ?? buildIdentityStub(payment, { type: 'service-quote', nameKey: 'service_quote_id' }),
         },
         {
-            label: 'Order',
+            label: this.intl.t('fleetops-ui.js.controllers.settings.payments.index.order'),
             valuePath: 'order_id',
             cellComponent: 'cell/order-identity',
             resourcePath: (payment) =>
@@ -39,18 +40,18 @@ export default class SettingsPaymentsIndexController extends Controller {
                 buildIdentityStub(payment, { type: 'order', nameKey: 'order_id', load: () => (payment.order_uuid ? this.store.findRecord('order', payment.order_uuid) : null) }),
         },
         {
-            label: 'Customer',
+            label: this.intl.t('fleetops-ui.js.controllers.settings.payments.index.customer'),
             valuePath: 'customer.name',
             cellComponent: 'cell/customer-identity',
             resourcePath: (payment) => relationValue(payment, 'customer') ?? buildIdentityStub(payment, { type: payment.customer_type ?? 'customer', nameKey: 'customer_name' }),
         },
         {
-            label: 'Amount',
+            label: this.intl.t('fleetops-ui.js.controllers.settings.payments.index.amount'),
             valuePath: 'amount',
             cellComponent: 'table/cell/currency',
         },
         {
-            label: 'Date',
+            label: this.intl.t('fleetops-ui.js.controllers.settings.payments.index.date'),
             valuePath: 'created_at',
         },
     ];

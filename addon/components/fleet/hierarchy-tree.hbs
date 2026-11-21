@@ -6,7 +6,7 @@
                 <input
                     type="search"
                     value={{this.query}}
-                    placeholder="Search hierarchy..."
+                    placeholder={{t "fleetops-ui.components.fleet.hierarchy-tree.search-hierarchy"}}
                     class="min-w-0 flex-1 appearance-none rounded-md border-0 bg-transparent p-0 text-xs leading-5 text-gray-700 outline-none shadow-none ring-0 focus:border-transparent focus:outline-none focus:ring-0 dark:text-gray-100"
                     data-test-fleet-hierarchy-search
                     {{on "input" this.updateQuery}}
@@ -16,7 +16,12 @@
                 {{#each this.filters as |filter|}}
                     <button
                         type="button"
-                        class="rounded px-2 py-1 text-xs font-medium {{if (eq this.activeFilter filter.id) 'bg-white text-gray-900 shadow-sm dark:bg-gray-700 dark:text-white' 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'}}"
+                        class="rounded px-2 py-1 text-xs font-medium
+                            {{if
+                                (eq this.activeFilter filter.id)
+                                'bg-white text-gray-900 shadow-sm dark:bg-gray-700 dark:text-white'
+                                'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
+                            }}"
                         data-test-fleet-hierarchy-filter={{filter.id}}
                         {{on "click" (fn this.setFilter filter.id)}}
                     >
@@ -37,12 +42,14 @@
         </div>
     </div>
 
-    <div class="fleet-hierarchy-tree-list bg-white dark:bg-gray-900" aria-label="Fleet hierarchy">
+    <div class="fleet-hierarchy-tree-list bg-white dark:bg-gray-900" aria-label={{t "fleetops-ui.components.fleet.hierarchy-tree.fleet-hierarchy"}}>
         {{#if this.visibleRows.length}}
             {{#each this.visibleRows as |row|}}
                 {{#if (eq row.type "fleet")}}
                     <div
-                        class="fleet-hierarchy-tree-row {{row.depthClass}} group flex min-w-0 items-start gap-2 border-b border-gray-100 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 dark:border-gray-800 dark:text-gray-200 dark:hover:bg-gray-800"
+                        class="fleet-hierarchy-tree-row
+                            {{row.depthClass}}
+                            group flex min-w-0 items-start gap-2 border-b border-gray-100 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 dark:border-gray-800 dark:text-gray-200 dark:hover:bg-gray-800"
                         data-test-fleet-hierarchy-row="fleet"
                     >
                         <button
@@ -65,7 +72,7 @@
                         </button>
                         <div class="flex shrink-0 items-center gap-1">
                             <span class="hidden rounded bg-gray-100 px-1.5 py-0.5 text-xs text-gray-500 dark:bg-gray-800 dark:text-gray-400 md:inline-flex">
-                                {{this.fleetSubfleetCount row.fleet}} subfleets
+                                {{t "fleetops-ui.components.fleet.hierarchy-tree.subfleets" fleet=(this.fleetSubfleetCount row.fleet)}}
                             </span>
                             <DropdownButton
                                 @icon="ellipsis-h"
@@ -78,10 +85,16 @@
                                 as |dd|
                             >
                                 <div class="next-dd-menu mx-0 mt-1" role="menu">
-                                    <a href="javascript:;" class="next-dd-item" {{on "click" (dropdown-fn dd this.viewFleet row.fleet)}}>View details</a>
+                                    <a href="javascript:;" class="next-dd-item" {{on "click" (dropdown-fn dd this.viewFleet row.fleet)}}>{{t
+                                            "fleetops-ui.components.fleet.hierarchy-tree.view-details"
+                                        }}</a>
                                     <div class="next-dd-menu-seperator"></div>
-                                    <a href="javascript:;" class="next-dd-item" {{on "click" (dropdown-fn dd this.assignDriver row.fleet)}}>Assign driver</a>
-                                    <a href="javascript:;" class="next-dd-item" {{on "click" (dropdown-fn dd this.assignVehicle row.fleet)}}>Assign vehicle</a>
+                                    <a href="javascript:;" class="next-dd-item" {{on "click" (dropdown-fn dd this.assignDriver row.fleet)}}>{{t
+                                            "fleetops-ui.components.fleet.hierarchy-tree.assign-driver"
+                                        }}</a>
+                                    <a href="javascript:;" class="next-dd-item" {{on "click" (dropdown-fn dd this.assignVehicle row.fleet)}}>{{t
+                                            "fleetops-ui.components.fleet.hierarchy-tree.assign-vehicle"
+                                        }}</a>
                                 </div>
                             </DropdownButton>
                         </div>
@@ -89,27 +102,37 @@
                 {{else if (eq row.type "driver")}}
                     <button
                         type="button"
-                        class="fleet-hierarchy-tree-row {{row.depthClass}} flex w-full min-w-0 items-start gap-2 border-b border-gray-100 px-3 py-1.5 text-left text-xs text-gray-600 hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-800"
+                        class="fleet-hierarchy-tree-row
+                            {{row.depthClass}}
+                            flex w-full min-w-0 items-start gap-2 border-b border-gray-100 px-3 py-1.5 text-left text-xs text-gray-600 hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-800"
                         data-test-fleet-hierarchy-row="driver"
                         {{on "click" (fn this.viewDriver row.driver)}}
                     >
                         <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full {{if row.driver.online 'bg-green-500' 'bg-yellow-300'}}" aria-hidden="true"></span>
                         <span class="min-w-0 flex-1">
                             <span class="block truncate font-medium leading-4" title={{this.displayName row.driver}}>{{this.displayName row.driver}}</span>
-                            <span class="block truncate text-xs leading-4 text-gray-400">Driver - {{this.driverSubtitle row.driver}}</span>
+                            <span class="block truncate text-xs leading-4 text-gray-400">{{t
+                                    "fleetops-ui.components.fleet.hierarchy-tree.driver"
+                                    driver=(this.driverSubtitle row.driver)
+                                }}</span>
                         </span>
                     </button>
                 {{else}}
                     <button
                         type="button"
-                        class="fleet-hierarchy-tree-row {{row.depthClass}} flex w-full min-w-0 items-start gap-2 border-b border-gray-100 px-3 py-1.5 text-left text-xs text-gray-600 hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-800"
+                        class="fleet-hierarchy-tree-row
+                            {{row.depthClass}}
+                            flex w-full min-w-0 items-start gap-2 border-b border-gray-100 px-3 py-1.5 text-left text-xs text-gray-600 hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-800"
                         data-test-fleet-hierarchy-row="vehicle"
                         {{on "click" (fn this.viewVehicle row.vehicle)}}
                     >
                         <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full {{if row.vehicle.online 'bg-green-500' 'bg-yellow-300'}}" aria-hidden="true"></span>
                         <span class="min-w-0 flex-1">
                             <span class="block truncate font-medium leading-4" title={{this.displayName row.vehicle}}>{{this.displayName row.vehicle}}</span>
-                            <span class="block truncate text-xs leading-4 text-gray-400">Vehicle - {{this.vehicleSubtitle row.vehicle}}</span>
+                            <span class="block truncate text-xs leading-4 text-gray-400">{{t
+                                    "fleetops-ui.components.fleet.hierarchy-tree.vehicle"
+                                    vehicle=(this.vehicleSubtitle row.vehicle)
+                                }}</span>
                         </span>
                     </button>
                 {{/if}}
@@ -124,11 +147,30 @@
                     <div class="mt-1 text-xs leading-5 text-gray-500 dark:text-gray-400">{{this.emptyDescription}}</div>
                 </div>
                 {{#if this.hasControlsApplied}}
-                    <Button @type="default" @size="xs" @icon="times" @text="Clear filters" @onClick={{this.clearFilters}} data-test-fleet-hierarchy-clear-filters />
+                    <Button
+                        @type="default"
+                        @size="xs"
+                        @icon="times"
+                        @text={{t "fleetops-ui.components.fleet.hierarchy-tree.clear-filters"}}
+                        @onClick={{this.clearFilters}}
+                        data-test-fleet-hierarchy-clear-filters
+                    />
                 {{else}}
                     <div class="flex items-center gap-1">
-                        <Button @type="default" @size="xs" @icon="user-plus" @text="Assign driver" @onClick={{fn this.assignDriver this.rootFleet}} />
-                        <Button @type="default" @size="xs" @icon="car" @text="Assign vehicle" @onClick={{fn this.assignVehicle this.rootFleet}} />
+                        <Button
+                            @type="default"
+                            @size="xs"
+                            @icon="user-plus"
+                            @text={{t "fleetops-ui.components.fleet.hierarchy-tree.assign-driver"}}
+                            @onClick={{fn this.assignDriver this.rootFleet}}
+                        />
+                        <Button
+                            @type="default"
+                            @size="xs"
+                            @icon="car"
+                            @text={{t "fleetops-ui.components.fleet.hierarchy-tree.assign-vehicle"}}
+                            @onClick={{fn this.assignVehicle this.rootFleet}}
+                        />
                     </div>
                 {{/if}}
             </div>

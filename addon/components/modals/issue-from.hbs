@@ -97,7 +97,13 @@
             </InputGroup>
 
             <InputGroup @name={{t "modals.issue-form.report"}}>
-                <Textarea @value={{this.issue.report}} aria-label="Issue Report" class="w-full form-input" placeholder={{t "modals.issue-form.report"}} rows={{5}} />
+                <Textarea
+                    @value={{this.issue.report}}
+                    aria-label={{t "fleetops-ui.components.modals.issue-from.issue-report"}}
+                    class="w-full form-input"
+                    placeholder={{t "modals.issue-form.report"}}
+                    rows={{5}}
+                />
             </InputGroup>
 
             <InputGroup @name={{t "modals.issue-form.tags"}}>

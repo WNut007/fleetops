@@ -1,5 +1,5 @@
-<ContentPanel @title="Fleet-Ops Order Settings" @open={{true}} @wrapperClass="bordered-classic">
-    <InputGroup @name="Enabled Order Types">
+<ContentPanel @title={{t "fleetops-ui.components.customer.admin-settings.fleet-ops-order-settings"}} @open={{true}} @wrapperClass="bordered-classic">
+    <InputGroup @name={{t "fleetops-ui.components.customer.admin-settings.enabled-order-types"}}>
         <div class="space-y-1">
             {{#if this.loadOrderConfigs.isRunning}}
                 <Spinner />
@@ -11,15 +11,15 @@
         </div>
         {{#if this.toggleOrderConfig.isRunning}}
             <div class="mt-4">
-                <Spinner @loadingMessage="Saving changes..." @loadingMessageClass="ml-2" @wrapperClass="flex flex-row items-center" />
+                <Spinner @loadingMessage={{t "fleetops-ui.components.customer.admin-settings.saving-changes"}} @loadingMessageClass="ml-2" @wrapperClass="flex flex-row items-center" />
             </div>
         {{/if}}
     </InputGroup>
-    <InputGroup @name="Enable Payments" @wrapperClass="mb-0i">
+    <InputGroup @name={{t "fleetops-ui.components.customer.admin-settings.enable-payments"}} @wrapperClass="mb-0i">
         <Toggle
             @isToggled={{this.paymentsEnabled}}
             @onToggle={{perform this.togglePayments}}
-            @label="Enable customer to make payments through portal"
+            @label={{t "fleetops-ui.components.customer.admin-settings.enable-customer-to-make-payments-through"}}
             @wrapperClass={{if (or this.togglePayments.isRunning this.loadOrderConfigs.isRunning) "pointer-events-none opacity-50" ""}}
             @disable={{not this.paymentsOnboardCompleted}}
         />
@@ -27,8 +27,12 @@
             <div class="space-y-4 mt-4">
                 {{#unless this.paymentsOnboardCompleted}}
                     <InfoBlock @type="warning" @icon="triangle-exclamation">
-                        <span>Payment onboard must be completed to enable payments from customers.</span>
-                        <Button @text="Completed Payments Onboard" @onClick={{transition-to "settings.payments.onboard"}} @wrapperClass="mt-2" />
+                        <span>{{t "fleetops-ui.components.customer.admin-settings.payment-onboard-must-be-completed-to"}}</span>
+                        <Button
+                            @text={{t "fleetops-ui.components.customer.admin-settings.completed-payments-onboard"}}
+                            @onClick={{transition-to "settings.payments.onboard"}}
+                            @wrapperClass="mt-2"
+                        />
                     </InfoBlock>
                 {{/unless}}
                 <InfoBlock
@@ -36,8 +40,8 @@
                     @icon={{if this.isStripeEnabled "check" "triangle-exclamation"}}
                     @text={{if
                         this.isStripeEnabled
-                        "Stripe is configured."
-                        "Stripe is NOT configured. The system administrator needs to configure stripe in order for customer payments to be accepted"
+                        (t "fleetops-ui.components.customer.admin-settings.stripe-is-configured")
+                        (t "fleetops-ui.components.customer.admin-settings.stripe-is-not-configured-the-system")
                     }}
                 />
             </div>

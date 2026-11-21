@@ -24,7 +24,7 @@
                 @range={{true}}
                 @onSelect={{this.onDateRangeChanged}}
                 @autoClose={{true}}
-                @placeholder="Select date range"
+                @placeholder={{t "fleetops-ui.components.map.drawer.position-listing.select-date-range"}}
                 class="w-full form-input form-input-sm"
             />
         </div>
@@ -39,26 +39,54 @@
     <div class="replay-controls">
         <div class="flex items-center justify-between space-x-2">
             <div class="flex items-center space-x-2">
-                <Button @type="danger" @text="Stop" @icon="stop" @size="xs" @disabled={{not (or this.isReplaying this.isPaused)}} @onClick={{this.stopReplay}} />
+                <Button
+                    @type="danger"
+                    @text={{t "fleetops-ui.components.map.drawer.position-listing.stop"}}
+                    @icon="stop"
+                    @size="xs"
+                    @disabled={{not (or this.isReplaying this.isPaused)}}
+                    @onClick={{this.stopReplay}}
+                />
 
                 {{#if (or this.isReplaying this.isPaused)}}
                     {{#if this.isReplaying}}
-                        <Button @type="warning" @text="Pause" @icon="pause" @size="xs" @onClick={{this.pauseReplay}} />
+                        <Button @type="warning" @text={{t "fleetops-ui.components.map.drawer.position-listing.pause"}} @icon="pause" @size="xs" @onClick={{this.pauseReplay}} />
                     {{else}}
-                        <Button @type="success" @text="Resume" @icon="play" @size="xs" @onClick={{this.startReplay}} />
+                        <Button @type="success" @text={{t "fleetops-ui.components.map.drawer.position-listing.resume"}} @icon="play" @size="xs" @onClick={{this.startReplay}} />
                     {{/if}}
                 {{else}}
-                    <Button @type="success" @text="Play" @icon="play" @size="xs" @disabled={{not this.hasPositions}} @onClick={{this.startReplay}} />
+                    <Button
+                        @type="success"
+                        @text={{t "fleetops-ui.components.map.drawer.position-listing.play"}}
+                        @icon="play"
+                        @size="xs"
+                        @disabled={{not this.hasPositions}}
+                        @onClick={{this.startReplay}}
+                    />
                 {{/if}}
 
                 <div class="step-controls flex items-center space-x-1 border-l border-gray-300 dark:border-gray-700 pl-2 ml-2">
-                    <Button @type="default" @icon="backward-step" @size="xs" @disabled={{not this.hasPositions}} @onClick={{this.stepBackward}} title="Step backward" />
-                    <Button @type="default" @icon="forward-step" @size="xs" @disabled={{not this.hasPositions}} @onClick={{this.stepForward}} title="Step forward" />
+                    <Button
+                        @type="default"
+                        @icon="backward-step"
+                        @size="xs"
+                        @disabled={{not this.hasPositions}}
+                        @onClick={{this.stepBackward}}
+                        title={{t "fleetops-ui.components.map.drawer.position-listing.step-backward"}}
+                    />
+                    <Button
+                        @type="default"
+                        @icon="forward-step"
+                        @size="xs"
+                        @disabled={{not this.hasPositions}}
+                        @onClick={{this.stepForward}}
+                        title={{t "fleetops-ui.components.map.drawer.position-listing.step-forward"}}
+                    />
                 </div>
 
                 <div class="speed-control border-l border-gray-300 dark:border-gray-700 pl-2 ml-2">
                     <label class="text-xs uppercase tracking-wide font-medium text-gray-700 dark:text-gray-400 mr-1">
-                        Speed:
+                        {{t "fleetops-ui.components.map.drawer.position-listing.speed"}}
                     </label>
                     <Select
                         @value={{this.replaySpeed}}

@@ -8,6 +8,7 @@ import copyToClipboard from '@fleetbase/ember-core/utils/copy-to-clipboard';
 const METADATA_LABELS = { environment: 'Environment', host: 'Host', auth_type: 'Authentication', status: 'HTTP status', total_vehicles: 'Vehicles available' };
 
 export default class FuelConnectionDiagnosticsComponent extends Component {
+    @service intl;
     @service fetch;
     @service notifications;
     @tracked result;
@@ -79,9 +80,9 @@ export default class FuelConnectionDiagnosticsComponent extends Component {
     @action async copyDiagnostics() {
         try {
             await copyToClipboard(this.diagnosticsText);
-            this.notifications.success('Connection diagnostics copied.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.components.modals.fuel-connection-diagnostics.connection-diagnostics-copied'));
         } catch {
-            this.notifications.error('Unable to copy diagnostics.');
+            this.notifications.error(this.intl.t('fleetops-ui.js.components.modals.fuel-connection-diagnostics.unable-to-copy-diagnostics'));
         }
     }
 }

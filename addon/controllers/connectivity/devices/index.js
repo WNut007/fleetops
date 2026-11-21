@@ -92,7 +92,7 @@ export default class ConnectivityDevicesIndexController extends Controller {
     @tracked bulkActions = [
         {
             id: 'bulk-delete',
-            label: 'Delete selected...',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.devices.index.delete-selected'),
             class: 'text-red-500',
             fn: this.deviceActions.bulkDelete,
             permission: 'fleet-ops delete device',
@@ -100,11 +100,11 @@ export default class ConnectivityDevicesIndexController extends Controller {
     ];
 
     get deviceTypeOptions() {
-        return fleetOpsOptions('deviceTypes');
+        return fleetOpsOptions('deviceTypes', this.intl);
     }
 
     get deviceStatusOptions() {
-        return fleetOpsOptions('deviceStatuses');
+        return fleetOpsOptions('deviceStatuses', this.intl);
     }
 
     get columns() {

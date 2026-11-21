@@ -5,6 +5,7 @@ import { debug } from '@ember/debug';
 import { task } from 'ember-concurrency';
 
 export default class OrderDetailsTrackingComponent extends Component {
+    @service intl;
     @service orderActions;
     @service fetch;
     @service notifications;
@@ -529,12 +530,12 @@ export default class OrderDetailsTrackingComponent extends Component {
         }
 
         return [
-            { label: 'Provider', value: this.humanize(trackerData.provider) },
-            { label: 'Fallback', value: trackerData.fallback_provider ? this.humanize(trackerData.fallback_provider) : 'No' },
-            { label: 'Traffic aware', value: trackerData.options?.traffic_enabled ? 'Yes' : 'No' },
-            { label: 'Confidence', value: this.confidenceLabel },
-            { label: 'Driver signal', value: this.driverSignal },
-            { label: 'Warnings', value: String((trackerData.warnings ?? []).length) },
+            { label: this.intl.t('fleetops-ui.js.components.order.details.tracking.provider'), value: this.humanize(trackerData.provider) },
+            { label: this.intl.t('fleetops-ui.js.components.order.details.tracking.fallback'), value: trackerData.fallback_provider ? this.humanize(trackerData.fallback_provider) : 'No' },
+            { label: this.intl.t('fleetops-ui.js.components.order.details.tracking.traffic-aware'), value: trackerData.options?.traffic_enabled ? 'Yes' : 'No' },
+            { label: this.intl.t('fleetops-ui.js.components.order.details.tracking.confidence'), value: this.confidenceLabel },
+            { label: this.intl.t('fleetops-ui.js.components.order.details.tracking.driver-signal'), value: this.driverSignal },
+            { label: this.intl.t('fleetops-ui.js.components.order.details.tracking.warnings'), value: String((trackerData.warnings ?? []).length) },
         ];
     }
 
@@ -617,7 +618,7 @@ export default class OrderDetailsTrackingComponent extends Component {
 
         try {
             yield this.fetch.post(`orders/${order.id}/ping-driver`);
-            this.notifications.success('Driver app ping sent.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.components.order.details.tracking.driver-app-ping-sent'));
         } catch (err) {
             this.notifications.error(err.message ?? 'Unable to ping driver app.');
         }

@@ -22,10 +22,10 @@ export default class SettingsMapController extends Controller {
      */
     @tracked mapProviderOptions = MAP_PROVIDER_OPTIONS;
     @tracked googleMapsMapTypeOptions = [
-        { label: 'Roadmap', value: 'roadmap' },
-        { label: 'Satellite', value: 'satellite' },
-        { label: 'Hybrid', value: 'hybrid' },
-        { label: 'Terrain', value: 'terrain' },
+        { label: this.intl.t('fleetops-ui.js.controllers.settings.map.roadmap'), value: 'roadmap' },
+        { label: this.intl.t('fleetops-ui.js.controllers.settings.map.satellite'), value: 'satellite' },
+        { label: this.intl.t('fleetops-ui.js.controllers.settings.map.hybrid'), value: 'hybrid' },
+        { label: this.intl.t('fleetops-ui.js.controllers.settings.map.terrain'), value: 'terrain' },
     ];
 
     /**

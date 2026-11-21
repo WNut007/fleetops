@@ -37,7 +37,7 @@ export default class ConnectivityFuelProvidersIndexController extends Controller
             },
             {
                 icon: 'plus',
-                text: 'Connect Integration',
+                text: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.index.connect-integration'),
                 type: 'primary',
                 onClick: () => this.fuelIntegrationActions.transition.create(),
                 permission: 'fleet-ops create fuel-provider-connection',
@@ -61,7 +61,7 @@ export default class ConnectivityFuelProvidersIndexController extends Controller
         return [
             {
                 sticky: true,
-                label: 'Integration',
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.index.integration'),
                 valuePath: 'displayName',
                 sortParam: 'name',
                 cellComponent: 'table/cell/anchor',
@@ -73,7 +73,7 @@ export default class ConnectivityFuelProvidersIndexController extends Controller
                 filterComponent: 'filter/string',
             },
             {
-                label: 'Provider Key',
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.index.provider-key'),
                 valuePath: 'provider',
                 resizable: true,
                 sortable: true,
@@ -81,7 +81,7 @@ export default class ConnectivityFuelProvidersIndexController extends Controller
                 filterComponent: 'filter/string',
             },
             {
-                label: 'Status',
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.index.status'),
                 valuePath: 'status',
                 cellComponent: 'table/cell/status',
                 resizable: true,
@@ -91,26 +91,26 @@ export default class ConnectivityFuelProvidersIndexController extends Controller
                 filterOptions: ['configured', 'connected', 'active', 'error', 'disabled'],
             },
             {
-                label: 'Last Sync',
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.index.last-sync'),
                 valuePath: 'lastSyncedAt',
                 sortParam: 'last_synced_at',
                 resizable: true,
                 sortable: true,
             },
             {
-                label: 'New in last sync',
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.index.new-in-last-sync'),
                 valuePath: 'lastImported',
                 resizable: true,
                 sortable: false,
             },
             {
-                label: 'Unmatched in last sync',
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.index.unmatched-in-last-sync'),
                 valuePath: 'lastUnmatched',
                 resizable: true,
                 sortable: false,
             },
             {
-                label: 'Last Error',
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.index.last-error'),
                 valuePath: 'last_error',
                 resizable: true,
                 hidden: true,
@@ -121,17 +121,33 @@ export default class ConnectivityFuelProvidersIndexController extends Controller
                 ddButtonText: false,
                 ddButtonIcon: 'ellipsis-h',
                 ddButtonIconPrefix: 'fas',
-                ddMenuLabel: 'Fuel Integration Actions',
+                ddMenuLabel: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.index.fuel-integration-actions'),
                 cellClassNames: 'overflow-visible',
                 wrapperClass: 'flex items-center justify-end mx-2',
                 sticky: 'right',
                 width: 60,
                 actions: [
-                    { label: 'Open Integration', fn: this.openConnection, permission: 'fleet-ops view fuel-provider-connection' },
-                    { label: 'Edit Settings', fn: this.editConnection, permission: 'fleet-ops update fuel-provider-connection' },
+                    {
+                        label: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.index.open-integration'),
+                        fn: this.openConnection,
+                        permission: 'fleet-ops view fuel-provider-connection',
+                    },
+                    {
+                        label: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.index.edit-settings'),
+                        fn: this.editConnection,
+                        permission: 'fleet-ops update fuel-provider-connection',
+                    },
                     { separator: true },
-                    { label: 'Test Connection', fn: this.testConnection, permission: 'fleet-ops update fuel-provider-connection' },
-                    { label: 'Sync Transactions', fn: this.syncConnection, permission: 'fleet-ops sync fuel-provider-connection' },
+                    {
+                        label: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.index.test-connection'),
+                        fn: this.testConnection,
+                        permission: 'fleet-ops update fuel-provider-connection',
+                    },
+                    {
+                        label: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.index.sync-transactions'),
+                        fn: this.syncConnection,
+                        permission: 'fleet-ops sync fuel-provider-connection',
+                    },
                 ],
                 sortable: false,
                 filterable: false,
@@ -163,10 +179,10 @@ export default class ConnectivityFuelProvidersIndexController extends Controller
 
     @action testConnection(connection) {
         return this.modalsManager.show('modals/fuel-connection-diagnostics', {
-            title: 'Test Fuel Connection',
-            acceptButtonText: 'Run Test',
+            title: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.index.test-fuel-connection'),
+            acceptButtonText: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.index.run-test'),
             acceptButtonIcon: 'plug',
-            declineButtonText: 'Close',
+            declineButtonText: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.index.close'),
             connection,
             onTested: () => connection.reload(),
         });
@@ -175,7 +191,7 @@ export default class ConnectivityFuelProvidersIndexController extends Controller
     @action async syncConnection(connection) {
         try {
             await this.fetch.post(`fuel-provider-connections/${connection.id}/sync`, { async: true });
-            this.notifications.success('Fuel transaction sync queued.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.index.fuel-transaction-sync-queued'));
             await connection.reload();
         } catch (error) {
             this.notifications.serverError(error);

@@ -4,17 +4,18 @@ import { getOwner } from '@ember/application';
 import getCurrentNestedController from '@fleetbase/ember-core/utils/get-current-nested-controller';
 
 export default class ManagementContactsController extends Controller {
+    @service intl;
     @service hostRouter;
 
     get tabs() {
         return [
             {
                 route: 'management.contacts.index',
-                label: 'Contacts',
+                label: this.intl.t('fleetops-ui.js.controllers.management.contacts.contacts'),
             },
             {
                 route: 'management.contacts.customers',
-                label: 'Customers',
+                label: this.intl.t('fleetops-ui.js.controllers.management.contacts.customers-label'),
             },
         ];
     }

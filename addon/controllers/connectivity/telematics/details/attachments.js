@@ -184,8 +184,8 @@ export default class ConnectivityTelematicsDetailsAttachmentsController extends 
                 return {
                     tone: 'danger',
                     icon: 'triangle-exclamation',
-                    title: 'Unable to load device attachments',
-                    message: 'Fleetbase could not load the full provider device list. Refresh the tab or review the connection logs.',
+                    title: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.attachments.unable-to-load-device-attachments'),
+                    message: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.attachments.fleetbase-could-not-load-the-full'),
                     primaryText: 'Refresh',
                     primaryIcon: 'refresh',
                     primaryAction: this.refresh,
@@ -197,8 +197,8 @@ export default class ConnectivityTelematicsDetailsAttachmentsController extends 
                 return {
                     tone: 'warning',
                     icon: 'satellite-dish',
-                    title: 'Sync devices before mapping vehicles',
-                    message: 'Vehicle attachment starts after provider devices are synced into this connection.',
+                    title: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.attachments.sync-devices-before-mapping-vehicles'),
+                    message: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.attachments.vehicle-attachment-starts-after-provider-devices'),
                     primaryText: 'Go to Devices',
                     primaryIcon: 'microchip',
                     primaryAction: this.goToDevices,
@@ -207,8 +207,8 @@ export default class ConnectivityTelematicsDetailsAttachmentsController extends 
                 return {
                     tone: 'info',
                     icon: 'filter',
-                    title: 'No mappings match these filters',
-                    message: 'Clear the search and filters to return to all synced devices and vehicle mappings.',
+                    title: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.attachments.no-mappings-match-these-filters'),
+                    message: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.attachments.clear-the-search-and-filters-to'),
                     primaryText: 'Clear filters',
                     primaryIcon: 'filter',
                     primaryAction: this.clearFilters,
@@ -217,15 +217,15 @@ export default class ConnectivityTelematicsDetailsAttachmentsController extends 
                 return {
                     tone: 'success',
                     icon: 'check',
-                    title: 'All synced devices are mapped',
-                    message: 'Every synced provider device in this connection is currently attached to a vehicle.',
+                    title: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.attachments.all-synced-devices-are-mapped'),
+                    message: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.attachments.every-synced-provider-device-in-this'),
                 };
             case 'unattached_only':
                 return {
                     tone: 'warning',
                     icon: 'link-slash',
-                    title: 'Attach synced devices to vehicles',
-                    message: 'Use the unattached devices section below to map each device deliberately. Bulk auto-attachment is intentionally not available here.',
+                    title: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.attachments.attach-synced-devices-to-vehicles'),
+                    message: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.attachments.use-the-unattached-devices-section-below'),
                 };
             default:
                 return null;
@@ -234,11 +234,36 @@ export default class ConnectivityTelematicsDetailsAttachmentsController extends 
 
     get metrics() {
         return [
-            { label: 'Synced devices', value: this.totalSyncedDevices, icon: 'microchip', accentClass: 'fleetops-connectivity-kpi-accent-blue' },
-            { label: 'Assets mapped', value: this.mappedAssetsCount, icon: 'truck', accentClass: 'fleetops-connectivity-kpi-accent-blue' },
-            { label: 'Attached devices', value: this.attachedDevicesCount, icon: 'link', accentClass: 'fleetops-connectivity-kpi-accent-green' },
-            { label: 'Unattached devices', value: this.unattachedDevicesCount, icon: 'link-slash', accentClass: 'fleetops-connectivity-kpi-accent-amber' },
-            { label: 'Online devices', value: this.onlineDevicesCount, icon: 'signal', accentClass: 'fleetops-connectivity-kpi-accent-green' },
+            {
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.attachments.synced-devices'),
+                value: this.totalSyncedDevices,
+                icon: 'microchip',
+                accentClass: 'fleetops-connectivity-kpi-accent-blue',
+            },
+            {
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.attachments.assets-mapped'),
+                value: this.mappedAssetsCount,
+                icon: 'truck',
+                accentClass: 'fleetops-connectivity-kpi-accent-blue',
+            },
+            {
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.attachments.attached-devices'),
+                value: this.attachedDevicesCount,
+                icon: 'link',
+                accentClass: 'fleetops-connectivity-kpi-accent-green',
+            },
+            {
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.attachments.unattached-devices'),
+                value: this.unattachedDevicesCount,
+                icon: 'link-slash',
+                accentClass: 'fleetops-connectivity-kpi-accent-amber',
+            },
+            {
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.attachments.online-devices'),
+                value: this.onlineDevicesCount,
+                icon: 'signal',
+                accentClass: 'fleetops-connectivity-kpi-accent-green',
+            },
         ];
     }
 

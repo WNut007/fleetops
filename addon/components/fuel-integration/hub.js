@@ -8,6 +8,7 @@ import { fuelDate, fuelNumber, fuelMoney } from '../../utils/fuel-integration-fo
 const WARNING_STATUSES = ['error', 'disabled'];
 
 export default class FuelIntegrationHubComponent extends Component {
+    @service intl;
     @service fuelIntegrationActions;
     @service currentUser;
     @tracked table;
@@ -76,37 +77,37 @@ export default class FuelIntegrationHubComponent extends Component {
         return [
             {
                 icon: 'gas-pump',
-                label: 'Connected integrations',
+                label: this.intl.t('fleetops-ui.js.components.fuel-integration.hub.connected-integrations'),
                 value: this.activeConnectionCount,
                 help: 'Fuel card and fuel management accounts',
-                action: 'Connect integration',
+                action: this.intl.t('fleetops-ui.js.components.fuel-integration.hub.connect-integration'),
                 actionType: 'create',
                 accentClass: 'fleetops-connectivity-kpi-accent-blue',
             },
             {
                 icon: 'clock-rotate-left',
-                label: 'Last sync',
+                label: this.intl.t('fleetops-ui.js.components.fuel-integration.hub.last-sync'),
                 value: this.lastSyncLabel,
                 help: 'Most recent completed import',
-                action: 'Review sync',
+                action: this.intl.t('fleetops-ui.js.components.fuel-integration.hub.review-sync'),
                 actionType: 'review',
                 accentClass: 'fleetops-connectivity-kpi-accent-green',
             },
             {
                 icon: 'triangle-exclamation',
-                label: 'Unmatched in latest runs',
+                label: this.intl.t('fleetops-ui.js.components.fuel-integration.hub.unmatched-in-latest-runs'),
                 value: this.unmatchedTransactionsCount,
                 help: this.unmatchedTransactionsCount > 0 ? 'Need vehicle or trip matching' : 'No unmatched count',
-                action: 'Review matches',
+                action: this.intl.t('fleetops-ui.js.components.fuel-integration.hub.review-matches'),
                 actionType: 'transactions',
                 accentClass: 'fleetops-connectivity-kpi-accent-amber',
             },
             {
                 icon: 'receipt',
-                label: 'Latest import spend',
+                label: this.intl.t('fleetops-ui.js.components.fuel-integration.hub.latest-import-spend'),
                 value: this.formatSpend,
                 help: `${this.formatLiters} imported`,
-                action: 'Open ledger',
+                action: this.intl.t('fleetops-ui.js.components.fuel-integration.hub.open-ledger'),
                 actionType: 'transactions',
                 accentClass: 'fleetops-connectivity-kpi-accent-rose',
             },

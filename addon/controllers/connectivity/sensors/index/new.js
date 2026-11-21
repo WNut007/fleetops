@@ -21,7 +21,7 @@ export default class ConnectivitySensorsIndexNewController extends Controller {
 
             yield this.hostRouter.refresh();
             yield this.hostRouter.transitionTo('console.fleet-ops.connectivity.sensors.index.details', sensor);
-            this.notifications.success('Sensor created successfully.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.controllers.connectivity.sensors.index.new.sensor-created-successfully'));
             this.resetForm();
         } catch (err) {
             this.notifications.serverError(err);

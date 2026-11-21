@@ -2,7 +2,7 @@
     @resource={{this.fleet}}
     @controller={{this}}
     @actionButtons={{this.actionButtons}}
-    @headerTitle="Create a new fleet"
+    @headerTitle={{t "fleetops-ui.templates.management.fleets.index.new.create-a-new-fleet"}}
     @saveTask={{this.save}}
     @onPressCancel={{transition-to "management.fleets.index"}}
     @onOverlayReady={{fn (mut this.overlay)}}

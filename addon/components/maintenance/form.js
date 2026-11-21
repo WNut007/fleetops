@@ -73,9 +73,9 @@ export default class MaintenanceFormComponent extends Component {
      * label instead of the raw model type string.
      */
     performedByTypeOptions = [
-        { value: 'fleet-ops:vendor', label: 'Vendor' },
-        { value: 'fleet-ops:driver', label: 'Driver' },
-        { value: 'Auth:User', label: 'User' },
+        { value: 'fleet-ops:vendor', label: this.intl.t('fleetops-ui.js.components.maintenance.form.vendor') },
+        { value: 'fleet-ops:driver', label: this.intl.t('fleetops-ui.js.components.maintenance.form.driver') },
+        { value: 'Auth:User', label: this.intl.t('fleetops-ui.js.components.maintenance.form.user') },
     ];
 
     /** The currently selected maintainable type option object. */

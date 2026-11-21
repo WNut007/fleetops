@@ -1,7 +1,7 @@
 <div class="issue-timeline" {{did-update this.reload this.issueId}} ...attributes>
     {{#if this.loadTimeline.isRunning}}
         <div class="issue-timeline-loading">
-            <Spinner @loadingMessage="Loading timeline..." />
+            <Spinner @loadingMessage={{t "fleetops-ui.components.issue.timeline.loading-timeline"}} />
         </div>
     {{else if this.hasEvents}}
         <ol class="issue-timeline-list">
@@ -34,7 +34,7 @@
     {{else}}
         <div class="issue-detail-empty issue-detail-empty-compact">
             <FaIcon @icon="timeline" />
-            <span>No issue activity yet.</span>
+            <span>{{t "fleetops-ui.components.issue.timeline.no-issue-activity-yet"}}</span>
         </div>
     {{/if}}
 </div>

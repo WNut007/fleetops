@@ -25,32 +25,44 @@
 
                 <div class="mt-1 flex max-w-2xl flex-wrap items-center gap-1.5">
                     {{#if this.type}}
-                        <span class="inline-flex max-w-[10rem] items-center gap-1 truncate rounded-md bg-gray-100 px-1.5 py-0.5 text-[11px] font-medium leading-4 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                        <span
+                            class="inline-flex max-w-[10rem] items-center gap-1 truncate rounded-md bg-gray-100 px-1.5 py-0.5 text-[11px] font-medium leading-4 text-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                        >
                             <FaIcon @icon="gauge-high" class="text-gray-400 dark:text-gray-300" />
                             <span class="truncate">{{n-a (get-fleet-ops-option-label "sensorTypes" this.type)}}</span>
                         </span>
                     {{/if}}
                     {{#if this.identifier}}
-                        <span class="inline-flex max-w-[12rem] items-center gap-1 truncate rounded-md bg-gray-100 px-1.5 py-0.5 text-[11px] font-medium leading-4 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                        <span
+                            class="inline-flex max-w-[12rem] items-center gap-1 truncate rounded-md bg-gray-100 px-1.5 py-0.5 text-[11px] font-medium leading-4 text-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                        >
                             <FaIcon @icon="id-card" class="text-gray-400 dark:text-gray-300" />
                             <span class="truncate">{{this.identifier}}</span>
                         </span>
                     {{/if}}
                     {{#if this.reading}}
-                        <span class="inline-flex max-w-[10rem] items-center gap-1 truncate rounded-md bg-gray-100 px-1.5 py-0.5 text-[11px] font-medium leading-4 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                        <span
+                            class="inline-flex max-w-[10rem] items-center gap-1 truncate rounded-md bg-gray-100 px-1.5 py-0.5 text-[11px] font-medium leading-4 text-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                        >
                             <FaIcon @icon="chart-line" class="text-gray-400 dark:text-gray-300" />
                             <span class="truncate">{{this.reading}}</span>
                         </span>
                     {{/if}}
                     {{#if this.deviceName}}
-                        <span class="inline-flex max-w-[14rem] items-center gap-1 truncate rounded-md bg-gray-100 px-1.5 py-0.5 text-[11px] font-medium leading-4 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                        <span
+                            class="inline-flex max-w-[14rem] items-center gap-1 truncate rounded-md bg-gray-100 px-1.5 py-0.5 text-[11px] font-medium leading-4 text-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                        >
                             <FaIcon @icon="microchip" class="text-gray-400 dark:text-gray-300" />
                             <span class="truncate">{{this.deviceName}}</span>
                         </span>
                     {{/if}}
-                    <span class="inline-flex max-w-[13rem] items-center gap-1 truncate rounded-md bg-gray-100 px-1.5 py-0.5 text-[11px] font-medium leading-4 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                    <span
+                        class="inline-flex max-w-[13rem] items-center gap-1 truncate rounded-md bg-gray-100 px-1.5 py-0.5 text-[11px] font-medium leading-4 text-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                    >
                         <FaIcon @icon="clock" class="text-gray-400 dark:text-gray-300" />
-                        <span class="truncate">{{#if this.lastReadingAt}}{{format-date-fns this.lastReadingAt "dd MMM yyyy, HH:mm"}}{{else}}No reading yet{{/if}}</span>
+                        <span class="truncate">{{#if this.lastReadingAt}}{{format-date-fns this.lastReadingAt "dd MMM yyyy, HH:mm"}}{{else}}{{t
+                                    "fleetops-ui.components.sensor.panel-header.no-reading-yet"
+                                }}{{/if}}</span>
                     </span>
                 </div>
             </div>

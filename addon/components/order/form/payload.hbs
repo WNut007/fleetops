@@ -76,7 +76,7 @@
                                                     @options={{get-fleet-ops-options "entityTypes"}}
                                                     @selected={{find-by "value" entity.type (get-fleet-ops-options "entityTypes")}}
                                                     @onChange={{set-model-attr entity "type"}}
-                                                    @placeholder="Select entity type"
+                                                    @placeholder={{t "fleetops-ui.components.order.form.payload.select-entity-type"}}
                                                     @triggerClass="form-select"
                                                     as |type|
                                                 >
@@ -128,7 +128,7 @@
                                         @options={{get-fleet-ops-options "entityTypes"}}
                                         @selected={{find-by "value" entity.type (get-fleet-ops-options "entityTypes")}}
                                         @onChange={{set-model-attr entity "type"}}
-                                        @placeholder="Select entity type"
+                                        @placeholder={{t "fleetops-ui.components.order.form.payload.select-entity-type"}}
                                         @triggerClass="form-select"
                                         as |type|
                                     >

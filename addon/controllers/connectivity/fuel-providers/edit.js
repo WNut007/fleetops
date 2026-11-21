@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 import { task } from 'ember-concurrency';
 
 export default class ConnectivityFuelProvidersIndexEditController extends Controller {
+    @service intl;
     @service hostRouter;
     @service notifications;
 
@@ -12,7 +13,7 @@ export default class ConnectivityFuelProvidersIndexEditController extends Contro
             yield connection.save();
             yield this.hostRouter.refresh();
             yield this.hostRouter.transitionTo('console.fleet-ops.connectivity.fuel-providers.details', connection);
-            this.notifications.success('Fuel integration settings saved.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.edit.fuel-integration-settings-saved'));
         } catch (error) {
             this.notifications.serverError(error);
         }

@@ -23,7 +23,7 @@
             </div>
             <div class="field-info-container">
                 <div class="field-name">{{t "fleet.fields.active-manpower"}}</div>
-                <div class="field-value">{{this.driversOnlineCount}} of {{this.driversCount}} Online</div>
+                <div class="field-value">{{t "fleetops-ui.components.fleet.details.of-online" driversOnlineCount=this.driversOnlineCount driversCount=this.driversCount}}</div>
             </div>
             <div class="field-info-container">
                 <div class="field-name">{{t "common.date-created"}}</div>
@@ -32,7 +32,7 @@
         </div>
     </ContentPanel>
 
-    <ContentPanel @title="Hierarchy" @open={{true}} @wrapperClass="bordered-top" @panelBodyWrapperClass="p-0i">
+    <ContentPanel @title={{t "fleetops-ui.components.fleet.details.hierarchy"}} @open={{true}} @wrapperClass="bordered-top" @panelBodyWrapperClass="p-0i">
         <Fleet::HierarchyTree
             @fleet={{this.resource}}
             @onViewFleet={{this.viewFleet}}

@@ -35,7 +35,9 @@
                         {{#if this.hasConnectionMetadata}}
                             <div class="mt-3 flex flex-wrap gap-2">
                                 {{#each this.connectionMetadataEntries as |item|}}
-                                    <span class="inline-flex items-center rounded-md border border-gray-200 bg-white px-2 py-1 text-[11px] text-gray-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                                    <span
+                                        class="inline-flex items-center rounded-md border border-gray-200 bg-white px-2 py-1 text-[11px] text-gray-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
+                                    >
                                         <span class="mr-1 font-semibold text-gray-900 dark:text-gray-100">{{item.label}}</span>
                                         {{item.value}}
                                     </span>
@@ -51,9 +53,15 @@
             <div class="flex items-center justify-between border-b border-gray-200 px-3 py-2 dark:border-gray-700">
                 <div class="flex items-center gap-2 text-xs font-semibold uppercase text-gray-500 dark:text-gray-400">
                     <FaIcon @icon="terminal" />
-                    <span>Diagnostics</span>
+                    <span>{{t "fleetops-ui.components.modals.telematic-connection-diagnostics.diagnostics"}}</span>
                 </div>
-                <Button @icon="copy" @text="Copy diagnostics" @size="xs" @disabled={{this.runTest.isRunning}} @onClick={{this.copyConnectionDiagnostics}} />
+                <Button
+                    @icon="copy"
+                    @text={{t "fleetops-ui.components.modals.telematic-connection-diagnostics.copy-diagnostics"}}
+                    @size="xs"
+                    @disabled={{this.runTest.isRunning}}
+                    @onClick={{this.copyConnectionDiagnostics}}
+                />
             </div>
             <div class="max-h-64 overflow-y-auto rounded-b-md border border-gray-900 bg-gray-900 p-3 font-mono text-[11px] leading-5 shadow-inner dark:border-gray-700 dark:bg-gray-900">
                 {{#each this.connectionDiagnosticEntries as |entry|}}

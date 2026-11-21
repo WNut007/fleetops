@@ -3,7 +3,7 @@
         <div class="flex flex-row items-center space-x-2">
             {{#each-in @model.amount_totals as |currency total|}}
                 <div class="flex flex-row space-x-1 px-2 py-0.5 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800">
-                    <span class="text-sm text-black dark:text-white font-bold">Total {{currency}}:</span>
+                    <span class="text-sm text-black dark:text-white font-bold">{{t "fleetops-ui.templates.settings.payments.index.total" currency=currency}}</span>
                     <span class="text-sm text-black dark:text-white">{{format-currency total currency}}</span>
                 </div>
             {{/each-in}}
@@ -60,7 +60,7 @@
                                         @type="primary"
                                         @size="lg"
                                         @icon="flag-checkered"
-                                        @text="Start payments onboard"
+                                        @text={{t "fleetops-ui.templates.settings.payments.index.start-payments-onboard"}}
                                         @onClick={{transition-to "settings.payments.onboard"}}
                                         @permission="fleet-ops onboard payments"
                                         @wrapperClass="mt-4 mb-1"

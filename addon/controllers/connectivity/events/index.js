@@ -1,3 +1,4 @@
+import { localizeOptions } from '../../../utils/fleet-ops-options';
 import Controller from '@ember/controller';
 import { action, get } from '@ember/object';
 import { inject as service } from '@ember/service';
@@ -123,7 +124,7 @@ export default class ConnectivityEventsIndexController extends Controller {
         {
             id: 'event-type',
             sticky: true,
-            label: 'Event',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.events.index.event'),
             valuePath: 'event_type',
             cellComponent: 'table/cell/anchor',
             cellClassNames: 'uppercase',
@@ -137,7 +138,7 @@ export default class ConnectivityEventsIndexController extends Controller {
         },
         {
             id: 'device-display-name',
-            label: 'Device',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.events.index.device'),
             valuePath: 'device.displayName',
             cellComponent: 'cell/device-identity',
             resourcePath: eventDevice,
@@ -154,7 +155,7 @@ export default class ConnectivityEventsIndexController extends Controller {
         },
         {
             id: 'provider',
-            label: 'Provider',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.events.index.provider'),
             valuePath: 'provider',
             cellComponent: 'cell/telematic-identity',
             resourcePath: eventTelematic,
@@ -170,7 +171,7 @@ export default class ConnectivityEventsIndexController extends Controller {
         },
         {
             id: 'severity',
-            label: 'Severity',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.events.index.severity'),
             valuePath: 'severity',
             cellComponent: 'table/cell/status',
             resizable: true,
@@ -178,20 +179,20 @@ export default class ConnectivityEventsIndexController extends Controller {
             filterable: true,
             filterParam: 'severity',
             filterComponent: 'filter/multi-option',
-            filterOptions: severityOptions,
+            filterOptions: localizeOptions(this.intl, 'local.controllers.connectivity.events.index.severityOptions', severityOptions),
             filterOptionLabel: 'label',
             filterOptionValue: 'value',
         },
         {
             id: 'message',
-            label: 'Message',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.events.index.message'),
             valuePath: 'message',
             resizable: true,
             sortable: false,
         },
         {
             id: 'code',
-            label: 'Code',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.events.index.code'),
             valuePath: 'code',
             resizable: true,
             sortable: true,
@@ -201,7 +202,7 @@ export default class ConnectivityEventsIndexController extends Controller {
         },
         {
             id: 'ident',
-            label: 'IDENT',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.events.index.ident'),
             valuePath: 'ident',
             hidden: true,
             resizable: true,
@@ -209,7 +210,7 @@ export default class ConnectivityEventsIndexController extends Controller {
         },
         {
             id: 'protocol',
-            label: 'Protocol',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.events.index.protocol'),
             valuePath: 'protocol',
             hidden: true,
             resizable: true,
@@ -217,7 +218,7 @@ export default class ConnectivityEventsIndexController extends Controller {
         },
         {
             id: 'state',
-            label: 'State',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.events.index.state'),
             valuePath: 'state',
             hidden: true,
             resizable: true,
@@ -225,7 +226,7 @@ export default class ConnectivityEventsIndexController extends Controller {
         },
         {
             id: 'processed-at',
-            label: 'Processed',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.events.index.processed'),
             valuePath: 'processedAt',
             sortParam: 'processed_at',
             resizable: true,
@@ -233,13 +234,13 @@ export default class ConnectivityEventsIndexController extends Controller {
             filterable: true,
             filterParam: 'processed',
             filterComponent: 'filter/multi-option',
-            filterOptions: processedOptions,
+            filterOptions: localizeOptions(this.intl, 'local.controllers.connectivity.events.index.processedOptions', processedOptions),
             filterOptionLabel: 'label',
             filterOptionValue: 'value',
         },
         {
             id: 'occurred-at',
-            label: 'Occurred',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.events.index.occurred'),
             valuePath: 'occurredAt',
             sortParam: 'occurred_at',
             resizable: true,
@@ -292,7 +293,7 @@ export default class ConnectivityEventsIndexController extends Controller {
                 },
                 {
                     id: 'mark-processed',
-                    label: 'Mark processed',
+                    label: this.intl.t('fleetops-ui.js.controllers.connectivity.events.index.mark-processed'),
                     fn: this.markProcessed,
                     permission: 'fleet-ops update device-event',
                 },

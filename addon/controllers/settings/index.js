@@ -3,72 +3,120 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 
 export default class SettingsIndexController extends Controller {
+    @service intl;
     @service docsPanel;
 
     groups = [
         {
-            title: 'Driver And Map Experience',
-            description: 'Tune what dispatchers and drivers see while work is moving.',
+            title: this.intl.t('fleetops-ui.js.controllers.settings.index.driver-and-map-experience'),
+            description: this.intl.t('fleetops-ui.js.controllers.settings.index.tune-what-dispatchers-and-drivers-see'),
             links: [
-                { label: 'Navigator App', route: 'settings.navigator-app', icon: 'location-arrow', description: 'Driver app behavior and workflow defaults.' },
-                { label: 'Map', route: 'settings.map', icon: 'map', description: 'Map providers, defaults, and display behavior.' },
-            ],
-        },
-        {
-            title: 'Dispatch Automation',
-            description: 'Shape route planning, assignment, and scheduling behavior.',
-            links: [
-                { label: 'Routing', route: 'settings.routing', icon: 'route', description: 'Routing engines and routing defaults.' },
-                { label: 'Orchestrator', route: 'settings.orchestrator', icon: 'circle-nodes', description: 'Dispatch orchestration and assignment behavior.' },
-                { label: 'Scheduling', route: 'settings.scheduling', icon: 'calendar-days', description: 'Schedule planning and operational timing rules.' },
-            ],
-        },
-        {
-            title: 'Business And Data',
-            description: 'Keep commerce, metadata, and visual conventions aligned.',
-            links: [
-                { label: 'Payments', route: 'settings.payments', icon: 'cash-register', description: 'Payment setup for operational commerce workflows.' },
                 {
-                    label: 'Tracking Page',
+                    label: this.intl.t('fleetops-ui.js.controllers.settings.index.navigator-app'),
+                    route: 'settings.navigator-app',
+                    icon: 'location-arrow',
+                    description: this.intl.t('fleetops-ui.js.controllers.settings.index.driver-app-behavior-and-workflow-defaults'),
+                },
+                {
+                    label: this.intl.t('fleetops-ui.js.controllers.settings.index.map'),
+                    route: 'settings.map',
+                    icon: 'map',
+                    description: this.intl.t('fleetops-ui.js.controllers.settings.index.map-providers-defaults-and-display-behavior'),
+                },
+            ],
+        },
+        {
+            title: this.intl.t('fleetops-ui.js.controllers.settings.index.dispatch-automation'),
+            description: this.intl.t('fleetops-ui.js.controllers.settings.index.shape-route-planning-assignment-and-scheduling'),
+            links: [
+                {
+                    label: this.intl.t('fleetops-ui.js.controllers.settings.index.routing'),
+                    route: 'settings.routing',
+                    icon: 'route',
+                    description: this.intl.t('fleetops-ui.js.controllers.settings.index.routing-engines-and-routing-defaults'),
+                },
+                {
+                    label: this.intl.t('fleetops-ui.js.controllers.settings.index.orchestrator'),
+                    route: 'settings.orchestrator',
+                    icon: 'circle-nodes',
+                    description: this.intl.t('fleetops-ui.js.controllers.settings.index.dispatch-orchestration-and-assignment-behavior'),
+                },
+                {
+                    label: this.intl.t('fleetops-ui.js.controllers.settings.index.scheduling'),
+                    route: 'settings.scheduling',
+                    icon: 'calendar-days',
+                    description: this.intl.t('fleetops-ui.js.controllers.settings.index.schedule-planning-and-operational-timing-rules'),
+                },
+            ],
+        },
+        {
+            title: this.intl.t('fleetops-ui.js.controllers.settings.index.business-and-data'),
+            description: this.intl.t('fleetops-ui.js.controllers.settings.index.keep-commerce-metadata-and-visual-conventions'),
+            links: [
+                {
+                    label: this.intl.t('fleetops-ui.js.controllers.settings.index.payments'),
+                    route: 'settings.payments',
+                    icon: 'cash-register',
+                    description: this.intl.t('fleetops-ui.js.controllers.settings.index.payment-setup-for-operational-commerce-workflows'),
+                },
+                {
+                    label: this.intl.t('fleetops-ui.js.controllers.settings.index.tracking-page'),
                     route: 'settings.tracking-page',
                     icon: 'magnifying-glass-location',
-                    description: 'The page your customers use to follow deliveries: address, branding and how they verify.',
+                    description: this.intl.t('fleetops-ui.js.controllers.settings.index.the-page-your-customers-use-to'),
                 },
                 {
-                    label: 'Telematics',
+                    label: this.intl.t('fleetops-ui.js.controllers.settings.index.telematics'),
                     route: 'settings.telematics',
                     icon: 'satellite-dish',
-                    description: 'Device event and position history preferences within the system retention policy.',
+                    description: this.intl.t('fleetops-ui.js.controllers.settings.index.device-event-and-position-history-preferences'),
                 },
-                { label: 'Custom Fields', route: 'settings.custom-fields', icon: 'pen-to-square', description: 'Operational metadata fields for Fleet-Ops records.' },
-                { label: 'Avatars', route: 'settings.avatars', icon: 'icons', description: 'Visual assets for driver, vehicle, and map displays.' },
+                {
+                    label: this.intl.t('fleetops-ui.js.controllers.settings.index.custom-fields'),
+                    route: 'settings.custom-fields',
+                    icon: 'pen-to-square',
+                    description: this.intl.t('fleetops-ui.js.controllers.settings.index.operational-metadata-fields-for-fleet-ops'),
+                },
+                {
+                    label: this.intl.t('fleetops-ui.js.controllers.settings.index.avatars'),
+                    route: 'settings.avatars',
+                    icon: 'icons',
+                    description: this.intl.t('fleetops-ui.js.controllers.settings.index.visual-assets-for-driver-vehicle-and'),
+                },
             ],
         },
         {
-            title: 'Communication',
-            description: 'Control operational alerts and notification behavior.',
-            links: [{ label: 'Notifications', route: 'settings.notifications', icon: 'bell', description: 'Operational status alerts and notification rules.' }],
+            title: this.intl.t('fleetops-ui.js.controllers.settings.index.communication'),
+            description: this.intl.t('fleetops-ui.js.controllers.settings.index.control-operational-alerts-and-notification-behavior'),
+            links: [
+                {
+                    label: this.intl.t('fleetops-ui.js.controllers.settings.index.notifications'),
+                    route: 'settings.notifications',
+                    icon: 'bell',
+                    description: this.intl.t('fleetops-ui.js.controllers.settings.index.operational-status-alerts-and-notification-rules'),
+                },
+            ],
         },
     ];
 
     actions = [
         {
-            label: 'Start with driver experience',
-            description: 'Navigator App and Map settings should be reviewed before operators rely on live dispatch defaults.',
+            label: this.intl.t('fleetops-ui.js.controllers.settings.index.start-with-driver-experience'),
+            description: this.intl.t('fleetops-ui.js.controllers.settings.index.navigator-app-and-map-settings-should'),
             icon: 'location-arrow',
             route: 'settings.navigator-app',
             tone: 'info',
         },
         {
-            label: 'Review automation rules',
-            description: 'Routing, orchestration, and scheduling settings affect assignment and planning behavior.',
+            label: this.intl.t('fleetops-ui.js.controllers.settings.index.review-automation-rules'),
+            description: this.intl.t('fleetops-ui.js.controllers.settings.index.routing-orchestration-and-scheduling-settings-affect'),
             icon: 'route',
             route: 'settings.routing',
             tone: 'warning',
         },
         {
-            label: 'Keep forms focused',
-            description: 'Add custom fields after core workflows are stable so operational screens stay easy to scan.',
+            label: this.intl.t('fleetops-ui.js.controllers.settings.index.keep-forms-focused'),
+            description: this.intl.t('fleetops-ui.js.controllers.settings.index.add-custom-fields-after-core-workflows'),
             icon: 'pen-to-square',
             route: 'settings.custom-fields',
             tone: 'success',
@@ -77,74 +125,74 @@ export default class SettingsIndexController extends Controller {
 
     docs = [
         {
-            label: 'Navigator App',
+            label: this.intl.t('fleetops-ui.js.controllers.settings.index.navigator-app'),
             icon: 'location-arrow',
             slug: 'fleet-ops/settings/navigator-app',
-            title: 'Navigator App settings',
-            description: 'Configure driver app behavior, onboarding, and live workflow defaults.',
+            title: this.intl.t('fleetops-ui.js.controllers.settings.index.navigator-app-settings'),
+            description: this.intl.t('fleetops-ui.js.controllers.settings.index.configure-driver-app-behavior-onboarding-and'),
         },
         {
-            label: 'Map',
+            label: this.intl.t('fleetops-ui.js.controllers.settings.index.map'),
             icon: 'map',
             slug: 'fleet-ops/settings/map',
-            title: 'Map settings',
-            description: 'Set map providers, display defaults, and operator map behavior.',
+            title: this.intl.t('fleetops-ui.js.controllers.settings.index.map-settings'),
+            description: this.intl.t('fleetops-ui.js.controllers.settings.index.set-map-providers-display-defaults-and'),
         },
         {
-            label: 'Payments',
+            label: this.intl.t('fleetops-ui.js.controllers.settings.index.payments'),
             icon: 'cash-register',
             slug: 'fleet-ops/settings/payments',
-            title: 'Payments guide',
-            description: 'Connect payment providers and payment behavior for Fleet-Ops workflows.',
+            title: this.intl.t('fleetops-ui.js.controllers.settings.index.payments-guide'),
+            description: this.intl.t('fleetops-ui.js.controllers.settings.index.connect-payment-providers-and-payment-behavior'),
         },
         {
-            label: 'Notifications',
+            label: this.intl.t('fleetops-ui.js.controllers.settings.index.notifications'),
             icon: 'bell',
             slug: 'fleet-ops/settings/notifications',
-            title: 'Notification settings',
-            description: 'Tune operational alerts sent to dispatchers, customers, and drivers.',
+            title: this.intl.t('fleetops-ui.js.controllers.settings.index.notification-settings'),
+            description: this.intl.t('fleetops-ui.js.controllers.settings.index.tune-operational-alerts-sent-to-dispatchers'),
         },
         {
-            label: 'Routing',
+            label: this.intl.t('fleetops-ui.js.controllers.settings.index.routing'),
             icon: 'route',
             slug: 'fleet-ops/settings/routing',
-            title: 'Routing settings',
-            description: 'Configure routing engines, tracking defaults, and distance units.',
+            title: this.intl.t('fleetops-ui.js.controllers.settings.index.routing-settings'),
+            description: this.intl.t('fleetops-ui.js.controllers.settings.index.configure-routing-engines-tracking-defaults-and'),
         },
         {
-            label: 'Orchestrator',
+            label: this.intl.t('fleetops-ui.js.controllers.settings.index.orchestrator'),
             icon: 'circle-nodes',
             slug: 'fleet-ops/settings/orchestrator',
-            title: 'Orchestrator settings',
-            description: 'Select dispatch automation engines and assignment behavior.',
+            title: this.intl.t('fleetops-ui.js.controllers.settings.index.orchestrator-settings'),
+            description: this.intl.t('fleetops-ui.js.controllers.settings.index.select-dispatch-automation-engines-and-assignment'),
         },
         {
-            label: 'Scheduling',
+            label: this.intl.t('fleetops-ui.js.controllers.settings.index.scheduling'),
             icon: 'calendar-days',
             slug: 'fleet-ops/settings/scheduling',
-            title: 'Scheduling settings',
-            description: 'Manage schedule templates and timing rules for planned work.',
+            title: this.intl.t('fleetops-ui.js.controllers.settings.index.scheduling-settings'),
+            description: this.intl.t('fleetops-ui.js.controllers.settings.index.manage-schedule-templates-and-timing-rules'),
         },
         {
-            label: 'Telematics',
+            label: this.intl.t('fleetops-ui.js.controllers.settings.index.telematics'),
             icon: 'satellite-dish',
             slug: 'fleet-ops/settings/telematics',
-            title: 'Telematics Settings',
-            description: 'Choose how long your organization keeps device events and position history.',
+            title: this.intl.t('fleetops-ui.js.controllers.settings.index.telematics-settings'),
+            description: this.intl.t('fleetops-ui.js.controllers.settings.index.choose-how-long-your-organization-keeps'),
         },
         {
-            label: 'Custom Fields',
+            label: this.intl.t('fleetops-ui.js.controllers.settings.index.custom-fields'),
             icon: 'pen-to-square',
             slug: 'fleet-ops/settings/custom-fields',
-            title: 'Custom field settings',
-            description: 'Add structured operational metadata to Fleet-Ops records.',
+            title: this.intl.t('fleetops-ui.js.controllers.settings.index.custom-field-settings'),
+            description: this.intl.t('fleetops-ui.js.controllers.settings.index.add-structured-operational-metadata-to-fleet'),
         },
         {
-            label: 'Avatars',
+            label: this.intl.t('fleetops-ui.js.controllers.settings.index.avatars'),
             icon: 'icons',
             slug: 'fleet-ops/settings/avatars',
-            title: 'Avatar settings',
-            description: 'Manage visual markers used across maps and operational screens.',
+            title: this.intl.t('fleetops-ui.js.controllers.settings.index.avatar-settings'),
+            description: this.intl.t('fleetops-ui.js.controllers.settings.index.manage-visual-markers-used-across-maps'),
         },
     ];
 

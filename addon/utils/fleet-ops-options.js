@@ -918,7 +918,62 @@ export const importColumnMappings = [
     { field: 'customer_email', label: 'Customer Email', required: false, example: 'customer@example.com', group: 'customer' },
 ];
 
-export default function fleetOpsOptions(key) {
+const NOT_LOCALIZED = new Set(['importColumnMappings']);
+const POWER_GROUP_SOURCES = { issueCategoriesPowerGroups: 'issueCategories', driverSkillsPowerGroups: 'driverSkills', vehicleSkillsPowerGroups: 'vehicleSkills' };
+const localizedCache = new Map();
+
+function translateOrKeep(intl, key, fallback) {
+    if (typeof fallback !== 'string' || !intl || !intl.exists(key)) return fallback;
+    return intl.t(key);
+}
+
+function optionKey(option) {
+    return String(option.value ?? option.id ?? option.key ?? option.field).replace(/[^a-zA-Z0-9_-]/g, '_');
+}
+
+/**
+ * Returns the option list with label and description translated for the current locale.
+ * Translations live under `fleetops-ui.options.<listName>.<value>.<field>`; anything without a
+ * translation keeps its English text. Results are cached per locale so the same option objects
+ * are returned on every call (power-select matches the selected option by identity).
+ */
+export function localizeOptions(intl, listName, list) {
+    if (!intl || !Array.isArray(list) || NOT_LOCALIZED.has(listName)) return list;
+    const locale = String(intl.primaryLocale ?? '');
+    const cacheKey = `${locale}:${listName}`;
+    if (localizedCache.has(cacheKey)) return localizedCache.get(cacheKey);
+
+    const localized = list.map((option) => {
+        if (!option || typeof option !== 'object') return option;
+        const base = `fleetops-ui.options.${listName}.${optionKey(option)}`;
+        const copy = { ...option };
+        for (const field of ['label', 'description']) {
+            if (field in option) copy[field] = translateOrKeep(intl, `${base}.${field}`, option[field]);
+        }
+        return copy;
+    });
+    localizedCache.set(cacheKey, localized);
+    return localized;
+}
+
+export default function fleetOpsOptions(key, intl = null) {
+    if (intl && POWER_GROUP_SOURCES[key]) {
+        const source = POWER_GROUP_SOURCES[key];
+        const cacheKey = `${String(intl.primaryLocale ?? '')}:${key}`;
+        if (!localizedCache.has(cacheKey)) {
+            const items = localizeOptions(intl, source, fleetOpsOptions(source));
+            // group values are identifiers; translate only the header shown for each group
+            const groupLabelMap = {};
+            for (const item of items) {
+                const group = item?.group;
+                if (typeof group === 'string' && intl.exists(`fleetops-ui.options.groups.${group}`)) groupLabelMap[group] = intl.t(`fleetops-ui.options.groups.${group}`);
+            }
+            localizedCache.set(cacheKey, toPowerSelectGroups(items, { groupLabelMap }));
+        }
+        return localizedCache.get(cacheKey);
+    }
+    if (intl) return localizeOptions(intl, key, fleetOpsOptions(key));
+
     const allOptions = {
         driverTypes,
         driverStatuses,

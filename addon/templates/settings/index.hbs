@@ -1,9 +1,9 @@
 <div class="fleet-ops-control-hub fleet-ops-settings-control-hub" data-test-fleet-ops-settings-hub>
     <section class="fleet-ops-control-hub-header">
         <div class="fleet-ops-control-hub-header-copy">
-            <div class="fleet-ops-control-hub-eyebrow">Settings</div>
-            <h1 class="fleet-ops-control-hub-title">Fleet-Ops Settings</h1>
-            <p class="fleet-ops-control-hub-subtitle">Configure the operator, driver, routing, notification, and data rules that shape Fleet-Ops workflows.</p>
+            <div class="fleet-ops-control-hub-eyebrow">{{t "fleetops-ui.templates.settings.index.settings"}}</div>
+            <h1 class="fleet-ops-control-hub-title">{{t "fleetops-ui.templates.settings.index.fleet-ops-settings"}}</h1>
+            <p class="fleet-ops-control-hub-subtitle">{{t "fleetops-ui.templates.settings.index.configure-the-operator-driver-routing-notification"}}</p>
         </div>
     </section>
 
@@ -39,8 +39,8 @@
                 <div class="fleet-ops-control-hub-panel">
                     <div class="fleet-ops-control-hub-panel-header">
                         <div>
-                            <h2>Setup Focus</h2>
-                            <p>Compact next steps for operators.</p>
+                            <h2>{{t "fleetops-ui.templates.settings.index.setup-focus"}}</h2>
+                            <p>{{t "fleetops-ui.templates.settings.index.compact-next-steps-for-operators"}}</p>
                         </div>
                     </div>
 
@@ -60,15 +60,15 @@
                 <div class="fleet-ops-control-hub-doc-note">
                     <div class="fleet-ops-control-hub-doc-note-heading">
                         <FaIcon @icon="lightbulb" />
-                        <span>Guides</span>
+                        <span>{{t "fleetops-ui.templates.settings.index.guides"}}</span>
                     </div>
-                    <p class="fleet-ops-control-hub-doc-note-copy">Read the guide before changing settings.</p>
+                    <p class="fleet-ops-control-hub-doc-note-copy">{{t "fleetops-ui.templates.settings.index.read-the-guide-before-changing-settings"}}</p>
                     <div class="fleet-ops-control-hub-doc-grid">
                         {{#each this.docs as |doc|}}
                             <button type="button" class="fleet-ops-control-hub-doc-link" {{on "click" (fn this.openDocs doc)}}>
                                 <FaIcon @icon={{doc.icon}} />
                                 <span class="fleet-ops-control-hub-doc-copy">
-                                    <strong>Read the guide on {{doc.label}}</strong>
+                                    <strong>{{t "fleetops-ui.templates.settings.index.read-the-guide-on" label=doc.label}}</strong>
                                     <small>{{doc.description}}</small>
                                 </span>
                             </button>

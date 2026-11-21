@@ -7,6 +7,7 @@ import relationValue from '../../../utils/relation-value';
 import { openTransactionAction } from '../../../utils/fuel-transaction';
 
 export default class ManagementFuelTransactionsIndexController extends Controller {
+    @service intl;
     @service tableContext;
     @service modalsManager;
     @service notifications;
@@ -66,12 +67,12 @@ export default class ManagementFuelTransactionsIndexController extends Controlle
                 id: 'refresh',
                 icon: 'refresh',
                 onClick: this.refresh,
-                helpText: 'Refresh',
+                helpText: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.refresh'),
             },
             {
                 id: 'fuel-integrations',
                 icon: 'gas-pump',
-                text: 'Fuel Integrations',
+                text: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.fuel-integrations'),
                 onClick: () => this.hostRouter.transitionTo('console.fleet-ops.connectivity.fuel-providers.index'),
                 permission: 'fleet-ops list fuel-provider-connection',
             },
@@ -100,7 +101,7 @@ export default class ManagementFuelTransactionsIndexController extends Controlle
             {
                 id: 'provider-transaction-id',
                 sticky: true,
-                label: 'Transaction',
+                label: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.transaction'),
                 valuePath: 'provider_transaction_id',
                 cellComponent: 'cell/fuel-provider-transaction-identity',
                 action: this.openDetails,
@@ -112,7 +113,7 @@ export default class ManagementFuelTransactionsIndexController extends Controlle
             },
             {
                 id: 'provider',
-                label: 'Provider',
+                label: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.provider'),
                 valuePath: 'provider',
                 resizable: true,
                 sortable: true,
@@ -121,7 +122,7 @@ export default class ManagementFuelTransactionsIndexController extends Controlle
             },
             {
                 id: 'sync-status',
-                label: 'Status',
+                label: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.status'),
                 valuePath: 'sync_status',
                 cellComponent: 'fuel-transaction-status',
                 resizable: true,
@@ -132,7 +133,7 @@ export default class ManagementFuelTransactionsIndexController extends Controlle
             },
             {
                 id: 'vehicle-name',
-                label: 'Vehicle',
+                label: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.vehicle'),
                 valuePath: 'vehicle_name',
                 cellComponent: 'cell/vehicle-identity',
                 permission: 'fleet-ops view vehicle',
@@ -147,33 +148,33 @@ export default class ManagementFuelTransactionsIndexController extends Controlle
             },
             {
                 id: 'vehicle-card-id',
-                label: 'Card / Internal',
+                label: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.card-internal'),
                 valuePath: 'vehicle_card_id',
                 resizable: true,
             },
             {
                 id: 'trip-number',
-                label: 'Trip',
+                label: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.trip'),
                 valuePath: 'trip_number',
                 resizable: true,
                 hidden: true,
             },
             {
                 id: 'station-name',
-                label: 'Station',
+                label: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.station'),
                 valuePath: 'station_name',
                 resizable: true,
             },
             {
                 id: 'volume',
-                label: 'Liters',
+                label: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.liters'),
                 valuePath: 'volume',
                 resizable: true,
                 sortable: true,
             },
             {
                 id: 'amount',
-                label: 'Amount',
+                label: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.amount'),
                 valuePath: 'amount',
                 cellComponent: 'table/cell/currency',
                 resizable: true,
@@ -181,7 +182,7 @@ export default class ManagementFuelTransactionsIndexController extends Controlle
             },
             {
                 id: 'fuel-report-id',
-                label: 'Fuel Report',
+                label: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.fuel-report'),
                 valuePath: 'fuel_report_id',
                 cellComponent: 'cell/fuel-report-identity',
                 resourcePath: (transaction) =>
@@ -191,7 +192,7 @@ export default class ManagementFuelTransactionsIndexController extends Controlle
             },
             {
                 id: 'transaction-at',
-                label: 'Date',
+                label: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.date'),
                 valuePath: 'transactionAt',
                 sortParam: 'transaction_at',
                 resizable: true,
@@ -207,38 +208,53 @@ export default class ManagementFuelTransactionsIndexController extends Controlle
                 ddButtonText: false,
                 ddButtonIcon: 'ellipsis-h',
                 ddButtonIconPrefix: 'fas',
-                ddMenuLabel: 'Fuel Transaction Actions',
+                ddMenuLabel: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.fuel-transaction-actions'),
                 cellClassNames: 'overflow-visible',
                 wrapperClass: 'flex items-center justify-end mx-2',
                 sticky: 'right',
                 width: 60,
                 actions: [
-                    { id: 'open-details', label: 'Review Details', fn: this.openDetails, permission: 'fleet-ops view fuel-provider-transaction' },
+                    {
+                        id: 'open-details',
+                        label: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.review-details'),
+                        fn: this.openDetails,
+                        permission: 'fleet-ops view fuel-provider-transaction',
+                    },
                     {
                         id: 'open-fuel-report',
-                        label: 'Open Fuel Report',
+                        label: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.open-fuel-report'),
                         fn: this.openFuelReport,
                         isVisible: (transaction) => Boolean(transaction.fuel_report_id),
                         permission: 'fleet-ops view fuel-report',
                     },
                     { separator: true },
-                    { id: 'match-vehicle', label: 'Match to Vehicle', fn: this.matchVehicle, permission: 'fleet-ops update fuel-provider-transaction' },
-                    { id: 'match-order', label: 'Match to Order', fn: this.matchOrder, permission: 'fleet-ops update fuel-provider-transaction' },
+                    {
+                        id: 'match-vehicle',
+                        label: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.match-to-vehicle'),
+                        fn: this.matchVehicle,
+                        permission: 'fleet-ops update fuel-provider-transaction',
+                    },
+                    {
+                        id: 'match-order',
+                        label: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.match-to-order'),
+                        fn: this.matchOrder,
+                        permission: 'fleet-ops update fuel-provider-transaction',
+                    },
                     {
                         id: 'reprocess',
-                        label: 'Reprocess / Rematch',
+                        label: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.reprocess-rematch'),
                         fn: (transaction) => this.confirmAction('reprocess', transaction),
                         permission: 'fleet-ops update fuel-provider-transaction',
                     },
                     {
                         id: 'ignore',
-                        label: 'Ignore Transaction',
+                        label: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.ignore-transaction'),
                         fn: (transaction) => this.confirmAction('ignored', transaction),
                         permission: 'fleet-ops review fuel-provider-transaction',
                     },
                     {
                         id: 'mark-reviewed',
-                        label: 'Mark Reviewed',
+                        label: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.mark-reviewed'),
                         fn: (transaction) => this.confirmAction('reviewed', transaction),
                         permission: 'fleet-ops review fuel-provider-transaction',
                     },
@@ -257,7 +273,7 @@ export default class ManagementFuelTransactionsIndexController extends Controlle
 
     @action openFuelReport(transaction) {
         if (!transaction?.fuel_report_id) {
-            this.notifications.info('This transaction does not have a linked Fuel Report yet.');
+            this.notifications.info(this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.this-transaction-does-not-have-a'));
             return;
         }
 
@@ -273,6 +289,6 @@ export default class ManagementFuelTransactionsIndexController extends Controlle
     }
 
     @action confirmAction(mode, transactions) {
-        return openTransactionAction(this.modalsManager, mode, transactions, this.refresh);
+        return openTransactionAction(this.modalsManager, mode, transactions, this.refresh, this.intl);
     }
 }

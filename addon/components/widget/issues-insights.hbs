@@ -15,20 +15,20 @@
                     {{#if this.categoryDatasets}}
                         <Chart @type="doughnut" @labels={{this.categoryLabels}} @datasets={{this.categoryDatasets}} @options={{this.categoryOptions}} />
                     {{else}}
-                        <div class="flex items-center justify-center h-full text-[10px] text-gray-500">No issues yet.</div>
+                        <div class="flex items-center justify-center h-full text-[10px] text-gray-500">{{t "fleetops-ui.components.widget.issues-insights.no-issues-yet"}}</div>
                     {{/if}}
                 </div>
                 <div class="flex flex-col justify-around gap-1.5">
                     <div>
-                        <div class="text-[9px] uppercase text-gray-500 dark:text-gray-400 leading-none">Open</div>
+                        <div class="text-[9px] uppercase text-gray-500 dark:text-gray-400 leading-none">{{t "fleetops-ui.components.widget.issues-insights.open"}}</div>
                         <div class="text-lg font-bold text-amber-500 leading-tight">{{this.data.open}}</div>
                     </div>
                     <div>
-                        <div class="text-[9px] uppercase text-gray-500 dark:text-gray-400 leading-none">Resolved (30d)</div>
+                        <div class="text-[9px] uppercase text-gray-500 dark:text-gray-400 leading-none">{{t "fleetops-ui.components.widget.issues-insights.resolved-30d"}}</div>
                         <div class="text-lg font-bold text-green-500 leading-tight">{{this.data.resolved_this_period}}</div>
                     </div>
                     <div>
-                        <div class="text-[9px] uppercase text-gray-500 dark:text-gray-400 leading-none">Avg Resolve</div>
+                        <div class="text-[9px] uppercase text-gray-500 dark:text-gray-400 leading-none">{{t "fleetops-ui.components.widget.issues-insights.avg-resolve"}}</div>
                         <div class="text-sm font-bold text-black dark:text-gray-100 leading-tight">{{this.resolutionDisplay}}</div>
                     </div>
                     <div class="flex flex-wrap gap-1">

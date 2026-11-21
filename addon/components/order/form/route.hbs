@@ -40,11 +40,13 @@
             {{#let (get this.waypointRouteStops index) as |stop|}}
                 <div
                     id={{concat "waypoint_" (add index 1)}}
-                    class="fleetops-order-form-waypoint {{if stop.required 'fleetops-order-form-waypoint--required'}} border rounded-md px-3 py-2 shadow-sm border-gray-300 dark:border-gray-900 mb-3"
+                    class="fleetops-order-form-waypoint
+                        {{if stop.required 'fleetops-order-form-waypoint--required'}}
+                        border rounded-md px-3 py-2 shadow-sm border-gray-300 dark:border-gray-900 mb-3"
                     data-test-waypoint-row={{add index 1}}
                 >
                     {{#if stop.required}}
-                        <div class="fleetops-order-form-waypoint__required-tab" data-test-required-waypoint-tab>Required</div>
+                        <div class="fleetops-order-form-waypoint__required-tab" data-test-required-waypoint-tab>{{t "fleetops-ui.components.order.form.route.required"}}</div>
                     {{/if}}
                     <div class="flex items-start justify-between">
                         <div class="fleetops-order-form-waypoint__marker grip-cursor">
@@ -113,7 +115,7 @@
                                                 @name={{concat "waypoint_" index "_dropoff"}}
                                                 @changed={{fn (mut waypoint.type)}}
                                             />
-                                            <label for={{concat "waypoint_" index "_dropoff"}} class="ml-2">Dropoff</label>
+                                            <label for={{concat "waypoint_" index "_dropoff"}} class="ml-2">{{t "fleetops-ui.components.order.form.route.dropoff"}}</label>
                                         </div>
                                     </div>
                                     <div class={{if (eq waypoint.type "pickup") "is-checked"}}>
@@ -126,7 +128,7 @@
                                                 @name={{concat "waypoint_" index "_pickup"}}
                                                 @changed={{fn (mut waypoint.type)}}
                                             />
-                                            <label for={{concat "waypoint_" index "_pickup"}} class="ml-2">Pickup</label>
+                                            <label for={{concat "waypoint_" index "_pickup"}} class="ml-2">{{t "fleetops-ui.components.order.form.route.pickup"}}</label>
                                         </div>
                                     </div>
                                 </div>

@@ -1,3 +1,4 @@
+import { localizeOptions } from '../../../utils/fleet-ops-options';
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
@@ -28,6 +29,7 @@ function toRecentList(records) {
 }
 
 export default class DevicePanelTabsEventsComponent extends Component {
+    @service intl;
     @service deviceEventActions;
     @service store;
 
@@ -46,7 +48,7 @@ export default class DevicePanelTabsEventsComponent extends Component {
         return [
             {
                 sticky: true,
-                label: 'Event',
+                label: this.intl.t('fleetops-ui.js.components.device.panel-tabs.events.event'),
                 valuePath: 'event_type',
                 cellComponent: 'table/cell/anchor',
                 action: this.deviceEventActions.panel?.view ?? this.deviceEventActions.transition.view,
@@ -54,30 +56,30 @@ export default class DevicePanelTabsEventsComponent extends Component {
                 resizable: true,
             },
             {
-                label: 'Severity',
+                label: this.intl.t('fleetops-ui.js.components.device.panel-tabs.events.severity'),
                 valuePath: 'severity',
                 cellComponent: 'table/cell/status',
-                filterOptions: severityOptions,
+                filterOptions: localizeOptions(this.intl, 'local.components.device.panel-tabs.events.severityOptions', severityOptions),
                 resizable: true,
             },
             {
-                label: 'Message',
+                label: this.intl.t('fleetops-ui.js.components.device.panel-tabs.events.message'),
                 valuePath: 'message',
                 resizable: true,
             },
             {
-                label: 'Code',
+                label: this.intl.t('fleetops-ui.js.components.device.panel-tabs.events.code'),
                 valuePath: 'code',
                 resizable: true,
             },
             {
-                label: 'Processed',
+                label: this.intl.t('fleetops-ui.js.components.device.panel-tabs.events.processed'),
                 valuePath: 'processedAt',
                 sortParam: 'processed_at',
                 resizable: true,
             },
             {
-                label: 'Occurred',
+                label: this.intl.t('fleetops-ui.js.components.device.panel-tabs.events.occurred'),
                 valuePath: 'occurredAt',
                 sortParam: 'occurred_at',
                 resizable: true,
@@ -93,12 +95,12 @@ export default class DevicePanelTabsEventsComponent extends Component {
                 width: 60,
                 actions: [
                     {
-                        label: 'View event',
+                        label: this.intl.t('fleetops-ui.js.components.device.panel-tabs.events.view-event'),
                         fn: this.deviceEventActions.panel?.view ?? this.deviceEventActions.transition.view,
                         permission: 'fleet-ops view device-event',
                     },
                     {
-                        label: 'Mark processed',
+                        label: this.intl.t('fleetops-ui.js.components.device.panel-tabs.events.mark-processed'),
                         fn: this.markProcessed,
                         permission: 'fleet-ops update device-event',
                     },

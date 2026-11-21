@@ -19,7 +19,13 @@
             </ModelSelect>
         </InputGroup>
         <InputGroup>
-            <Checkbox @value={{@options.notifyDriver}} @label="Notify driver" @onToggle={{@options.toggleNotifyDriver}} @alignItems="center" @labelClass="mb-0i" />
+            <Checkbox
+                @value={{@options.notifyDriver}}
+                @label={{t "fleetops-ui.components.modals.bulk-assign-driver.notify-driver"}}
+                @onToggle={{@options.toggleNotifyDriver}}
+                @alignItems="center"
+                @labelClass="mb-0i"
+            />
         </InputGroup>
     </div>
 </Modals::BulkActionModel>

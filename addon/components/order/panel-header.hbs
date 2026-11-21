@@ -15,8 +15,8 @@
                     {{/if}}
                 </div>
                 <div class="mt-1">
-                    <div class="text-xs text-gray-400 dark:text-gray-500">Date Created: {{@resource.createdAt}}</div>
-                    <div class="text-xs text-gray-400 dark:text-gray-500">Type: {{smart-humanize @resource.type}}</div>
+                    <div class="text-xs text-gray-400 dark:text-gray-500">{{t "fleetops-ui.components.order.panel-header.date-created" createdAt=@resource.createdAt}}</div>
+                    <div class="text-xs text-gray-400 dark:text-gray-500">{{t "fleetops-ui.components.order.panel-header.type" type=(smart-humanize @resource.type)}}</div>
                 </div>
             </div>
         </div>

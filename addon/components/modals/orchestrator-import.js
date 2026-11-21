@@ -1,3 +1,4 @@
+import { localizeOptions } from '../../utils/fleet-ops-options';
 import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
@@ -242,7 +243,13 @@ export default class OrchestratorImportComponent extends Component {
 
     // ── Mapping step ──────────────────────────────────────────────────────────
     /** Array of { key, label, required, mappedColumn, hint? } objects. */
-    @tracked columnMappings = TARGET_FIELDS.map((f) => ({ ...f, mappedColumn: null }));
+    @tracked columnMappings = TARGET_FIELDS.map((f) => ({ ...this.localizeField(f), mappedColumn: null }));
+
+    localizeField(field) {
+        const base = `fleetops-ui.options.local.components.modals.orchestrator-import.fields.${field.key}`;
+        const translate = (name) => (field[name] && this.intl.exists(`${base}.${name}`) ? this.intl.t(`${base}.${name}`) : field[name]);
+        return { ...field, label: translate('label'), hint: translate('hint') };
+    }
 
     // ── Preview step ──────────────────────────────────────────────────────────
     @tracked mappedRows = [];
@@ -250,7 +257,7 @@ export default class OrchestratorImportComponent extends Component {
 
     // ── Sections (for grouped column-mapping UI) ──────────────────────────────
     get fieldSections() {
-        return FIELD_SECTIONS.map((section) => ({
+        return localizeOptions(this.intl, 'local.components.modals.orchestrator-import.FIELD_SECTIONS', FIELD_SECTIONS).map((section) => ({
             ...section,
             fields: this.columnMappings.filter((m) => section.fields.some((f) => f.key === m.key)),
         }));

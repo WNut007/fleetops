@@ -1,6 +1,8 @@
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 
 export default class TelematicDetailsComponent extends Component {
+    @service intl;
     get webhookUrl() {
         if (this.args.resource?.provider_descriptor?.metadata?.telemetry?.secure_webhooks) return null;
         const url = this.args.resource?.provider_descriptor?.webhook_url;
@@ -24,14 +26,14 @@ export default class TelematicDetailsComponent extends Component {
         if (result === 'success') {
             return {
                 status: 'success',
-                label: 'Verified',
+                label: this.intl.t('fleetops-ui.js.components.telematic.details.verified'),
             };
         }
 
         if (result === 'failed') {
             return {
                 status: 'danger',
-                label: 'Failed',
+                label: this.intl.t('fleetops-ui.js.components.telematic.details.failed'),
             };
         }
 
@@ -42,7 +44,7 @@ export default class TelematicDetailsComponent extends Component {
         if (this.args.resource?.status === 'synchronizing') {
             return {
                 status: 'info',
-                label: 'Syncing',
+                label: this.intl.t('fleetops-ui.js.components.telematic.details.syncing'),
             };
         }
 
@@ -51,14 +53,14 @@ export default class TelematicDetailsComponent extends Component {
         if (result === 'success') {
             return {
                 status: 'success',
-                label: 'Synced',
+                label: this.intl.t('fleetops-ui.js.components.telematic.details.synced'),
             };
         }
 
         if (result === 'failed') {
             return {
                 status: 'danger',
-                label: 'Failed',
+                label: this.intl.t('fleetops-ui.js.components.telematic.details.failed'),
             };
         }
 
@@ -131,7 +133,7 @@ export default class TelematicDetailsComponent extends Component {
         return [
             {
                 icon: 'plug',
-                label: 'Connection test',
+                label: this.intl.t('fleetops-ui.js.components.telematic.details.connection-test'),
                 value: this.connectionTestValue,
                 help: 'Provider credentials',
                 detailLabel: 'Last test',
@@ -143,7 +145,7 @@ export default class TelematicDetailsComponent extends Component {
             },
             {
                 icon: 'satellite-dish',
-                label: 'Device sync',
+                label: this.intl.t('fleetops-ui.js.components.telematic.details.device-sync'),
                 value: this.deviceSyncValue,
                 help: 'Provider device discovery',
                 detailLabel: this.args.resource?.status === 'synchronizing' ? 'Started' : 'Last sync',
@@ -155,7 +157,7 @@ export default class TelematicDetailsComponent extends Component {
             },
             {
                 icon: 'microchip',
-                label: 'Devices synced',
+                label: this.intl.t('fleetops-ui.js.components.telematic.details.devices-synced'),
                 value: resource?.meta?.last_sync_total ?? 0,
                 help: 'Devices from provider',
                 detailLabel: 'Sync job',
@@ -175,7 +177,7 @@ export default class TelematicDetailsComponent extends Component {
         if (resource?.meta?.last_error) {
             items.push({
                 icon: 'triangle-exclamation',
-                title: 'Connection issue',
+                title: this.intl.t('fleetops-ui.js.components.telematic.details.connection-issue'),
                 description: this.userFacingIssueMessage(resource.meta.last_error, 'Connection test failed. Review the provider credentials and try again.'),
                 status: 'warning',
             });
@@ -184,7 +186,7 @@ export default class TelematicDetailsComponent extends Component {
         if (resource?.meta?.last_sync_error) {
             items.push({
                 icon: 'circle-exclamation',
-                title: 'Sync issue',
+                title: this.intl.t('fleetops-ui.js.components.telematic.details.sync-issue'),
                 description: this.userFacingIssueMessage(resource.meta.last_sync_error, 'Device sync failed. Review the provider connection and server logs, then try again.'),
                 status: 'warning',
             });
@@ -193,7 +195,7 @@ export default class TelematicDetailsComponent extends Component {
         if (resource?.meta?.unattached_devices_count > 0) {
             items.push({
                 icon: 'truck',
-                title: 'Devices need vehicles',
+                title: this.intl.t('fleetops-ui.js.components.telematic.details.devices-need-vehicles'),
                 description: `${resource.meta.unattached_devices_count} synced devices are waiting to be attached.`,
                 status: 'warning',
             });
@@ -220,14 +222,14 @@ export default class TelematicDetailsComponent extends Component {
         const resource = this.args.resource;
 
         return [
-            { label: 'Model', value: resource?.model },
-            { label: 'Serial Number', value: resource?.serial_number },
-            { label: 'Firmware Version', value: resource?.firmware_version },
-            { label: 'IMEI', value: resource?.imei },
-            { label: 'ICCID', value: resource?.iccid },
-            { label: 'IMSI', value: resource?.imsi },
-            { label: 'MSISDN', value: resource?.msisdn },
-            { label: 'Signal Strength', value: resource?.signal_strength },
+            { label: this.intl.t('fleetops-ui.js.components.telematic.details.model'), value: resource?.model },
+            { label: this.intl.t('fleetops-ui.js.components.telematic.details.serial-number'), value: resource?.serial_number },
+            { label: this.intl.t('fleetops-ui.js.components.telematic.details.firmware-version'), value: resource?.firmware_version },
+            { label: this.intl.t('fleetops-ui.js.components.telematic.details.imei'), value: resource?.imei },
+            { label: this.intl.t('fleetops-ui.js.components.telematic.details.iccid'), value: resource?.iccid },
+            { label: this.intl.t('fleetops-ui.js.components.telematic.details.imsi'), value: resource?.imsi },
+            { label: this.intl.t('fleetops-ui.js.components.telematic.details.msisdn'), value: resource?.msisdn },
+            { label: this.intl.t('fleetops-ui.js.components.telematic.details.signal-strength'), value: resource?.signal_strength },
         ];
     }
 }

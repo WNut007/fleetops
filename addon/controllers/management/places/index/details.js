@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import { isArray } from '@ember/array';
 
 export default class ManagementPlacesIndexDetailsController extends Controller {
+    @service intl;
     @service('universe/menu-service') menuService;
     @service hostRouter;
 
@@ -11,7 +12,7 @@ export default class ManagementPlacesIndexDetailsController extends Controller {
         return [
             {
                 route: 'management.places.index.details.index',
-                label: 'Overview',
+                label: this.intl.t('fleetops-ui.js.controllers.management.places.index.details.overview'),
             },
             ...(isArray(registeredTabs) ? registeredTabs : []),
         ];

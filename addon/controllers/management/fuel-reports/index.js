@@ -174,7 +174,7 @@ export default class ManagementFuelReportsIndexController extends Controller {
             },
             {
                 id: 'source',
-                label: 'Source',
+                label: this.intl.t('fleetops-ui.js.controllers.management.fuel-reports.index.source'),
                 valuePath: 'source',
                 resizable: true,
                 sortable: false,
@@ -184,7 +184,7 @@ export default class ManagementFuelReportsIndexController extends Controller {
             },
             {
                 id: 'provider',
-                label: 'Provider',
+                label: this.intl.t('fleetops-ui.js.controllers.management.fuel-reports.index.provider'),
                 valuePath: 'provider',
                 resizable: true,
                 sortable: false,

@@ -1,27 +1,27 @@
 <div class="next-content-panel-wrapper" ...attributes>
 
     {{! ===== OVERVIEW ===== }}
-    <ContentPanel @title="Overview" @open={{true}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.maintenance-schedule.details.overview"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 text-xs dark:text-gray-100">
 
             {{! — Identity — }}
             <div class="col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-1">
-                Identity
+                {{t "fleetops-ui.components.maintenance-schedule.details.identity"}}
             </div>
             <div class="field-info-container">
                 <div class="field-name">ID</div>
                 <ClickToCopy @value={{@resource.public_id}} class="field-value font-mono">{{n-a @resource.public_id}}</ClickToCopy>
             </div>
             <div class="field-info-container">
-                <div class="field-name">Name</div>
+                <div class="field-name">{{t "fleetops-ui.components.maintenance-schedule.details.name"}}</div>
                 <div class="field-value">{{n-a @resource.name}}</div>
             </div>
             <div class="field-info-container">
-                <div class="field-name">Type</div>
+                <div class="field-name">{{t "fleetops-ui.components.maintenance-schedule.details.type"}}</div>
                 <div class="field-value">{{n-a (smart-humanize @resource.type)}}</div>
             </div>
             <div class="field-info-container">
-                <div class="field-name">Status</div>
+                <div class="field-name">{{t "fleetops-ui.components.maintenance-schedule.details.status"}}</div>
                 <div class="field-value">
                     <Badge @status={{@resource.status}}>{{smart-humanize @resource.status}}</Badge>
                 </div>
@@ -29,33 +29,33 @@
 
             {{! — Assignment — }}
             <div class="col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-3">
-                Assignment
+                {{t "fleetops-ui.components.maintenance-schedule.details.assignment"}}
             </div>
             <div class="field-info-container">
-                <div class="field-name">Asset</div>
+                <div class="field-name">{{t "fleetops-ui.components.maintenance-schedule.details.asset"}}</div>
                 <div class="field-value">
                     <MaintenanceSubject::Pill @maintenanceSubject={{resource-relation @resource "subject"}} @titleFallback={{n-a @resource.subject_name}} />
                 </div>
             </div>
             {{#if (or @resource.default_assignee @resource.default_assignee_name)}}
                 <div class="field-info-container">
-                    <div class="field-name">Default Assignee</div>
+                    <div class="field-name">{{t "fleetops-ui.components.maintenance-schedule.details.default-assignee"}}</div>
                     <div class="field-value">
                         <Facilitator::Pill @facilitator={{resource-relation @resource "default_assignee"}} @titleFallback={{n-a @resource.default_assignee_name}} />
                     </div>
                 </div>
             {{/if}}
             <div class="field-info-container">
-                <div class="field-name">Default Priority</div>
+                <div class="field-name">{{t "fleetops-ui.components.maintenance-schedule.details.default-priority"}}</div>
                 <div class="field-value">
                     {{#if (eq @resource.default_priority "critical")}}
-                        <Badge @status="danger">Critical</Badge>
+                        <Badge @status="danger">{{t "fleetops-ui.components.maintenance-schedule.details.critical"}}</Badge>
                     {{else if (eq @resource.default_priority "high")}}
-                        <Badge @status="warning">High</Badge>
+                        <Badge @status="warning">{{t "fleetops-ui.components.maintenance-schedule.details.high"}}</Badge>
                     {{else if (eq @resource.default_priority "medium")}}
-                        <Badge @status="info">Medium</Badge>
+                        <Badge @status="info">{{t "fleetops-ui.components.maintenance-schedule.details.medium"}}</Badge>
                     {{else}}
-                        <Badge @status="default">Low</Badge>
+                        <Badge @status="default">{{t "fleetops-ui.components.maintenance-schedule.details.low"}}</Badge>
                     {{/if}}
                 </div>
             </div>
@@ -63,88 +63,86 @@
     </ContentPanel>
 
     {{! ===== INTERVAL TRIGGERS ===== }}
-    <ContentPanel @title="Interval Triggers" @open={{true}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.maintenance-schedule.details.interval-triggers"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 text-xs dark:text-gray-100">
 
             {{#if @resource.interval_value}}
                 <div class="col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-1">
-                    Time-Based
+                    {{t "fleetops-ui.components.maintenance-schedule.details.time-based"}}
                 </div>
                 <div class="field-info-container">
-                    <div class="field-name">Repeat Every</div>
+                    <div class="field-name">{{t "fleetops-ui.components.maintenance-schedule.details.repeat-every"}}</div>
                     <div class="field-value">{{@resource.interval_value}} {{@resource.interval_unit}}</div>
                 </div>
             {{/if}}
 
             {{#if @resource.interval_distance}}
                 <div class="col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-3">
-                    Distance-Based
+                    {{t "fleetops-ui.components.maintenance-schedule.details.distance-based"}}
                 </div>
                 <div class="field-info-container">
-                    <div class="field-name">Every (km)</div>
-                    <div class="field-value">{{@resource.interval_distance}} km</div>
+                    <div class="field-name">{{t "fleetops-ui.components.maintenance-schedule.details.every-km"}}</div>
+                    <div class="field-value">{{t "fleetops-ui.components.maintenance-schedule.details.km" interval_distance=@resource.interval_distance}}</div>
                 </div>
             {{/if}}
 
             {{#if @resource.interval_engine_hours}}
                 <div class="col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-3">
-                    Engine Hours-Based
+                    {{t "fleetops-ui.components.maintenance-schedule.details.engine-hours-based"}}
                 </div>
                 <div class="field-info-container">
-                    <div class="field-name">Every (hours)</div>
-                    <div class="field-value">{{@resource.interval_engine_hours}} hrs</div>
+                    <div class="field-name">{{t "fleetops-ui.components.maintenance-schedule.details.every-hours"}}</div>
+                    <div class="field-value">{{t "fleetops-ui.components.maintenance-schedule.details.hrs" interval_engine_hours=@resource.interval_engine_hours}}</div>
                 </div>
             {{/if}}
         </div>
     </ContentPanel>
 
     {{! ===== SERVICE HISTORY & NEXT DUE ===== }}
-    <ContentPanel @title="Service History & Next Due" @open={{true}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.maintenance-schedule.details.service-history-next-due"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 text-xs dark:text-gray-100">
 
             <div class="col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-1">
-                Last Service
+                {{t "fleetops-ui.components.maintenance-schedule.details.last-service"}}
             </div>
             <div class="field-info-container">
-                <div class="field-name">Last Service Date</div>
+                <div class="field-name">{{t "fleetops-ui.components.maintenance-schedule.details.last-service-date"}}</div>
                 <div class="field-value">{{n-a (format-date-fns @resource.last_service_date "dd MMM yyyy")}}</div>
             </div>
             <div class="field-info-container">
-                <div class="field-name">Last Odometer</div>
+                <div class="field-name">{{t "fleetops-ui.components.maintenance-schedule.details.last-odometer"}}</div>
                 <div class="field-value">
                     {{#if @resource.last_service_odometer}}
-                        {{@resource.last_service_odometer}}
-                        km
+                        {{t "fleetops-ui.components.maintenance-schedule.details.km-2" last_service_odometer=@resource.last_service_odometer}}
                     {{else}}
                         —
                     {{/if}}
                 </div>
             </div>
             <div class="field-info-container">
-                <div class="field-name">Last Engine Hours</div>
+                <div class="field-name">{{t "fleetops-ui.components.maintenance-schedule.details.last-engine-hours"}}</div>
                 <div class="field-value">{{n-a @resource.last_service_engine_hours}}</div>
             </div>
 
             <div class="col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-3">
-                Next Due
+                {{t "fleetops-ui.components.maintenance-schedule.details.next-due"}}
             </div>
             <div class="field-info-container">
-                <div class="field-name">Next Due Date</div>
+                <div class="field-name">{{t "fleetops-ui.components.maintenance-schedule.details.next-due-date"}}</div>
                 <div class="field-value">{{n-a (format-date-fns @resource.next_due_date "dd MMM yyyy")}}</div>
             </div>
             <div class="field-info-container">
-                <div class="field-name">Next Due Odometer</div>
+                <div class="field-name">{{t "fleetops-ui.components.maintenance-schedule.details.next-due-odometer"}}</div>
                 <div class="field-value">
                     {{#if @resource.next_due_odometer}}
-                        {{@resource.next_due_odometer}}
-                        km
+                        {{t "fleetops-ui.components.maintenance-schedule.details.km-3" next_due_odometer=@resource.next_due_odometer}}
                     {{else}}
                         —
                     {{/if}}
                 </div>
             </div>
             <div class="field-info-container">
-                <div class="field-name">Next Due Engine Hours</div>
+                <div class="field-name">{{t "fleetops-ui.components.maintenance-schedule.details.next-due-engine-hours"}}</div>
                 <div class="field-value">{{n-a @resource.next_due_engine_hours}}</div>
             </div>
         </div>
@@ -152,7 +150,7 @@
 
     {{! ===== INSTRUCTIONS ===== }}
     {{#if @resource.instructions}}
-        <ContentPanel @title="Instructions" @open={{false}} @wrapperClass="bordered-top">
+        <ContentPanel @title={{t "fleetops-ui.components.maintenance-schedule.details.instructions"}} @open={{false}} @wrapperClass="bordered-top">
             <div class="text-xs text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
                 {{@resource.instructions}}
             </div>
@@ -161,7 +159,7 @@
 
     {{! ===== UPCOMING SCHEDULE CALENDAR (time-based only) ===== }}
     {{#if this.isTimeBased}}
-        <ContentPanel @title="Upcoming Schedule" @open={{true}} @wrapperClass="bordered-top" @panelBodyWrapperClass="px-0i">
+        <ContentPanel @title={{t "fleetops-ui.components.maintenance-schedule.details.upcoming-schedule"}} @open={{true}} @wrapperClass="bordered-top" @panelBodyWrapperClass="px-0i">
             {{! Calendar header }}
             <div class="flex items-center justify-between px-6 pb-2">
                 <button type="button" class="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400" {{on "click" this.prevMonth}}>
@@ -205,11 +203,11 @@
             <div class="flex items-center gap-4 px-3 py-2 border-t border-gray-100 dark:border-gray-700">
                 <div class="flex items-center gap-1.5">
                     <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-500 text-white text-xs">1</span>
-                    <span class="text-xs text-gray-500 dark:text-gray-400">Scheduled service</span>
+                    <span class="text-xs text-gray-500 dark:text-gray-400">{{t "fleetops-ui.components.maintenance-schedule.details.scheduled-service"}}</span>
                 </div>
                 <div class="flex items-center gap-1.5">
                     <span class="inline-flex items-center justify-center w-5 h-5 rounded-full ring-2 ring-blue-400 text-xs text-blue-600">1</span>
-                    <span class="text-xs text-gray-500 dark:text-gray-400">Today</span>
+                    <span class="text-xs text-gray-500 dark:text-gray-400">{{t "fleetops-ui.components.maintenance-schedule.details.today"}}</span>
                 </div>
             </div>
 
@@ -217,7 +215,9 @@
             {{#if this.upcomingOccurrences.length}}
                 <div class="px-3 pb-3 pt-1 border-t border-gray-100 dark:border-gray-700">
                     <div class="py-2">
-                        <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Next occurrences</p>
+                        <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">{{t
+                                "fleetops-ui.components.maintenance-schedule.details.next-occurrences"
+                            }}</p>
                     </div>
                     <div class="space-y-1 pl-4">
                         {{#each this.upcomingOccurrences as |occurrence index|}}
@@ -240,16 +240,15 @@
 
     {{! ===== REMINDER OFFSETS ===== }}
     {{#if @resource.reminder_offsets.length}}
-        <ContentPanel @title="Reminder Emails" @open={{true}} @wrapperClass="bordered-top">
+        <ContentPanel @title={{t "fleetops-ui.components.maintenance-schedule.details.reminder-emails"}} @open={{true}} @wrapperClass="bordered-top">
             <div class="text-xs text-gray-700 dark:text-gray-300">
                 <p class="mb-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold">
-                    The default assignee will receive email reminders at:
+                    {{t "fleetops-ui.components.maintenance-schedule.details.the-default-assignee-will-receive-email"}}
                 </p>
                 <div class="flex flex-wrap gap-1">
                     {{#each @resource.reminder_offsets as |offset|}}
                         <span class="inline-flex items-center bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-2 py-0.5 rounded">
-                            {{offset}}
-                            days before
+                            {{t "fleetops-ui.components.maintenance-schedule.details.days-before" offset=offset}}
                         </span>
                     {{/each}}
                 </div>

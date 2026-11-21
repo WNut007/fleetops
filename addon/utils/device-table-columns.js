@@ -1,3 +1,4 @@
+import { localizeOptions } from './fleet-ops-options';
 import { buildIdentityStub } from './identity-cell-resource';
 import relationValue from './relation-value';
 
@@ -30,7 +31,7 @@ export default function buildDeviceTableColumns(controller, options = {}) {
     const columns = [
         {
             sticky: true,
-            label: 'Telematic Device',
+            label: controller.intl.t('fleetops-ui.js.utils.device-table-columns.telematic-device'),
             valuePath: 'displayName',
             cellComponent: 'cell/device-identity',
             action: viewDevice,
@@ -43,7 +44,7 @@ export default function buildDeviceTableColumns(controller, options = {}) {
             showStatusDot: showDeviceStatus,
         },
         {
-            label: 'Connection',
+            label: controller.intl.t('fleetops-ui.js.utils.device-table-columns.connection'),
             valuePath: 'connection_status',
             cellComponent: 'table/cell/status',
             resizable: true,
@@ -51,13 +52,13 @@ export default function buildDeviceTableColumns(controller, options = {}) {
             filterable: true,
             filterParam: 'connection_status',
             filterComponent: 'filter/multi-option',
-            filterOptions: connectionStatusOptions,
+            filterOptions: localizeOptions(controller.intl, 'local.utils.device-table-columns.connectionStatusOptions', connectionStatusOptions),
             filterOptionLabel: 'label',
             filterOptionValue: 'value',
         },
     ];
     const providerIdColumn = {
-        label: 'Provider ID / IMEI',
+        label: controller.intl.t('fleetops-ui.js.utils.device-table-columns.provider-id-imei'),
         valuePath: 'device_id',
         resizable: true,
         sortable: true,
@@ -100,7 +101,7 @@ export default function buildDeviceTableColumns(controller, options = {}) {
 
     if (showProvider) {
         columns.push({
-            label: 'Telematic Provider',
+            label: controller.intl.t('fleetops-ui.js.utils.device-table-columns.telematic-provider'),
             valuePath: 'telematic_name',
             cellComponent: 'cell/telematic-identity',
             resourcePath: (device) => relationValue(device, 'telematic') ?? buildIdentityStub(device, { type: 'telematic', load: () => device.get('telematic') }),
@@ -121,14 +122,14 @@ export default function buildDeviceTableColumns(controller, options = {}) {
 
     columns.push(
         {
-            label: 'Sensors',
+            label: controller.intl.t('fleetops-ui.js.utils.device-table-columns.sensors'),
             valuePath: 'sensors_count',
             resizable: true,
             sortable: false,
             filterable: false,
         },
         {
-            label: 'Last Seen',
+            label: controller.intl.t('fleetops-ui.js.utils.device-table-columns.last-seen'),
             valuePath: 'lastOnlineAt',
             sortParam: 'last_online_at',
             resizable: true,
@@ -138,7 +139,7 @@ export default function buildDeviceTableColumns(controller, options = {}) {
             filterComponent: 'filter/date',
         },
         {
-            label: 'Provider',
+            label: controller.intl.t('fleetops-ui.js.utils.device-table-columns.provider'),
             valuePath: 'provider',
             hidden: true,
             resizable: true,
@@ -148,7 +149,7 @@ export default function buildDeviceTableColumns(controller, options = {}) {
             filterComponent: 'filter/string',
         },
         {
-            label: 'Type',
+            label: controller.intl.t('fleetops-ui.js.utils.device-table-columns.type'),
             valuePath: 'type',
             hidden: true,
             resizable: true,
@@ -161,7 +162,7 @@ export default function buildDeviceTableColumns(controller, options = {}) {
             filterOptionValue: 'value',
         },
         {
-            label: 'Serial Number',
+            label: controller.intl.t('fleetops-ui.js.utils.device-table-columns.serial-number'),
             valuePath: 'serial_number',
             hidden: true,
             resizable: true,
@@ -185,7 +186,7 @@ export default function buildDeviceTableColumns(controller, options = {}) {
             filterOptionValue: 'value',
         },
         {
-            label: 'Attachment',
+            label: controller.intl.t('fleetops-ui.js.utils.device-table-columns.attachment'),
             valuePath: 'attachable_uuid',
             hidden: true,
             resizable: true,
@@ -193,7 +194,7 @@ export default function buildDeviceTableColumns(controller, options = {}) {
             filterable: true,
             filterParam: 'attachment_state',
             filterComponent: 'filter/select',
-            filterOptions: attachmentStateOptions,
+            filterOptions: localizeOptions(controller.intl, 'local.utils.device-table-columns.attachmentStateOptions', attachmentStateOptions),
             filterOptionLabel: 'label',
             filterOptionValue: 'value',
         },
@@ -265,7 +266,7 @@ export default function buildDeviceTableColumns(controller, options = {}) {
                               separator: true,
                           },
                           {
-                              label: 'Review recent events',
+                              label: controller.intl.t('fleetops-ui.js.utils.device-table-columns.review-recent-events'),
                               fn: controller.openDeviceEvents,
                               permission: 'fleet-ops view device-event',
                           },

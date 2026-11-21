@@ -5,6 +5,7 @@ import { action } from '@ember/object';
 import { task } from 'ember-concurrency';
 
 export default class VendorPersonnelManagerComponent extends Component {
+    @service intl;
     @service fetch;
     @service notifications;
 
@@ -19,14 +20,14 @@ export default class VendorPersonnelManagerComponent extends Component {
 
     roleOptions = [
         {
-            label: 'Admin',
+            label: this.intl.t('fleetops-ui.js.components.vendor.personnel-manager.admin'),
             value: 'admin',
-            description: 'Can manage vendor account settings and personnel.',
+            description: this.intl.t('fleetops-ui.js.components.vendor.personnel-manager.can-manage-vendor-account-settings-and'),
         },
         {
-            label: 'Member',
+            label: this.intl.t('fleetops-ui.js.components.vendor.personnel-manager.member'),
             value: 'member',
-            description: 'Can access the vendor customer workspace.',
+            description: this.intl.t('fleetops-ui.js.components.vendor.personnel-manager.can-access-the-vendor-customer-workspace'),
         },
     ];
 
@@ -125,7 +126,7 @@ export default class VendorPersonnelManagerComponent extends Component {
             }
 
             this.clearForm();
-            this.notifications.success('Personnel added.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.components.vendor.personnel-manager.personnel-added'));
         } catch (error) {
             this.notifications.serverError(error);
         }
@@ -135,7 +136,7 @@ export default class VendorPersonnelManagerComponent extends Component {
         try {
             yield this.fetch.delete(`vendors/${this.args.vendor.id}/personnels/${personnel.id}`, {}, { namespace: 'int/v1' });
             this.personnels = this.personnels.filter((item) => item.id !== personnel.id);
-            this.notifications.success('Personnel removed.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.components.vendor.personnel-manager.personnel-removed'));
         } catch (error) {
             this.notifications.serverError(error);
         }

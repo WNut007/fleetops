@@ -1,6 +1,14 @@
 <Modal::Default @modalIsOpened={{@modalIsOpened}} @options={{@options}} @confirm={{@onConfirm}} @decline={{@onDecline}}>
     <div>
-        <ContentPanel @title={{if (eq @options.selectedLayerType "Zone") "Zone Details" "Service Area Details"}} @open={{true}} @wrapperClass="bordered-top">
+        <ContentPanel
+            @title={{if
+                (eq @options.selectedLayerType "Zone")
+                (t "fleetops-ui.components.modals.map-layer-form.zone-details")
+                (t "fleetops-ui.components.modals.map-layer-form.service-area-details")
+            }}
+            @open={{true}}
+            @wrapperClass="bordered-top"
+        >
             <div class="space-y-2">
                 <InputGroup @name={{t "modals.map-layer-form.layer-type"}} @helpText={{t "modals.map-layer-form.layer-type-text"}}>
                     <Select
@@ -32,7 +40,7 @@
 
                 <InputGroup
                     @value={{@options.layerOptions.name}}
-                    @name="{{@options.selectedLayerType}} Name"
+                    @name={{t "fleetops-ui.components.modals.map-layer-form.name" selectedLayerType=@options.selectedLayerType}}
                     @helpText={{t "modals.map-layer-form.set-name" htmlSafe=true options=@options.selectedLayerType}}
                     @required={{true}}
                 />
@@ -53,14 +61,14 @@
                     <InputGroup
                         @type="color"
                         @value={{@options.layerOptions.stroke_color}}
-                        @name="{{@options.selectedLayerType}} Border Color"
+                        @name={{t "fleetops-ui.components.modals.map-layer-form.border-color" selectedLayerType=@options.selectedLayerType}}
                         @helpText={{t "modals.map-layer-form.customize-border" htmlSafe=true options=@options.selectedLayerType}}
                         class="p-0 border-0 m-0 w-8 h-8 bg-transparent rounded-none"
                     />
                     <InputGroup
                         @type="color"
                         @value={{@options.layerOptions.color}}
-                        @name="{{@options.selectedLayerType}} Color"
+                        @name={{t "fleetops-ui.components.modals.map-layer-form.color" selectedLayerType=@options.selectedLayerType}}
                         @helpText={{t "modals.map-layer-form.customize-fill-color" htmlSafe=true options=@options.selectedLayerType}}
                         class="p-0 border-0 m-0 w-8 h-8 bg-transparent rounded-none"
                     />
@@ -78,58 +86,56 @@
             </div>
         </ContentPanel>
 
-        <ContentPanel @title="Geofence Triggers" @open={{true}} @wrapperClass="bordered-top">
+        <ContentPanel @title={{t "fleetops-ui.components.modals.map-layer-form.geofence-triggers"}} @open={{true}} @wrapperClass="bordered-top">
             <div class="space-y-4">
                 <p class="text-sm text-gray-500 dark:text-gray-400">
-                    Configure when this {{if (eq @options.selectedLayerType "Zone") "zone" "service area"}} fires active geofence events. Entry and exit events are dispatched to webhooks, WebSocket channels, and the notification system whenever a driver crosses the boundary.
+                    {{t "fleetops-ui.components.modals.map-layer-form.configure-when-this-fires-active-geofence" value=(if (eq @options.selectedLayerType "Zone") "zone" "service area")}}
                 </p>
 
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div class="flex items-start space-x-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700">
                         <div class="flex-shrink-0 mt-0.5">
-                            <Toggle
-                                @isToggled={{@options.layerOptions.trigger_on_entry}}
-                                @onToggle={{fn (mut @options.layerOptions.trigger_on_entry)}}
-                            />
+                            <Toggle @isToggled={{@options.layerOptions.trigger_on_entry}} @onToggle={{fn (mut @options.layerOptions.trigger_on_entry)}} />
                         </div>
                         <div>
-                            <p class="text-sm font-medium text-gray-900 dark:text-white">Trigger on Entry</p>
+                            <p class="text-sm font-medium text-gray-900 dark:text-white">{{t "fleetops-ui.components.modals.map-layer-form.trigger-on-entry"}}</p>
                             <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                                Fire a <code class="font-mono">geofence.entered</code> event when a driver enters this {{if (eq @options.selectedLayerType "Zone") "zone" "service area"}}.
+                                {{t "fleetops-ui.components.modals.map-layer-form.fire-a"}}
+                                <code class="font-mono">geofence.entered</code>
+                                {{t "fleetops-ui.components.modals.map-layer-form.event-when-a-driver-enters-this" value=(if (eq @options.selectedLayerType "Zone") "zone" "service area")}}
                             </p>
                         </div>
                     </div>
 
                     <div class="flex items-start space-x-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700">
                         <div class="flex-shrink-0 mt-0.5">
-                            <Toggle
-                                @isToggled={{@options.layerOptions.trigger_on_exit}}
-                                @onToggle={{fn (mut @options.layerOptions.trigger_on_exit)}}
-                            />
+                            <Toggle @isToggled={{@options.layerOptions.trigger_on_exit}} @onToggle={{fn (mut @options.layerOptions.trigger_on_exit)}} />
                         </div>
                         <div>
-                            <p class="text-sm font-medium text-gray-900 dark:text-white">Trigger on Exit</p>
+                            <p class="text-sm font-medium text-gray-900 dark:text-white">{{t "fleetops-ui.components.modals.map-layer-form.trigger-on-exit"}}</p>
                             <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                                Fire a <code class="font-mono">geofence.exited</code> event when a driver leaves this {{if (eq @options.selectedLayerType "Zone") "zone" "service area"}}.
+                                {{t "fleetops-ui.components.modals.map-layer-form.fire-a"}}
+                                <code class="font-mono">geofence.exited</code>
+                                {{t "fleetops-ui.components.modals.map-layer-form.event-when-a-driver-leaves-this" value=(if (eq @options.selectedLayerType "Zone") "zone" "service area")}}
                             </p>
                         </div>
                     </div>
                 </div>
 
                 <InputGroup
-                    @name="Dwell Threshold (minutes)"
+                    @name={{t "fleetops-ui.components.modals.map-layer-form.dwell-threshold-minutes"}}
                     @value={{@options.layerOptions.dwell_threshold_minutes}}
                     @type="number"
                     @placeholder="e.g. 10"
-                    @helpText="Fire a geofence.dwelled event after a driver has been inside this boundary for this many minutes. Leave blank to disable dwell tracking."
+                    @helpText={{t "fleetops-ui.components.modals.map-layer-form.fire-a-geofence-dwelled-event-after"}}
                 />
 
                 <InputGroup
-                    @name="Speed Limit (km/h)"
+                    @name={{t "fleetops-ui.components.modals.map-layer-form.speed-limit-km-h"}}
                     @value={{@options.layerOptions.speed_limit_kmh}}
                     @type="number"
                     @placeholder="e.g. 50"
-                    @helpText="Optional speed limit enforced within this boundary. Leave blank for no limit."
+                    @helpText={{t "fleetops-ui.components.modals.map-layer-form.optional-speed-limit-enforced-within-this"}}
                 />
             </div>
         </ContentPanel>

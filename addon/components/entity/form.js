@@ -9,6 +9,7 @@ export default class EntityFormComponent extends Component {
     @service fetch;
     @service currentUser;
     @service notifications;
+    @service intl;
     @tracked useCustomType = false;
 
     constructor() {
@@ -17,7 +18,7 @@ export default class EntityFormComponent extends Component {
     }
 
     get entityTypes() {
-        return fleetOpsOptions('entityTypes');
+        return fleetOpsOptions('entityTypes', this.intl);
     }
 
     get selectedEntityType() {

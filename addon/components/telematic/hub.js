@@ -6,6 +6,7 @@ import { action } from '@ember/object';
 const WARNING_STATUSES = ['error', 'degraded', 'disconnected'];
 
 export default class TelematicHubComponent extends Component {
+    @service intl;
     @service telematicActions;
     @service hostRouter;
     @tracked table;
@@ -61,40 +62,40 @@ export default class TelematicHubComponent extends Component {
         return [
             {
                 icon: 'plug',
-                label: 'Provider count',
+                label: this.intl.t('fleetops-ui.js.components.telematic.hub.provider-count'),
                 value: this.activeProviderCount,
                 help: 'Connected provider accounts',
-                action: 'Connect a provider',
+                action: this.intl.t('fleetops-ui.js.components.telematic.hub.connect-a-provider'),
                 routeAction: 'create',
                 accent: 'blue',
                 accentClass: 'fleetops-connectivity-kpi-accent-blue',
             },
             {
                 icon: 'satellite-dish',
-                label: 'Synced Devices',
+                label: this.intl.t('fleetops-ui.js.components.telematic.hub.synced-devices'),
                 value: this.syncedDeviceCount,
                 help: 'Discovered from providers',
-                action: 'Review synced devices',
+                action: this.intl.t('fleetops-ui.js.components.telematic.hub.review-synced-devices'),
                 routeAction: 'devices',
                 accent: 'green',
                 accentClass: 'fleetops-connectivity-kpi-accent-green',
             },
             {
                 icon: 'truck',
-                label: 'Unattached devices',
+                label: this.intl.t('fleetops-ui.js.components.telematic.hub.unattached-devices'),
                 value: this.unattachedDeviceCount,
                 help: this.unattachedDeviceCount > 0 ? 'Devices need vehicles' : 'No open attachment count',
-                action: 'Attach to vehicles',
+                action: this.intl.t('fleetops-ui.js.components.telematic.hub.attach-to-vehicles'),
                 routeAction: 'attachments',
                 accent: 'amber',
                 accentClass: 'fleetops-connectivity-kpi-accent-amber',
             },
             {
                 icon: 'wave-square',
-                label: 'Health warnings',
+                label: this.intl.t('fleetops-ui.js.components.telematic.hub.health-warnings'),
                 value: this.healthWarningCount,
                 help: this.healthWarningCount > 0 ? 'Warnings need review' : 'No warnings',
-                action: 'Review health',
+                action: this.intl.t('fleetops-ui.js.components.telematic.hub.review-health'),
                 routeAction: 'health',
                 accent: 'rose',
                 accentClass: 'fleetops-connectivity-kpi-accent-rose',

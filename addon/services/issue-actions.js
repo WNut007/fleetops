@@ -2,7 +2,7 @@ import ResourceActionService from '@fleetbase/ember-core/services/resource-actio
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { format } from 'date-fns';
-import { issueStatuses } from '../utils/fleet-ops-options';
+import { issueStatuses, localizeOptions } from '../utils/fleet-ops-options';
 import { PANEL_DEFAULTS } from '../utils/context-panel';
 
 export default class IssueActionsService extends ResourceActionService {
@@ -126,16 +126,31 @@ export default class IssueActionsService extends ResourceActionService {
 
     workflowItems(issue, onSaved) {
         const items = [
-            { label: 'Change Status', text: 'Change Status', icon: 'arrows-rotate', fn: () => this.openStatusModal(issue, { onSaved }) },
-            { label: 'Assign Issue', text: 'Assign Issue', icon: 'user-check', fn: () => this.openAssignModal(issue, { onSaved }) },
+            {
+                label: this.intl.t('fleetops-ui.js.services.issue-actions.change-status'),
+                text: this.intl.t('fleetops-ui.js.services.issue-actions.change-status'),
+                icon: 'arrows-rotate',
+                fn: () => this.openStatusModal(issue, { onSaved }),
+            },
+            {
+                label: this.intl.t('fleetops-ui.js.services.issue-actions.assign-issue'),
+                text: this.intl.t('fleetops-ui.js.services.issue-actions.assign-issue'),
+                icon: 'user-check',
+                fn: () => this.openAssignModal(issue, { onSaved }),
+            },
         ];
 
         if (this.closedStatuses.includes(issue?.status)) {
-            items.push({ label: 'Re-open Issue', text: 'Re-open Issue', icon: 'rotate-left', fn: () => this.confirmReopenIssue(issue, { onSaved }) });
+            items.push({
+                label: this.intl.t('fleetops-ui.js.services.issue-actions.re-open-issue'),
+                text: this.intl.t('fleetops-ui.js.services.issue-actions.re-open-issue'),
+                icon: 'rotate-left',
+                fn: () => this.confirmReopenIssue(issue, { onSaved }),
+            });
         } else {
             items.push({
-                label: 'Close Issue',
-                text: 'Close Issue',
+                label: this.intl.t('fleetops-ui.js.services.issue-actions.close-issue'),
+                text: this.intl.t('fleetops-ui.js.services.issue-actions.close-issue'),
                 icon: 'circle-check',
                 class: 'text-green-600 dark:text-green-400',
                 fn: () => this.openCloseIssueModal(issue, { onSaved }),
@@ -152,7 +167,7 @@ export default class IssueActionsService extends ResourceActionService {
     openStatusModal(issue, options = {}) {
         return this.modalsManager.show('modals/issue-status', {
             issue,
-            statusOptions: issueStatuses,
+            statusOptions: localizeOptions(this.intl, 'issueStatuses', issueStatuses),
             onSaved: options.onSaved,
         });
     }
@@ -174,8 +189,8 @@ export default class IssueActionsService extends ResourceActionService {
     confirmReopenIssue(issue, options = {}) {
         this.modalsManager.confirm({
             title: `Re-open ${issue.public_id || 'issue'}?`,
-            body: 'This will move the issue back into an active re-opened state and clear the active resolution date.',
-            acceptButtonText: 'Re-open Issue',
+            body: this.intl.t('fleetops-ui.js.services.issue-actions.this-will-move-the-issue-back'),
+            acceptButtonText: this.intl.t('fleetops-ui.js.services.issue-actions.re-open-issue'),
             acceptButtonIcon: 'rotate-left',
             confirm: async (modal) => {
                 modal.startLoading();
@@ -200,7 +215,7 @@ export default class IssueActionsService extends ResourceActionService {
                     };
 
                     await issue.save();
-                    this.notifications.success('Issue re-opened.');
+                    this.notifications.success(this.intl.t('fleetops-ui.js.services.issue-actions.issue-re-opened'));
 
                     if (typeof options.onSaved === 'function') {
                         await options.onSaved(issue);

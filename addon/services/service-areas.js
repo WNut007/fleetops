@@ -14,6 +14,7 @@ import ensureLeafletDrawEditNamespace from '../utils/leaflet-draw-namespace-guar
 
 const L = window.L;
 export default class ServiceAreasService extends Service {
+    @service intl;
     @service store;
     @service modalsManager;
     @service notifications;
@@ -279,7 +280,7 @@ export default class ServiceAreasService extends Service {
         this.triggerLiveMapFn('showDrawControls', { text: true });
         this.setLayerCreationContext('service-area');
 
-        this.notifications.info('Use drawing controls to the right to draw a service area, complete point connections to save service area.', {
+        this.notifications.info(this.intl.t('fleetops-ui.js.services.service-areas.use-drawing-controls-to-the-right'), {
             clearDuration: 1000 * 9,
         });
     }
@@ -314,9 +315,9 @@ export default class ServiceAreasService extends Service {
         }
 
         this.modalsManager.show('modals/map-layer-form', {
-            title: 'Create new Layer',
+            title: this.intl.t('fleetops-ui.js.services.service-areas.create-new-layer'),
             modalClass: 'flb-resource-modal',
-            acceptButtonText: 'Create',
+            acceptButtonText: this.intl.t('fleetops-ui.js.services.service-areas.create'),
             acceptButtonIcon: 'magic',
             declineButtonIcon: 'times',
             declineButtonIconPrefix: 'fas',
@@ -339,7 +340,7 @@ export default class ServiceAreasService extends Service {
 
                 // parse service area for zone
                 if (selectedLayerType === 'Zone' && !layerOptions?.service_area) {
-                    this.notifications.error('Service Area required to create Zone!');
+                    this.notifications.error(this.intl.t('fleetops-ui.js.services.service-areas.service-area-required-to-create-zone'));
                     return;
                 } else {
                     serviceArea = layerOptions.service_area;
@@ -409,8 +410,8 @@ export default class ServiceAreasService extends Service {
         });
 
         return this.editServiceAreaDetails(serviceArea, {
-            title: 'Save Service Area',
-            acceptButtonText: 'Confirm & Save',
+            title: this.intl.t('fleetops-ui.js.services.service-areas.save-service-area'),
+            acceptButtonText: this.intl.t('fleetops-ui.js.services.service-areas.confirm-save'),
             onFinish: () => {
                 map.removeLayer(drawFeatureGroupLayer);
                 // Hide draw controls on finish
@@ -428,7 +429,7 @@ export default class ServiceAreasService extends Service {
      */
     @action editServiceAreaDetails(serviceArea, options = {}) {
         this.modalsManager.show('modals/service-area-form', {
-            title: 'Edit Service Area',
+            title: this.intl.t('fleetops-ui.js.services.service-areas.edit-service-area'),
             acceptButtonText: this.intl.t('common.save-changes'),
             acceptButtonIcon: 'save',
             declineButtonIcon: 'times',
@@ -491,7 +492,7 @@ export default class ServiceAreasService extends Service {
         this.setZoneServiceAreaContext(serviceArea);
         this.setLayerCreationContext('zone');
 
-        this.notifications.info('Use the drawing controls to the right to draw a zone within the service area, complete point connections to save the zone.', {
+        this.notifications.info(this.intl.t('fleetops-ui.js.services.service-areas.use-the-drawing-controls-to-the'), {
             clearDuration: 1000 * 9,
         });
     }
@@ -521,8 +522,8 @@ export default class ServiceAreasService extends Service {
         });
 
         return this.editZone(zone, serviceArea, {
-            title: 'Save Zone',
-            acceptButtonText: 'Confirm & Save',
+            title: this.intl.t('fleetops-ui.js.services.service-areas.save-zone'),
+            acceptButtonText: this.intl.t('fleetops-ui.js.services.service-areas.confirm-save'),
             onFinish: () => {
                 map.removeLayer(drawFeatureGroupLayer);
                 // Hide draw controls on finish
@@ -542,7 +543,7 @@ export default class ServiceAreasService extends Service {
      */
     @action editZone(zone, serviceArea, options = {}) {
         this.modalsManager.show('modals/zone-form', {
-            title: 'Edit Zone',
+            title: this.intl.t('fleetops-ui.js.services.service-areas.edit-zone'),
             acceptButtonText: this.intl.t('common.save-changes'),
             acceptButtonIcon: 'save',
             declineButtonIcon: 'times',

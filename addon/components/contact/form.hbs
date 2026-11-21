@@ -2,7 +2,14 @@
     <ContentPanel @title={{t "contact.fields.contact-details"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="flex flex-row space-x-3 mb-3">
             <div class="flex items-center justify-start rounded-full">
-                <Image src={{resource-image @resource.photo_url "contact"}} @fallbackSrc={{(placeholder-image "contact")}} alt={{@resource.name}} height="48" width="48" class="h-14 w-14 rounded-full shadow-sm" />
+                <Image
+                    src={{resource-image @resource.photo_url "contact"}}
+                    @fallbackSrc={{(placeholder-image "contact")}}
+                    alt={{@resource.name}}
+                    height="48"
+                    width="48"
+                    class="h-14 w-14 rounded-full shadow-sm"
+                />
                 <Attach::Tooltip @class="clean" @animation="scale" @placement="top">
                     <InputInfo @text={{t "common.upload-new-photo"}} />
                 </Attach::Tooltip>
@@ -56,7 +63,14 @@
                     </label>
                     <div class="mb-1.5 space-x-1 flex flex-row">
                         {{#if @resource.has_place}}
-                            <Button @type="danger" @size="xs" @icon="trash" @text="Remove" @onClick={{this.removePlace}} @disabled={{cannot-write @resource}} />
+                            <Button
+                                @type="danger"
+                                @size="xs"
+                                @icon="trash"
+                                @text={{t "fleetops-ui.components.contact.form.remove"}}
+                                @onClick={{this.removePlace}}
+                                @disabled={{cannot-write @resource}}
+                            />
                         {{/if}}
                         <Button
                             @type="default"

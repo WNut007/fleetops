@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency';
 
 export default class WidgetGeofenceViolationsComponent extends Component {
+    @service intl;
     static widgetId = 'fleet-ops-geofence-violations-widget';
 
     @service fetch;
@@ -20,7 +21,7 @@ export default class WidgetGeofenceViolationsComponent extends Component {
         if (!this.data?.by_zone?.data?.length) return null;
         return [
             {
-                label: 'Events',
+                label: this.intl.t('fleetops-ui.js.components.widget.geofence-violations.events'),
                 data: this.data.by_zone.data,
                 backgroundColor: '#f59e0b',
             },

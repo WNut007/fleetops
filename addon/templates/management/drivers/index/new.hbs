@@ -2,7 +2,7 @@
     @resource={{this.driver}}
     @controller={{this}}
     @actionButtons={{this.actionButtons}}
-    @headerTitle="Create a new driver"
+    @headerTitle={{t "fleetops-ui.templates.management.drivers.index.new.create-a-new-driver"}}
     @saveTask={{this.save}}
     @onPressCancel={{transition-to "management.drivers.index"}}
     @onOverlayReady={{fn (mut this.overlay)}}

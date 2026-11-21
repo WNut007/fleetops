@@ -32,14 +32,25 @@ export const transactionActions = {
     reviewed: { title: 'Mark Reviewed', description: 'Confirm that you have checked this purchase. This updates its review status without changing its vehicle, order, or Fuel Report.' },
 };
 
-export function openTransactionAction(modalsManager, mode, transactions, onSaved) {
+const KEY = 'fleetops-ui.js.utils.fuel-transaction';
+const translated = (intl, key, fallback) => (intl && intl.exists(key) ? intl.t(key) : fallback);
+
+export function transactionStatusLabel(intl, status) {
+    return translated(intl, `${KEY}.statuses.${status}`, transactionStatuses[status]?.label);
+}
+
+export function transactionActionText(intl, mode, field) {
+    return translated(intl, `${KEY}.actions.${mode}.${field}`, transactionActions[mode]?.[field]);
+}
+
+export function openTransactionAction(modalsManager, mode, transactions, onSaved, intl = null) {
     const records = Array.isArray(transactions) ? transactions : [transactions];
     if (!records.length || !transactionActions[mode]) return;
     return modalsManager.show('modals/fuel-transaction-action', {
-        title: transactionActions[mode].title,
-        acceptButtonText: transactionActions[mode].title,
+        title: transactionActionText(intl, mode, 'title'),
+        acceptButtonText: transactionActionText(intl, mode, 'title'),
         acceptButtonType: mode === 'ignored' ? 'danger' : 'primary',
-        declineButtonText: 'Cancel',
+        declineButtonText: translated(intl, `${KEY}.cancel`, 'Cancel'),
         keepOpen: true,
         mode,
         transactions: records,

@@ -23,12 +23,18 @@
         {{#if this.refreshWarning}}<p class="text-xs text-yellow-600 dark:text-yellow-300" role="alert">{{this.refreshWarning}}</p>{{/if}}
         <section class="overflow-hidden rounded-md border border-gray-200 dark:border-gray-700">
             <div class="flex items-center justify-between border-b border-gray-200 p-3 dark:border-gray-700">
-                <h3 class="text-xs font-semibold text-gray-600 dark:text-gray-300">Diagnostics · UTC</h3>
-                <Button @icon="copy" @text="Copy diagnostics" @size="xs" @disabled={{not this.entries.length}} @onClick={{this.copyDiagnostics}} />
+                <h3 class="text-xs font-semibold text-gray-600 dark:text-gray-300">{{t "fleetops-ui.components.modals.fuel-connection-diagnostics.diagnostics-utc"}}</h3>
+                <Button
+                    @icon="copy"
+                    @text={{t "fleetops-ui.components.modals.fuel-connection-diagnostics.copy-diagnostics"}}
+                    @size="xs"
+                    @disabled={{not this.entries.length}}
+                    @onClick={{this.copyDiagnostics}}
+                />
             </div>
             <div class="max-h-64 overflow-auto bg-gray-900 p-3 font-mono text-xs leading-5 text-gray-300" dir="ltr" data-test-fuel-test-log>
                 {{#each this.entries as |entry|}}<div class="break-words"><time class="text-gray-400">[{{entry.time}}]</time> {{entry.text}}</div>
-                {{else}}<p>The connection test has not started.</p>{{/each}}
+                {{else}}<p>{{t "fleetops-ui.components.modals.fuel-connection-diagnostics.the-connection-test-has-not-started"}}</p>{{/each}}
             </div>
         </section>
     </div>

@@ -1,11 +1,9 @@
 <div class="tracking-stop-progress" ...attributes>
     <div class="tracking-stop-progress__header">
-        <div class="tracking-stop-progress__title">Between Stops</div>
+        <div class="tracking-stop-progress__title">{{t "fleetops-ui.components.tracking-stop-progress.between-stops"}}</div>
         <div class="tracking-stop-progress__count">
             <span class="font-semibold text-gray-800 dark:text-gray-100">{{this.completedCount}}</span>
-            /
-            {{this.totalCount}}
-            stops
+            {{t "fleetops-ui.components.tracking-stop-progress.stops" totalCount=this.totalCount}}
         </div>
     </div>
 

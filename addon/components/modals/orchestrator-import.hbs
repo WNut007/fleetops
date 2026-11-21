@@ -29,10 +29,10 @@
                         {{#if dropzone.active}}
                             {{#if dropzone.valid}}
                                 <FaIcon @icon="cloud-upload-alt" @size="2x" class="text-indigo-400 mb-2" />
-                                <p class="text-sm dark:text-gray-300">Drop to upload</p>
+                                <p class="text-sm dark:text-gray-300">{{t "fleetops-ui.components.modals.orchestrator-import.drop-to-upload"}}</p>
                             {{else}}
                                 <FaIcon @icon="times-circle" @size="2x" class="text-red-400 mb-2" />
-                                <p class="text-sm text-red-400">Invalid file type</p>
+                                <p class="text-sm text-red-400">{{t "fleetops-ui.components.modals.orchestrator-import.invalid-file-type"}}</p>
                             {{/if}}
                         {{else if this.selectedFile}}
                             <div class="flex flex-col items-center">
@@ -154,7 +154,7 @@
                                         {{if (and mapping.required (not mapping.mappedColumn)) 'import-mapping-select--error' ''}}"
                                     {{on "change" (fn this.setColumnMapping mapping.key)}}
                                 >
-                                    <option value="" selected={{not mapping.mappedColumn}}>— skip —</option>
+                                    <option value="" selected={{not mapping.mappedColumn}}>{{t "fleetops-ui.components.modals.orchestrator-import.skip"}}</option>
                                     {{#each this.fileColumns as |col|}}
                                         <option value={{col}} selected={{eq col mapping.mappedColumn}}>{{col}}</option>
                                     {{/each}}

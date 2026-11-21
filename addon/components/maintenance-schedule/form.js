@@ -1,3 +1,4 @@
+import { localizeOptions } from '../../utils/fleet-ops-options';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { isArray } from '@ember/array';
@@ -77,8 +78,8 @@ export default class MaintenanceScheduleFormComponent extends Component {
             { label: this.intl.t('resource.equipment'), value: 'fleet-ops:equipment' },
         ];
     }
-    assigneeTypeOptions = ASSIGNEE_TYPE_OPTIONS;
-    intervalMethodOptions = INTERVAL_METHOD_OPTIONS;
+    assigneeTypeOptions = localizeOptions(this.intl, 'local.components.maintenance-schedule.form.ASSIGNEE_TYPE_OPTIONS', ASSIGNEE_TYPE_OPTIONS);
+    intervalMethodOptions = localizeOptions(this.intl, 'local.components.maintenance-schedule.form.INTERVAL_METHOD_OPTIONS', INTERVAL_METHOD_OPTIONS);
 
     statusOptions = ['active', 'paused', 'completed'];
     priorityOptions = ['low', 'normal', 'high', 'critical'];
@@ -119,7 +120,8 @@ export default class MaintenanceScheduleFormComponent extends Component {
                 const modelName = defaultAssignee.constructor?.modelName ?? defaultAssignee.modelName;
                 const typeValue = ASSIGNEE_MODEL_TO_TYPE[modelName] ?? null;
                 if (typeValue) {
-                    this.selectedAssigneeType = ASSIGNEE_TYPE_OPTIONS.find((o) => o.value === typeValue) ?? null;
+                    this.selectedAssigneeType =
+                        localizeOptions(this.intl, 'local.components.maintenance-schedule.form.ASSIGNEE_TYPE_OPTIONS', ASSIGNEE_TYPE_OPTIONS).find((o) => o.value === typeValue) ?? null;
                     this.assigneeModelName = TYPE_TO_MODEL[typeValue] ?? null;
                 }
             }
@@ -129,13 +131,19 @@ export default class MaintenanceScheduleFormComponent extends Component {
             }
             // Restore interval method from stored interval_method field, or infer from populated fields
             if (resource.interval_method) {
-                this.selectedIntervalMethod = INTERVAL_METHOD_OPTIONS.find((o) => o.value === resource.interval_method) ?? null;
+                this.selectedIntervalMethod =
+                    localizeOptions(this.intl, 'local.components.maintenance-schedule.form.INTERVAL_METHOD_OPTIONS', INTERVAL_METHOD_OPTIONS).find(
+                        (o) => o.value === resource.interval_method
+                    ) ?? null;
             } else if (resource.interval_distance) {
-                this.selectedIntervalMethod = INTERVAL_METHOD_OPTIONS.find((o) => o.value === 'distance') ?? null;
+                this.selectedIntervalMethod =
+                    localizeOptions(this.intl, 'local.components.maintenance-schedule.form.INTERVAL_METHOD_OPTIONS', INTERVAL_METHOD_OPTIONS).find((o) => o.value === 'distance') ?? null;
             } else if (resource.interval_engine_hours) {
-                this.selectedIntervalMethod = INTERVAL_METHOD_OPTIONS.find((o) => o.value === 'engine_hours') ?? null;
+                this.selectedIntervalMethod =
+                    localizeOptions(this.intl, 'local.components.maintenance-schedule.form.INTERVAL_METHOD_OPTIONS', INTERVAL_METHOD_OPTIONS).find((o) => o.value === 'engine_hours') ?? null;
             } else if (resource.interval_value) {
-                this.selectedIntervalMethod = INTERVAL_METHOD_OPTIONS.find((o) => o.value === 'time') ?? null;
+                this.selectedIntervalMethod =
+                    localizeOptions(this.intl, 'local.components.maintenance-schedule.form.INTERVAL_METHOD_OPTIONS', INTERVAL_METHOD_OPTIONS).find((o) => o.value === 'time') ?? null;
             }
         }
     }

@@ -1,29 +1,41 @@
 <div class="work-order-form" ...attributes>
 
     {{! ===== IDENTIFICATION ===== }}
-    <ContentPanel @title="Identification" @open={{true}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.work-order.form.identification"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 gap-2 lg:grid-cols-2 lg:gap-2 no-input-group-padding text-xs">
             <div class="col-span-1 lg:col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-1">
-                Work Order Details
+                {{t "fleetops-ui.components.work-order.form.work-order-details"}}
             </div>
-            <InputGroup @name="Code">
-                <Input @value={{@resource.code}} @type="text" class="w-full form-input" placeholder="Auto-generated if left blank" disabled={{cannot-write @resource}} />
+            <InputGroup @name={{t "fleetops-ui.components.work-order.form.code"}}>
+                <Input
+                    @value={{@resource.code}}
+                    @type="text"
+                    class="w-full form-input"
+                    placeholder={{t "fleetops-ui.components.work-order.form.auto-generated-if-left-blank"}}
+                    disabled={{cannot-write @resource}}
+                />
             </InputGroup>
-            <InputGroup @name="Subject" @wrapperClass="col-span-2">
-                <Input @value={{@resource.subject}} @type="text" class="w-full form-input" placeholder="Brief description of the work order" disabled={{cannot-write @resource}} />
+            <InputGroup @name={{t "fleetops-ui.components.work-order.form.subject"}} @wrapperClass="col-span-2">
+                <Input
+                    @value={{@resource.subject}}
+                    @type="text"
+                    class="w-full form-input"
+                    placeholder={{t "fleetops-ui.components.work-order.form.brief-description-of-the-work-order"}}
+                    disabled={{cannot-write @resource}}
+                />
             </InputGroup>
 
             {{! Work Classification }}
             <div class="col-span-1 lg:col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-3">
-                Work Order Classification
+                {{t "fleetops-ui.components.work-order.form.work-order-classification"}}
             </div>
-            <InputGroup @name="Category" @wrapperClass="col-span-1 lg:col-span-2">
+            <InputGroup @name={{t "fleetops-ui.components.work-order.form.category"}} @wrapperClass="col-span-1 lg:col-span-2">
                 <div class="fleetbase-model-select fleetbase-power-select ember-model-select">
                     <PowerSelect
                         @options={{this.categoryOptions}}
                         @selected={{find-by "value" @resource.category this.categoryOptions}}
                         @onChange={{set-model-attr @resource "category"}}
-                        @placeholder="Select Category"
+                        @placeholder={{t "fleetops-ui.components.work-order.form.select-category"}}
                         @triggerClass="form-select form-input"
                         @disabled={{cannot-write @resource}}
                         as |category|
@@ -36,15 +48,15 @@
 
             {{! Status & Priority }}
             <div class="col-span-1 lg:col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-3">
-                Status & Priority
+                {{t "fleetops-ui.components.work-order.form.status-priority"}}
             </div>
-            <InputGroup @name="Status">
+            <InputGroup @name={{t "fleetops-ui.components.work-order.form.status"}}>
                 <div class="fleetbase-model-select fleetbase-power-select ember-model-select">
                     <PowerSelect
                         @options={{this.statusOptions}}
                         @selected={{find-by "value" @resource.status this.statusOptions}}
                         @onChange={{set-model-attr @resource "status"}}
-                        @placeholder="Select Status"
+                        @placeholder={{t "fleetops-ui.components.work-order.form.select-status"}}
                         @triggerClass="form-select form-input"
                         @disabled={{cannot-write @resource}}
                         as |status|
@@ -54,13 +66,13 @@
                     </PowerSelect>
                 </div>
             </InputGroup>
-            <InputGroup @name="Priority">
+            <InputGroup @name={{t "fleetops-ui.components.work-order.form.priority"}}>
                 <div class="fleetbase-model-select fleetbase-power-select ember-model-select">
                     <PowerSelect
                         @options={{this.priorityOptions}}
                         @selected={{@resource.priority}}
                         @onChange={{fn (mut @resource.priority)}}
-                        @placeholder="Select Priority"
+                        @placeholder={{t "fleetops-ui.components.work-order.form.select-priority"}}
                         @triggerClass="form-select form-input"
                         @disabled={{cannot-write @resource}}
                         as |priority|
@@ -73,18 +85,18 @@
     </ContentPanel>
 
     {{! ===== ASSIGNMENT ===== }}
-    <ContentPanel @title="Assignment" @open={{true}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.work-order.form.assignment"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 gap-2 lg:grid-cols-2 lg:gap-2 no-input-group-padding text-xs">
             <div class="col-span-1 lg:col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-1">
-                Target Asset
+                {{t "fleetops-ui.components.work-order.form.target-asset"}}
             </div>
-            <InputGroup @name="Target Type">
+            <InputGroup @name={{t "fleetops-ui.components.work-order.form.target-type"}}>
                 <div class="fleetbase-model-select fleetbase-power-select ember-model-select">
                     <PowerSelect
                         @options={{this.targetTypeOptions}}
                         @selected={{this.selectedTargetType}}
                         @onChange={{this.onTargetTypeChange}}
-                        @placeholder="Select target type"
+                        @placeholder={{t "fleetops-ui.components.work-order.form.select-target-type"}}
                         @allowClear={{true}}
                         @triggerClass="form-select form-input"
                         @disabled={{cannot-write @resource}}
@@ -95,12 +107,15 @@
                 </div>
             </InputGroup>
             {{#if this.targetModelName}}
-                <InputGroup @name="Target">
+                <InputGroup @name={{t "fleetops-ui.components.work-order.form.target"}}>
                     <ModelSelect
                         @modelName={{this.targetModelName}}
-                        @selectedItemComponent={{if (resource-component "select-option" this.targetModelName) (component (resource-component "select-option" this.targetModelName) compact=true)}}
+                        @selectedItemComponent={{if
+                            (resource-component "select-option" this.targetModelName)
+                            (component (resource-component "select-option" this.targetModelName) compact=true)
+                        }}
                         @selectedModel={{@resource.target}}
-                        @placeholder="Select target asset"
+                        @placeholder={{t "fleetops-ui.components.work-order.form.select-target-asset"}}
                         @allowClear={{true}}
                         @triggerClass="form-select form-input"
                         @infiniteScroll={{false}}
@@ -121,15 +136,15 @@
             {{/if}}
 
             <div class="col-span-1 lg:col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-3">
-                Assignee
+                {{t "fleetops-ui.components.work-order.form.assignee"}}
             </div>
-            <InputGroup @name="Assignee Type">
+            <InputGroup @name={{t "fleetops-ui.components.work-order.form.assignee-type"}}>
                 <div class="fleetbase-model-select fleetbase-power-select ember-model-select">
                     <PowerSelect
                         @options={{this.assigneeTypeOptions}}
                         @selected={{this.selectedAssigneeType}}
                         @onChange={{this.onAssigneeTypeChange}}
-                        @placeholder="Select assignee type"
+                        @placeholder={{t "fleetops-ui.components.work-order.form.select-assignee-type"}}
                         @allowClear={{true}}
                         @triggerClass="form-select form-input"
                         @disabled={{cannot-write @resource}}
@@ -140,12 +155,15 @@
                 </div>
             </InputGroup>
             {{#if this.assigneeModelName}}
-                <InputGroup @name="Assignee">
+                <InputGroup @name={{t "fleetops-ui.components.work-order.form.assignee"}}>
                     <ModelSelect
                         @modelName={{this.assigneeModelName}}
-                        @selectedItemComponent={{if (resource-component "select-option" this.assigneeModelName) (component (resource-component "select-option" this.assigneeModelName) compact=true)}}
+                        @selectedItemComponent={{if
+                            (resource-component "select-option" this.assigneeModelName)
+                            (component (resource-component "select-option" this.assigneeModelName) compact=true)
+                        }}
                         @selectedModel={{@resource.assignee}}
-                        @placeholder="Select assignee"
+                        @placeholder={{t "fleetops-ui.components.work-order.form.select-assignee"}}
                         @allowClear={{true}}
                         @triggerClass="form-select form-input"
                         @infiniteScroll={{false}}
@@ -168,32 +186,32 @@
     </ContentPanel>
 
     {{! ===== SCHEDULING ===== }}
-    <ContentPanel @title="Scheduling" @open={{true}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.work-order.form.scheduling"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 gap-2 lg:grid-cols-2 lg:gap-2 no-input-group-padding text-xs">
             <div class="col-span-1 lg:col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-1">
-                Dates
+                {{t "fleetops-ui.components.work-order.form.dates"}}
             </div>
-            <InputGroup @name="Opened At">
+            <InputGroup @name={{t "fleetops-ui.components.work-order.form.opened-at"}}>
                 <DatePicker
                     @value={{or (format-date-fns @resource.opened_at "yyyy-MM-dd") null}}
                     @onChange={{fn (mut @resource.opened_at)}}
-                    @placeholder="DD-MM-YYYY"
+                    @placeholder={{t "fleetops-ui.components.work-order.form.dd-mm-yyyy"}}
                     class="filter-date-input w-full flex-1"
                 />
             </InputGroup>
-            <InputGroup @name="Due At">
+            <InputGroup @name={{t "fleetops-ui.components.work-order.form.due-at"}}>
                 <DatePicker
                     @value={{or (format-date-fns @resource.due_at "yyyy-MM-dd") null}}
                     @onChange={{fn (mut @resource.due_at)}}
-                    @placeholder="DD-MM-YYYY"
+                    @placeholder={{t "fleetops-ui.components.work-order.form.dd-mm-yyyy"}}
                     class="filter-date-input w-full flex-1"
                 />
             </InputGroup>
-            <InputGroup @name="Closed At">
+            <InputGroup @name={{t "fleetops-ui.components.work-order.form.closed-at"}}>
                 <DatePicker
                     @value={{or (format-date-fns @resource.closed_at "yyyy-MM-dd") null}}
                     @onChange={{fn (mut @resource.closed_at)}}
-                    @placeholder="DD-MM-YYYY"
+                    @placeholder={{t "fleetops-ui.components.work-order.form.dd-mm-yyyy"}}
                     class="filter-date-input w-full flex-1"
                 />
             </InputGroup>
@@ -201,15 +219,15 @@
     </ContentPanel>
 
     {{! ===== INSTRUCTIONS ===== }}
-    <ContentPanel @title="Instructions" @open={{true}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.work-order.form.instructions"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 gap-2 no-input-group-padding text-xs">
-            <InputGroup @name="Instructions">
+            <InputGroup @name={{t "fleetops-ui.components.work-order.form.instructions"}}>
                 <Textarea
                     @value={{@resource.instructions}}
-                    aria-label="Instructions"
+                    aria-label={{t "fleetops-ui.components.work-order.form.instructions"}}
                     class="w-full form-input"
                     disabled={{cannot-write @resource}}
-                    placeholder="Step-by-step instructions for the technician"
+                    placeholder={{t "fleetops-ui.components.work-order.form.step-by-step-instructions-for-the"}}
                     rows={{5}}
                 />
             </InputGroup>
@@ -218,13 +236,13 @@
 
     {{! ===== COMPLETION DATA (shown when status = closed) ===== }}
     {{#if this.isCompleting}}
-        <ContentPanel @title="Completion Details" @open={{true}} @wrapperClass="bordered-top">
+        <ContentPanel @title={{t "fleetops-ui.components.work-order.form.completion-details"}} @open={{true}} @wrapperClass="bordered-top">
             <div class="grid grid-cols-1 gap-2 lg:grid-cols-2 lg:gap-2 no-input-group-padding text-xs">
                 <div class="col-span-1 lg:col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-1">
-                    Record what was actually done — this will auto-create a Maintenance History entry.
+                    {{t "fleetops-ui.components.work-order.form.record-what-was-actually-done-this"}}
                 </div>
 
-                <InputGroup @name="Odometer at Completion (km)">
+                <InputGroup @name={{t "fleetops-ui.components.work-order.form.odometer-at-completion-km"}}>
                     <Input
                         @value={{this.completionOdometer}}
                         @type="number"
@@ -235,7 +253,7 @@
                     />
                 </InputGroup>
 
-                <InputGroup @name="Engine Hours at Completion">
+                <InputGroup @name={{t "fleetops-ui.components.work-order.form.engine-hours-at-completion"}}>
                     <Input
                         @value={{this.completionEngineHours}}
                         @type="number"
@@ -246,24 +264,24 @@
                     />
                 </InputGroup>
 
-                <InputGroup @name="Labour Cost">
+                <InputGroup @name={{t "fleetops-ui.components.work-order.form.labour-cost"}}>
                     <MoneyInput @value={{this.completionLaborCost}} @currency={{or @resource.currency "USD"}} @disabled={{false}} @onChange={{this.setCompletionLaborCost}} />
                 </InputGroup>
 
-                <InputGroup @name="Parts Cost">
+                <InputGroup @name={{t "fleetops-ui.components.work-order.form.parts-cost"}}>
                     <MoneyInput @value={{this.completionPartsCost}} @currency={{or @resource.currency "USD"}} @disabled={{false}} @onChange={{this.setCompletionPartsCost}} />
                 </InputGroup>
 
-                <InputGroup @name="Tax">
+                <InputGroup @name={{t "fleetops-ui.components.work-order.form.tax"}}>
                     <MoneyInput @value={{this.completionTax}} @currency={{or @resource.currency "USD"}} @disabled={{false}} @onChange={{this.setCompletionTax}} />
                 </InputGroup>
 
-                <InputGroup @name="Completion Notes" @wrapperClass="col-span-2">
+                <InputGroup @name={{t "fleetops-ui.components.work-order.form.completion-notes"}} @wrapperClass="col-span-2">
                     <Textarea
                         @value={{this.completionNotes}}
                         class="w-full form-input"
                         rows="3"
-                        placeholder="Notes on what was done, parts replaced, observations..."
+                        placeholder={{t "fleetops-ui.components.work-order.form.notes-on-what-was-done-parts"}}
                         {{on "input" (fn this.setCompletionNotes this.completionNotes)}}
                         {{on "change" (fn this.setCompletionNotes this.completionNotes)}}
                     />
@@ -280,7 +298,7 @@
     <RegistryYield @registry="fleet-ops:component:work-order:form" as |RegistryComponent|>
         <RegistryComponent @resource={{@resource}} @controller={{@controller}} @permission={{get-write-permission @resource}} />
     </RegistryYield>
-    <ContentPanel @title="Metadata" @open={{false}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.work-order.form.metadata"}} @open={{false}} @wrapperClass="bordered-top">
         <MetadataEditor @value={{@resource.meta}} @onChange={{fn (mut @resource.meta)}} />
     </ContentPanel>
 </div>

@@ -94,7 +94,7 @@ export default class ManagementDriversIndexController extends Controller {
                     },
                 ],
                 renderInPlace: true,
-                helpText: 'Change the layout',
+                helpText: this.intl.t('fleetops-ui.js.controllers.management.drivers.index.change-the-layout'),
             },
             {
                 id: 'refresh',

@@ -18,6 +18,7 @@ import CustomerCreateOrderFormComponent from './create-order-form';
 const MAP_TARGET_FOCUS_PADDING_BOTTOM_RIGHT = [200, 0];
 const MAP_TARGET_FOCUS_REFOCUS_PANBY = [150, 0];
 export default class CustomerOrdersComponent extends Component {
+    @service intl;
     @service store;
     @service fetch;
     @service notifications;
@@ -165,9 +166,9 @@ export default class CustomerOrdersComponent extends Component {
 
         // render dialog to display label within
         this.modalsManager.show(`modals/order-label`, {
-            title: 'Order Label',
+            title: this.intl.t('fleetops-ui.js.components.customer.orders.order-label'),
             modalClass: 'modal-xl',
-            acceptButtonText: 'Done',
+            acceptButtonText: this.intl.t('fleetops-ui.js.components.customer.orders.done'),
             hideDeclineButton: true,
             order,
         });
@@ -194,9 +195,9 @@ export default class CustomerOrdersComponent extends Component {
     @action async viewWaypointLabel(waypoint) {
         // render dialog to display label within
         this.modalsManager.show(`modals/order-label`, {
-            title: 'Waypoint Label',
+            title: this.intl.t('fleetops-ui.js.components.customer.orders.waypoint-label'),
             modalClass: 'modal-xl',
-            acceptButtonText: 'Done',
+            acceptButtonText: this.intl.t('fleetops-ui.js.components.customer.orders.done'),
             hideDeclineButton: true,
         });
 
@@ -353,7 +354,7 @@ export default class CustomerOrdersComponent extends Component {
         try {
             const response = await this.fetch.post(`customer-portal/orders/${this.selectedOrder.public_id}/cancel`, {}, { namespace: 'fleet-ops/int/v1' });
             this.selectedOrder.set('status', response.order?.status ?? 'canceled');
-            this.notifications.success('Order canceled.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.components.customer.orders.order-canceled'));
         } catch (error) {
             this.notifications.serverError(error);
         }
@@ -371,7 +372,7 @@ export default class CustomerOrdersComponent extends Component {
                 { namespace: 'fleet-ops/int/v1' }
             );
             this.selectedOrder.set('scheduled_at', response.order?.scheduled_at ?? this.scheduledAt);
-            this.notifications.success('Order rescheduled.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.components.customer.orders.order-rescheduled'));
         } catch (error) {
             this.notifications.serverError(error);
         }
@@ -388,7 +389,7 @@ export default class CustomerOrdersComponent extends Component {
 
         try {
             await this.fetch.post(`customer-portal/orders/${this.selectedOrder.public_id}/delivery-instructions`, this.deliveryInstructions, { namespace: 'fleet-ops/int/v1' });
-            this.notifications.success('Delivery instructions saved.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.components.customer.orders.delivery-instructions-saved'));
         } catch (error) {
             this.notifications.serverError(error);
         }

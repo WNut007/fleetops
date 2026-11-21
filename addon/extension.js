@@ -11,39 +11,39 @@ export default {
         menuService.registerHeaderMenuItem('Fleet-Ops', 'console.fleet-ops', {
             icon: 'route',
             priority: 0,
-            description: 'Dispatch, fleet management, driver tracking, and logistics operations.',
+            description: intlService.t('fleetops-ui.js.extension.dispatch-fleet-management-driver-tracking-and'),
             shortcuts: [
                 {
-                    title: 'Radar',
-                    description: 'Everything across resources, maintenance and staffing that needs a decision today.',
+                    title: intlService.t('fleetops-ui.js.extension.radar'),
+                    description: intlService.t('fleetops-ui.js.extension.everything-across-resources-maintenance-and-staffing'),
                     icon: 'satellite-dish',
                     route: 'console.fleet-ops.management.index',
                     permission: 'fleet-ops list driver',
                 },
                 {
-                    title: 'Orders',
-                    description: 'Create, dispatch, and track delivery orders in real time.',
+                    title: intlService.t('fleetops-ui.js.extension.orders'),
+                    description: intlService.t('fleetops-ui.js.extension.create-dispatch-and-track-delivery-orders'),
                     icon: 'boxes-stacked',
                     route: 'console.fleet-ops.operations.orders',
                     permission: 'fleet-ops list order',
                 },
                 {
-                    title: 'Places',
-                    description: 'Manage saved locations, addresses, and points of interest.',
+                    title: intlService.t('fleetops-ui.js.extension.places'),
+                    description: intlService.t('fleetops-ui.js.extension.manage-saved-locations-addresses-and-points'),
                     icon: 'location-dot',
                     route: 'console.fleet-ops.management.places',
                     permission: 'fleet-ops list place',
                 },
                 {
-                    title: 'Drivers',
-                    description: 'Manage driver profiles, assignments, and live locations.',
+                    title: intlService.t('fleetops-ui.js.extension.drivers'),
+                    description: intlService.t('fleetops-ui.js.extension.manage-driver-profiles-assignments-and-live'),
                     icon: 'id-card',
                     route: 'console.fleet-ops.management.drivers',
                     permission: 'fleet-ops list driver',
                 },
                 {
-                    title: 'Vehicles',
-                    description: 'View and manage your vehicle fleet and telematics.',
+                    title: intlService.t('fleetops-ui.js.extension.vehicles'),
+                    description: intlService.t('fleetops-ui.js.extension.view-and-manage-your-vehicle-fleet'),
                     icon: 'truck',
                     route: 'console.fleet-ops.management.vehicles',
                     permission: 'fleet-ops list vehicle',
@@ -56,36 +56,36 @@ export default {
                     permission: 'fleet-ops list trailer',
                 },
                 {
-                    title: 'Fleets',
-                    description: 'Organise drivers and vehicles into operational fleets.',
+                    title: intlService.t('fleetops-ui.js.extension.fleets'),
+                    description: intlService.t('fleetops-ui.js.extension.organise-drivers-and-vehicles-into-operational'),
                     icon: 'layer-group',
                     route: 'console.fleet-ops.management.fleets',
                     permission: 'fleet-ops list fleet',
                 },
                 {
-                    title: 'Service Rates',
-                    description: 'Configure pricing rules and service rate cards.',
+                    title: intlService.t('fleetops-ui.js.extension.service-rates'),
+                    description: intlService.t('fleetops-ui.js.extension.configure-pricing-rules-and-service-rate'),
                     icon: 'tags',
                     route: 'console.fleet-ops.operations.service-rates',
                     permission: 'fleet-ops list service-rate',
                 },
                 {
-                    title: 'Devices',
-                    description: 'Manage connected telematics devices and their sensor data.',
+                    title: intlService.t('fleetops-ui.js.extension.devices'),
+                    description: intlService.t('fleetops-ui.js.extension.manage-connected-telematics-devices-and-their'),
                     icon: 'microchip',
                     route: 'console.fleet-ops.connectivity.devices',
                     permission: 'fleet-ops list device',
                 },
                 {
-                    title: 'Reports',
-                    description: 'Generate and review operational analytics reports.',
+                    title: intlService.t('fleetops-ui.js.extension.reports'),
+                    description: intlService.t('fleetops-ui.js.extension.generate-and-review-operational-analytics-reports'),
                     icon: 'chart-bar',
                     route: 'console.fleet-ops.analytics.reports',
                     permission: 'iam list report',
                 },
                 {
-                    title: 'Orchestrator',
-                    description: 'Intelligently allocate and dispatch orders to available drivers.',
+                    title: intlService.t('fleetops-ui.js.extension.orchestrator'),
+                    description: intlService.t('fleetops-ui.js.extension.intelligently-allocate-and-dispatch-orders-to'),
                     icon: 'diagram-project',
                     route: 'console.fleet-ops.operations.orchestrator',
                     permission: 'fleet-ops list order',
@@ -98,27 +98,32 @@ export default {
             'Fleet-Ops',
             [
                 new MenuItem({
-                    title: 'Routing',
+                    slug: 'routing',
+                    title: intlService.t('fleetops-ui.js.extension.routing'),
                     icon: 'route',
                     component: new ExtensionComponent('@fleetbase/fleetops-engine', 'admin/routing-settings'),
                 }),
                 new MenuItem({
-                    title: 'Map',
+                    slug: 'map',
+                    title: intlService.t('fleetops-ui.js.extension.map'),
                     icon: 'map',
                     component: new ExtensionComponent('@fleetbase/fleetops-engine', 'admin/map-settings'),
                 }),
                 new MenuItem({
-                    title: 'Navigator App',
+                    slug: 'navigator-app',
+                    title: intlService.t('fleetops-ui.js.extension.navigator-app'),
                     icon: 'location-arrow',
                     component: new ExtensionComponent('@fleetbase/fleetops-engine', 'admin/navigator-app'),
                 }),
                 new MenuItem({
-                    title: 'Telematics',
+                    slug: 'telematics',
+                    title: intlService.t('fleetops-ui.js.extension.telematics'),
                     icon: 'satellite-dish',
                     component: new ExtensionComponent('@fleetbase/fleetops-engine', 'admin/telematics-settings'),
                 }),
                 new MenuItem({
-                    title: 'Tracking Page',
+                    slug: 'tracking-page',
+                    title: intlService.t('fleetops-ui.js.extension.tracking-page'),
                     icon: 'magnifying-glass-location',
                     component: new ExtensionComponent('@fleetbase/fleetops-engine', 'admin/tracking-page-settings'),
                 }),
@@ -136,7 +141,7 @@ export default {
             menuService.registerMenuItem(
                 'console',
                 new MenuItem({
-                    title: 'Track Order',
+                    title: intlService.t('fleetops-ui.js.extension.track-order'),
                     slug,
                     section: null,
                     view: null,
@@ -149,7 +154,7 @@ export default {
         menuService.registerMenuItem(
             'auth:login',
             new MenuItem({
-                title: 'Track Order',
+                title: intlService.t('fleetops-ui.js.extension.track-order'),
                 route: 'virtual',
                 slug: 'track-order',
                 icon: 'barcode',
@@ -168,7 +173,7 @@ export default {
         menuService.registerMenuItem(
             'auth:login',
             new MenuItem({
-                title: 'Track',
+                title: intlService.t('fleetops-ui.js.extension.track'),
                 route: 'virtual',
                 slug: 'track',
                 type: 'link',
@@ -184,7 +189,7 @@ export default {
         menuService.registerMenuItem(
             'auth:login',
             new MenuItem({
-                title: 'Company tracking',
+                title: intlService.t('fleetops-ui.js.extension.company-tracking'),
                 route: 'virtual',
                 slug: 't',
                 type: 'link',
@@ -199,7 +204,7 @@ export default {
         menuService.registerMenuItem(
             'auth:login',
             new MenuItem({
-                title: 'Inspection',
+                title: intlService.t('fleetops-ui.js.extension.inspection'),
                 route: 'virtual',
                 slug: 'inspection',
                 type: 'link',
@@ -212,7 +217,7 @@ export default {
         );
 
         // Register widgets
-        this.registerWidgets(widgetService);
+        this.registerWidgets(widgetService, intlService);
 
         // Create registries
         this.createRegistries(registryService);
@@ -262,7 +267,7 @@ export default {
         }
     },
 
-    registerWidgets(widgetService) {
+    registerWidgets(widgetService, intlService = { t: (key) => key }) {
         // `order` places a default widget on the default dashboard, which mixes widgets from
         // every extension; the grid fills rows first-fit, lowest order first (widgets without
         // one follow). The default layout is:
@@ -277,8 +282,8 @@ export default {
             // below supersede it. Scheduled for removal in the next major.
             new Widget({
                 id: 'fleet-ops-key-metrics-widget',
-                name: 'Fleet-Ops Metrics (Legacy)',
-                description: 'DEPRECATED — replaced by individual KPI tile widgets. Will be removed in the next major release.',
+                name: intlService.t('fleetops-ui.js.extension.fleet-ops-metrics-legacy'),
+                description: intlService.t('fleetops-ui.js.extension.deprecated-replaced-by-individual-kpi-tile'),
                 icon: 'truck',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/fleet-ops-key-metrics'),
                 grid_options: { w: 12, h: 8, minW: 8, minH: 6 },
@@ -290,8 +295,8 @@ export default {
             // fixed slug pointing at GET /fleet-ops/metrics/{slug}.
             new Widget({
                 id: 'fleet-ops-kpi-earnings-widget',
-                name: 'Earnings (30d)',
-                description: 'Total earnings over the last 30 days with trend.',
+                name: intlService.t('fleetops-ui.js.extension.earnings-30d'),
+                description: intlService.t('fleetops-ui.js.extension.total-earnings-over-the-last-30'),
                 icon: 'sack-dollar',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/kpi-earnings'),
                 grid_options: { w: 3, h: 4, minW: 3, minH: 4 },
@@ -300,8 +305,8 @@ export default {
             }),
             new Widget({
                 id: 'fleet-ops-kpi-aov-widget',
-                name: 'Avg Order Value (30d)',
-                description: 'Average revenue per completed order with trend.',
+                name: intlService.t('fleetops-ui.js.extension.avg-order-value-30d'),
+                description: intlService.t('fleetops-ui.js.extension.average-revenue-per-completed-order-with'),
                 icon: 'receipt',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/kpi-aov'),
                 grid_options: { w: 3, h: 4, minW: 3, minH: 4 },
@@ -310,8 +315,8 @@ export default {
             }),
             new Widget({
                 id: 'fleet-ops-kpi-distance-widget',
-                name: 'Distance Travelled (30d)',
-                description: 'Total kilometres delivered over the last 30 days.',
+                name: intlService.t('fleetops-ui.js.extension.distance-travelled-30d'),
+                description: intlService.t('fleetops-ui.js.extension.total-kilometres-delivered-over-the-last'),
                 icon: 'route',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/kpi-distance'),
                 grid_options: { w: 3, h: 4, minW: 3, minH: 4 },
@@ -320,8 +325,8 @@ export default {
             }),
             new Widget({
                 id: 'fleet-ops-kpi-active-orders-widget',
-                name: 'Active Orders',
-                description: 'Live count of orders currently in flight.',
+                name: intlService.t('fleetops-ui.js.extension.active-orders'),
+                description: intlService.t('fleetops-ui.js.extension.live-count-of-orders-currently-in'),
                 icon: 'bolt',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/kpi-active-orders'),
                 grid_options: { w: 3, h: 4, minW: 3, minH: 4 },
@@ -331,8 +336,8 @@ export default {
             }),
             new Widget({
                 id: 'fleet-ops-kpi-drivers-online-widget',
-                name: 'Drivers Online',
-                description: 'Live count of drivers currently active on a job.',
+                name: intlService.t('fleetops-ui.js.extension.drivers-online'),
+                description: intlService.t('fleetops-ui.js.extension.live-count-of-drivers-currently-active'),
                 icon: 'id-card',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/kpi-drivers-online'),
                 grid_options: { w: 3, h: 4, minW: 3, minH: 4 },
@@ -342,8 +347,8 @@ export default {
             }),
             new Widget({
                 id: 'fleet-ops-radar-widget',
-                name: 'Radar',
-                description: 'What needs a decision across the fleet right now: open, overdue and snoozed items, linking to Radar.',
+                name: intlService.t('fleetops-ui.js.extension.radar'),
+                description: intlService.t('fleetops-ui.js.extension.what-needs-a-decision-across-the'),
                 icon: 'satellite-dish',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/radar'),
                 grid_options: { w: 3, h: 4, minW: 3, minH: 4 },
@@ -353,8 +358,8 @@ export default {
             }),
             new Widget({
                 id: 'fleet-ops-kpi-open-issues-widget',
-                name: 'Open Issues',
-                description: 'Pending issues across the fleet (lower is better).',
+                name: intlService.t('fleetops-ui.js.extension.open-issues'),
+                description: intlService.t('fleetops-ui.js.extension.pending-issues-across-the-fleet-lower'),
                 icon: 'triangle-exclamation',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/kpi-open-issues'),
                 grid_options: { w: 3, h: 4, minW: 3, minH: 4 },
@@ -365,8 +370,8 @@ export default {
             // Analytics widgets — composed visualizations powered by /fleet-ops/analytics/*.
             new Widget({
                 id: 'fleet-ops-operations-pulse-widget',
-                name: 'Operations Pulse',
-                description: 'Live operational snapshot with day-over-day deltas.',
+                name: intlService.t('fleetops-ui.js.extension.operations-pulse'),
+                description: intlService.t('fleetops-ui.js.extension.live-operational-snapshot-with-day-over'),
                 icon: 'wave-pulse',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/operations-pulse'),
                 grid_options: { w: 6, h: 6, minW: 5, minH: 5 },
@@ -375,8 +380,8 @@ export default {
             }),
             new Widget({
                 id: 'fleet-ops-live-fleet-widget',
-                name: 'Live Fleet Map',
-                description: 'Real-time driver positions and active routes.',
+                name: intlService.t('fleetops-ui.js.extension.live-fleet-map'),
+                description: intlService.t('fleetops-ui.js.extension.real-time-driver-positions-and-active'),
                 icon: 'map-location-dot',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/live-fleet'),
                 grid_options: { w: 12, h: 12, minW: 8, minH: 8 },
@@ -386,8 +391,8 @@ export default {
             }),
             new Widget({
                 id: 'fleet-ops-revenue-trend-widget',
-                name: 'Revenue Trend',
-                description: 'Revenue over time with period comparison.',
+                name: intlService.t('fleetops-ui.js.extension.revenue-trend'),
+                description: intlService.t('fleetops-ui.js.extension.revenue-over-time-with-period-comparison'),
                 icon: 'chart-line',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/revenue-trend'),
                 grid_options: { w: 4, h: 9, minW: 4, minH: 7 },
@@ -397,8 +402,8 @@ export default {
             }),
             new Widget({
                 id: 'fleet-ops-orders-by-status-widget',
-                name: 'Order Volume by Status',
-                description: 'Daily stacked bars of order counts by status.',
+                name: intlService.t('fleetops-ui.js.extension.order-volume-by-status'),
+                description: intlService.t('fleetops-ui.js.extension.daily-stacked-bars-of-order-counts'),
                 icon: 'chart-column',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/orders-by-status'),
                 grid_options: { w: 6, h: 6, minW: 5, minH: 5 },
@@ -407,8 +412,8 @@ export default {
             }),
             new Widget({
                 id: 'fleet-ops-on-time-delivery-widget',
-                name: 'On-Time Delivery',
-                description: 'Percentage of deliveries completed within the SLA window.',
+                name: intlService.t('fleetops-ui.js.extension.on-time-delivery'),
+                description: intlService.t('fleetops-ui.js.extension.percentage-of-deliveries-completed-within-the'),
                 icon: 'clock',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/on-time-delivery'),
                 grid_options: { w: 3, h: 4, minW: 3, minH: 4 },
@@ -417,8 +422,8 @@ export default {
             }),
             new Widget({
                 id: 'fleet-ops-top-drivers-widget',
-                name: 'Top Drivers',
-                description: 'Driver leaderboard sortable by orders, on-time %, or distance.',
+                name: intlService.t('fleetops-ui.js.extension.top-drivers'),
+                description: intlService.t('fleetops-ui.js.extension.driver-leaderboard-sortable-by-orders-on'),
                 icon: 'medal',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/top-drivers'),
                 grid_options: { w: 4, h: 9, minW: 4, minH: 6 },
@@ -428,8 +433,8 @@ export default {
             }),
             new Widget({
                 id: 'fleet-ops-fuel-efficiency-widget',
-                name: 'Fuel Cost & Efficiency',
-                description: 'Weekly fuel cost and cost-per-km trend.',
+                name: intlService.t('fleetops-ui.js.extension.fuel-cost-efficiency'),
+                description: intlService.t('fleetops-ui.js.extension.weekly-fuel-cost-and-cost-per'),
                 icon: 'gas-pump',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/fuel-efficiency'),
                 grid_options: { w: 6, h: 6, minW: 5, minH: 5 },
@@ -438,8 +443,8 @@ export default {
             }),
             new Widget({
                 id: 'fleet-ops-fuel-providers-widget',
-                name: 'Fuel Integrations',
-                description: 'Provider spend, unmatched transactions, and sync health.',
+                name: intlService.t('fleetops-ui.js.extension.fuel-integrations'),
+                description: intlService.t('fleetops-ui.js.extension.provider-spend-unmatched-transactions-and-sync'),
                 icon: 'gas-pump',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/fuel-providers'),
                 grid_options: { w: 4, h: 5, minW: 4, minH: 5 },
@@ -448,8 +453,8 @@ export default {
             }),
             new Widget({
                 id: 'fleet-ops-issues-insights-widget',
-                name: 'Issues Insights',
-                description: 'Open/resolved issues, category breakdown, and average resolution time.',
+                name: intlService.t('fleetops-ui.js.extension.issues-insights'),
+                description: intlService.t('fleetops-ui.js.extension.open-resolved-issues-category-breakdown-and'),
                 icon: 'triangle-exclamation',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/issues-insights'),
                 grid_options: { w: 6, h: 6, minW: 5, minH: 5 },
@@ -458,8 +463,8 @@ export default {
             }),
             new Widget({
                 id: 'fleet-ops-maintenance-overview-widget',
-                name: 'Maintenance Overview',
-                description: 'Overdue, scheduled, and YTD maintenance spend.',
+                name: intlService.t('fleetops-ui.js.extension.maintenance-overview'),
+                description: intlService.t('fleetops-ui.js.extension.overdue-scheduled-and-ytd-maintenance-spend'),
                 icon: 'wrench',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/maintenance-overview'),
                 grid_options: { w: 4, h: 9, minW: 4, minH: 6 },
@@ -469,8 +474,8 @@ export default {
             }),
             new Widget({
                 id: 'fleet-ops-proof-of-delivery-widget',
-                name: 'Proof of Delivery',
-                description: 'The latest proof of delivery photos, each linking to its order.',
+                name: intlService.t('fleetops-ui.js.extension.proof-of-delivery'),
+                description: intlService.t('fleetops-ui.js.extension.the-latest-proof-of-delivery-photos'),
                 icon: 'camera',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/proof-of-delivery'),
                 grid_options: { w: 4, h: 9, minW: 3, minH: 6 },
@@ -479,8 +484,8 @@ export default {
             }),
             new Widget({
                 id: 'fleet-ops-geofence-violations-widget',
-                name: 'Geofence Violations',
-                description: 'Dwell-time outliers and geofence event hotspots.',
+                name: intlService.t('fleetops-ui.js.extension.geofence-violations'),
+                description: intlService.t('fleetops-ui.js.extension.dwell-time-outliers-and-geofence-event'),
                 icon: 'location-crosshairs',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/geofence-violations'),
                 grid_options: { w: 6, h: 6, minW: 5, minH: 5 },

@@ -78,16 +78,16 @@ export default class DriverScheduleComponent extends Component {
 
     get hosComplianceBadge() {
         if (!this.hosStatus) {
-            return { color: 'gray', label: 'Unknown' };
+            return { color: 'gray', label: this.intl.t('fleetops-ui.js.components.driver.schedule.unknown') };
         }
         const { daily_hours, weekly_hours } = this.hosStatus;
         if (daily_hours >= 11 || weekly_hours >= 70) {
-            return { color: 'red', label: 'At Limit' };
+            return { color: 'red', label: this.intl.t('fleetops-ui.js.components.driver.schedule.at-limit') };
         }
         if (daily_hours >= 9 || weekly_hours >= 60) {
-            return { color: 'yellow', label: 'Approaching Limit' };
+            return { color: 'yellow', label: this.intl.t('fleetops-ui.js.components.driver.schedule.approaching-limit') };
         }
-        return { color: 'green', label: 'Compliant' };
+        return { color: 'green', label: this.intl.t('fleetops-ui.js.components.driver.schedule.compliant') };
     }
 
     get pendingExceptions() {

@@ -150,18 +150,18 @@
     </ContentPanel>
 
     {{! ORCHESTRATOR CONSTRAINTS }}
-    <ContentPanel @title="Orchestrator Constraints" @open={{true}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.driver.form.orchestrator-constraints"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 gap-2 lg:grid-cols-2 lg:gap-2 no-input-group-padding text-xs">
             <div class="col-span-1 lg:col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-1">
-                Skills & Certifications
+                {{t "fleetops-ui.components.driver.form.skills-certifications"}}
             </div>
             <div class="col-span-1 lg:col-span-2">
-                <InputGroup @name="Driver Skills" @helpText="Skills and certifications this driver holds (e.g. refrigerated, hazmat, forklift). Used by the Orchestrator for order matching.">
+                <InputGroup @name={{t "fleetops-ui.components.driver.form.driver-skills"}} @helpText={{t "fleetops-ui.components.driver.form.skills-and-certifications-this-driver-holds"}}>
                     <MultiSelect
                         @options={{get-fleet-ops-options "driverSkills"}}
                         @selected={{@resource.skills}}
                         @onChange={{fn (mut @resource.skills)}}
-                        @placeholder="Select skills…"
+                        @placeholder={{t "fleetops-ui.components.driver.form.select-skills"}}
                         @triggerClass="form-select form-input"
                         @disabled={{cannot-write @resource}}
                         as |option|
@@ -171,22 +171,22 @@
                 </InputGroup>
             </div>
             <div class="col-span-1 lg:col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-3">
-                Route Limits
+                {{t "fleetops-ui.components.driver.form.route-limits"}}
             </div>
             <div class="col-span-1 lg:col-span-2 text-xs text-gray-500 dark:text-gray-400 -mt-1">
-                Hard caps applied by the Orchestrator when building a single route. These are separate from the driver's shift schedule, which controls availability windows.
+                {{t "fleetops-ui.components.driver.form.hard-caps-applied-by-the-orchestrator"}}
             </div>
-            <InputGroup
-                @name="Max Driving Time (seconds)"
-                @helpText="Maximum total driving time in seconds the Orchestrator may assign to this driver in a single route. Leave blank for no limit. Example: 28800 = 8 hours."
-            >
+            <InputGroup @name={{t "fleetops-ui.components.driver.form.max-driving-time-seconds"}} @helpText={{t "fleetops-ui.components.driver.form.maximum-total-driving-time-in-seconds"}}>
                 <Input @value={{@resource.max_travel_time}} @type="number" class="form-input w-full" placeholder="e.g. 28800 (8 h)" disabled={{cannot-write @resource}} />
             </InputGroup>
-            <InputGroup
-                @name="Max Distance (metres)"
-                @helpText="Maximum total route distance in metres the Orchestrator may assign to this driver in a single route. Leave blank for no limit."
-            >
-                <Input @value={{@resource.max_distance}} @type="number" class="form-input w-full" placeholder="e.g. 150000 (150 km)" disabled={{cannot-write @resource}} />
+            <InputGroup @name={{t "fleetops-ui.components.driver.form.max-distance-metres"}} @helpText={{t "fleetops-ui.components.driver.form.maximum-total-route-distance-in-metres"}}>
+                <Input
+                    @value={{@resource.max_distance}}
+                    @type="number"
+                    class="form-input w-full"
+                    placeholder={{t "fleetops-ui.components.driver.form.e-g-150000-150-km"}}
+                    disabled={{cannot-write @resource}}
+                />
             </InputGroup>
         </div>
     </ContentPanel>

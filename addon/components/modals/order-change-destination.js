@@ -7,6 +7,7 @@ import { buildServiceStopsFromPayload, describeRoutePoint } from '../../utils/ro
 import { colorForId } from '../../utils/route-colors';
 
 export default class ModalsOrderChangeDestinationComponent extends Component {
+    @service intl;
     @service fetch;
     @service notifications;
     @tracked selectedOption;
@@ -83,7 +84,7 @@ export default class ModalsOrderChangeDestinationComponent extends Component {
         const waypointId = this.waypointId(waypoint);
         if (!waypointId) {
             modal.stopLoading();
-            return this.notifications.warning('Select a destination first.');
+            return this.notifications.warning(this.intl.t('fleetops-ui.js.components.modals.order-change-destination.select-a-destination-first'));
         }
 
         modal.startLoading();

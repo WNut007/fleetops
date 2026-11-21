@@ -184,7 +184,13 @@ export default class MaintenanceSchedulesIndexController extends Controller {
 
     get bulkActions() {
         return [
-            { id: 'bulk-delete', label: 'Delete selected...', class: 'text-red-500', fn: this.maintenanceScheduleActions.bulkDelete, permission: 'fleet-ops delete maintenance-schedule' },
+            {
+                id: 'bulk-delete',
+                label: this.intl.t('fleetops-ui.js.controllers.maintenance.schedules.index.delete-selected'),
+                class: 'text-red-500',
+                fn: this.maintenanceScheduleActions.bulkDelete,
+                permission: 'fleet-ops delete maintenance-schedule',
+            },
         ];
     }
 

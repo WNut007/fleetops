@@ -1,12 +1,12 @@
 <Modal::Default @modalIsOpened={{@modalIsOpened}} @options={{@options}} @confirm={{@onConfirm}} @decline={{@onDecline}}>
     <div class="modal-body-container">
-        <InputGroup @name="Status" @helpText="Choose the current workflow state for this issue.">
+        <InputGroup @name={{t "fleetops-ui.components.modals.issue-status.status"}} @helpText={{t "fleetops-ui.components.modals.issue-status.choose-the-current-workflow-state-for"}}>
             <div class="fleetbase-model-select fleetbase-power-select ember-model-select">
                 <PowerSelect
                     @options={{@options.statusOptions}}
                     @selected={{this.selectedStatus}}
                     @onChange={{fn (mut this.selectedStatus)}}
-                    @placeholder="Select status"
+                    @placeholder={{t "fleetops-ui.components.modals.issue-status.select-status"}}
                     @triggerClass="form-select form-input"
                     @renderInPlace={{true}}
                     as |status|

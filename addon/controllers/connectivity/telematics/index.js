@@ -60,7 +60,7 @@ export default class ConnectivityTelematicsIndexController extends Controller {
     /** bulk action buttons */
     @tracked bulkActions = [
         {
-            label: 'Delete selected...',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.index.delete-selected'),
             class: 'text-red-500',
             fn: this.telematicActions.bulkDelete,
             permission: 'fleet-ops delete telematic',
@@ -71,7 +71,7 @@ export default class ConnectivityTelematicsIndexController extends Controller {
     @tracked columns = [
         {
             sticky: true,
-            label: 'Provider',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.index.provider'),
             valuePath: 'name',
             cellComponent: 'cell/telematic-identity',
             action: this.telematicActions.transition.view,
@@ -92,7 +92,7 @@ export default class ConnectivityTelematicsIndexController extends Controller {
             sortable: true,
             filterable: true,
             filterComponent: 'filter/multi-option',
-            filterOptions: fleetOpsOptions('telematicStatuses'),
+            filterOptions: fleetOpsOptions('telematicStatuses', this.intl),
             filterOptionLabel: 'label',
             filterOptionValue: 'value',
         },

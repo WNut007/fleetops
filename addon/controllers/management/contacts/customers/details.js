@@ -13,7 +13,7 @@ export default class ManagementContactsCustomersDetailsController extends Contro
         return [
             {
                 route: 'management.contacts.index.details.index',
-                label: 'Overview',
+                label: this.intl.t('fleetops-ui.js.controllers.management.contacts.customers.details.overview'),
             },
             ...(isArray(registeredTabs) ? registeredTabs : []),
         ];

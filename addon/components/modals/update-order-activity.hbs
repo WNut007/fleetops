@@ -6,7 +6,14 @@
                     {{t "modals.order-new-activity.select-message"}}
                 </p>
             </div>
-            <Button @text="Refresh activity" @icon="refresh" @size="xs" @wrapperClass="self-start" @isLoading={{this.loadActivity.isRunning}} @onClick={{perform this.loadActivity}} />
+            <Button
+                @text={{t "fleetops-ui.components.modals.update-order-activity.refresh-activity"}}
+                @icon="refresh"
+                @size="xs"
+                @wrapperClass="self-start"
+                @isLoading={{this.loadActivity.isRunning}}
+                @onClick={{perform this.loadActivity}}
+            />
         </div>
 
         {{#if this.order.activityHasEnded}}
@@ -18,7 +25,7 @@
 
         {{#if this.currentWaypoint}}
             <div class="my-4 rounded-md border border-blue-200 bg-blue-50 px-4 py-3 text-blue-900 dark:border-blue-700 dark:bg-blue-900 dark:text-blue-50">
-                <div class="text-xs font-semibold uppercase">Updating activity for</div>
+                <div class="text-xs font-semibold uppercase">{{t "fleetops-ui.components.modals.update-order-activity.updating-activity-for"}}</div>
                 <div class="mt-1 flex items-start justify-between gap-3">
                     <div class="min-w-0">
                         <div class="truncate text-sm font-semibold">{{or this.currentWaypoint.name this.currentWaypoint.public_id}}</div>
@@ -64,11 +71,29 @@
 
                                 {{#if activity.require_pod}}
                                     {{#if (eq activity.pod_method "signature")}}
-                                        <InfoBlock @type="warning" @size="xs" @icon="signature" @text="Requires signature proof of delivery" class="mt-1" />
+                                        <InfoBlock
+                                            @type="warning"
+                                            @size="xs"
+                                            @icon="signature"
+                                            @text={{t "fleetops-ui.components.modals.update-order-activity.requires-signature-proof-of-delivery"}}
+                                            class="mt-1"
+                                        />
                                     {{else if (eq activity.pod_method "scan")}}
-                                        <InfoBlock @type="warning" @size="xs" @icon="qrcode" @text="Requires scan proof of delivery" class="mt-1" />
+                                        <InfoBlock
+                                            @type="warning"
+                                            @size="xs"
+                                            @icon="qrcode"
+                                            @text={{t "fleetops-ui.components.modals.update-order-activity.requires-scan-proof-of-delivery"}}
+                                            class="mt-1"
+                                        />
                                     {{else}}
-                                        <InfoBlock @type="warning" @size="xs" @icon="camera" @text="Requires photo proof of delivery" class="mt-1" />
+                                        <InfoBlock
+                                            @type="warning"
+                                            @size="xs"
+                                            @icon="camera"
+                                            @text={{t "fleetops-ui.components.modals.update-order-activity.requires-photo-proof-of-delivery"}}
+                                            class="mt-1"
+                                        />
                                     {{/if}}
                                 {{/if}}
                             </span>
@@ -91,7 +116,7 @@
                         />
                     </div>
                     <label for="activity_custom" class="ml-3 flex flex-col cursor-pointer w-full pr-5">
-                        <div class="font-semibold text-sm mb-1">Add custom activity</div>
+                        <div class="font-semibold text-sm mb-1">{{t "fleetops-ui.components.modals.update-order-activity.add-custom-activity"}}</div>
                         <span class="block text-sm font-medium mb-0.5">
                             <Input
                                 @type="text"
@@ -120,20 +145,23 @@
             <div class="mb-4 rounded-md border border-yellow-300 bg-yellow-50 py-2 text-yellow-900 dark:border-yellow-700 dark:bg-yellow-900 dark:text-yellow-50">
                 <div class="flex flex-wrap items-center justify-between gap-2 px-3">
                     <div class="min-w-0">
-                        <div class="text-xs font-semibold uppercase">Proof of delivery required ({{this.requiredPodMethod}})</div>
+                        <div class="text-xs font-semibold uppercase">{{t
+                                "fleetops-ui.components.modals.update-order-activity.proof-of-delivery-required"
+                                requiredPodMethod=this.requiredPodMethod
+                            }}</div>
                         {{#unless this.requiredPodMethodIsPhoto}}
                             <div class="text-xs text-yellow-800 dark:text-yellow-100">
-                                The driver captures {{this.requiredPodMethod}} proof in the driver app. From the console, upload a photo instead, for example of the signed delivery note.
+                                {{t "fleetops-ui.components.modals.update-order-activity.the-driver-captures-proof-in-the" requiredPodMethod=this.requiredPodMethod}}
                             </div>
                         {{/unless}}
                         {{#if this.bypassProof}}
-                            <div class="text-xs text-yellow-800 dark:text-yellow-100">Proof bypass enabled.</div>
+                            <div class="text-xs text-yellow-800 dark:text-yellow-100">{{t "fleetops-ui.components.modals.update-order-activity.proof-bypass-enabled"}}</div>
                         {{else if this.hasUploadedProof}}
-                            <div class="text-xs text-yellow-800 dark:text-yellow-100">Proof uploaded.</div>
+                            <div class="text-xs text-yellow-800 dark:text-yellow-100">{{t "fleetops-ui.components.modals.update-order-activity.proof-uploaded"}}</div>
                         {{else if this.uploadProofFile.isRunning}}
-                            <div class="text-xs text-yellow-800 dark:text-yellow-100">Uploading proof...</div>
+                            <div class="text-xs text-yellow-800 dark:text-yellow-100">{{t "fleetops-ui.components.modals.update-order-activity.uploading-proof"}}</div>
                         {{else}}
-                            <div class="text-xs text-yellow-800 dark:text-yellow-100">Upload proof before submitting.</div>
+                            <div class="text-xs text-yellow-800 dark:text-yellow-100">{{t "fleetops-ui.components.modals.update-order-activity.upload-proof-before-submitting"}}</div>
                         {{/if}}
                     </div>
                     {{#unless this.bypassProof}}
@@ -141,10 +169,10 @@
                             <a tabindex={{0}} class="btn btn-magic btn-sm cursor-pointer">
                                 {{#if this.uploadProofFile.isRunning}}
                                     <Spinner class="mr-1" />
-                                    Uploading
+                                    {{t "fleetops-ui.components.modals.update-order-activity.uploading"}}
                                 {{else}}
                                     <FaIcon @icon="camera" class="mr-1" />
-                                    Select photo
+                                    {{t "fleetops-ui.components.modals.update-order-activity.select-photo"}}
                                 {{/if}}
                             </a>
                         </FileUpload>
@@ -152,21 +180,28 @@
                 </div>
                 {{#if this.canBypassProof}}
                     <div class="px-3 mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-yellow-50 pt-2 dark:border-yellow-700">
-                        <Toggle @isToggled={{this.bypassProof}} @onToggle={{this.toggleBypassProof}} @label="Bypass proof of delivery" @labelClass="text-xs" />
-                        <span class="text-xs text-yellow-800 dark:text-yellow-100">Use only when proof cannot be provided from the console.</span>
+                        <Toggle
+                            @isToggled={{this.bypassProof}}
+                            @onToggle={{this.toggleBypassProof}}
+                            @label={{t "fleetops-ui.components.modals.update-order-activity.bypass-proof-of-delivery"}}
+                            @labelClass="text-xs"
+                        />
+                        <span class="text-xs text-yellow-800 dark:text-yellow-100">{{t "fleetops-ui.components.modals.update-order-activity.use-only-when-proof-cannot-be"}}</span>
                     </div>
                 {{/if}}
                 {{#if this.proofFiles}}
                     <div class="mt-4 mb-1 px-3 space-x-2">
                         {{#each this.proofFiles as |file|}}
-                            <div class="flex items-center justify-between gap-2 text-xs text-yellow-900 dark:text-yellow-50 border border-yellow-50 dark:border-yellow-700 shadow-sm px-2 py-1.5 rounded-md">
+                            <div
+                                class="flex items-center justify-between gap-2 text-xs text-yellow-900 dark:text-yellow-50 border border-yellow-50 dark:border-yellow-700 shadow-sm px-2 py-1.5 rounded-md"
+                            >
                                 <div class="text-xs flex items-center space-x-2">
                                     <FaIcon @icon="file" />
                                     <span class="truncate">{{file.name}}</span>
                                 </div>
                                 <span class="flex-shrink-0 font-semibold">
                                     {{#if this.hasUploadedProof}}
-                                        Uploaded
+                                        {{t "fleetops-ui.components.modals.update-order-activity.uploaded"}}
                                     {{else}}
                                         {{round file.progress}}%
                                     {{/if}}

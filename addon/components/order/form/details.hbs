@@ -1,4 +1,4 @@
-<ContentPanel @title="Details" @open={{true}} @wrapperClass="bordered-top">
+<ContentPanel @title={{t "fleetops-ui.components.order.form.details.details"}} @open={{true}} @wrapperClass="bordered-top">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
         <InputGroup @name={{t "order.fields.order-type"}} @helpText={{t "order.fields.order-type-help-text"}} @required={{true}}>
             <div class="fleetbase-model-select fleetbase-power-select ember-model-select">
@@ -26,61 +26,61 @@
         {{/if}}
 
         {{#if this.show.internalId}}
-        <InputGroup @name={{t "order.fields.internal-id"}} @value={{@resource.internal_id}} @helpText={{t "order.fields.internal-id-help-text"}} @disabled={{cannot-write @resource}} />
+            <InputGroup @name={{t "order.fields.internal-id"}} @value={{@resource.internal_id}} @helpText={{t "order.fields.internal-id-help-text"}} @disabled={{cannot-write @resource}} />
         {{/if}}
 
         {{#if this.show.schedule}}
-        <InputGroup>
-            <InputLabel @labelText={{t "order.fields.schedule"}} @helpText={{t "order.fields.schedule-help-text"}} />
-            <DateTimeInput
-                class="form-input"
-                @value={{@resource.scheduled_at}}
-                @minDate={{format-date-fns (now) "yyyy-MM-dd"}}
-                @minTime={{format-date-fns (now) "HH:mm"}}
-                @onUpdate={{this.setScheduledAt}}
-                @disabled={{or @resource.dispatched (cannot-write @resource)}}
-            />
-        </InputGroup>
+            <InputGroup>
+                <InputLabel @labelText={{t "order.fields.schedule"}} @helpText={{t "order.fields.schedule-help-text"}} />
+                <DateTimeInput
+                    class="form-input"
+                    @value={{@resource.scheduled_at}}
+                    @minDate={{format-date-fns (now) "yyyy-MM-dd"}}
+                    @minTime={{format-date-fns (now) "HH:mm"}}
+                    @onUpdate={{this.setScheduledAt}}
+                    @disabled={{or @resource.dispatched (cannot-write @resource)}}
+                />
+            </InputGroup>
         {{/if}}
 
         {{#if this.show.customer}}
-        <InputGroup @name={{t "order.fields.customer"}} @helpText={{t "order.fields.customer-help-text"}}>
-            <ModelSelect
-                @modelName="customer"
-                @selectedItemComponent={{component "select-option/customer" compact=true}}
-                @selectedModel={{@resource.customer}}
-                @placeholder={{t "order.fields.customer-placeholder"}}
-                @triggerClass="form-select form-input"
-                @infiniteScroll={{false}}
-                @renderInPlace={{true}}
-                @allowClear={{true}}
-                @disabled={{or @resource.hasWaypoints (cannot-write @resource)}}
-                @onChange={{this.selectCustomer}}
-                as |model|
-            >
-                <SelectOption::Customer @option={{model}} />
-            </ModelSelect>
-        </InputGroup>
+            <InputGroup @name={{t "order.fields.customer"}} @helpText={{t "order.fields.customer-help-text"}}>
+                <ModelSelect
+                    @modelName="customer"
+                    @selectedItemComponent={{component "select-option/customer" compact=true}}
+                    @selectedModel={{@resource.customer}}
+                    @placeholder={{t "order.fields.customer-placeholder"}}
+                    @triggerClass="form-select form-input"
+                    @infiniteScroll={{false}}
+                    @renderInPlace={{true}}
+                    @allowClear={{true}}
+                    @disabled={{or @resource.hasWaypoints (cannot-write @resource)}}
+                    @onChange={{this.selectCustomer}}
+                    as |model|
+                >
+                    <SelectOption::Customer @option={{model}} />
+                </ModelSelect>
+            </InputGroup>
         {{/if}}
 
         {{#if this.show.facilitator}}
-        <InputGroup @name={{t "order.fields.facilitator"}} @helpText={{t "order.fields.facilitator-help-text"}}>
-            <ModelSelect
-                @modelName="facilitator"
-                @selectedItemComponent={{component "select-option/facilitator" compact=true}}
-                @selectedModel={{@resource.facilitator}}
-                @placeholder={{t "order.fields.facilitator-placeholder"}}
-                @triggerClass="form-select form-input"
-                @allowClear={{true}}
-                @infiniteScroll={{false}}
-                @renderInPlace={{true}}
-                @disabled={{cannot-write @resource}}
-                @onChange={{this.selectFacilitator}}
-                as |model|
-            >
-                <SelectOption::Facilitator @option={{model}} />
-            </ModelSelect>
-        </InputGroup>
+            <InputGroup @name={{t "order.fields.facilitator"}} @helpText={{t "order.fields.facilitator-help-text"}}>
+                <ModelSelect
+                    @modelName="facilitator"
+                    @selectedItemComponent={{component "select-option/facilitator" compact=true}}
+                    @selectedModel={{@resource.facilitator}}
+                    @placeholder={{t "order.fields.facilitator-placeholder"}}
+                    @triggerClass="form-select form-input"
+                    @allowClear={{true}}
+                    @infiniteScroll={{false}}
+                    @renderInPlace={{true}}
+                    @disabled={{cannot-write @resource}}
+                    @onChange={{this.selectFacilitator}}
+                    as |model|
+                >
+                    <SelectOption::Facilitator @option={{model}} />
+                </ModelSelect>
+            </InputGroup>
         {{/if}}
 
         {{#if (and this.show.serviceType @resource.facilitator.isIntegratedVendor @resource.facilitator.service_types.length)}}
@@ -99,46 +99,46 @@
         {{/if}}
 
         {{#if this.show.driver}}
-        <InputGroup @name={{t "order.fields.assign-driver"}} @helpText={{t "order.fields.assign-driver-help-text"}}>
-            <ModelSelect
-                @modelName="driver"
-                @selectedItemComponent={{component "select-option/driver" compact=true}}
-                @selectedModel={{@resource.driver_assigned}}
-                @query={{if @resource.facilitator (hash facilitator=@resource.facilitator.id) (hash)}}
-                @placeholder={{t "order.fields.assign-driver-placeholder"}}
-                @triggerClass="form-select form-input"
-                @infiniteScroll={{false}}
-                @renderInPlace={{true}}
-                @allowClear={{true}}
-                @disabled={{@resource.facilitator.isIntegratedVendor}}
-                @permission="fleet-ops create order"
-                @onChange={{perform this.selectDriver}}
-                as |model|
-            >
-                <SelectOption::Driver @option={{model}} />
-            </ModelSelect>
-        </InputGroup>
+            <InputGroup @name={{t "order.fields.assign-driver"}} @helpText={{t "order.fields.assign-driver-help-text"}}>
+                <ModelSelect
+                    @modelName="driver"
+                    @selectedItemComponent={{component "select-option/driver" compact=true}}
+                    @selectedModel={{@resource.driver_assigned}}
+                    @query={{if @resource.facilitator (hash facilitator=@resource.facilitator.id) (hash)}}
+                    @placeholder={{t "order.fields.assign-driver-placeholder"}}
+                    @triggerClass="form-select form-input"
+                    @infiniteScroll={{false}}
+                    @renderInPlace={{true}}
+                    @allowClear={{true}}
+                    @disabled={{@resource.facilitator.isIntegratedVendor}}
+                    @permission="fleet-ops create order"
+                    @onChange={{perform this.selectDriver}}
+                    as |model|
+                >
+                    <SelectOption::Driver @option={{model}} />
+                </ModelSelect>
+            </InputGroup>
         {{/if}}
 
         {{#if this.show.vehicle}}
-        <InputGroup @name={{t "order.fields.assign-vehicle"}} @helpText={{t "order.fields.assign-vehicle-help-text"}}>
-            <ModelSelect
-                @modelName="vehicle"
-                @selectedItemComponent={{component "select-option/vehicle" compact=true}}
-                @selectedModel={{@resource.vehicle_assigned}}
-                @placeholder={{t "order.fields.assign-vehicle-placeholder"}}
-                @triggerClass="form-select form-input"
-                @infiniteScroll={{false}}
-                @renderInPlace={{true}}
-                @allowClear={{true}}
-                @disabled={{@resource.facilitator.isIntegratedVendor}}
-                @permission="fleet-ops create order"
-                @onChange={{fn (mut @resource.vehicle_assigned)}}
-                as |model|
-            >
-                <SelectOption::Vehicle @option={{model}} />
-            </ModelSelect>
-        </InputGroup>
+            <InputGroup @name={{t "order.fields.assign-vehicle"}} @helpText={{t "order.fields.assign-vehicle-help-text"}}>
+                <ModelSelect
+                    @modelName="vehicle"
+                    @selectedItemComponent={{component "select-option/vehicle" compact=true}}
+                    @selectedModel={{@resource.vehicle_assigned}}
+                    @placeholder={{t "order.fields.assign-vehicle-placeholder"}}
+                    @triggerClass="form-select form-input"
+                    @infiniteScroll={{false}}
+                    @renderInPlace={{true}}
+                    @allowClear={{true}}
+                    @disabled={{@resource.facilitator.isIntegratedVendor}}
+                    @permission="fleet-ops create order"
+                    @onChange={{fn (mut @resource.vehicle_assigned)}}
+                    as |model|
+                >
+                    <SelectOption::Vehicle @option={{model}} />
+                </ModelSelect>
+            </InputGroup>
         {{/if}}
 
         {{#if (and this.show.pod @resource.pod_required (not @resource.facilitator.isIntegratedVendor))}}
@@ -198,48 +198,48 @@
         {{/if}}
 
         {{#if this.show.adhoc}}
-        <div class="lg:col-span-2">
-            <InputGroup @wrapperClass="pt-2">
-                <Toggle
-                    @label={{t "order.fields.ad-hoc"}}
-                    @wrapperClass="justify-start-i"
-                    @isToggled={{@resource.adhoc}}
-                    @onToggle={{this.toggleAdhoc}}
-                    @disabled={{or (cannot-write @resource) @resource.facilitator.isIntegratedVendor}}
-                    @helpText={{t "order.fields.ad-hoc-help-text"}}
-                />
-            </InputGroup>
-        </div>
+            <div class="lg:col-span-2">
+                <InputGroup @wrapperClass="pt-2">
+                    <Toggle
+                        @label={{t "order.fields.ad-hoc"}}
+                        @wrapperClass="justify-start-i"
+                        @isToggled={{@resource.adhoc}}
+                        @onToggle={{this.toggleAdhoc}}
+                        @disabled={{or (cannot-write @resource) @resource.facilitator.isIntegratedVendor}}
+                        @helpText={{t "order.fields.ad-hoc-help-text"}}
+                    />
+                </InputGroup>
+            </div>
         {{/if}}
 
         {{#if this.show.dispatch}}
-        <div class="lg:col-span-2">
-            <InputGroup @wrapperClass="pt-1">
-                <Toggle
-                    @label={{t "order.fields.dispatch"}}
-                    @wrapperClass="justify-start-i"
-                    @isToggled={{@resource.dispatched}}
-                    @onToggle={{fn (mut @resource.dispatched)}}
-                    @disabled={{or (cannot-write @resource) @resource.facilitator.isIntegratedVendor}}
-                    @helpText={{t "order.fields.dispatch-help-text"}}
-                />
-            </InputGroup>
-        </div>
+            <div class="lg:col-span-2">
+                <InputGroup @wrapperClass="pt-1">
+                    <Toggle
+                        @label={{t "order.fields.dispatch"}}
+                        @wrapperClass="justify-start-i"
+                        @isToggled={{@resource.dispatched}}
+                        @onToggle={{fn (mut @resource.dispatched)}}
+                        @disabled={{or (cannot-write @resource) @resource.facilitator.isIntegratedVendor}}
+                        @helpText={{t "order.fields.dispatch-help-text"}}
+                    />
+                </InputGroup>
+            </div>
         {{/if}}
 
         {{#if this.show.pod}}
-        <div class="lg:col-span-2">
-            <InputGroup @wrapperClass="pt-1">
-                <Toggle
-                    @label={{t "order.fields.require-proof"}}
-                    @wrapperClass="justify-start-i"
-                    @isToggled={{@resource.pod_required}}
-                    @onToggle={{this.toggleProofOfDelivery}}
-                    @disabled={{cannot-write @resource}}
-                    @helpText={{t "order.fields.require-proof-help-text"}}
-                />
-            </InputGroup>
-        </div>
+            <div class="lg:col-span-2">
+                <InputGroup @wrapperClass="pt-1">
+                    <Toggle
+                        @label={{t "order.fields.require-proof"}}
+                        @wrapperClass="justify-start-i"
+                        @isToggled={{@resource.pod_required}}
+                        @onToggle={{this.toggleProofOfDelivery}}
+                        @disabled={{cannot-write @resource}}
+                        @helpText={{t "order.fields.require-proof-help-text"}}
+                    />
+                </InputGroup>
+            </div>
         {{/if}}
 
         <RegistryYield @registry="fleet-ops:component:order:form:details" as |RegistryComponent|>

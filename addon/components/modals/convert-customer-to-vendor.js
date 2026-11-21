@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
 export default class ModalsConvertCustomerToVendorComponent extends Component {
+    @service intl;
     @service fetch;
     @service notifications;
 
@@ -39,7 +40,7 @@ export default class ModalsConvertCustomerToVendorComponent extends Component {
                     { namespace: 'int/v1' }
                 );
 
-                this.notifications.success('Customer converted to vendor account.');
+                this.notifications.success(this.intl.t('fleetops-ui.js.components.modals.convert-customer-to-vendor.customer-converted-to-vendor-account'));
 
                 if (typeof this.options.onConverted === 'function') {
                     this.options.onConverted(response.vendor);

@@ -9,6 +9,7 @@ import { task } from 'ember-concurrency';
  * branding it shows before a lookup (and for companies without their own).
  */
 export default class AdminTrackingPageSettingsComponent extends Component {
+    @service intl;
     @service fetch;
     @service notifications;
     @tracked genericEnabled = true;
@@ -59,7 +60,7 @@ export default class AdminTrackingPageSettingsComponent extends Component {
                 },
             });
 
-            this.notifications.success('Tracking page defaults saved.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.components.admin.tracking-page-settings.tracking-page-defaults-saved'));
         } catch (error) {
             this.notifications.serverError(error);
         }

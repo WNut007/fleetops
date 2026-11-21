@@ -6,6 +6,7 @@ import { task } from 'ember-concurrency';
 import config from 'ember-get-config';
 
 export default class CustomerAdminSettingsComponent extends Component {
+    @service intl;
     @service fetch;
     @service store;
     @service notifications;
@@ -58,7 +59,7 @@ export default class CustomerAdminSettingsComponent extends Component {
 
         try {
             yield this.fetch.post('fleet-ops/settings/customer-enabled-order-configs', { enabledOrderConfigs: this.enabledOrderConfigs });
-            this.notifications.success('Settings saved.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.components.customer.admin-settings.settings-saved'));
         } catch (error) {
             this.notifications.serverError(error);
         }
@@ -67,14 +68,14 @@ export default class CustomerAdminSettingsComponent extends Component {
     @task *togglePayments(enabled) {
         if (!this.isStripeEnabled) {
             this.paymentsEnabled = false;
-            return this.notifications.warning('You must configure Stripe first to accept payments.');
+            return this.notifications.warning(this.intl.t('fleetops-ui.js.components.customer.admin-settings.you-must-configure-stripe-first-to'));
         }
 
         this.paymentsEnabled = enabled;
 
         try {
             yield this.fetch.post('fleet-ops/settings/customer-payments-config', { paymentsConfig: { paymentsEnabled: this.paymentsEnabled, paymentGateway: 'stripe' } });
-            this.notifications.success('Settings saved.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.components.customer.admin-settings.settings-saved'));
         } catch (error) {
             this.notifications.serverError(error);
         }

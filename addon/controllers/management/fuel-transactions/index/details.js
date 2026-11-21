@@ -7,6 +7,7 @@ import relationValue from '../../../../utils/relation-value';
 
 export default class ManagementFuelTransactionsIndexDetailsController extends Controller {
     @service modalsManager;
+    @service intl;
     @service hostRouter;
     @service store;
 
@@ -65,7 +66,7 @@ export default class ManagementFuelTransactionsIndexDetailsController extends Co
     }
 
     @action confirmAction(mode) {
-        return openTransactionAction(this.modalsManager, mode, this.model);
+        return openTransactionAction(this.modalsManager, mode, this.model, undefined, this.intl);
     }
     @action openFuelReport() {
         if (this.model.fuel_report_id) return this.hostRouter.transitionTo('console.fleet-ops.management.fuel-reports.index.details', this.model.fuel_report_id);

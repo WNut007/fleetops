@@ -3,6 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
 export default class ModalsIssueAssignComponent extends Component {
+    @service intl;
     @service notifications;
 
     @tracked options = {};
@@ -26,14 +27,14 @@ export default class ModalsIssueAssignComponent extends Component {
 
             try {
                 if (this.selectedAssignee?.type === 'customer') {
-                    this.notifications.warning('Customers cannot be assigned to issues.');
+                    this.notifications.warning(this.intl.t('fleetops-ui.js.components.modals.issue-assign.customers-cannot-be-assigned-to-issues'));
                     modal.stopLoading();
                     return;
                 }
 
                 this.issue.assignee = this.selectedAssignee;
                 await this.issue.save();
-                this.notifications.success('Issue assignment updated.');
+                this.notifications.success(this.intl.t('fleetops-ui.js.components.modals.issue-assign.issue-assignment-updated'));
 
                 if (typeof this.options.onSaved === 'function') {
                     await this.options.onSaved(this.issue);

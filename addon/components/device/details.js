@@ -125,27 +125,27 @@ export default class DeviceDetailsComponent extends Component {
     get metrics() {
         return [
             {
-                label: 'Connection',
+                label: this.intl.t('fleetops-ui.js.components.device.details.connection'),
                 value: this.connectionLabel,
                 icon: this.connectionStatus === 'online' ? 'signal' : 'power-off',
                 accentClass: this.connectionStatus === 'online' ? 'fleetops-connectivity-kpi-accent-green' : 'fleetops-connectivity-kpi-accent-rose',
             },
             {
-                label: 'Sensors',
+                label: this.intl.t('fleetops-ui.js.components.device.details.sensors'),
                 value: this.sensorTotal ?? this.sensors.length,
                 meta: `${this.activeSensorsCount} active`,
                 icon: 'gauge-high',
                 accentClass: 'fleetops-connectivity-kpi-accent-blue',
             },
             {
-                label: 'Events',
+                label: this.intl.t('fleetops-ui.js.components.device.details.events'),
                 value: this.eventTotal ?? this.events.length,
                 meta: `${this.warningEventsCount + this.unprocessedEventsCount} need review`,
                 icon: 'bolt',
                 accentClass: this.warningEventsCount || this.unprocessedEventsCount ? 'fleetops-connectivity-kpi-accent-amber' : 'fleetops-connectivity-kpi-accent-green',
             },
             {
-                label: 'Vehicle',
+                label: this.intl.t('fleetops-ui.js.components.device.details.vehicle'),
                 value: this.attachmentLabel,
                 icon: this.attachedVehicleName ? 'truck' : 'link-slash',
                 accentClass: this.attachedVehicleName ? 'fleetops-connectivity-kpi-accent-green' : 'fleetops-connectivity-kpi-accent-amber',

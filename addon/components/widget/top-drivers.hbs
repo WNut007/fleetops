@@ -3,9 +3,11 @@
         <span class="text-xs font-bold text-black dark:text-gray-100">{{t "widget.top-drivers.title"}}</span>
         <div class="flex gap-0.5">
             {{#each this.sorts as |s|}}
-                <button type="button"
-                        class="text-[10px] px-1.5 py-0.5 rounded {{if (eq this.sortBy s.key) 'bg-sky-600 text-white' 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-200'}}"
-                        {{on "click" (fn this.setSort s.key)}}>
+                <button
+                    type="button"
+                    class="text-[10px] px-1.5 py-0.5 rounded {{if (eq this.sortBy s.key) 'bg-sky-600 text-white' 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-200'}}"
+                    {{on "click" (fn this.setSort s.key)}}
+                >
                     {{s.label}}
                 </button>
             {{/each}}
@@ -22,23 +24,31 @@
                 {{#each this.data.rows as |row index|}}
                     <div class="flex items-center gap-2 px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-800">
                         <span class="text-[11px] font-bold text-gray-400 w-3 text-right">{{add index 1}}</span>
-                        <div class="w-5 h-5 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-[9px] font-semibold text-gray-600 dark:text-gray-300 flex-shrink-0">
+                        <div
+                            class="w-5 h-5 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-[9px] font-semibold text-gray-600 dark:text-gray-300 flex-shrink-0"
+                        >
                             {{first-char row.name}}
                         </div>
                         <div class="flex-1 min-w-0">
                             <div class="text-[11px] font-medium text-black dark:text-gray-100 truncate leading-tight">{{row.name}}</div>
                             <div class="text-[10px] text-gray-500 dark:text-gray-400 truncate leading-tight">
-                                {{row.orders_completed}} orders &middot; {{format-meters row.distance_m}}
+                                {{t "fleetops-ui.components.widget.top-drivers.orders" orders_completed=row.orders_completed distance_m=(format-meters row.distance_m)}}
                             </div>
                         </div>
                         {{#if row.on_time_pct}}
-                            <Badge @status={{this.onTimeStatus row.on_time_pct}} @text={{concat row.on_time_pct "%"}} @hideIcon={{true}} @disableHumanize={{true}} @wrapperClass="text-[9px] px-1 py-0" />
+                            <Badge
+                                @status={{this.onTimeStatus row.on_time_pct}}
+                                @text={{concat row.on_time_pct "%"}}
+                                @hideIcon={{true}}
+                                @disableHumanize={{true}}
+                                @wrapperClass="text-[9px] px-1 py-0"
+                            />
                         {{/if}}
                     </div>
                 {{/each}}
             </div>
         {{else}}
-            <div class="flex items-center justify-center h-full text-[10px] text-gray-500">No driver activity in this period.</div>
+            <div class="flex items-center justify-center h-full text-[10px] text-gray-500">{{t "fleetops-ui.components.widget.top-drivers.no-driver-activity-in-this-period"}}</div>
         {{/if}}
     </div>
 </div>

@@ -5,7 +5,7 @@
                 @modelName="telematic"
                 @selectedItemComponent={{component "select-option/telematic" compact=true}}
                 @selectedModel={{this.telematic}}
-                @placeholder="Filter by Telematic"
+                @placeholder={{t "fleetops-ui.components.map.drawer.device-event-listing.filter-by-telematic"}}
                 @triggerClass="form-select form-input form-input-sm w-48"
                 @infiniteScroll={{false}}
                 @renderInPlace={{true}}
@@ -21,7 +21,7 @@
                 @modelName="device"
                 @selectedItemComponent={{component "select-option/device" compact=true}}
                 @selectedModel={{this.device}}
-                @placeholder="Filter by Device"
+                @placeholder={{t "fleetops-ui.components.map.drawer.device-event-listing.filter-by-device"}}
                 @triggerClass="form-select form-input form-input-sm w-48"
                 @infiniteScroll={{false}}
                 @renderInPlace={{true}}
@@ -38,7 +38,7 @@
                 @range={{true}}
                 @onSelect={{this.onDateRangeChanged}}
                 @autoClose={{true}}
-                @placeholder="Select date range"
+                @placeholder={{t "fleetops-ui.components.map.drawer.device-event-listing.select-date-range"}}
                 class="w-full form-input form-input-sm w-48"
             />
         </div>

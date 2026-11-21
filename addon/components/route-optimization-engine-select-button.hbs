@@ -1,11 +1,11 @@
 <DropdownButton
-    @text="Optimize Route"
+    @text={{t "fleetops-ui.components.route-optimization-engine-select-button.optimize-route"}}
     @icon="caret-down"
     @type="magic"
     @size="sm"
     @iconPrefix="fas"
     @triggerClass="hidden md:flex"
-    @helpText="Optimize route using an integrated optimization engine"
+    @helpText={{t "fleetops-ui.components.route-optimization-engine-select-button.optimize-route-using-an-integrated-optimization"}}
     @disabled={{@disabled}}
     @isLoading={{@isLoading}}
     @renderInPlace={{true}}

@@ -21,7 +21,7 @@
                                     <Badge @hideStatusDot={{true}} @status={{if result.has_driver_assigned "assigned" "default"}}>
                                         <div class="flex flex-row items-center {{if result.has_driver_assigned 'text-indigo-900' 'text-gray-900'}}">
                                             <FaIcon @icon="steering-wheel" @size="xs" class="mr-1" />
-                                            {{if result.has_driver_assigned result.driver_name "Unassigned"}}
+                                            {{if result.has_driver_assigned result.driver_name (t "fleetops-ui.components.global-search.unassigned")}}
                                         </div>
                                     </Badge>
                                 </div>

@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 
 export default class ServiceRateFormComponent extends Component {
+    @service intl;
     @service orderConfigActions;
     @service serviceAreaActions;
     @service serviceRateActions;
@@ -23,9 +24,9 @@ export default class ServiceRateFormComponent extends Component {
 
     get geographyTypes() {
         return [
-            { label: 'Service Area', value: 'service_area' },
-            { label: 'Zone', value: 'zone' },
-            { label: 'Fallback', value: 'fallback' },
+            { label: this.intl.t('fleetops-ui.js.components.service-rate.form.service-area'), value: 'service_area' },
+            { label: this.intl.t('fleetops-ui.js.components.service-rate.form.zone'), value: 'zone' },
+            { label: this.intl.t('fleetops-ui.js.components.service-rate.form.fallback'), value: 'fallback' },
         ];
     }
 

@@ -15,7 +15,7 @@
                     {{format-currency this.data.summary.total_cost this.data.summary.currency}}
                 </span>
                 <span class="text-[10px] text-gray-500 dark:text-gray-400">
-                    {{format-currency this.data.summary.avg_cost_per_km this.data.summary.currency}}/km avg
+                    {{t "fleetops-ui.components.widget.fuel-efficiency.km-avg" currency=(format-currency this.data.summary.avg_cost_per_km this.data.summary.currency)}}
                 </span>
             </div>
             <div class="flex-1 min-h-0">

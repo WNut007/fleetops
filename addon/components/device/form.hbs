@@ -1,5 +1,5 @@
 <div class="form-wrapper" ...attributes>
-    <ContentPanel @title="Integration" @open={{true}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.device.form.integration"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 gap-2 lg:grid-cols-2 lg:gap-2 no-input-group-padding text-xs">
             <InputGroup @name={{t "device.fields.telematic"}}>
                 <ModelSelect
@@ -49,7 +49,7 @@
         </div>
     </ContentPanel>
 
-    <ContentPanel @title="Identity" @open={{true}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.device.form.identity"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="flex flex-row space-x-3 mb-3">
             <div class="flex items-center justify-start rounded-full">
                 <Image src={{@resource.photo_url}} alt={{@resource.name}} height="48" width="48" class="h-14 w-14 rounded-full shadow-sm" />
@@ -81,11 +81,11 @@
                 <Input @value={{@resource.device_id}} @type="text" class="w-full form-input" placeholder={{t "device.fields.device-id-placeholder"}} disabled={{cannot-write @resource}} />
             </InputGroup>
 
-            <InputGroup @name="Internal ID" @value={{@resource.internal_id}} disabled={{cannot-write @resource}} />
+            <InputGroup @name={{t "fleetops-ui.components.device.form.internal-id"}} @value={{@resource.internal_id}} disabled={{cannot-write @resource}} />
         </div>
     </ContentPanel>
 
-    <ContentPanel @title="Hardware" @open={{true}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.device.form.hardware"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-2 no-input-group-padding text-xs">
             <InputGroup @name={{t "device.fields.device-provider"}}>
                 <Input
@@ -123,7 +123,7 @@
         </div>
     </ContentPanel>
 
-    <ContentPanel @title="Installation & Maintenance" @open={{true}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.device.form.installation-maintenance"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-2 no-input-group-padding text-xs">
             <InputGroup @name={{t "device.fields.device-location"}} @wrapperClass="lg:col-span-2">
                 <Input
@@ -157,7 +157,7 @@
         </div>
     </ContentPanel>
 
-    <ContentPanel @title="Warranty & Status" @open={{true}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.device.form.warranty-status"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 gap-2 lg:grid-cols-2 lg:gap-2 no-input-group-padding text-xs">
             <InputGroup @name={{t "device.fields.status"}}>
                 <div class="fleetbase-model-select fleetbase-power-select ember-model-select">
@@ -198,7 +198,7 @@
         </div>
     </ContentPanel>
 
-    <ContentPanel @title="Notes" @open={{true}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.device.form.notes"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 gap-2 no-input-group-padding text-xs">
             <InputGroup @name={{t "device.fields.notes"}} @wrapperClass="col-span-2">
                 <Textarea

@@ -221,7 +221,7 @@ export default class ManagementFleetsIndexController extends Controller {
                 filterComponent: 'filter/multi-option',
                 filterOptionLabel: 'label',
                 filterOptionValue: 'value',
-                filterOptions: fleetOpsOptions('fleetStatuses'),
+                filterOptions: fleetOpsOptions('fleetStatuses', this.intl),
             },
             {
                 id: 'created-at',

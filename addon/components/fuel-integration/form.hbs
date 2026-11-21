@@ -42,9 +42,8 @@
             {{#if (eq this.activeStepKey "provider")}}
                 <section class="rounded-md border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800">
                     <div class="mb-3">
-                        <h2 class="text-sm font-bold text-gray-900 dark:text-gray-100">Choose Fuel Integration</h2>
-                        <p class="text-xs text-gray-500 dark:text-gray-300">Select the system to connect for fuel card bills, purchase transactions, station locations, or vehicle fuel
-                            identifiers.</p>
+                        <h2 class="text-sm font-bold text-gray-900 dark:text-gray-100">{{t "fleetops-ui.components.fuel-integration.form.choose-fuel-integration"}}</h2>
+                        <p class="text-xs text-gray-500 dark:text-gray-300">{{t "fleetops-ui.components.fuel-integration.form.select-the-system-to-connect-for"}}</p>
                     </div>
 
                     {{#if this.loadProviders.isRunning}}
@@ -73,7 +72,7 @@
                                             </div>
                                         </div>
                                         {{#if provider.selected}}
-                                            <Badge @status="success" @hideStatusDot={{true}}>Selected</Badge>
+                                            <Badge @status="success" @hideStatusDot={{true}}>{{t "fleetops-ui.components.fuel-integration.form.selected"}}</Badge>
                                         {{/if}}
                                     </div>
                                     <p class="mt-3 line-clamp-2 flex-1 text-xs leading-5 text-gray-500 dark:text-gray-300">{{provider.description}}</p>
@@ -91,13 +90,13 @@
                 <section class="grid grid-cols-1 gap-4 lg:grid-cols-3">
                     <div class="rounded-md border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 lg:col-span-2">
                         <div class="mb-3">
-                            <h2 class="text-sm font-bold text-gray-900 dark:text-gray-100">Credentials</h2>
-                            <p class="text-xs text-gray-500 dark:text-gray-300">These credentials are stored on the connection and used to test and import provider transactions.</p>
+                            <h2 class="text-sm font-bold text-gray-900 dark:text-gray-100">{{t "fleetops-ui.components.fuel-integration.form.credentials"}}</h2>
+                            <p class="text-xs text-gray-500 dark:text-gray-300">{{t "fleetops-ui.components.fuel-integration.form.these-credentials-are-stored-on-the"}}</p>
                         </div>
 
                         {{#if this.selectedProvider}}
                             <div class="grid grid-cols-1 gap-2 lg:grid-cols-2 no-input-group-padding text-xs">
-                                <InputGroup @name="Environment">
+                                <InputGroup @name={{t "fleetops-ui.components.fuel-integration.form.environment"}}>
                                     <select class="form-select w-full" data-test-fuel-environment {{on "change" this.setEnvironment}}>
                                         <option value="sandbox" selected={{eq this.environment "sandbox"}}>{{this.sandboxLabel}}</option>
                                         <option value="production" selected={{eq this.environment "production"}}>{{this.productionLabel}}</option>
@@ -125,11 +124,14 @@
                                 {{/each}}
                             </div>
                             {{#if this.baseUrl}}
-                                <p class="mt-3 break-all text-xs text-gray-500 dark:text-gray-300" data-test-fuel-base-url>Web Service URL: {{this.baseUrl}}</p>
+                                <p class="mt-3 break-all text-xs text-gray-500 dark:text-gray-300" data-test-fuel-base-url>{{t
+                                        "fleetops-ui.components.fuel-integration.form.web-service-url"
+                                        baseUrl=this.baseUrl
+                                    }}</p>
                             {{/if}}
                         {{else}}
                             <div class="rounded-md border border-dashed border-gray-300 p-6 text-center text-xs text-gray-500 dark:border-gray-700 dark:text-gray-300">
-                                Choose a fuel integration before entering credentials.
+                                {{t "fleetops-ui.components.fuel-integration.form.choose-a-fuel-integration-before-entering"}}
                             </div>
                         {{/if}}
                     </div>
@@ -156,8 +158,8 @@
             {{else if (eq this.activeStepKey "test")}}
                 <section class="rounded-md border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800">
                     <div class="mb-3">
-                        <h2 class="text-sm font-bold text-gray-900 dark:text-gray-100">Test Connection</h2>
-                        <p class="text-xs text-gray-500 dark:text-gray-300">Confirm the provider accepts the credentials before saving this fuel integration.</p>
+                        <h2 class="text-sm font-bold text-gray-900 dark:text-gray-100">{{t "fleetops-ui.components.fuel-integration.form.test-connection"}}</h2>
+                        <p class="text-xs text-gray-500 dark:text-gray-300">{{t "fleetops-ui.components.fuel-integration.form.confirm-the-provider-accepts-the-credentials"}}</p>
                     </div>
 
                     <div
@@ -201,7 +203,11 @@
                             <Button
                                 data-test-fuel-test
                                 @icon="plug"
-                                @text={{if (eq this.connectionState "success") "Test Again" "Test Connection"}}
+                                @text={{if
+                                    (eq this.connectionState "success")
+                                    (t "fleetops-ui.components.fuel-integration.form.test-again")
+                                    (t "fleetops-ui.components.fuel-integration.form.test-connection")
+                                }}
                                 @size="xs"
                                 @isLoading={{this.testConnection.isRunning}}
                                 @disabled={{this.testConnection.isRunning}}
@@ -218,11 +224,15 @@
                                     {{on "click" (fn (mut this.showDiagnostics) (not this.showDiagnostics))}}
                                 >
                                     <FaIcon @icon={{if this.showDiagnostics "chevron-up" "chevron-down"}} class="text-[10px]" />
-                                    <span>{{if this.showDiagnostics "Hide diagnostics" "Show diagnostics"}}</span>
+                                    <span>{{if
+                                            this.showDiagnostics
+                                            (t "fleetops-ui.components.fuel-integration.form.hide-diagnostics")
+                                            (t "fleetops-ui.components.fuel-integration.form.show-diagnostics")
+                                        }}</span>
                                 </button>
 
                                 {{#if this.showDiagnostics}}
-                                    <Button @icon="copy" @text="Copy diagnostics" @size="xs" @onClick={{this.copyDiagnostics}} />
+                                    <Button @icon="copy" @text={{t "fleetops-ui.components.fuel-integration.form.copy-diagnostics"}} @size="xs" @onClick={{this.copyDiagnostics}} />
                                 {{/if}}
                             </div>
 
@@ -249,34 +259,37 @@
             {{else if (eq this.activeStepKey "sync")}}
                 <section class="rounded-md border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800">
                     <div class="mb-3">
-                        <h2 class="text-sm font-bold text-gray-900 dark:text-gray-100">Sync Settings</h2>
-                        <p class="text-xs text-gray-500 dark:text-gray-300">Choose how fuel transactions are imported from this system.</p>
+                        <h2 class="text-sm font-bold text-gray-900 dark:text-gray-100">{{t "fleetops-ui.components.fuel-integration.form.sync-settings"}}</h2>
+                        <p class="text-xs text-gray-500 dark:text-gray-300">{{t "fleetops-ui.components.fuel-integration.form.choose-how-fuel-transactions-are-imported"}}</p>
                     </div>
 
                     <div class="grid grid-cols-1 gap-3 lg:grid-cols-2 no-input-group-padding text-xs">
-                        <InputGroup @name="Integration name" @value={{@resource.name}} {{on "input" this.setName}} />
-                        <InputGroup @name="Default sync window" @helpText="Number of days to import when no explicit date range is provided.">
+                        <InputGroup @name={{t "fleetops-ui.components.fuel-integration.form.integration-name"}} @value={{@resource.name}} {{on "input" this.setName}} />
+                        <InputGroup
+                            @name={{t "fleetops-ui.components.fuel-integration.form.default-sync-window"}}
+                            @helpText={{t "fleetops-ui.components.fuel-integration.form.number-of-days-to-import-when"}}
+                        >
                             <Input @type="number" min="1" max="90" class="form-input w-full" @value={{this.syncSettings.window_days}} {{on "input" (fn this.setSyncSetting "window_days")}} />
                         </InputGroup>
                         <div class="rounded-md border border-gray-200 p-3 dark:border-gray-700 lg:col-span-2">
                             <Checkbox
                                 @value={{this.syncSettings.auto_create_fuel_reports}}
-                                @label="Create Fuel Reports after vehicle match"
+                                @label={{t "fleetops-ui.components.fuel-integration.form.create-fuel-reports-after-vehicle-match"}}
                                 @onToggle={{fn this.setSyncSetting "auto_create_fuel_reports"}}
                                 @alignItems="center"
                                 @labelClass="mb-0i"
                             />
-                            <p class="mt-2 text-xs leading-5 text-gray-500 dark:text-gray-300">Provider bills remain in Fuel Transactions. Fuel Reports are created only when a transaction is
-                                matched to a vehicle.</p>
+                            <p class="mt-2 text-xs leading-5 text-gray-500 dark:text-gray-300">{{t
+                                    "fleetops-ui.components.fuel-integration.form.provider-bills-remain-in-fuel-transactions"
+                                }}</p>
                         </div>
                     </div>
                 </section>
             {{else}}
                 <section class="rounded-md border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800">
                     <div class="mb-3">
-                        <h2 class="text-sm font-bold text-gray-900 dark:text-gray-100">Vehicle Matching Priority</h2>
-                        <p class="text-xs leading-5 text-gray-500 dark:text-gray-300">Choose which provider identifiers should be used for automatic matching and put the most reliable
-                            identifier first.</p>
+                        <h2 class="text-sm font-bold text-gray-900 dark:text-gray-100">{{t "fleetops-ui.components.fuel-integration.form.vehicle-matching-priority"}}</h2>
+                        <p class="text-xs leading-5 text-gray-500 dark:text-gray-300">{{t "fleetops-ui.components.fuel-integration.form.choose-which-provider-identifiers-should-be"}}</p>
                     </div>
 
                     <FuelIntegration::MatchingPriority @order={{this.matchingOrder}} @onChange={{this.setMatchingOrder}} @editable={{true}} />
@@ -288,13 +301,13 @@
     <div class="flex flex-shrink-0 items-center justify-between border-t border-gray-200 bg-white px-4 py-3 dark:border-gray-700 dark:bg-gray-900 md:px-6">
         <div class="text-xs text-gray-500 dark:text-gray-300">{{@footerHelp}}</div>
         <div class="flex items-center gap-2">
-            <Button @icon="arrow-left" @text="Back" @size="sm" @disabled={{eq this.activeStep 0}} @onClick={{this.previousStep}} />
+            <Button @icon="arrow-left" @text={{t "fleetops-ui.components.fuel-integration.form.back"}} @size="sm" @disabled={{eq this.activeStep 0}} @onClick={{this.previousStep}} />
             {{#if this.isLastStep}}
                 <Button @icon="save" @text={{@saveLabel}} @type="primary" @size="sm" @isLoading={{@isSaving}} @disabled={{@isSaving}} @onClick={{@onSave}} />
             {{else}}
-                <Button @icon="arrow-right" @text="Next" @type="primary" @size="sm" @onClick={{this.nextStep}} />
+                <Button @icon="arrow-right" @text={{t "fleetops-ui.components.fuel-integration.form.next"}} @type="primary" @size="sm" @onClick={{this.nextStep}} />
             {{/if}}
-            <Button @icon="times" @text="Cancel" @size="sm" @onClick={{@onCancel}} />
+            <Button @icon="times" @text={{t "fleetops-ui.components.fuel-integration.form.cancel"}} @size="sm" @onClick={{@onCancel}} />
         </div>
     </div>
 </div>

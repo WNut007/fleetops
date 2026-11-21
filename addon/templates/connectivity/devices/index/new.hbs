@@ -2,7 +2,7 @@
     @resource={{this.device}}
     @controller={{this}}
     @actionButtons={{this.actionButtons}}
-    @headerTitle="Create a new device"
+    @headerTitle={{t "fleetops-ui.templates.connectivity.devices.index.new.create-a-new-device"}}
     @saveTask={{this.save}}
     @onPressCancel={{transition-to "connectivity.devices.index"}}
     @onOverlayReady={{fn (mut this.overlay)}}

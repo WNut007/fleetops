@@ -1,26 +1,26 @@
 {{! ===== COST PANEL — invoice-style line items ===== }}
-<ContentPanel @title="Costs" @open={{true}} @wrapperClass="bordered-top">
+<ContentPanel @title={{t "fleetops-ui.components.maintenance.cost-panel.costs"}} @open={{true}} @wrapperClass="bordered-top">
 
     {{! ── Currency selector (single, shared by all money fields) ── }}
     <div class="grid grid-cols-1 gap-2 lg:grid-cols-2 lg:gap-2 no-input-group-padding text-xs mb-2">
-        <InputGroup @name="Currency">
+        <InputGroup @name={{t "fleetops-ui.components.maintenance.cost-panel.currency"}}>
             <CurrencySelect @currency={{@resource.currency}} @onCurrencyChange={{fn (mut @resource.currency)}} @triggerClass="w-full form-select" @disabled={{this.isDisabled}} />
         </InputGroup>
     </div>
 
     {{! ── Labour & Tax inputs (always editable on the form) ── }}
     <div class="grid grid-cols-1 gap-2 lg:grid-cols-2 lg:gap-2 no-input-group-padding text-xs mb-4">
-        <InputGroup @name="Labour Cost">
+        <InputGroup @name={{t "fleetops-ui.components.maintenance.cost-panel.labour-cost"}}>
             <MoneyInput class="w-full" @value={{@resource.labor_cost}} @currency={{this.currency}} @onChange={{fn (mut @resource.labor_cost)}} @disabled={{this.isDisabled}} />
         </InputGroup>
-        <InputGroup @name="Tax">
+        <InputGroup @name={{t "fleetops-ui.components.maintenance.cost-panel.tax"}}>
             <MoneyInput class="w-full" @value={{@resource.tax}} @currency={{this.currency}} @onChange={{fn (mut @resource.tax)}} @disabled={{this.isDisabled}} />
         </InputGroup>
     </div>
 
     {{! ── Line items table ── }}
     <div class="text-[11px] uppercase tracking-wide text-gray-500 dark:text-gray-400 font-semibold mb-2">
-        Parts &amp; Services
+        {{t "fleetops-ui.components.maintenance.cost-panel.parts-services"}}
     </div>
 
     <table class="w-full text-xs border-collapse mb-2 table-fixed">
@@ -35,10 +35,10 @@
         </colgroup>
         <thead>
             <tr class="border-b border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 text-left">
-                <th class="pb-1 pr-2 font-medium">Description</th>
-                <th class="pb-1 pr-2 font-medium text-right">Qty</th>
-                <th class="pb-1 pr-2 font-medium text-right">Unit Cost</th>
-                <th class="pb-1 pr-2 font-medium text-right">Total</th>
+                <th class="pb-1 pr-2 font-medium">{{t "fleetops-ui.components.maintenance.cost-panel.description"}}</th>
+                <th class="pb-1 pr-2 font-medium text-right">{{t "fleetops-ui.components.maintenance.cost-panel.qty"}}</th>
+                <th class="pb-1 pr-2 font-medium text-right">{{t "fleetops-ui.components.maintenance.cost-panel.unit-cost"}}</th>
+                <th class="pb-1 pr-2 font-medium text-right">{{t "fleetops-ui.components.maintenance.cost-panel.total"}}</th>
                 {{#unless this.isDisabled}}
                     <th class="pb-1"></th>
                 {{/unless}}
@@ -50,7 +50,7 @@
                     {{! ── Inline edit row ── }}
                     <tr class="border-b border-gray-100 dark:border-gray-800">
                         <td class="py-1 pr-2">
-                            <Input @value={{this.draftDescription}} class="form-input w-full text-xs" placeholder="Description" />
+                            <Input @value={{this.draftDescription}} class="form-input w-full text-xs" placeholder={{t "fleetops-ui.components.maintenance.cost-panel.description"}} />
                         </td>
                         <td class="py-1 pr-2">
                             <Input @value={{this.draftQuantity}} @type="number" class="form-input w-full text-xs text-right" min="0" />
@@ -64,10 +64,10 @@
                         <td class="py-1">
                             <div class="flex items-center space-x-1">
                                 <Button @size="xs" @type="primary" @onClick={{this.saveEdit}} class="px-2 py-0.5">
-                                    Save
+                                    {{t "fleetops-ui.components.maintenance.cost-panel.save"}}
                                 </Button>
                                 <Button @size="xs" @type="default" @onClick={{this.cancelEdit}} class="px-2 py-0.5">
-                                    Cancel
+                                    {{t "fleetops-ui.components.maintenance.cost-panel.cancel"}}
                                 </Button>
                             </div>
                         </td>
@@ -89,7 +89,7 @@
                                     <button
                                         type="button"
                                         class="text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
-                                        title="Edit"
+                                        title={{t "fleetops-ui.components.maintenance.cost-panel.edit"}}
                                         {{on "click" (fn this.startEdit index)}}
                                     >
                                         <FaIcon @icon="pencil" @size="xs" />
@@ -97,7 +97,7 @@
                                     <button
                                         type="button"
                                         class="text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors"
-                                        title="Remove"
+                                        title={{t "fleetops-ui.components.maintenance.cost-panel.remove"}}
                                         {{on "click" (fn this.removeLineItem index)}}
                                     >
                                         <FaIcon @icon="trash" @size="xs" />
@@ -113,7 +113,7 @@
             {{#if this.isAddingItem}}
                 <tr class="border-b border-gray-100 dark:border-gray-800">
                     <td class="py-1 pr-2">
-                        <Input @value={{this.draftDescription}} class="form-input w-full text-xs" placeholder="Description" />
+                        <Input @value={{this.draftDescription}} class="form-input w-full text-xs" placeholder={{t "fleetops-ui.components.maintenance.cost-panel.description"}} />
                     </td>
                     <td class="py-1 pr-2">
                         <Input @value={{this.draftQuantity}} @type="number" class="form-input w-full text-xs text-right" min="0" />
@@ -127,10 +127,10 @@
                     <td class="py-1">
                         <div class="flex items-center space-x-1">
                             <Button @size="xs" @type="primary" @onClick={{this.addLineItem}} class="px-2 py-0.5">
-                                Add
+                                {{t "fleetops-ui.components.maintenance.cost-panel.add"}}
                             </Button>
                             <Button @size="xs" @type="default" @onClick={{this.cancelAdd}} class="px-2 py-0.5">
-                                Cancel
+                                {{t "fleetops-ui.components.maintenance.cost-panel.cancel"}}
                             </Button>
                         </div>
                     </td>
@@ -148,7 +148,7 @@
                 {{on "click" this.showAddRow}}
             >
                 <FaIcon @icon="plus" @size="xs" />
-                <span>Add line item</span>
+                <span>{{t "fleetops-ui.components.maintenance.cost-panel.add-line-item"}}</span>
             </button>
         {{/unless}}
     {{/unless}}
@@ -156,19 +156,19 @@
     {{! ── Totals summary ── }}
     <div class="border-t border-gray-200 dark:border-gray-700 pt-2 mt-1 space-y-1 text-xs">
         <div class="flex justify-between text-gray-500 dark:text-gray-400">
-            <span>Labour</span>
+            <span>{{t "fleetops-ui.components.maintenance.cost-panel.labour"}}</span>
             <span>{{format-currency this.laborCost this.currency}}</span>
         </div>
         <div class="flex justify-between text-gray-500 dark:text-gray-400">
-            <span>Parts</span>
+            <span>{{t "fleetops-ui.components.maintenance.cost-panel.parts"}}</span>
             <span>{{format-currency this.partsCost this.currency}}</span>
         </div>
         <div class="flex justify-between text-gray-500 dark:text-gray-400">
-            <span>Tax</span>
+            <span>{{t "fleetops-ui.components.maintenance.cost-panel.tax"}}</span>
             <span>{{format-currency this.tax this.currency}}</span>
         </div>
         <div class="flex justify-between font-semibold text-gray-800 dark:text-gray-100 border-t border-gray-200 dark:border-gray-700 pt-1 mt-1">
-            <span>Total</span>
+            <span>{{t "fleetops-ui.components.maintenance.cost-panel.total"}}</span>
             <span>{{format-currency this.totalCost this.currency}}</span>
         </div>
     </div>

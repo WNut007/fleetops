@@ -60,7 +60,7 @@ export default class MaintenanceMaintenancesIndexController extends Controller {
         return [
             {
                 id: 'bulk-delete',
-                label: 'Delete selected...',
+                label: this.intl.t('fleetops-ui.js.controllers.maintenance.maintenances.index.delete-selected'),
                 class: 'text-red-500',
                 fn: this.maintenanceActions.bulkDelete,
                 permission: 'fleet-ops delete maintenance',

@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import isEmptyObject from '@fleetbase/ember-core/utils/is-empty-object';
 
 export default class OrderDetailsMetadataComponent extends Component {
+    @service intl;
     @service orderActions;
 
     get emptyMetadata() {
@@ -13,7 +14,7 @@ export default class OrderDetailsMetadataComponent extends Component {
         return [
             {
                 type: 'default',
-                text: 'Edit',
+                text: this.intl.t('fleetops-ui.js.components.order.details.metadata.edit'),
                 icon: 'pencil',
                 iconPrefix: 'fas',
                 permission: 'fleet-ops update order',

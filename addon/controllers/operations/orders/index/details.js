@@ -9,6 +9,7 @@ import { colorForId, routeColorForStatus, routeStyleForStatus } from '../../../.
 import { buildRoutePointMarkerPresentation, buildRoutePointsFromPayload } from '../../../../utils/route-visualization';
 
 export default class OperationsOrdersIndexDetailsController extends Controller {
+    @service intl;
     @controller('operations.orders.index') index;
     @service('universe/menu-service') menuService;
     @service orderActions;
@@ -82,7 +83,7 @@ export default class OperationsOrdersIndexDetailsController extends Controller {
                 // Pass the order explicitly: without it the link's href is generated from whatever
                 // transition is in flight, and leaving for a shallower route throws in the router.
                 model: this.model?.public_id,
-                label: 'Overview',
+                label: this.intl.t('fleetops-ui.js.controllers.operations.orders.index.details.overview'),
                 icon: 'folder-open',
             },
             ...(isArray(registeredTabs) ? registeredTabs : []),
@@ -110,7 +111,7 @@ export default class OperationsOrdersIndexDetailsController extends Controller {
                 items: [
                     {
                         id: 'edit-order-details',
-                        text: 'Edit details',
+                        text: this.intl.t('fleetops-ui.js.controllers.operations.orders.index.details.edit-details'),
                         icon: 'pencil',
                         disabled: this.isClosed,
                         permission: 'fleet-ops update order',
@@ -118,7 +119,7 @@ export default class OperationsOrdersIndexDetailsController extends Controller {
                     },
                     {
                         id: 'update-activity',
-                        text: 'Update activity',
+                        text: this.intl.t('fleetops-ui.js.controllers.operations.orders.index.details.update-activity'),
                         icon: 'signal',
                         disabled: this.isClosed,
                         permission: 'fleet-ops update order',
@@ -137,7 +138,7 @@ export default class OperationsOrdersIndexDetailsController extends Controller {
                     },
                     {
                         id: 'view-label',
-                        text: 'View order label',
+                        text: this.intl.t('fleetops-ui.js.controllers.operations.orders.index.details.view-order-label'),
                         icon: 'file-invoice',
                         permission: 'fleet-ops view order',
                         fn: () => this.orderActions.viewLabel(this.model),
@@ -147,13 +148,13 @@ export default class OperationsOrdersIndexDetailsController extends Controller {
                     },
                     {
                         id: 'listen-to-socket-channel',
-                        text: 'Listen to socket channel',
+                        text: this.intl.t('fleetops-ui.js.controllers.operations.orders.index.details.listen-to-socket-channel'),
                         icon: 'headphones',
                         fn: () => this.hostRouter.transitionTo('console.developers.sockets.view', `order.${this.model.public_id}`),
                     },
                     {
                         id: 'view-metadata',
-                        text: 'View metadata',
+                        text: this.intl.t('fleetops-ui.js.controllers.operations.orders.index.details.view-metadata'),
                         icon: 'table',
                         fn: () => this.orderActions.viewMetadata(this.model),
                     },
@@ -162,7 +163,7 @@ export default class OperationsOrdersIndexDetailsController extends Controller {
                     },
                     {
                         id: 'cancel',
-                        text: 'Cancel order',
+                        text: this.intl.t('fleetops-ui.js.controllers.operations.orders.index.details.cancel-order'),
                         icon: 'ban',
                         class: 'text-danger',
                         disabled: this.isClosed,
@@ -171,7 +172,7 @@ export default class OperationsOrdersIndexDetailsController extends Controller {
                     },
                     {
                         id: 'delete',
-                        text: 'Delete order',
+                        text: this.intl.t('fleetops-ui.js.controllers.operations.orders.index.details.delete-order'),
                         icon: 'trash',
                         class: 'text-danger',
                         permission: 'fleet-ops delete order',

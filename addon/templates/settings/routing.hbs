@@ -1,4 +1,4 @@
-<Layout::Section::Header @title="Fleet-Ops Routing & Tracking">
+<Layout::Section::Header @title={{t "fleetops-ui.templates.settings.routing.fleet-ops-routing-tracking"}}>
     <Button
         @type="primary"
         @size="sm"
@@ -25,14 +25,17 @@
                         class="w-full"
                     />
                 </InputGroup>
-                <InputGroup @name="Routing Optimization Engine" @helpText="Choose which engine should optimize stop order before the route is rendered.">
+                <InputGroup
+                    @name={{t "fleetops-ui.templates.settings.routing.routing-optimization-engine"}}
+                    @helpText={{t "fleetops-ui.templates.settings.routing.choose-which-engine-should-optimize-stop"}}
+                >
                     <Select
                         @value={{this.optimizationEngine}}
                         @options={{this.routeOptimization.availableServices}}
                         @optionLabel="name"
                         @optionValue="key"
                         @onSelect={{fn (mut this.optimizationEngine)}}
-                        @placeholder="Select route optimization engine"
+                        @placeholder={{t "fleetops-ui.templates.settings.routing.select-route-optimization-engine"}}
                         class="w-full"
                     />
                 </InputGroup>
@@ -49,70 +52,102 @@
                 </InputGroup>
             </ContentPanel>
             {{#if this.usesOsrm}}
-                <ContentPanel @title="OSRM Server" @open={{true}} @wrapperClass="bordered-classic">
-                    <InputGroup @name="Use my own OSRM server" @helpText={{this.osrmSystemHelpText}}>
+                <ContentPanel @title={{t "fleetops-ui.templates.settings.routing.osrm-server"}} @open={{true}} @wrapperClass="bordered-classic">
+                    <InputGroup @name={{t "fleetops-ui.templates.settings.routing.use-my-own-osrm-server"}} @helpText={{this.osrmSystemHelpText}}>
                         <Toggle @isToggled={{this.osrmUseOwnServer}} @onToggle={{fn (mut this.osrmUseOwnServer)}} data-test-osrm-use-own />
                     </InputGroup>
                     {{#if this.osrmUseOwnServer}}
-                        <InputGroup @name="OSRM Host" @helpText="A public OSRM server this organization's routes, distances and ETAs use. Private network addresses are refused.">
+                        <InputGroup
+                            @name={{t "fleetops-ui.templates.settings.routing.osrm-host"}}
+                            @helpText={{t "fleetops-ui.templates.settings.routing.a-public-osrm-server-this-organization"}}
+                        >
                             <Input @value={{this.osrmHost}} placeholder="https://osrm.example.com" class="w-full form-input" data-test-osrm-host />
                         </InputGroup>
                     {{/if}}
                 </ContentPanel>
             {{/if}}
-            <ContentPanel @title="Tracking Intelligence" @open={{true}} @wrapperClass="bordered-classic">
+            <ContentPanel @title={{t "fleetops-ui.templates.settings.routing.tracking-intelligence"}} @open={{true}} @wrapperClass="bordered-classic">
                 <p class="mb-2 text-sm text-gray-600 dark:text-gray-400">
-                    Live ETAs, remaining distance and route lines use the routing service selected above, the same one that measures each order's distance and time. These settings only tune
-                    tracking behaviour.
+                    {{t "fleetops-ui.templates.settings.routing.live-etas-remaining-distance-and-route"}}
                 </p>
                 <div class="flex justify-end">
                     <Button
                         @type="default"
                         @size="xs"
                         @icon={{if this.showTrackingAdvancedSettings "chevron-up" "chevron-down"}}
-                        @text="Advanced Settings"
+                        @text={{t "fleetops-ui.templates.settings.routing.advanced-settings"}}
                         @onClick={{this.toggleTrackingAdvancedSettings}}
                     />
                 </div>
                 {{#if this.showTrackingAdvancedSettings}}
                     <div class="mt-2 space-y-4 rounded-md border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-800">
-                        <InputGroup @name="Traffic-Aware ETA" @helpText="Use provider traffic data when supported.">
+                        <InputGroup
+                            @name={{t "fleetops-ui.templates.settings.routing.traffic-aware-eta"}}
+                            @helpText={{t "fleetops-ui.templates.settings.routing.use-provider-traffic-data-when-supported"}}
+                        >
                             <Toggle @isToggled={{this.trackingTrafficEnabled}} @onToggle={{fn (mut this.trackingTrafficEnabled)}} />
                         </InputGroup>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <InputGroup @name="Summary Cache TTL" @helpText="Seconds to cache the final tracking summary.">
+                            <InputGroup
+                                @name={{t "fleetops-ui.templates.settings.routing.summary-cache-ttl"}}
+                                @helpText={{t "fleetops-ui.templates.settings.routing.seconds-to-cache-the-final-tracking"}}
+                            >
                                 <Input @type="number" @value={{this.trackingCacheTtlSeconds}} min="15" max="300" class="form-input w-full" />
                             </InputGroup>
-                            <InputGroup @name="Route Cache TTL" @helpText="Seconds to cache provider route responses.">
+                            <InputGroup
+                                @name={{t "fleetops-ui.templates.settings.routing.route-cache-ttl"}}
+                                @helpText={{t "fleetops-ui.templates.settings.routing.seconds-to-cache-provider-route-responses"}}
+                            >
                                 <Input @type="number" @value={{this.trackingRouteCacheTtlSeconds}} min="60" max="1800" class="form-input w-full" />
                             </InputGroup>
-                            <InputGroup @name="Stale Location Threshold" @helpText="Seconds before driver location is marked stale.">
+                            <InputGroup
+                                @name={{t "fleetops-ui.templates.settings.routing.stale-location-threshold"}}
+                                @helpText={{t "fleetops-ui.templates.settings.routing.seconds-before-driver-location-is-marked"}}
+                            >
                                 <Input @type="number" @value={{this.trackingStaleLocationThresholdSeconds}} min="30" max="3600" class="form-input w-full" />
                             </InputGroup>
-                            <InputGroup @name="Fallback Speed" @helpText="Kilometers per hour used by the calculated provider.">
+                            <InputGroup
+                                @name={{t "fleetops-ui.templates.settings.routing.fallback-speed"}}
+                                @helpText={{t "fleetops-ui.templates.settings.routing.kilometers-per-hour-used-by-the"}}
+                            >
                                 <Input @type="number" @value={{this.trackingDefaultVehicleSpeedKph}} min="1" max="160" class="form-input w-full" />
                             </InputGroup>
                         </div>
                     </div>
                 {{/if}}
             </ContentPanel>
-            <ContentPanel @title="Operational Alerts" @open={{true}} @wrapperClass="bordered-classic">
-                <InputGroup @name="Late Departures" @helpText="Notify when an order has not departed after the scheduled pickup window plus the configured grace period.">
+            <ContentPanel @title={{t "fleetops-ui.templates.settings.routing.operational-alerts"}} @open={{true}} @wrapperClass="bordered-classic">
+                <InputGroup @name={{t "fleetops-ui.templates.settings.routing.late-departures"}} @helpText={{t "fleetops-ui.templates.settings.routing.notify-when-an-order-has-not"}}>
                     <Toggle @isToggled={{this.lateDepartureAlertsEnabled}} @onToggle={{fn (mut this.lateDepartureAlertsEnabled)}} />
                 </InputGroup>
-                <InputGroup @name="Late Departure Grace Period" @helpText="Minutes after scheduled pickup before the order is considered late to depart.">
+                <InputGroup
+                    @name={{t "fleetops-ui.templates.settings.routing.late-departure-grace-period"}}
+                    @helpText={{t "fleetops-ui.templates.settings.routing.minutes-after-scheduled-pickup-before-the"}}
+                >
                     <Input @type="number" @value={{this.lateDepartureGracePeriodMinutes}} min="0" max="1440" class="form-input w-full" />
                 </InputGroup>
-                <InputGroup @name="Route Deviations" @helpText="Notify when tracked vehicle location drifts beyond the configured distance from the active route.">
+                <InputGroup
+                    @name={{t "fleetops-ui.templates.settings.routing.route-deviations"}}
+                    @helpText={{t "fleetops-ui.templates.settings.routing.notify-when-tracked-vehicle-location-drifts"}}
+                >
                     <Toggle @isToggled={{this.routeDeviationAlertsEnabled}} @onToggle={{fn (mut this.routeDeviationAlertsEnabled)}} />
                 </InputGroup>
-                <InputGroup @name="Route Deviation Threshold" @helpText="Meters from the active route before a deviation alert is eligible.">
+                <InputGroup
+                    @name={{t "fleetops-ui.templates.settings.routing.route-deviation-threshold"}}
+                    @helpText={{t "fleetops-ui.templates.settings.routing.meters-from-the-active-route-before"}}
+                >
                     <Input @type="number" @value={{this.routeDeviationDistanceThresholdMeters}} min="0" max="100000" class="form-input w-full" />
                 </InputGroup>
-                <InputGroup @name="Prolonged Stoppages" @helpText="Notify when a vehicle remains stopped beyond the configured duration during an active trip.">
+                <InputGroup
+                    @name={{t "fleetops-ui.templates.settings.routing.prolonged-stoppages"}}
+                    @helpText={{t "fleetops-ui.templates.settings.routing.notify-when-a-vehicle-remains-stopped"}}
+                >
                     <Toggle @isToggled={{this.prolongedStoppageAlertsEnabled}} @onToggle={{fn (mut this.prolongedStoppageAlertsEnabled)}} />
                 </InputGroup>
-                <InputGroup @name="Prolonged Stoppage Duration" @helpText="Minutes stopped before a stoppage alert is eligible.">
+                <InputGroup
+                    @name={{t "fleetops-ui.templates.settings.routing.prolonged-stoppage-duration"}}
+                    @helpText={{t "fleetops-ui.templates.settings.routing.minutes-stopped-before-a-stoppage-alert"}}
+                >
                     <Input @type="number" @value={{this.prolongedStoppageDurationThresholdMinutes}} min="0" max="1440" class="form-input w-full" />
                 </InputGroup>
             </ContentPanel>

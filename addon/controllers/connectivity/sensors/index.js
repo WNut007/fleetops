@@ -133,7 +133,7 @@ export default class ConnectivitySensorsIndexController extends Controller {
     @tracked bulkActions = [
         {
             id: 'bulk-delete',
-            label: 'Delete selected...',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.sensors.index.delete-selected'),
             class: 'text-red-500',
             fn: this.sensorActions.bulkDelete,
             permission: 'fleet-ops delete sensor',
@@ -159,7 +159,7 @@ export default class ConnectivitySensorsIndexController extends Controller {
         },
         {
             id: 'telematic-provider',
-            label: 'Telematic',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.sensors.index.telematic'),
             valuePath: 'telematic.provider',
             cellComponent: 'cell/telematic-identity',
             resourcePath: sensorTelematic,
@@ -175,7 +175,7 @@ export default class ConnectivitySensorsIndexController extends Controller {
         },
         {
             id: 'device-display-name',
-            label: 'Device',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.sensors.index.device'),
             valuePath: 'device.displayName',
             cellComponent: 'cell/device-identity',
             resourcePath: sensorDevice,
@@ -193,7 +193,7 @@ export default class ConnectivitySensorsIndexController extends Controller {
         },
         {
             id: 'type',
-            label: 'Type',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.sensors.index.type'),
             valuePath: 'type',
             cellComponent: 'table/cell/base',
             humanize: true,
@@ -202,20 +202,20 @@ export default class ConnectivitySensorsIndexController extends Controller {
             filterable: true,
             filterParam: 'type',
             filterComponent: 'filter/multi-option',
-            filterOptions: fleetOpsOptions('sensorTypes'),
+            filterOptions: fleetOpsOptions('sensorTypes', this.intl),
             filterOptionLabel: 'label',
             filterOptionValue: 'value',
         },
         {
             id: 'last-value',
-            label: 'Last Value',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.sensors.index.last-value'),
             valuePath: 'last_value',
             resizable: true,
             sortable: true,
         },
         {
             id: 'unit',
-            label: 'Unit',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.sensors.index.unit'),
             valuePath: 'unit',
             resizable: true,
             sortable: true,
@@ -229,13 +229,13 @@ export default class ConnectivitySensorsIndexController extends Controller {
             sortable: true,
             filterable: true,
             filterComponent: 'filter/multi-option',
-            filterOptions: fleetOpsOptions('sensorStatuses'),
+            filterOptions: fleetOpsOptions('sensorStatuses', this.intl),
             filterOptionLabel: 'label',
             filterOptionValue: 'value',
         },
         {
             id: 'threshold-status',
-            label: 'Threshold',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.sensors.index.threshold'),
             valuePath: 'threshold_status',
             cellComponent: 'table/cell/status',
             resizable: true,
@@ -243,7 +243,7 @@ export default class ConnectivitySensorsIndexController extends Controller {
         },
         {
             id: 'serial-number',
-            label: 'Serial Number',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.sensors.index.serial-number'),
             valuePath: 'serial_number',
             resizable: true,
             sortable: true,
@@ -253,7 +253,7 @@ export default class ConnectivitySensorsIndexController extends Controller {
         },
         {
             id: 'imei',
-            label: 'IMEI',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.sensors.index.imei'),
             valuePath: 'imei',
             resizable: true,
             sortable: true,
@@ -263,7 +263,7 @@ export default class ConnectivitySensorsIndexController extends Controller {
         },
         {
             id: 'last-reading-at',
-            label: 'Last Reading',
+            label: this.intl.t('fleetops-ui.js.controllers.connectivity.sensors.index.last-reading'),
             valuePath: 'lastReadingAt',
             sortParam: 'last_reading_at',
             resizable: true,

@@ -21,7 +21,7 @@
                     @onAdd={{fn this.onZoneAdded @options.zone}}
                     as |polygon|
                 >
-                    <polygon.tooltip @permanent={{true}} @sticky={{true}}>{{@options.zone.name}} Zone</polygon.tooltip>
+                    <polygon.tooltip @permanent={{true}} @sticky={{true}}>{{t "fleetops-ui.components.modals.view-zone.zone" name=@options.zone.name}}</polygon.tooltip>
                 </layers.polygon>
             {{/if}}
         </LeafletMap>

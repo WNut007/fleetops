@@ -21,7 +21,7 @@ export default class ConnectivityDevicesIndexNewController extends Controller {
 
             yield this.hostRouter.refresh();
             yield this.hostRouter.transitionTo('console.fleet-ops.connectivity.devices.index.details', device);
-            this.notifications.success('Device created successfully.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.controllers.connectivity.devices.index.new.device-created-successfully'));
             this.resetForm();
         } catch (err) {
             this.notifications.serverError(err);

@@ -13,7 +13,7 @@
                 <UploadButton @name="photos" @accept="image/*" @onFileAdded={{@options.uploadNewPhoto}} class="w-32" />
             </div>
             <div class="flex-1 space-y-4">
-                <ContentPanel @title="Details" @open={{true}} @panelBodyClass="bg-white dark:bg-gray-800">
+                <ContentPanel @title={{t "fleetops-ui.components.modals.vehicle-form.details"}} @open={{true}} @panelBodyClass="bg-white dark:bg-gray-800">
                     <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-2">
                         <div class="input-group mb-2">
                             <label>
@@ -38,9 +38,14 @@
 
                         <div class="input-group mb-2">
                             <label>
-                                Fuel Card Number
+                                {{t "fleetops-ui.components.modals.vehicle-form.fuel-card-number"}}
                             </label>
-                            <Input @value={{@options.vehicle.fuel_card_number}} @type="text" class="w-full form-input" placeholder="Fuel Card Number" />
+                            <Input
+                                @value={{@options.vehicle.fuel_card_number}}
+                                @type="text"
+                                class="w-full form-input"
+                                placeholder={{t "fleetops-ui.components.modals.vehicle-form.fuel-card-number"}}
+                            />
                         </div>
 
                         <div class="input-group mb-2">
@@ -72,7 +77,7 @@
                                 @modelName="driver"
                                 @selectedItemComponent={{component "select-option/driver" compact=true}}
                                 @selectedModel={{@options.vehicle.driver}}
-                                @placeholder="Select Driver"
+                                @placeholder={{t "fleetops-ui.components.modals.vehicle-form.select-driver"}}
                                 @triggerClass="form-select form-input"
                                 @infiniteScroll={{false}}
                                 @renderInPlace={{true}}

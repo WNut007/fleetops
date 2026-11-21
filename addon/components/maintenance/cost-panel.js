@@ -158,7 +158,7 @@ export default class MaintenanceCostPanelComponent extends Component {
     @action
     addLineItem() {
         if (!this.draftDescription?.trim()) {
-            this.notifications.warning('Please enter a description for the line item.');
+            this.notifications.warning(this.intl.t('fleetops-ui.js.components.maintenance.cost-panel.please-enter-a-description-for-the'));
             return;
         }
 
@@ -197,7 +197,7 @@ export default class MaintenanceCostPanelComponent extends Component {
     @action
     saveEdit() {
         if (!this.draftDescription?.trim()) {
-            this.notifications.warning('Please enter a description for the line item.');
+            this.notifications.warning(this.intl.t('fleetops-ui.js.components.maintenance.cost-panel.please-enter-a-description-for-the'));
             return;
         }
 

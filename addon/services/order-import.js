@@ -6,6 +6,7 @@ import { debug } from '@ember/debug';
 import { task } from 'ember-concurrency';
 
 export default class OrderImportService extends Service {
+    @service intl;
     @service fetch;
     @service modalsManager;
     @service notifications;
@@ -15,8 +16,8 @@ export default class OrderImportService extends Service {
 
     @action promptImport(order, options = {}) {
         return this.modalsManager.show('modals/order-import', {
-            title: 'Import order(s) with spreadsheets',
-            acceptButtonText: 'Start Upload',
+            title: this.intl.t('fleetops-ui.js.services.order-import.import-order-s-with-spreadsheets'),
+            acceptButtonText: this.intl.t('fleetops-ui.js.services.order-import.start-upload'),
             acceptButtonScheme: 'magic',
             acceptButtonIcon: 'upload',
             acceptButtonDisabled: true,

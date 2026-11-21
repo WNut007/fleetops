@@ -126,8 +126,8 @@ export default class ConnectivityTelematicsDetailsDevicesController extends Cont
                 return {
                     tone: 'info',
                     icon: 'filter',
-                    title: 'No devices match these filters',
-                    message: 'Clear the current search and filters to return to the synced device inventory.',
+                    title: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.devices.no-devices-match-these-filters'),
+                    message: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.devices.clear-the-current-search-and-filters'),
                     primaryText: 'Clear filters',
                     primaryIcon: 'filter',
                     primaryAction: this.clearFilters,
@@ -136,8 +136,8 @@ export default class ConnectivityTelematicsDetailsDevicesController extends Cont
                 return {
                     tone: 'info',
                     icon: 'rotate',
-                    title: 'Device sync is running',
-                    message: 'Devices are being fetched from the provider. Refresh this tab when the sync job finishes.',
+                    title: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.devices.device-sync-is-running'),
+                    message: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.devices.devices-are-being-fetched-from-the'),
                     primaryText: 'Refresh',
                     primaryIcon: 'refresh',
                     primaryAction: this.refresh,
@@ -146,8 +146,8 @@ export default class ConnectivityTelematicsDetailsDevicesController extends Cont
                 return {
                     tone: 'warning',
                     icon: 'satellite-dish',
-                    title: 'No device sync has run yet',
-                    message: 'Sync devices from this provider connection to build the inventory and start vehicle attachment.',
+                    title: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.devices.no-device-sync-has-run-yet'),
+                    message: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.devices.sync-devices-from-this-provider-connection'),
                     primaryText: 'Sync Devices',
                     primaryIcon: 'satellite-dish',
                     primaryAction: this.startDeviceSync,
@@ -159,8 +159,8 @@ export default class ConnectivityTelematicsDetailsDevicesController extends Cont
                 return {
                     tone: 'info',
                     icon: 'microchip',
-                    title: 'Provider returned no devices',
-                    message: 'The connection synced successfully, but the provider did not return device inventory for these credentials.',
+                    title: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.devices.provider-returned-no-devices'),
+                    message: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.devices.the-connection-synced-successfully-but-the'),
                     primaryText: 'Sync Again',
                     primaryIcon: 'refresh',
                     primaryAction: this.startDeviceSync,
@@ -176,10 +176,30 @@ export default class ConnectivityTelematicsDetailsDevicesController extends Cont
 
     get metrics() {
         return [
-            { label: 'Synced devices', value: this.totalDevices, icon: 'microchip', accentClass: 'fleetops-connectivity-kpi-accent-blue' },
-            { label: 'Online', value: this.onlineDevicesCount, icon: 'signal', accentClass: 'fleetops-connectivity-kpi-accent-green' },
-            { label: 'Unattached', value: this.unattachedDevicesCount, icon: 'link-slash', accentClass: 'fleetops-connectivity-kpi-accent-amber' },
-            { label: 'Offline / unknown', value: this.offlineDevicesCount, icon: 'power-off', accentClass: 'fleetops-connectivity-kpi-accent-rose' },
+            {
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.devices.synced-devices'),
+                value: this.totalDevices,
+                icon: 'microchip',
+                accentClass: 'fleetops-connectivity-kpi-accent-blue',
+            },
+            {
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.devices.online'),
+                value: this.onlineDevicesCount,
+                icon: 'signal',
+                accentClass: 'fleetops-connectivity-kpi-accent-green',
+            },
+            {
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.devices.unattached'),
+                value: this.unattachedDevicesCount,
+                icon: 'link-slash',
+                accentClass: 'fleetops-connectivity-kpi-accent-amber',
+            },
+            {
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.devices.offline-unknown'),
+                value: this.offlineDevicesCount,
+                icon: 'power-off',
+                accentClass: 'fleetops-connectivity-kpi-accent-rose',
+            },
         ];
     }
 
@@ -197,19 +217,19 @@ export default class ConnectivityTelematicsDetailsDevicesController extends Cont
             {
                 icon: 'ellipsis-h',
                 prefix: 'fas',
-                helpText: 'Actions',
+                helpText: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.devices.actions'),
                 type: 'primary',
                 size: 'sm',
                 triggerClass: 'fleetops-telematics-action-button',
                 items: [
                     {
                         icon: 'satellite-dish',
-                        text: 'Sync Devices',
+                        text: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.devices.sync-devices'),
                         onClick: this.startDeviceSync,
                     },
                     {
                         icon: 'link',
-                        text: 'Attach Unassigned',
+                        text: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.devices.attach-unassigned'),
                         onClick: this.openAttachmentsForUnassigned,
                     },
                 ],
@@ -220,11 +240,11 @@ export default class ConnectivityTelematicsDetailsDevicesController extends Cont
     @tracked bulkActions = [];
 
     get deviceTypeOptions() {
-        return fleetOpsOptions('deviceTypes');
+        return fleetOpsOptions('deviceTypes', this.intl);
     }
 
     get deviceStatusOptions() {
-        return fleetOpsOptions('deviceStatuses');
+        return fleetOpsOptions('deviceStatuses', this.intl);
     }
 
     get columns() {
@@ -256,10 +276,10 @@ export default class ConnectivityTelematicsDetailsDevicesController extends Cont
 
     @action openConnectionTestDialog() {
         this.modalsManager.show('modals/telematic-connection-diagnostics', {
-            title: 'Test Connection',
-            acceptButtonText: 'Run Test',
+            title: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.devices.test-connection'),
+            acceptButtonText: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.devices.run-test'),
             acceptButtonIcon: 'plug',
-            declineButtonText: 'Close',
+            declineButtonText: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.devices.close'),
             telematic: this.telematic,
             onTested: () => this.hostRouter.refresh(),
         });
@@ -401,7 +421,7 @@ export default class ConnectivityTelematicsDetailsDevicesController extends Cont
     @task *syncDevices() {
         try {
             yield this.fetch.post(`telematics/${this.telematic.id}/discover`);
-            this.notifications.success('Device sync queued.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.devices.device-sync-queued'));
             yield this.hostRouter.refresh();
         } catch (error) {
             this.notifications.serverError(error);

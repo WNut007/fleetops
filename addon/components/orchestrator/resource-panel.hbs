@@ -159,7 +159,7 @@
                         <div class="relative flex-shrink-0 mt-0.5">
                             <img
                                 src={{vehicle.photo_url}}
-                                alt={{or vehicle.display_name "Vehicle"}}
+                                alt={{or vehicle.display_name (t "fleetops-ui.components.orchestrator.resource-panel.vehicle")}}
                                 class="w-9 h-9 rounded object-cover bg-gray-200 dark:bg-gray-700"
                                 {{fallback-img-src (config "defaultValues.vehicleAvatar")}}
                             />
@@ -179,8 +179,7 @@
                             </div>
                             {{! Position }}
                             <div
-                                class="flex items-center gap-1 text-xs truncate
-                                    {{if (this.hasPosition vehicle) 'text-green-500 dark:text-green-300' 'text-amber-600 dark:text-amber-300'}}"
+                                class="flex items-center gap-1 text-xs truncate {{if (this.hasPosition vehicle) 'text-green-500 dark:text-green-300' 'text-amber-600 dark:text-amber-300'}}"
                                 title={{if (this.hasPosition vehicle) (point-coordinates vehicle.location) (t "orchestrator.no-position")}}
                             >
                                 <FaIcon @icon="location-dot" @size="xs" class="w-3 flex-shrink-0" />
@@ -233,7 +232,7 @@
                         <div class="relative flex-shrink-0 mt-0.5">
                             <img
                                 src={{resource-image driver.photo_url "driver"}}
-                                alt={{or driver.name "Driver"}}
+                                alt={{or driver.name (t "fleetops-ui.components.orchestrator.resource-panel.driver")}}
                                 class="w-9 h-9 rounded-full object-cover bg-gray-200 dark:bg-gray-700"
                                 {{fallback-img-src (placeholder-image "driver")}}
                             />
@@ -246,8 +245,7 @@
                             <div class="text-xs font-semibold truncate dark:text-white">{{or driver.name "-"}}</div>
                             {{! Position }}
                             <div
-                                class="flex items-center gap-1 text-xs truncate
-                                    {{if (this.hasPosition driver) 'text-green-500 dark:text-green-300' 'text-amber-600 dark:text-amber-300'}}"
+                                class="flex items-center gap-1 text-xs truncate {{if (this.hasPosition driver) 'text-green-500 dark:text-green-300' 'text-amber-600 dark:text-amber-300'}}"
                                 title={{if (this.hasPosition driver) (point-coordinates driver.location) (t "orchestrator.no-position")}}
                             >
                                 <FaIcon @icon="location-dot" @size="xs" class="w-3 flex-shrink-0" />
@@ -289,8 +287,7 @@
         <div class="px-3 py-2 border-t dark:border-gray-700 bg-indigo-900/20 flex items-center justify-between flex-shrink-0">
             <span class="text-xs text-indigo-400">
                 {{#if this.selectedVehicleIdsArray.length}}
-                    {{this.selectedVehicleIdsArray.length}}
-                    vehicles selected
+                    {{t "fleetops-ui.components.orchestrator.resource-panel.vehicles-selected" length=this.selectedVehicleIdsArray.length}}
                 {{/if}}
                 {{#if (and this.selectedVehicleIdsArray.length this.selectedDriverIdsArray.length)}}
                     ·

@@ -14,6 +14,7 @@ const TYPE_TO_MODEL = {
 };
 
 export default class PartFormComponent extends Component {
+    @service intl;
     @service fetch;
     @service currentUser;
     @service notifications;
@@ -46,8 +47,8 @@ export default class PartFormComponent extends Component {
      * Each entry has a `value` (stored on the model) and a `label` (displayed in the UI).
      */
     assetTypeOptions = [
-        { value: 'fleet-ops:vehicle', label: 'Vehicle' },
-        { value: 'fleet-ops:equipment', label: 'Equipment' },
+        { value: 'fleet-ops:vehicle', label: this.intl.t('fleetops-ui.js.components.part.form.vehicle') },
+        { value: 'fleet-ops:equipment', label: this.intl.t('fleetops-ui.js.components.part.form.equipment') },
     ];
 
     /** Derived Ember Data model name for the currently selected asset type. */

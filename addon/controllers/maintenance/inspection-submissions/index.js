@@ -49,7 +49,13 @@ export default class MaintenanceInspectionSubmissionsIndexController extends Con
 
     get bulkActions() {
         return [
-            { id: 'bulk-delete', label: 'Delete selected...', class: 'text-red-500', fn: this.inspectionSubmissionActions.bulkDelete, permission: 'fleet-ops delete inspection-submission' },
+            {
+                id: 'bulk-delete',
+                label: this.intl.t('fleetops-ui.js.controllers.maintenance.inspection-submissions.index.delete-selected'),
+                class: 'text-red-500',
+                fn: this.inspectionSubmissionActions.bulkDelete,
+                permission: 'fleet-ops delete inspection-submission',
+            },
         ];
     }
 
@@ -57,7 +63,7 @@ export default class MaintenanceInspectionSubmissionsIndexController extends Con
         return [
             {
                 id: 'public-id',
-                label: 'Inspection',
+                label: this.intl.t('fleetops-ui.js.controllers.maintenance.inspection-submissions.index.inspection'),
                 valuePath: 'public_id',
                 cellComponent: 'table/cell/anchor',
                 action: this.inspectionSubmissionActions.transition.view,
@@ -70,7 +76,7 @@ export default class MaintenanceInspectionSubmissionsIndexController extends Con
             },
             {
                 id: 'form-name',
-                label: 'Form',
+                label: this.intl.t('fleetops-ui.js.controllers.maintenance.inspection-submissions.index.form'),
                 valuePath: 'form_name',
                 cellComponent: 'cell/inspection-form-identity',
                 permission: 'fleet-ops view inspection-form',
@@ -80,7 +86,7 @@ export default class MaintenanceInspectionSubmissionsIndexController extends Con
             },
             {
                 id: 'vehicle-name',
-                label: 'Vehicle',
+                label: this.intl.t('fleetops-ui.js.controllers.maintenance.inspection-submissions.index.vehicle'),
                 valuePath: 'vehicle_name',
                 cellComponent: 'cell/vehicle-identity',
                 permission: 'fleet-ops view vehicle',
@@ -92,7 +98,7 @@ export default class MaintenanceInspectionSubmissionsIndexController extends Con
             },
             {
                 id: 'driver-name',
-                label: 'Driver',
+                label: this.intl.t('fleetops-ui.js.controllers.maintenance.inspection-submissions.index.driver'),
                 valuePath: 'driver_name',
                 cellComponent: 'cell/driver-identity',
                 permission: 'fleet-ops view driver',
@@ -104,7 +110,7 @@ export default class MaintenanceInspectionSubmissionsIndexController extends Con
             },
             {
                 id: 'result',
-                label: 'Result',
+                label: this.intl.t('fleetops-ui.js.controllers.maintenance.inspection-submissions.index.result'),
                 valuePath: 'result',
                 cellComponent: 'table/cell/status',
                 resizable: true,
@@ -113,10 +119,16 @@ export default class MaintenanceInspectionSubmissionsIndexController extends Con
                 filterParam: 'result',
                 filterComponent: 'filter/string',
             },
-            { id: 'failed-items', label: 'Failed', valuePath: 'failed_items', resizable: true, sortable: true },
+            {
+                id: 'failed-items',
+                label: this.intl.t('fleetops-ui.js.controllers.maintenance.inspection-submissions.index.failed'),
+                valuePath: 'failed_items',
+                resizable: true,
+                sortable: true,
+            },
             {
                 id: 'submitted-at',
-                label: 'Submitted',
+                label: this.intl.t('fleetops-ui.js.controllers.maintenance.inspection-submissions.index.submitted'),
                 valuePath: 'submittedAt',
                 sortParam: 'submitted_at',
                 resizable: true,
@@ -134,8 +146,18 @@ export default class MaintenanceInspectionSubmissionsIndexController extends Con
                 cellClassNames: 'overflow-visible',
                 wrapperClass: 'flex items-center justify-end mx-2',
                 actions: [
-                    { id: 'view', label: 'View inspection', fn: this.inspectionSubmissionActions.transition.view, permission: 'fleet-ops view inspection-submission' },
-                    { id: 'edit', label: 'Edit inspection', fn: this.inspectionSubmissionActions.transition.edit, permission: 'fleet-ops update inspection-submission' },
+                    {
+                        id: 'view',
+                        label: this.intl.t('fleetops-ui.js.controllers.maintenance.inspection-submissions.index.view-inspection'),
+                        fn: this.inspectionSubmissionActions.transition.view,
+                        permission: 'fleet-ops view inspection-submission',
+                    },
+                    {
+                        id: 'edit',
+                        label: this.intl.t('fleetops-ui.js.controllers.maintenance.inspection-submissions.index.edit-inspection'),
+                        fn: this.inspectionSubmissionActions.transition.edit,
+                        permission: 'fleet-ops update inspection-submission',
+                    },
                     {
                         separator: true,
                         // Everything below this rule is conditional. On a row
@@ -146,7 +168,7 @@ export default class MaintenanceInspectionSubmissionsIndexController extends Con
                     },
                     {
                         id: 'submit',
-                        label: 'Submit',
+                        label: this.intl.t('fleetops-ui.js.controllers.maintenance.inspection-submissions.index.submit'),
                         fn: this.inspectionSubmissionActions.submit,
                         permission: 'fleet-ops submit inspection-submission',
                         // Submitting files a draft. On anything already filed it
@@ -156,27 +178,33 @@ export default class MaintenanceInspectionSubmissionsIndexController extends Con
                     },
                     {
                         id: 'create-issue',
-                        label: 'Create issue',
+                        label: this.intl.t('fleetops-ui.js.controllers.maintenance.inspection-submissions.index.create-issue'),
                         fn: this.inspectionSubmissionActions.createIssue,
                         permission: 'fleet-ops create-issue inspection-submission',
                         isVisible: (row) => row?.has_failures && !row?.issue_uuid,
                     },
                     {
                         id: 'create-work-order',
-                        label: 'Create work order',
+                        label: this.intl.t('fleetops-ui.js.controllers.maintenance.inspection-submissions.index.create-work-order'),
                         fn: this.inspectionSubmissionActions.createWorkOrder,
                         permission: 'fleet-ops create-work-order inspection-submission',
                         isVisible: (row) => row?.has_failures && !row?.work_order_uuid,
                     },
                     {
                         id: 'resolve',
-                        label: 'Resolve',
+                        label: this.intl.t('fleetops-ui.js.controllers.maintenance.inspection-submissions.index.resolve'),
                         fn: this.inspectionSubmissionActions.resolve,
                         permission: 'fleet-ops resolve inspection-submission',
                         isVisible: (row) => row?.status !== 'resolved',
                     },
                     { separator: true },
-                    { id: 'delete', label: 'Delete inspection', fn: this.inspectionSubmissionActions.delete, class: 'text-red-500', permission: 'fleet-ops delete inspection-submission' },
+                    {
+                        id: 'delete',
+                        label: this.intl.t('fleetops-ui.js.controllers.maintenance.inspection-submissions.index.delete-inspection'),
+                        fn: this.inspectionSubmissionActions.delete,
+                        class: 'text-red-500',
+                        permission: 'fleet-ops delete inspection-submission',
+                    },
                 ],
                 sortable: false,
                 filterable: false,

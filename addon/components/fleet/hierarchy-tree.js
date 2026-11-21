@@ -10,6 +10,7 @@ const FILTER_VEHICLES = 'vehicles';
 const FILTER_ONLINE = 'online';
 
 export default class FleetHierarchyTreeComponent extends Component {
+    @service intl;
     @service store;
 
     @tracked expandedFleetIds = new Set();
@@ -27,10 +28,10 @@ export default class FleetHierarchyTreeComponent extends Component {
 
     get filters() {
         return [
-            { id: FILTER_ALL, label: 'All' },
-            { id: FILTER_DRIVERS, label: 'Drivers' },
-            { id: FILTER_VEHICLES, label: 'Vehicles' },
-            { id: FILTER_ONLINE, label: 'Online' },
+            { id: FILTER_ALL, label: this.intl.t('fleetops-ui.js.components.fleet.hierarchy-tree.all') },
+            { id: FILTER_DRIVERS, label: this.intl.t('fleetops-ui.js.components.fleet.hierarchy-tree.drivers') },
+            { id: FILTER_VEHICLES, label: this.intl.t('fleetops-ui.js.components.fleet.hierarchy-tree.vehicles') },
+            { id: FILTER_ONLINE, label: this.intl.t('fleetops-ui.js.components.fleet.hierarchy-tree.online') },
         ];
     }
 

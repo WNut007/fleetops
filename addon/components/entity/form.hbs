@@ -24,16 +24,16 @@
                 <InputGroup @name={{t "common.name"}} @value={{@resource.name}} @helpText={{t "modals.entity-form.name-text"}} />
                 <InputGroup @name={{t "common.internal-id"}} @value={{@resource.internal_id}} @helpText={{t "modals.entity-form.id-text"}} />
                 <div class="space-y-2">
-                    <InputGroup @name={{t "common.type"}} @helpText="Choose a common entity type or switch to a custom value.">
+                    <InputGroup @name={{t "common.type"}} @helpText={{t "fleetops-ui.components.entity.form.choose-a-common-entity-type-or"}}>
                         {{#if this.useCustomType}}
-                            <Input @value={{@resource.type}} @type="text" class="w-full form-input" placeholder="Enter custom entity type" />
+                            <Input @value={{@resource.type}} @type="text" class="w-full form-input" placeholder={{t "fleetops-ui.components.entity.form.enter-custom-entity-type"}} />
                         {{else}}
                             <div class="fleetbase-model-select fleetbase-power-select ember-model-select">
                                 <PowerSelect
                                     @options={{this.entityTypes}}
                                     @selected={{this.selectedEntityType}}
                                     @onChange={{this.selectEntityType}}
-                                    @placeholder="Select entity type"
+                                    @placeholder={{t "fleetops-ui.components.entity.form.select-entity-type"}}
                                     @triggerClass="form-select"
                                     as |type|
                                 >
@@ -45,7 +45,13 @@
                             </div>
                         {{/if}}
                     </InputGroup>
-                    <Checkbox @value={{this.useCustomType}} @label="Use custom type" @onToggle={{this.toggleCustomType}} @alignItems="center" @labelClass="mb-0i" />
+                    <Checkbox
+                        @value={{this.useCustomType}}
+                        @label={{t "fleetops-ui.components.entity.form.use-custom-type"}}
+                        @onToggle={{this.toggleCustomType}}
+                        @alignItems="center"
+                        @labelClass="mb-0i"
+                    />
                 </div>
                 <InputGroup @name={{t "modals.entity-form.sku"}} @value={{@resource.sku}} @helpText={{t "modals.entity-form.sku-text"}} />
                 <div></div>

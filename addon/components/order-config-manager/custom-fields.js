@@ -79,7 +79,7 @@ export default class OrderConfigManagerCustomFieldsComponent extends Component {
      */
     @action createNewCustomField(group) {
         const customField = this.store.createRecord('custom-field', {
-            label: 'Untitled Field',
+            label: this.intl.t('fleetops-ui.js.components.order-config-manager.custom-fields.untitled-field'),
             category_uuid: group.id,
             subject_uuid: this.config.id,
             subject_type: 'order-config',

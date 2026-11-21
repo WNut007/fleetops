@@ -3,10 +3,11 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { task } from 'ember-concurrency';
-import { loadTransactionOrder, transactionActions } from '../../utils/fuel-transaction';
+import { loadTransactionOrder, transactionActionText } from '../../utils/fuel-transaction';
 import { fuelDate, fuelMoney } from '../../utils/fuel-integration-format';
 
 export default class FuelTransactionActionComponent extends Component {
+    @service intl;
     @service fetch;
     @service notifications;
     @service store;
@@ -26,7 +27,7 @@ export default class FuelTransactionActionComponent extends Component {
         return this.args.options.transactions;
     }
     get description() {
-        return transactionActions[this.mode].description;
+        return transactionActionText(this.intl, this.mode, 'description');
     }
     get isMatching() {
         return ['vehicle', 'order'].includes(this.mode);
@@ -84,7 +85,7 @@ export default class FuelTransactionActionComponent extends Component {
                 yield transaction.reload();
                 yield loadTransactionOrder(this.store, transaction);
             } catch {
-                this.notifications.warning('The change was saved, but the displayed transaction could not be refreshed. Refresh the ledger to see its latest state.');
+                this.notifications.warning(this.intl.t('fleetops-ui.js.components.modals.fuel-transaction-action.the-change-was-saved-but-the'));
             }
         }
         this.notifications.success(`${this.transactions.length === 1 ? 'Fuel transaction' : `${this.transactions.length} fuel transactions`} updated.`);
@@ -92,7 +93,7 @@ export default class FuelTransactionActionComponent extends Component {
         try {
             yield this.args.options.onSaved?.();
         } catch {
-            this.notifications.warning('Refresh the ledger to see the latest transactions.');
+            this.notifications.warning(this.intl.t('fleetops-ui.js.components.modals.fuel-transaction-action.refresh-the-ledger-to-see-the'));
         }
     }
 }

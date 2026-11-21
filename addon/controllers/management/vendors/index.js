@@ -264,7 +264,7 @@ export default class ManagementVendorsIndexController extends Controller {
                 filterComponent: 'filter/multi-option',
                 filterOptionLabel: 'label',
                 filterOptionValue: 'value',
-                filterOptions: fleetOpsOptions('vendorStatuses'),
+                filterOptions: fleetOpsOptions('vendorStatuses', this.intl),
             },
             {
                 id: 'row-actions',

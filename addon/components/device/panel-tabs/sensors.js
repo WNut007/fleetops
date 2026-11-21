@@ -20,6 +20,7 @@ function toRecentList(records) {
 }
 
 export default class DevicePanelTabsSensorsComponent extends Component {
+    @service intl;
     @service sensorActions;
     @service store;
 
@@ -38,7 +39,7 @@ export default class DevicePanelTabsSensorsComponent extends Component {
         return [
             {
                 sticky: true,
-                label: 'Sensor',
+                label: this.intl.t('fleetops-ui.js.components.device.panel-tabs.sensors.sensor'),
                 valuePath: 'name',
                 cellComponent: 'table/cell/anchor',
                 action: this.sensorActions.panel?.view ?? this.sensorActions.transition.view,
@@ -46,30 +47,30 @@ export default class DevicePanelTabsSensorsComponent extends Component {
                 resizable: true,
             },
             {
-                label: 'Type',
+                label: this.intl.t('fleetops-ui.js.components.device.panel-tabs.sensors.type'),
                 valuePath: 'type',
                 cellComponent: 'table/cell/base',
                 humanize: true,
                 resizable: true,
             },
             {
-                label: 'Value',
+                label: this.intl.t('fleetops-ui.js.components.device.panel-tabs.sensors.value'),
                 valuePath: 'last_value',
                 resizable: true,
             },
             {
-                label: 'Unit',
+                label: this.intl.t('fleetops-ui.js.components.device.panel-tabs.sensors.unit'),
                 valuePath: 'unit',
                 resizable: true,
             },
             {
-                label: 'Status',
+                label: this.intl.t('fleetops-ui.js.components.device.panel-tabs.sensors.status'),
                 valuePath: 'status',
                 cellComponent: 'table/cell/status',
                 resizable: true,
             },
             {
-                label: 'Last Reading',
+                label: this.intl.t('fleetops-ui.js.components.device.panel-tabs.sensors.last-reading'),
                 valuePath: 'lastReadingAt',
                 sortParam: 'last_reading_at',
                 resizable: true,

@@ -1,12 +1,16 @@
 <div class="flex flex-col gap-3 p-3">
     <div class="flex flex-col gap-1">
-        <h2 class="text-base font-bold text-gray-900 dark:text-gray-100">Sensor Inventory + Health</h2>
-        <p class="text-xs text-gray-500 dark:text-gray-300">Readings, thresholds, and reporting health for this device.</p>
+        <h2 class="text-base font-bold text-gray-900 dark:text-gray-100">{{t "fleetops-ui.templates.connectivity.devices.index.details.sensors.sensor-inventory-health"}}</h2>
+        <p class="text-xs text-gray-500 dark:text-gray-300">{{t "fleetops-ui.templates.connectivity.devices.index.details.sensors.readings-thresholds-and-reporting-health-for"}}</p>
     </div>
 
     <section class="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
         {{#each this.metrics as |metric|}}
-            <div class="fleet-ops-widget fleet-ops-kpi-tile fleetops-connectivity-kpi-tile {{metric.accentClass}} relative min-h-[82px] overflow-hidden rounded-md border bg-white shadow-sm dark:bg-gray-800">
+            <div
+                class="fleet-ops-widget fleet-ops-kpi-tile fleetops-connectivity-kpi-tile
+                    {{metric.accentClass}}
+                    relative min-h-[82px] overflow-hidden rounded-md border bg-white shadow-sm dark:bg-gray-800"
+            >
                 <div class="flex h-full items-start justify-between gap-2 p-3">
                     <div class="min-w-0">
                         <div class="truncate text-[10px] font-bold uppercase text-gray-500 dark:text-gray-400">{{metric.label}}</div>
@@ -23,12 +27,12 @@
     <section class="overflow-hidden rounded-md border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
         <div class="fleetops-provider-connections-header border-b border-gray-200 px-3 py-2 dark:border-gray-700">
             <div>
-                <h3 class="text-sm font-bold text-gray-900 dark:text-gray-100">Device Sensors</h3>
-                <p class="mt-1 text-xs text-gray-500 dark:text-gray-300">Filter by type, status, and last reading.</p>
+                <h3 class="text-sm font-bold text-gray-900 dark:text-gray-100">{{t "fleetops-ui.templates.connectivity.devices.index.details.sensors.device-sensors"}}</h3>
+                <p class="mt-1 text-xs text-gray-500 dark:text-gray-300">{{t "fleetops-ui.templates.connectivity.devices.index.details.sensors.filter-by-type-status-and-last"}}</p>
             </div>
             <div class="fleetops-provider-connections-actions flex min-w-0 flex-wrap items-center gap-2 lg:ml-auto lg:flex-nowrap lg:justify-end">
                 <Layout::Resource::TabularActions
-                    @title="Device Sensors"
+                    @title={{t "fleetops-ui.templates.connectivity.devices.index.details.sensors.device-sensors"}}
                     @searchQuery={{this.sensors_query}}
                     @onSearch={{perform this.searchTask}}
                     @columns={{this.columns}}
@@ -48,7 +52,7 @@
 
         <Layout::Resource::Tabular
             @resource="sensor"
-            @title="Device Sensors"
+            @title={{t "fleetops-ui.templates.connectivity.devices.index.details.sensors.device-sensors"}}
             @data={{@model}}
             @columns={{this.columns}}
             @page={{this.sensors_page}}

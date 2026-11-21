@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { workOrderCategories, workOrderStatuses } from '../../utils/fleet-ops-options';
+import { workOrderCategories, workOrderStatuses, localizeOptions } from '../../utils/fleet-ops-options';
 
 /**
  * Maps a user-facing polymorphic type string to the Ember Data model name
@@ -48,10 +48,14 @@ const ASSIGNEE_MODEL_TO_TYPE = {
 export default class WorkOrderFormComponent extends Component {
     @service intl;
     /** Status options for work orders. */
-    statusOptions = workOrderStatuses;
+    get statusOptions() {
+        return localizeOptions(this.intl, 'workOrderStatuses', workOrderStatuses);
+    }
 
     /** Operational category options for work orders. */
-    categoryOptions = workOrderCategories;
+    get categoryOptions() {
+        return localizeOptions(this.intl, 'workOrderCategories', workOrderCategories);
+    }
 
     /** Priority options for work orders. */
     priorityOptions = ['low', 'medium', 'high', 'critical'];
@@ -72,9 +76,9 @@ export default class WorkOrderFormComponent extends Component {
      * the work order.
      */
     assigneeTypeOptions = [
-        { value: 'fleet-ops:vendor', label: 'Vendor' },
-        { value: 'fleet-ops:contact', label: 'Contact' },
-        { value: 'Auth:User', label: 'User' },
+        { value: 'fleet-ops:vendor', label: this.intl.t('fleetops-ui.js.components.work-order.form.vendor') },
+        { value: 'fleet-ops:contact', label: this.intl.t('fleetops-ui.js.components.work-order.form.contact') },
+        { value: 'Auth:User', label: this.intl.t('fleetops-ui.js.components.work-order.form.user') },
     ];
 
     /** Derived Ember Data model name for the currently selected target type. */

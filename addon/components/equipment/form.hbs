@@ -1,7 +1,7 @@
 <div class="equipment-form" ...attributes>
 
     {{! ===== IDENTIFICATION (includes photo, matching vehicle/form convention) ===== }}
-    <ContentPanel @title="Identification" @open={{true}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.equipment.form.identification"}} @open={{true}} @wrapperClass="bordered-top">
         {{! Photo row — identical structure to vehicle/form UploadButton pattern }}
         <div class="flex flex-row space-x-3 mb-3">
             <div class="flex items-center justify-start rounded-full">
@@ -14,21 +14,21 @@
                     class="h-14 w-14 rounded-full shadow-sm"
                 />
                 <Attach::Tooltip @class="clean" @animation="scale" @placement="top">
-                    <InputInfo @text="Upload a new photo" />
+                    <InputInfo @text={{t "fleetops-ui.components.equipment.form.upload-a-new-photo"}} />
                 </Attach::Tooltip>
             </div>
             <div>
                 <UploadButton
-                    @name="Photos"
+                    @name={{t "fleetops-ui.components.equipment.form.photos"}}
                     @accept="image/*"
                     @onFileAdded={{perform this.handlePhotoUpload}}
                     @icon="upload"
                     @size="xs"
-                    @buttonText="Upload Image"
+                    @buttonText={{t "fleetops-ui.components.equipment.form.upload-image"}}
                     @disabled={{cannot-write @resource}}
                 />
                 <div class="px-1">
-                    <span class="text-gray-300 dark:text-gray-600 text-xs">Supports JPG, PNG, GIF up to 10 MB</span>
+                    <span class="text-gray-300 dark:text-gray-600 text-xs">{{t "fleetops-ui.components.equipment.form.supports-jpg-png-gif-up-to"}}</span>
                 </div>
             </div>
         </div>
@@ -36,35 +36,65 @@
         <div class="grid grid-cols-1 gap-2 lg:grid-cols-2 lg:gap-2 no-input-group-padding text-xs">
             {{! Equipment Identification }}
             <div class="col-span-1 lg:col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-1">
-                Equipment Details
+                {{t "fleetops-ui.components.equipment.form.equipment-details"}}
             </div>
-            <InputGroup @name="Name">
-                <Input @value={{@resource.name}} @type="text" class="w-full form-input" placeholder="Equipment name" disabled={{cannot-write @resource}} />
+            <InputGroup @name={{t "fleetops-ui.components.equipment.form.name"}}>
+                <Input
+                    @value={{@resource.name}}
+                    @type="text"
+                    class="w-full form-input"
+                    placeholder={{t "fleetops-ui.components.equipment.form.equipment-name"}}
+                    disabled={{cannot-write @resource}}
+                />
             </InputGroup>
-            <InputGroup @name="Code">
-                <Input @value={{@resource.code}} @type="text" class="w-full form-input" placeholder="Internal code or reference" disabled={{cannot-write @resource}} />
+            <InputGroup @name={{t "fleetops-ui.components.equipment.form.code"}}>
+                <Input
+                    @value={{@resource.code}}
+                    @type="text"
+                    class="w-full form-input"
+                    placeholder={{t "fleetops-ui.components.equipment.form.internal-code-or-reference"}}
+                    disabled={{cannot-write @resource}}
+                />
             </InputGroup>
-            <InputGroup @name="Serial Number">
-                <Input @value={{@resource.serial_number}} @type="text" class="w-full form-input" placeholder="Manufacturer serial number" disabled={{cannot-write @resource}} />
+            <InputGroup @name={{t "fleetops-ui.components.equipment.form.serial-number"}}>
+                <Input
+                    @value={{@resource.serial_number}}
+                    @type="text"
+                    class="w-full form-input"
+                    placeholder={{t "fleetops-ui.components.equipment.form.manufacturer-serial-number"}}
+                    disabled={{cannot-write @resource}}
+                />
             </InputGroup>
-            <InputGroup @name="Manufacturer">
-                <Input @value={{@resource.manufacturer}} @type="text" class="w-full form-input" placeholder="Manufacturer name" disabled={{cannot-write @resource}} />
+            <InputGroup @name={{t "fleetops-ui.components.equipment.form.manufacturer"}}>
+                <Input
+                    @value={{@resource.manufacturer}}
+                    @type="text"
+                    class="w-full form-input"
+                    placeholder={{t "fleetops-ui.components.equipment.form.manufacturer-name"}}
+                    disabled={{cannot-write @resource}}
+                />
             </InputGroup>
-            <InputGroup @name="Model">
-                <Input @value={{@resource.model}} @type="text" class="w-full form-input" placeholder="Model designation" disabled={{cannot-write @resource}} />
+            <InputGroup @name={{t "fleetops-ui.components.equipment.form.model"}}>
+                <Input
+                    @value={{@resource.model}}
+                    @type="text"
+                    class="w-full form-input"
+                    placeholder={{t "fleetops-ui.components.equipment.form.model-designation"}}
+                    disabled={{cannot-write @resource}}
+                />
             </InputGroup>
 
             {{! Type & Status }}
             <div class="col-span-1 lg:col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-3">
-                Type & Status
+                {{t "fleetops-ui.components.equipment.form.type-status"}}
             </div>
-            <InputGroup @name="Type">
+            <InputGroup @name={{t "fleetops-ui.components.equipment.form.type"}}>
                 <div class="fleetbase-model-select fleetbase-power-select ember-model-select">
                     <PowerSelect
                         @options={{this.equipmentTypeOptions}}
                         @selected={{@resource.type}}
                         @onChange={{fn (mut @resource.type)}}
-                        @placeholder="Select Equipment Type"
+                        @placeholder={{t "fleetops-ui.components.equipment.form.select-equipment-type"}}
                         @triggerClass="form-select form-input"
                         @disabled={{cannot-write @resource}}
                         as |type|
@@ -73,13 +103,13 @@
                     </PowerSelect>
                 </div>
             </InputGroup>
-            <InputGroup @name="Status">
+            <InputGroup @name={{t "fleetops-ui.components.equipment.form.status"}}>
                 <div class="fleetbase-model-select fleetbase-power-select ember-model-select">
                     <PowerSelect
                         @options={{this.statusOptions}}
                         @selected={{@resource.status}}
                         @onChange={{fn (mut @resource.status)}}
-                        @placeholder="Select Status"
+                        @placeholder={{t "fleetops-ui.components.equipment.form.select-status"}}
                         @triggerClass="form-select form-input"
                         @disabled={{cannot-write @resource}}
                         as |status|
@@ -92,18 +122,18 @@
     </ContentPanel>
 
     {{! ===== ASSIGNMENT ===== }}
-    <ContentPanel @title="Assignment" @open={{true}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.equipment.form.assignment"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 gap-2 lg:grid-cols-2 lg:gap-2 no-input-group-padding text-xs">
             <div class="col-span-1 lg:col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-1">
-                Equipped To
+                {{t "fleetops-ui.components.equipment.form.equipped-to"}}
             </div>
-            <InputGroup @name="Asset Type">
+            <InputGroup @name={{t "fleetops-ui.components.equipment.form.asset-type"}}>
                 <div class="fleetbase-model-select fleetbase-power-select ember-model-select">
                     <PowerSelect
                         @options={{this.equipableTypeOptions}}
                         @selected={{this.selectedEquipableType}}
                         @onChange={{this.onEquipableTypeChange}}
-                        @placeholder="Select asset type"
+                        @placeholder={{t "fleetops-ui.components.equipment.form.select-asset-type"}}
                         @triggerClass="form-select form-input"
                         @disabled={{cannot-write @resource}}
                         as |option|
@@ -113,12 +143,15 @@
                 </div>
             </InputGroup>
             {{#if this.equipableModelName}}
-                <InputGroup @name="Asset">
+                <InputGroup @name={{t "fleetops-ui.components.equipment.form.asset"}}>
                     <ModelSelect
                         @modelName={{this.equipableModelName}}
-                        @selectedItemComponent={{if (resource-component "select-option" this.equipableModelName) (component (resource-component "select-option" this.equipableModelName) compact=true)}}
+                        @selectedItemComponent={{if
+                            (resource-component "select-option" this.equipableModelName)
+                            (component (resource-component "select-option" this.equipableModelName) compact=true)
+                        }}
                         @selectedModel={{@resource.equipable}}
-                        @placeholder="Select asset to equip on"
+                        @placeholder={{t "fleetops-ui.components.equipment.form.select-asset-to-equip-on"}}
                         @triggerClass="form-select form-input"
                         @infiniteScroll={{false}}
                         @renderInPlace={{true}}
@@ -140,15 +173,15 @@
     </ContentPanel>
 
     {{! ===== PURCHASE & WARRANTY ===== }}
-    <ContentPanel @title="Purchase & Warranty" @open={{true}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.equipment.form.purchase-warranty"}} @open={{true}} @wrapperClass="bordered-top">
         <div class="grid grid-cols-1 gap-2 lg:grid-cols-2 lg:gap-2 no-input-group-padding text-xs">
             <div class="col-span-1 lg:col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-1">
-                Purchase Information
+                {{t "fleetops-ui.components.equipment.form.purchase-information"}}
             </div>
-            <InputGroup @name="Currency">
+            <InputGroup @name={{t "fleetops-ui.components.equipment.form.currency"}}>
                 <CurrencySelect @currency={{@resource.currency}} @onCurrencyChange={{fn (mut @resource.currency)}} @triggerClass="w-full form-select" @disabled={{cannot-write @resource}} />
             </InputGroup>
-            <InputGroup @name="Purchase Price">
+            <InputGroup @name={{t "fleetops-ui.components.equipment.form.purchase-price"}}>
                 <MoneyInput
                     class="w-full"
                     @value={{@resource.purchase_price}}
@@ -157,24 +190,24 @@
                     @disabled={{cannot-write @resource}}
                 />
             </InputGroup>
-            <InputGroup @name="Purchase Date">
+            <InputGroup @name={{t "fleetops-ui.components.equipment.form.purchase-date"}}>
                 <DatePicker
                     @value={{or (format-date-fns @resource.purchased_at "yyyy-MM-dd") null}}
                     @onChange={{fn (mut @resource.purchased_at)}}
-                    @placeholder="DD-MM-YYYY"
+                    @placeholder={{t "fleetops-ui.components.equipment.form.dd-mm-yyyy"}}
                     class="filter-date-input w-full flex-1"
                 />
             </InputGroup>
 
             <div class="col-span-1 lg:col-span-2 text-[11px] uppercase tracking-wide text-gray-500 font-semibold mt-3">
-                Warranty
+                {{t "fleetops-ui.components.equipment.form.warranty"}}
             </div>
-            <InputGroup @name="Warranty" @wrapperClass="col-span-2">
+            <InputGroup @name={{t "fleetops-ui.components.equipment.form.warranty"}} @wrapperClass="col-span-2">
                 <ModelSelect
                     @modelName="warranty"
                     @selectedItemComponent={{component "select-option/warranty" compact=true}}
                     @selectedModel={{@resource.warranty}}
-                    @placeholder="Select Warranty (optional)"
+                    @placeholder={{t "fleetops-ui.components.equipment.form.select-warranty-optional"}}
                     @triggerClass="form-select form-input"
                     @infiniteScroll={{false}}
                     @renderInPlace={{true}}
@@ -197,7 +230,7 @@
     <RegistryYield @registry="fleet-ops:component:equipment:form" as |RegistryComponent|>
         <RegistryComponent @resource={{@resource}} @controller={{@controller}} @permission={{get-write-permission @resource}} />
     </RegistryYield>
-    <ContentPanel @title="Metadata" @open={{false}} @wrapperClass="bordered-top">
+    <ContentPanel @title={{t "fleetops-ui.components.equipment.form.metadata"}} @open={{false}} @wrapperClass="bordered-top">
         <MetadataEditor @value={{@resource.meta}} @onChange={{fn (mut @resource.meta)}} />
     </ContentPanel>
 </div>

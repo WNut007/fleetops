@@ -6,6 +6,7 @@ import { action } from '@ember/object';
 import MAP_PROVIDER_OPTIONS from '../../utils/map-provider-options';
 
 export default class AdminMapSettingsComponent extends Component {
+    @service intl;
     @service fetch;
     @service notifications;
     @tracked mapProviderOptions = MAP_PROVIDER_OPTIONS;
@@ -38,7 +39,7 @@ export default class AdminMapSettingsComponent extends Component {
                 googleMapsMapId: this.googleMapsMapId,
             });
 
-            this.notifications.success('Map settings saved.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.components.admin.map-settings.map-settings-saved'));
         } catch (error) {
             this.notifications.serverError(error);
         }

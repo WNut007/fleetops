@@ -18,7 +18,7 @@
             {{#if @resource.quantity_on_hand}}
                 <div class="flex items-center space-x-1">
                     <FaIcon @icon="boxes-stacked" @size="xs" class="text-gray-400" />
-                    <span>Qty: {{@resource.quantity_on_hand}}</span>
+                    <span>{{t "fleetops-ui.components.part.card.qty" quantity_on_hand=@resource.quantity_on_hand}}</span>
                 </div>
             {{/if}}
             {{#if @resource.unit_cost}}
@@ -42,7 +42,7 @@
             {{yield to="footer"}}
         {{/if}}
         <div class="mt-1">
-            <div class="text-gray-300 dark:text-gray-500 text-xs">Last Modified: {{@resource.updatedAt}}</div>
+            <div class="text-gray-300 dark:text-gray-500 text-xs">{{t "fleetops-ui.components.part.card.last-modified" updatedAt=@resource.updatedAt}}</div>
         </div>
     </Card.footer>
 </Layout::Resource::Card>

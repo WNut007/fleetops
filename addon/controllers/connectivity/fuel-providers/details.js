@@ -6,6 +6,7 @@ import { syncRunView, fuelNumber, fuelMoney } from '../../../utils/fuel-integrat
 import { task, timeout } from 'ember-concurrency';
 
 export default class ConnectivityFuelProvidersIndexDetailsController extends Controller {
+    @service intl;
     @service hostRouter;
     @service fetch;
     @service notifications;
@@ -32,10 +33,10 @@ export default class ConnectivityFuelProvidersIndexDetailsController extends Con
     get metrics() {
         if (!this.totals) return [];
         return [
-            { label: 'Imported transactions', value: fuelNumber(this.totals.transactions), icon: 'receipt' },
-            { label: 'Needs matching', value: fuelNumber(this.totals.unmatched), icon: 'link' },
-            { label: 'Fuel reports', value: fuelNumber(this.totals.fuel_reports), icon: 'file-lines' },
-            { label: 'Fuel volume', value: `${fuelNumber(this.totals.liters)} L`, icon: 'gas-pump' },
+            { label: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.imported-transactions'), value: fuelNumber(this.totals.transactions), icon: 'receipt' },
+            { label: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.needs-matching'), value: fuelNumber(this.totals.unmatched), icon: 'link' },
+            { label: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.fuel-reports'), value: fuelNumber(this.totals.fuel_reports), icon: 'file-lines' },
+            { label: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.fuel-volume'), value: `${fuelNumber(this.totals.liters)} L`, icon: 'gas-pump' },
         ];
     }
     get spend() {
@@ -70,10 +71,10 @@ export default class ConnectivityFuelProvidersIndexDetailsController extends Con
 
     get tabs() {
         return [
-            { route: 'connectivity.fuel-providers.details.index', label: 'Overview' },
-            { route: 'connectivity.fuel-providers.details.sync', label: 'Sync' },
-            { route: 'connectivity.fuel-providers.details.matching', label: 'Matching' },
-            { route: 'connectivity.fuel-providers.details.transactions', label: 'Transactions' },
+            { route: 'connectivity.fuel-providers.details.index', label: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.overview') },
+            { route: 'connectivity.fuel-providers.details.sync', label: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.sync') },
+            { route: 'connectivity.fuel-providers.details.matching', label: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.matching') },
+            { route: 'connectivity.fuel-providers.details.transactions', label: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.transactions') },
         ].map((tab) => ({
             ...tab,
             active: this.hostRouter.currentRouteName?.endsWith(tab.route),
@@ -109,10 +110,10 @@ export default class ConnectivityFuelProvidersIndexDetailsController extends Con
 
     @action openConnectionTestDialog() {
         return this.modalsManager.show('modals/fuel-connection-diagnostics', {
-            title: 'Test Fuel Connection',
-            acceptButtonText: 'Run Test',
+            title: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.test-fuel-connection'),
+            acceptButtonText: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.run-test'),
             acceptButtonIcon: 'plug',
-            declineButtonText: 'Close',
+            declineButtonText: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.close'),
             connection: this.model,
             onTested: this.refreshActivity,
         });
@@ -122,7 +123,7 @@ export default class ConnectivityFuelProvidersIndexDetailsController extends Con
         if (this.hasPendingSync || this.model?.status === 'disabled') return;
         try {
             yield this.fetch.post(`fuel-provider-connections/${this.model.id}/sync`, { async: true, from: options.from, to: options.to });
-            this.notifications.success('Fuel transaction sync queued.');
+            this.notifications.success(this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.fuel-transaction-sync-queued'));
             yield this.refreshActivity();
             this.watchActivity.perform();
         } catch (error) {

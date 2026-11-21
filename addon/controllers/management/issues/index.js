@@ -131,8 +131,8 @@ export default class ManagementIssuesIndexController extends Controller {
                 filterComponent: 'filter/select',
                 filterOptionLabel: 'label',
                 filterOptionValue: 'value',
-                filterOptions: fleetOpsOptions('issueTypes'),
-                placeholder: 'Select issue type',
+                filterOptions: fleetOpsOptions('issueTypes', this.intl),
+                placeholder: this.intl.t('fleetops-ui.js.controllers.management.issues.index.select-issue-type'),
             },
             {
                 id: 'category',
@@ -145,8 +145,8 @@ export default class ManagementIssuesIndexController extends Controller {
                 filterComponent: 'filter/select',
                 filterOptionLabel: 'label',
                 filterOptionValue: 'value',
-                filterOptions: fleetOpsOptions('issueCategories'),
-                placeholder: 'Select issue category',
+                filterOptions: fleetOpsOptions('issueCategories', this.intl),
+                placeholder: this.intl.t('fleetops-ui.js.controllers.management.issues.index.select-issue-category'),
             },
             {
                 id: 'reporter-name',

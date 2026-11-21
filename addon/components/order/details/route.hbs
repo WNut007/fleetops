@@ -1,7 +1,10 @@
 <ContentPanel @title={{t "order.fields.route-panel-title"}} @open={{true}} @actionButtons={{this.actionButtons}} @wrapperClass="bordered-top">
     {{#if this.hasRouteSummaryLine}}
         <div class="mb-3 flex items-center justify-between gap-3 text-xs">
-            <div class="font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">All Stops - {{this.routeStopsCount}}</div>
+            <div class="font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">{{t
+                    "fleetops-ui.components.order.details.route.all-stops"
+                    routeStopsCount=this.routeStopsCount
+                }}</div>
             <div class="flex min-w-0 items-center gap-2 font-semibold text-gray-700 dark:text-gray-200">
                 <span>
                     {{#if this.hasTrackingDistance}}

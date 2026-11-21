@@ -71,7 +71,7 @@ export default class OrderRouteEditorComponent extends Component {
     get returnStop() {
         return {
             label: 'R',
-            title: 'Return',
+            title: this.intl.t('fleetops-ui.js.components.order.route-editor.return'),
             badgeStyle: this.badgeStyleForColor('#6B7280'),
         };
     }

@@ -1,9 +1,9 @@
 <div class="fleet-ops-control-hub" data-test-fleet-ops-maintenance-hub>
     <section class="fleet-ops-control-hub-header">
         <div class="fleet-ops-control-hub-header-copy">
-            <div class="fleet-ops-control-hub-eyebrow">Maintenance</div>
-            <h1 class="fleet-ops-control-hub-title">Maintenance Hub</h1>
-            <p class="fleet-ops-control-hub-subtitle">Plan recurring service, coordinate work orders, and keep assets ready for daily operations.</p>
+            <div class="fleet-ops-control-hub-eyebrow">{{t "fleetops-ui.templates.maintenance.index.maintenance"}}</div>
+            <h1 class="fleet-ops-control-hub-title">{{t "fleetops-ui.templates.maintenance.index.maintenance-hub"}}</h1>
+            <p class="fleet-ops-control-hub-subtitle">{{t "fleetops-ui.templates.maintenance.index.plan-recurring-service-coordinate-work-orders"}}</p>
         </div>
         <div class="fleet-ops-control-hub-header-actions">
             <Button @icon="refresh" @size="sm" @helpText={{t "common.reload"}} @onClick={{perform this.loadHub}} />
@@ -19,7 +19,7 @@
                         <div class="fleet-ops-control-hub-kpi-value">{{kpi.value}}</div>
                         <div class="fleet-ops-control-hub-kpi-caption">{{kpi.caption}}</div>
                         <div class="fleet-ops-control-hub-kpi-action">
-                            <span>Open {{kpi.label}}</span>
+                            <span>{{t "fleetops-ui.templates.maintenance.index.open" label=kpi.label}}</span>
                             <FaIcon @icon="arrow-right" />
                         </div>
                     </div>
@@ -59,8 +59,8 @@
                 <div class="fleet-ops-control-hub-panel">
                     <div class="fleet-ops-control-hub-panel-header">
                         <div>
-                            <h2>Action Queue</h2>
-                            <p>Signals from schedules, work orders, parts, and equipment.</p>
+                            <h2>{{t "fleetops-ui.templates.maintenance.index.action-queue"}}</h2>
+                            <p>{{t "fleetops-ui.templates.maintenance.index.signals-from-schedules-work-orders-parts"}}</p>
                         </div>
                     </div>
 
@@ -90,15 +90,15 @@
                 <div class="fleet-ops-control-hub-doc-note">
                     <div class="fleet-ops-control-hub-doc-note-heading">
                         <FaIcon @icon="lightbulb" />
-                        <span>Guides</span>
+                        <span>{{t "fleetops-ui.templates.maintenance.index.guides"}}</span>
                     </div>
-                    <p class="fleet-ops-control-hub-doc-note-copy">Read the guide before changing maintenance workflows.</p>
+                    <p class="fleet-ops-control-hub-doc-note-copy">{{t "fleetops-ui.templates.maintenance.index.read-the-guide-before-changing-maintenance"}}</p>
                     <div class="fleet-ops-control-hub-doc-grid">
                         {{#each this.docs as |doc|}}
                             <button type="button" class="fleet-ops-control-hub-doc-link" {{on "click" (fn this.openDocs doc)}}>
                                 <FaIcon @icon={{doc.icon}} />
                                 <span class="fleet-ops-control-hub-doc-copy">
-                                    <strong>Read the guide on {{doc.label}}</strong>
+                                    <strong>{{t "fleetops-ui.templates.maintenance.index.read-the-guide-on" label=doc.label}}</strong>
                                     <small>{{doc.description}}</small>
                                 </span>
                             </button>

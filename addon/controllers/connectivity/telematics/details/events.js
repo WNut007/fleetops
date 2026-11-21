@@ -1,3 +1,4 @@
+import { localizeOptions } from '../../../../utils/fleet-ops-options';
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { buildIdentityStub } from '../../../../utils/identity-cell-resource';
@@ -80,8 +81,8 @@ export default class ConnectivityTelematicsDetailsEventsController extends Contr
                 return {
                     tone: 'info',
                     icon: 'filter',
-                    title: 'No events match these filters',
-                    message: 'Clear the current search and filters to return to all events for this connection.',
+                    title: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.events.no-events-match-these-filters'),
+                    message: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.events.clear-the-current-search-and-filters'),
                     primaryText: 'Clear filters',
                     primaryIcon: 'filter',
                     primaryAction: this.clearFilters,
@@ -90,8 +91,8 @@ export default class ConnectivityTelematicsDetailsEventsController extends Contr
                 return {
                     tone: 'info',
                     icon: 'list',
-                    title: 'No telemetry events yet',
-                    message: 'Events arrive through provider webhooks or ingestion jobs after devices begin reporting telemetry.',
+                    title: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.events.no-telemetry-events-yet'),
+                    message: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.events.events-arrive-through-provider-webhooks-or'),
                     primaryText: 'Refresh',
                     primaryIcon: 'refresh',
                     primaryAction: this.refresh,
@@ -104,10 +105,30 @@ export default class ConnectivityTelematicsDetailsEventsController extends Contr
 
     get metrics() {
         return [
-            { label: 'Recent events', value: this.model?.meta?.total ?? this.events.length, icon: 'list', accentClass: 'fleetops-connectivity-kpi-accent-blue' },
-            { label: 'Warnings', value: this.warningEventsCount, icon: 'triangle-exclamation', accentClass: 'fleetops-connectivity-kpi-accent-amber' },
-            { label: 'Unprocessed', value: this.unprocessedEventsCount, icon: 'clock', accentClass: 'fleetops-connectivity-kpi-accent-rose' },
-            { label: 'Devices reporting', value: this.deviceCount, icon: 'microchip', accentClass: 'fleetops-connectivity-kpi-accent-green' },
+            {
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.events.recent-events'),
+                value: this.model?.meta?.total ?? this.events.length,
+                icon: 'list',
+                accentClass: 'fleetops-connectivity-kpi-accent-blue',
+            },
+            {
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.events.warnings'),
+                value: this.warningEventsCount,
+                icon: 'triangle-exclamation',
+                accentClass: 'fleetops-connectivity-kpi-accent-amber',
+            },
+            {
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.events.unprocessed'),
+                value: this.unprocessedEventsCount,
+                icon: 'clock',
+                accentClass: 'fleetops-connectivity-kpi-accent-rose',
+            },
+            {
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.events.devices-reporting'),
+                value: this.deviceCount,
+                icon: 'microchip',
+                accentClass: 'fleetops-connectivity-kpi-accent-green',
+            },
         ];
     }
 
@@ -131,7 +152,7 @@ export default class ConnectivityTelematicsDetailsEventsController extends Contr
         return [
             {
                 sticky: true,
-                label: 'Event',
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.events.event'),
                 valuePath: 'event_type',
                 cellComponent: 'table/cell/anchor',
                 action: this.deviceEventActions.transition.view,
@@ -143,7 +164,7 @@ export default class ConnectivityTelematicsDetailsEventsController extends Contr
                 filterComponent: 'filter/string',
             },
             {
-                label: 'Device',
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.events.device'),
                 valuePath: 'device_name',
                 cellComponent: 'cell/device-identity',
                 permission: 'fleet-ops view device',
@@ -161,7 +182,7 @@ export default class ConnectivityTelematicsDetailsEventsController extends Contr
                 query: { telematic_uuid: this.telematic?.id },
             },
             {
-                label: 'Provider',
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.events.provider'),
                 valuePath: 'provider',
                 cellClassNames: 'uppercase',
                 resizable: true,
@@ -171,7 +192,7 @@ export default class ConnectivityTelematicsDetailsEventsController extends Contr
                 filterComponent: 'filter/string',
             },
             {
-                label: 'Severity',
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.events.severity'),
                 valuePath: 'severity',
                 cellComponent: 'table/cell/status',
                 resizable: true,
@@ -179,12 +200,12 @@ export default class ConnectivityTelematicsDetailsEventsController extends Contr
                 filterable: true,
                 filterParam: 'severity',
                 filterComponent: 'filter/multi-option',
-                filterOptions: severityOptions,
+                filterOptions: localizeOptions(this.intl, 'local.controllers.connectivity.telematics.details.events.severityOptions', severityOptions),
                 filterOptionLabel: 'label',
                 filterOptionValue: 'value',
             },
             {
-                label: 'Processed',
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.events.processed'),
                 valuePath: 'processedAt',
                 sortParam: 'processed_at',
                 resizable: true,
@@ -193,14 +214,14 @@ export default class ConnectivityTelematicsDetailsEventsController extends Contr
                 filterParam: 'processed',
                 filterComponent: 'filter/multi-option',
                 filterOptions: [
-                    { label: 'Processed', value: 'processed' },
-                    { label: 'Unprocessed', value: 'unprocessed' },
+                    { label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.events.processed'), value: 'processed' },
+                    { label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.events.unprocessed'), value: 'unprocessed' },
                 ],
                 filterOptionLabel: 'label',
                 filterOptionValue: 'value',
             },
             {
-                label: 'Occurred',
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.events.occurred'),
                 valuePath: 'occurredAt',
                 sortParam: 'occurred_at',
                 resizable: true,
@@ -236,7 +257,7 @@ export default class ConnectivityTelematicsDetailsEventsController extends Contr
                         permission: 'fleet-ops view device-event',
                     },
                     {
-                        label: 'Mark processed',
+                        label: this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.events.mark-processed'),
                         fn: this.markProcessed,
                         permission: 'fleet-ops update device-event',
                     },

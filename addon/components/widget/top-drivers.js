@@ -1,3 +1,4 @@
+import { localizeOptions } from '../../utils/fleet-ops-options';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
@@ -11,6 +12,7 @@ const SORTS = [
 ];
 
 export default class WidgetTopDriversComponent extends Component {
+    @service intl;
     static widgetId = 'fleet-ops-top-drivers-widget';
 
     @service fetch;
@@ -19,7 +21,7 @@ export default class WidgetTopDriversComponent extends Component {
     @tracked data = null;
     @tracked error = null;
 
-    sorts = SORTS;
+    sorts = localizeOptions(this.intl, 'local.components.widget.top-drivers.SORTS', SORTS);
 
     constructor() {
         super(...arguments);

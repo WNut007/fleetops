@@ -10,6 +10,7 @@ import { startOfWeek, endOfWeek, format } from 'date-fns';
 import getModelName from '@fleetbase/ember-core/utils/get-model-name';
 
 export default class PositionsReplayComponent extends Component {
+    @service intl;
     @service store;
     @service fetch;
     @service positionPlayback;
@@ -238,12 +239,12 @@ export default class PositionsReplayComponent extends Component {
 
     @action startReplay() {
         if (this.positions.length === 0) {
-            this.notifications.warning('No positions to replay');
+            this.notifications.warning(this.intl.t('fleetops-ui.js.components.positions-replay.no-positions-to-replay'));
             return;
         }
 
         if (this.isReplaying && !this.isPaused) {
-            this.notifications.info('Replay is already running');
+            this.notifications.info(this.intl.t('fleetops-ui.js.components.positions-replay.replay-is-already-running'));
             return;
         }
 
@@ -303,7 +304,7 @@ export default class PositionsReplayComponent extends Component {
     /** Tasks */
     @task *loadPositions() {
         if (!this.args.resource) {
-            this.notifications.warning('No resource provided for position query');
+            this.notifications.warning(this.intl.t('fleetops-ui.js.components.positions-replay.no-resource-provided-for-position-query'));
             return;
         }
 
@@ -374,12 +375,12 @@ export default class PositionsReplayComponent extends Component {
      */
     #initializeReplay() {
         if (!this.args.resource) {
-            this.notifications.warning('No resource provided for replay');
+            this.notifications.warning(this.intl.t('fleetops-ui.js.components.positions-replay.no-resource-provided-for-replay'));
             return;
         }
 
         if (this.positions.length === 0) {
-            this.notifications.warning('No positions to replay');
+            this.notifications.warning(this.intl.t('fleetops-ui.js.components.positions-replay.no-positions-to-replay'));
             return;
         }
 
@@ -392,7 +393,7 @@ export default class PositionsReplayComponent extends Component {
             callback: (data) => {
                 if (data.type === 'complete') {
                     // Replay completed
-                    this.notifications.success('Replay completed');
+                    this.notifications.success(this.intl.t('fleetops-ui.js.components.positions-replay.replay-completed'));
                 }
             },
         });

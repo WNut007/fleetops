@@ -2,13 +2,21 @@
     <section class="flex-shrink-0 border-b border-gray-200 bg-white px-4 py-4 shadow-sm dark:border-gray-700 dark:bg-gray-900 dark:shadow-sm dark:shadow-black/30 md:px-6">
         <div class="mx-auto flex w-full max-w-6xl flex-col gap-3 md:flex-row md:items-start md:justify-between">
             <div class="min-w-0">
-                <div class="text-xs font-semibold uppercase text-gray-400 dark:text-gray-500">Fuel integration settings</div>
-                <h1 class="truncate text-lg font-bold text-gray-900 dark:text-gray-100">Edit {{or @model.name @model.provider}}</h1>
-                <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">Update credentials, sync behavior, and matching rules for this fuel integration.</p>
+                <div class="text-xs font-semibold uppercase text-gray-400 dark:text-gray-500">{{t "fleetops-ui.templates.connectivity.fuel-providers.edit.fuel-integration-settings"}}</div>
+                <h1 class="truncate text-lg font-bold text-gray-900 dark:text-gray-100">{{t
+                        "fleetops-ui.templates.connectivity.fuel-providers.edit.edit"
+                        value=(or @model.name @model.provider)
+                    }}</h1>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">{{t "fleetops-ui.templates.connectivity.fuel-providers.edit.update-credentials-sync-behavior-and-matching"}}</p>
             </div>
             <div class="flex items-center gap-2">
-                <Button @icon="eye" @text="View" @size="sm" @onClick={{transition-to "connectivity.fuel-providers.details" @model}} />
-                <Button @icon="times" @text="Cancel" @size="sm" @onClick={{this.cancel}} />
+                <Button
+                    @icon="eye"
+                    @text={{t "fleetops-ui.templates.connectivity.fuel-providers.edit.view"}}
+                    @size="sm"
+                    @onClick={{transition-to "connectivity.fuel-providers.details" @model}}
+                />
+                <Button @icon="times" @text={{t "fleetops-ui.templates.connectivity.fuel-providers.edit.cancel"}} @size="sm" @onClick={{this.cancel}} />
             </div>
         </div>
     </section>
@@ -16,8 +24,8 @@
     <FuelIntegration::Form
         @resource={{@model}}
         @isEditing={{true}}
-        @saveLabel="Save Changes"
-        @footerHelp="Changes affect credential tests, transaction sync, matching, and Fuel Report creation."
+        @saveLabel={{t "fleetops-ui.templates.connectivity.fuel-providers.edit.save-changes"}}
+        @footerHelp={{t "fleetops-ui.templates.connectivity.fuel-providers.edit.changes-affect-credential-tests-transaction-sync"}}
         @isSaving={{this.save.isRunning}}
         @onCancel={{this.cancel}}
         @onSave={{perform this.save @model}}

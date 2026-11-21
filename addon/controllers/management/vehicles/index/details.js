@@ -14,17 +14,17 @@ export default class ManagementVehiclesIndexDetailsController extends Controller
             {
                 id: 'index',
                 route: 'management.vehicles.index.details.index',
-                label: 'Overview',
+                label: this.intl.t('fleetops-ui.js.controllers.management.vehicles.index.details.overview'),
             },
             {
                 id: 'positions',
                 route: 'management.vehicles.index.details.positions',
-                label: 'Positions',
+                label: this.intl.t('fleetops-ui.js.controllers.management.vehicles.index.details.positions'),
             },
             {
                 id: 'devices',
                 route: 'management.vehicles.index.details.devices',
-                label: 'Devices',
+                label: this.intl.t('fleetops-ui.js.controllers.management.vehicles.index.details.devices'),
             },
             {
                 id: 'trailers',
@@ -39,17 +39,17 @@ export default class ManagementVehiclesIndexDetailsController extends Controller
             {
                 id: 'schedules',
                 route: 'management.vehicles.index.details.schedules',
-                label: 'Schedules',
+                label: this.intl.t('fleetops-ui.js.controllers.management.vehicles.index.details.schedules'),
             },
             {
                 id: 'work-orders',
                 route: 'management.vehicles.index.details.work-orders',
-                label: 'Work Orders',
+                label: this.intl.t('fleetops-ui.js.controllers.management.vehicles.index.details.work-orders'),
             },
             {
                 id: 'maintenance-history',
                 route: 'management.vehicles.index.details.maintenance-history',
-                label: 'Maintenance',
+                label: this.intl.t('fleetops-ui.js.controllers.management.vehicles.index.details.maintenance'),
             },
             {
                 id: 'inspections',
