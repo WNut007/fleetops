@@ -63,7 +63,7 @@ common:
   unable-to-load-route: โหลดตัวอย่างเส้นทางไม่ได้
 menu:
   operations: ปฏิบัติการ
-  dashboard: แดชบอร์ด
+  dashboard: Dashboard
   radar: Radar
   orders: ออเดอร์
   service-rates: อัตราค่าบริการ
