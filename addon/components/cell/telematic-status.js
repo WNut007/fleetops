@@ -1,6 +1,8 @@
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 
 export default class CellTelematicStatusComponent extends Component {
+    @service intl;
     get status() {
         return this.args.row?.status;
     }
@@ -25,15 +27,15 @@ export default class CellTelematicStatusComponent extends Component {
         switch (this.status) {
             case 'active':
             case 'connected':
-                return 'Connected';
+                return this.intl.t('fleetops-ui.js.components.cell.telematic-status.connected');
             case 'synchronizing':
-                return 'Syncing';
+                return this.intl.t('fleetops-ui.js.components.cell.telematic-status.syncing');
             case 'initialized':
-                return 'Not tested';
+                return this.intl.t('fleetops-ui.js.components.cell.telematic-status.not-tested');
             case 'error':
-                return 'Needs attention';
+                return this.intl.t('fleetops-ui.js.components.cell.telematic-status.needs-attention');
             default:
-                return this.status ?? 'Unknown';
+                return this.status ?? this.intl.t('fleetops-ui.js.components.cell.telematic-status.unknown');
         }
     }
 }

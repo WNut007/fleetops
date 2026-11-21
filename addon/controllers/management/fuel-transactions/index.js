@@ -39,26 +39,26 @@ export default class ManagementFuelTransactionsIndexController extends Controlle
 
     get emptyStateTitle() {
         if (this.sync_status === 'unmatched') {
-            return 'No unmatched fuel transactions';
+            return this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.no-unmatched-fuel-transactions');
         }
 
         if (this.connection) {
-            return 'No transactions imported for this integration';
+            return this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.no-transactions-imported-for-this-integration');
         }
 
-        return 'No fuel transactions imported yet';
+        return this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.no-fuel-transactions-imported-yet');
     }
 
     get emptyStateMessage() {
         if (this.sync_status === 'unmatched') {
-            return 'Fleet-Ops did not find imported provider bills that still need vehicle or trip matching.';
+            return this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.fleet-ops-did-not-find-imported');
         }
 
         if (this.connection) {
-            return 'Run a sync from the fuel integration detail page to import provider bills into this ledger.';
+            return this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.run-a-sync-from-the-fuel');
         }
 
-        return 'Connect PetroApp or another fuel integration, then run a transaction sync. Imported provider bills appear here before linked Fuel Reports are created.';
+        return this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.connect-petroapp-or-another-fuel-integration');
     }
 
     get actionButtons() {
@@ -89,7 +89,7 @@ export default class ManagementFuelTransactionsIndexController extends Controlle
         return [
             {
                 id: 'bulk-reprocess',
-                label: `Reprocess ${selected.length} selected`,
+                label: this.intl.t('fleetops-ui.js.controllers.management.fuel-transactions.index.reprocess-length-selected', { length: selected.length }),
                 fn: () => this.confirmAction('reprocess', selected),
                 permission: 'fleet-ops update fuel-provider-transaction',
             },

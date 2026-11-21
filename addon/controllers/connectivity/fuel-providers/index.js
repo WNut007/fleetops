@@ -50,7 +50,7 @@ export default class ConnectivityFuelProvidersIndexController extends Controller
 
         return [
             {
-                label: `Sync ${selected.length} selected`,
+                label: this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.index.sync-length-selected', { length: selected.length }),
                 fn: () => selected.forEach((connection) => this.syncConnection(connection)),
                 permission: 'fleet-ops sync fuel-provider-connection',
             },

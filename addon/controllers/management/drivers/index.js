@@ -420,7 +420,7 @@ export default class ManagementDriversIndexController extends Controller {
         this.issueActions.modal.create({
             driver,
             driver_uuid: driver.id,
-            title: `Issue reported for ${driver.name}`,
+            title: this.intl.t('fleetops-ui.js.controllers.management.drivers.index.issue-reported-for-name', { name: driver.name }),
         });
     }
 }

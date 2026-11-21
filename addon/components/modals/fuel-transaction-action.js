@@ -36,7 +36,9 @@ export default class FuelTransactionActionComponent extends Component {
         return this.mode === 'vehicle';
     }
     get selectionLabel() {
-        return this.isVehicle ? 'Vehicle' : 'Order / Trip';
+        return this.isVehicle
+            ? this.intl.t('fleetops-ui.js.components.modals.fuel-transaction-action.vehicle')
+            : this.intl.t('fleetops-ui.js.components.modals.fuel-transaction-action.order-trip');
     }
     get selectedName() {
         if (this.mode === 'order') {

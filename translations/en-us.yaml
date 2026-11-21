@@ -6478,6 +6478,7 @@ fleetops-ui:
                     straight-line-estimate-no-routing-calls: Straight-line estimate (no routing calls)
                     valhalla: Valhalla
                     vroom: VROOM
+                    the-osrm-server-organizations-use-unless: The OSRM server organizations use unless they set their own. The public demo server (router.project-osrm.org) only draws map routes; order distance and ETAs never use it.{environment}
                 telematics-settings:
                     system-telematics-settings-saved: System telematics settings saved.
                 tracking-page-settings:
@@ -6493,6 +6494,7 @@ fleetops-ui:
                     new-place: New Place
                     save-changes: Save Changes
                     something-went-wrong-trying-to-complete: Something went wrong trying to complete purchase.
+                    complete-payment-for-name-service: Complete Payment for {name} Service
                 orders:
                     delivery-instructions-saved: Delivery instructions saved.
                     done: Done
@@ -6506,12 +6508,16 @@ fleetops-ui:
                     processing: Processing
                     provider: Provider
                     severity: Severity
+                    processed: Processed
+                    unprocessed: Unprocessed
             device:
                 details:
                     connection: Connection
                     events: Events
                     sensors: Sensors
                     vehicle: Vehicle
+                    unknown: Unknown
+                    unattached: Unattached
                 panel-tabs:
                     events:
                         code: Code
@@ -6529,6 +6535,9 @@ fleetops-ui:
                         type: Type
                         unit: Unit
                         value: Value
+                telemetry:
+                    no-valid-position: No valid position
+                    ageseconds-s-ago: '{ageSeconds}s ago'
             driver:
                 details:
                     edit: Edit
@@ -6543,6 +6552,14 @@ fleetops-ui:
                     drivers: Drivers
                     online: Online
                     vehicles: Vehicles
+                    collapse-all: Collapse all
+                    expand-all: Expand all
+                    no-matching-resources: No matching resources
+                    no-fleet-resources-assigned: No fleet resources assigned
+                    clear-the-current-search-or-filter: Clear the current search or filter to show the full fleet hierarchy.
+                    assign-drivers-or-vehicles-to-make: Assign drivers or vehicles to make this fleet operationally useful.
+                    value-value2-drivers-online-value3-value4: '{value}/{value2} drivers online - {value3}/{value4} vehicles online'
+                    offline: Offline
             fuel-integration:
                 form:
                     choose-a-fuel-integration-provider-first: Choose a fuel integration provider first.
@@ -6554,6 +6571,14 @@ fleetops-ui:
                     sync: Sync
                     test: Test
                     unable-to-copy-diagnostics: Unable to copy diagnostics.
+                    sandbox: Sandbox
+                    production: Production
+                    testing-provider-credentials: Testing provider credentials...
+                    connection-verified: Connection verified
+                    connection-failed: Connection failed
+                    ready-to-test: Ready to test
+                    run-a-live-credential-test-before: Run a live credential test before saving so operators know the integration can import fuel data.
+                    the-configured-credentials-are-being-checked: The configured credentials are being checked with the fuel integration provider.
                 hub:
                     connected-integrations: Connected integrations
                     last-sync: Last sync
@@ -6563,6 +6588,7 @@ fleetops-ui:
                     review-sync: Review sync
                     review-matches: Review matches
                     open-ledger: Open ledger
+                    not-synced: Not synced
             fuel-transaction-status:
                 unknown: Unknown
             layout:
@@ -6583,6 +6609,11 @@ fleetops-ui:
                         create-driver: Create driver
                         create-vehicle: Create vehicle
                         create-fleet: Create fleet
+                        onlinedrivercount-drivers-online: '{onlineDriverCount} drivers online'
+                        onlinevehiclecount-vehicles-online: '{onlineVehicleCount} vehicles online'
+                        no-resources-match-this-search-2: No resources match this search.
+                        no-activetab-available: No {activeTab} available.
+                        value-drivers-value2-vehicles: '{value} drivers - {value2} vehicles'
             maintenance:
                 cost-panel:
                     please-enter-a-description-for-the: Please enter a description for the line item.
@@ -6616,17 +6647,26 @@ fleetops-ui:
                         replay-is-already-running: Replay is already running
                         speed-km-h: Speed (km/h)
                         timestamp: Timestamp
+                        position-value: Position {value}
                     positions: Positions
                     vehicles: Vehicles
+                    geofence-event-listing:
+                        service-area: Service Area
+                        zone: Zone
+                        geofence: Geofence
             modals:
                 convert-customer-to-vendor:
                     customer-converted-to-vendor-account: Customer converted to vendor account.
                 fuel-connection-diagnostics:
                     connection-diagnostics-copied: Connection diagnostics copied.
                     unable-to-copy-diagnostics: Unable to copy diagnostics.
+                    run-a-connection-test-using-this: Run a connection test using this integration’s saved credentials. This checks provider access without importing transactions.
+                    waiting-for-the-provider-to-respond: Waiting for the provider to respond…
                 fuel-transaction-action:
                     refresh-the-ledger-to-see-the: Refresh the ledger to see the latest transactions.
                     the-change-was-saved-but-the: The change was saved, but the displayed transaction could not be refreshed. Refresh the ledger to see its latest state.
+                    vehicle: Vehicle
+                    order-trip: Order / Trip
                 issue-assign:
                     customers-cannot-be-assigned-to-issues: Customers cannot be assigned to issues.
                     issue-assignment-updated: Issue assignment updated.
@@ -6637,6 +6677,7 @@ fleetops-ui:
                     issue-status-updated: Issue status updated.
                 order-change-destination:
                     select-a-destination-first: Select a destination first.
+                    current-destination-changed-to-value: Current destination changed to {value}.
                 telematic-connection-diagnostics:
                     awaiting-provider-response: Awaiting provider response
                     connection-diagnostics-copied: Connection diagnostics copied.
@@ -6645,15 +6686,29 @@ fleetops-ui:
                     provider-response-received: Provider response received
                     sending-saved-provider-connection-test-request: Sending saved provider connection test request
                     unable-to-copy-connection-diagnostics: Unable to copy connection diagnostics.
+                    provider: Provider
+                    testing-provider-connection: Testing provider connection...
+                    connection-failed: Connection failed
+                    ready-to-test: Ready to test
+                    waiting-for-the-provider-to-accept: Waiting for the provider to accept the saved credentials.
+                    run-a-connection-test-to-verify: Run a connection test to verify the saved provider credentials.
+                    provider-selected-providerlabel-value: 'Provider selected: {providerLabel}{value}'
+                    provider-metadata-value: 'Provider metadata: {value}'
+                    connection-failed-value: Connection failed{value}
                 update-order-activity:
                     photo-proof-of-delivery-is-still: Photo proof of delivery is still uploading.
                     photo-proof-of-delivery-uploaded: Photo proof of delivery uploaded.
                     upload-photo-proof-of-delivery-or: Upload photo proof of delivery or choose to bypass proof of delivery.
+                    order-activity-has-been-updated-to: Order activity has been updated to {status}
+                add-driver-shift:
+                    weekly-on-days-times: Weekly on {days}{times}
             orchestrator-workbench:
                 allocate: Allocate
             order-config-manager:
                 custom-fields:
                     untitled-field: Untitled Field
+                details:
+                    order-config-name-was-deleted: Order config {name} was deleted.
             order:
                 details:
                     metadata:
@@ -6678,6 +6733,27 @@ fleetops-ui:
                         provider: Provider
                         traffic-aware: Traffic aware
                         warnings: Warnings
+                        order-has-been-completed: Order has been completed.
+                        order-has-been-canceled: Order has been canceled.
+                        order-has-been-dispatched-estimated-start: Order has been dispatched. Estimated start is based on the assigned driver route to the first stop.
+                        live-eta-will-begin-once-the: Live ETA will begin once the order is started.
+                        order-completed: Order completed
+                        order-canceled: Order canceled
+                        order-dispatched: Order dispatched
+                        tracking-pending-start: Tracking pending start
+                        pending-driver-assignment: Pending driver assignment
+                        pending-gps-fix: Pending GPS fix
+                        pending-start: Pending start
+                        driver-live: Driver live
+                        driver-stale: Driver stale
+                        driver-missing-gps: Driver missing GPS
+                        no-driver-assigned: No driver assigned
+                        driver-offline: Driver offline
+                        now-heading-to: NOW HEADING TO
+                        now-heading-to-stop-activestopindex-of: NOW HEADING TO - STOP {activeStopIndex} OF {totalStops}
+                        stale-driver-location: Stale driver location
+                        tracking-estimate-warning: Tracking estimate warning
+                        1-warning: 1 warning
                 route-editor:
                     return: Return
             part:
@@ -6715,6 +6791,7 @@ fleetops-ui:
                     synced: Synced
                     syncing: Syncing
                     verified: Verified
+                    unattached-devices-count-synced-devices-are: '{unattached_devices_count} synced devices are waiting to be attached.'
                 form:
                     awaiting-provider-response: Awaiting provider response
                     choose-a-provider-to-continue: Choose a provider to continue.
@@ -6735,6 +6812,17 @@ fleetops-ui:
                     test-connection: Test Connection
                     unable-to-copy-connection-diagnostics: Unable to copy connection diagnostics.
                     webhook: Webhook
+                    continue: Continue
+                    testing-provider-credentials: Testing provider credentials...
+                    connection-failed: Connection failed
+                    ready-to-test: Ready to test
+                    sending-the-configured-credentials-to-the: Sending the configured credentials to the provider and waiting for a response.
+                    run-a-connection-test-to-verify: Run a connection test to verify credentials before saving. You can still continue if the provider does not support live credential testing.
+                    provider-selected-providerlabel-value: 'Provider selected: {providerLabel}{value}'
+                    credentials-prepared-length-required-fields-present: 'Credentials prepared: {length} required fields present'
+                    credentials-incomplete-length-required-fields-missing: 'Credentials incomplete: {length} required fields missing'
+                    provider-metadata-value: 'Provider metadata: {value}'
+                    connection-failed-value: Connection failed{value}
                 hub:
                     health-warnings: Health warnings
                     provider-count: Provider count
@@ -6763,6 +6851,43 @@ fleetops-ui:
                     contact: Contact
                     user: User
                     vendor: Vendor
+            ai:
+                create-order-preview:
+                    this-order-creation-preview-was-cancelled: This order creation preview was cancelled.
+                    fleet-ops-order-was-created: Fleet-Ops order was created.
+                    select-order-type: Select order type
+                    add-schedule: Add schedule
+                    add-pickup: Add pickup
+                    add-dropoff: Add dropoff
+                    assign-driver: Assign driver
+                    assign-vehicle: Assign vehicle
+                    add-order-notes: Add order notes
+                route-preview-map:
+                    unable-to-calculate-route: Unable to calculate route
+                    unable-to-preview-the-route-right: Unable to preview the route right now.
+                    select-pickup-and-dropoff-with-coordinates: Select pickup and dropoff with coordinates to preview the route.
+            cell:
+                telematic-status:
+                    connected: Connected
+                    syncing: Syncing
+                    not-tested: Not tested
+                    needs-attention: Needs attention
+                    unknown: Unknown
+            issue:
+                details:
+                    issue-closed: Issue closed
+                    issue-re-opened: Issue re-opened
+                    awaiting-resolution: Awaiting resolution
+                    this-issue-has-been-closed-and: This issue has been closed and no further action is currently required.
+                    this-issue-was-previously-closed-and: This issue was previously closed and has been re-opened for follow-up.
+                    no-resolution-details-have-been-recorded: No resolution details have been recorded yet.
+                panel-header:
+                    issue-reported-on-value: Issue reported on {value}
+            home:
+                getting-started-guidance:
+                    done: Done
+                    next: Next
+                    not-started: Not started
         controllers:
             analytics:
                 reports:
@@ -6818,6 +6943,9 @@ fleetops-ui:
                         provider: Provider
                         severity: Severity
                         state: State
+                    details:
+                        processed: Processed
+                        unprocessed: Unprocessed
                 fuel-providers:
                     details:
                         close: Close
@@ -6832,6 +6960,15 @@ fleetops-ui:
                         sync: Sync
                         test-fuel-connection: Test Fuel Connection
                         transactions: Transactions
+                        sandbox-test-account: Sandbox / test account
+                        production-account: Production account
+                        draft: Draft
+                        configured: Configured
+                        connected: Connected
+                        active: Active
+                        needs-attention: Needs attention
+                        disabled: Disabled
+                        unknown: Unknown
                     edit:
                         fuel-integration-settings-saved: Fuel integration settings saved.
                     index:
@@ -6852,6 +6989,7 @@ fleetops-ui:
                         test-connection: Test Connection
                         test-fuel-connection: Test Fuel Connection
                         unmatched-in-last-sync: Unmatched in last sync
+                        sync-length-selected: Sync {length} selected
                     new:
                         fuel-integration-connected: Fuel integration connected.
                 sensors:
@@ -6958,6 +7096,13 @@ fleetops-ui:
                         test: Test
                         test-connection: Test Connection
                         vehicle-attachments: Vehicle Attachments
+                        not-tested: Not tested
+                        connected: Connected
+                        syncing: Syncing
+                        needs-attention: Needs attention
+                        unknown: Unknown
+                        verified: Verified
+                        failed: Failed
                     edit:
                         close: Close
                         run-test: Run Test
@@ -7037,6 +7182,7 @@ fleetops-ui:
                 drivers:
                     index:
                         change-the-layout: Change the layout
+                        issue-reported-for-name: Issue reported for {name}
                 fleets:
                     index:
                         details:
@@ -7072,6 +7218,13 @@ fleetops-ui:
                         transaction: Transaction
                         trip: Trip
                         vehicle: Vehicle
+                        no-unmatched-fuel-transactions: No unmatched fuel transactions
+                        no-transactions-imported-for-this-integration: No transactions imported for this integration
+                        no-fuel-transactions-imported-yet: No fuel transactions imported yet
+                        fleet-ops-did-not-find-imported: Fleet-Ops did not find imported provider bills that still need vehicle or trip matching.
+                        run-a-sync-from-the-fuel: Run a sync from the fuel integration detail page to import provider bills into this ledger.
+                        connect-petroapp-or-another-fuel-integration: Connect PetroApp or another fuel integration, then run a transaction sync. Imported provider bills appear here before linked Fuel Reports are created.
+                        reprocess-length-selected: Reprocess {length} selected
                 issues:
                     index:
                         details:
@@ -7201,6 +7354,8 @@ fleetops-ui:
                     kilometers: Kilometers
                     miles: Miles
                     routing-and-tracking-settings-saved: Routing and tracking settings saved.
+                    otherwise-this-organization-uses-osrmsystemhost: Otherwise this organization uses {osrmSystemHost}.
+                    otherwise-this-organization-uses-the-platform: Otherwise this organization uses the platform OSRM server.
         extension:
             active-orders: Active Orders
             average-revenue-per-completed-order-with: Average revenue per completed order with trend.
@@ -7277,6 +7432,8 @@ fleetops-ui:
                     onboard:
                         this-system-is-unable-to-acceot: This system is unable to acceot or process payments at this time, contact the system administrator to configure payments.
                         your-account-is-already-enabled-to: Your account is already enabled to accept payments.
+            home:
+                loading-fleet-ops: Loading Fleet-Ops...
         services:
             driver-scheduling:
                 availability-set-successfully: Availability set successfully
@@ -7306,12 +7463,15 @@ fleetops-ui:
                 issue-re-opened: Issue re-opened.
                 re-open-issue: Re-open Issue
                 this-will-move-the-issue-back: This will move the issue back into an active re-opened state and clear the active resolution date.
+                issue-reported-on-value: Issue reported on {value}
+                re-open-value: Re-open {value}?
             maintenance-schedule-actions:
                 add-to-google-calendar: Add to Google Calendar
                 download-ics: Download .ics
                 schedule-paused-successfully: Schedule paused successfully.
                 schedule-resumed-successfully: Schedule resumed successfully.
                 trigger-work-order-now: Trigger Work Order Now
+                work-order-value-created-from-schedule: Work order {value} created from schedule.
             order-import:
                 import-order-s-with-spreadsheets: Import order(s) with spreadsheets
                 start-upload: Start Upload
@@ -7326,6 +7486,11 @@ fleetops-ui:
                 service-area-required-to-create-zone: Service Area required to create Zone!
                 use-drawing-controls-to-the-right: Use drawing controls to the right to draw a service area, complete point connections to save service area.
                 use-the-drawing-controls-to-the: Use the drawing controls to the right to draw a zone within the service area, complete point connections to save the zone.
+                new-selectedlayertype-name-saved: New {selectedLayerType} ''{name}'' saved.
+                new-service-area-name-saved: New service area ''{name}'' saved.
+                new-zone-name-added-to-name2: New zone ''{name}'' added to ''{name2}'' service area.
+                service-area-value: Service Area ({value})
+                zone-value: Zone ({value})
             vehicle-actions:
                 devices: Devices
                 maintenance: Maintenance

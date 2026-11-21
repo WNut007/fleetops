@@ -196,7 +196,9 @@ export default class TelematicDetailsComponent extends Component {
             items.push({
                 icon: 'truck',
                 title: this.intl.t('fleetops-ui.js.components.telematic.details.devices-need-vehicles'),
-                description: `${resource.meta.unattached_devices_count} synced devices are waiting to be attached.`,
+                description: this.intl.t('fleetops-ui.js.components.telematic.details.unattached-devices-count-synced-devices-are', {
+                    unattached_devices_count: resource.meta.unattached_devices_count,
+                }),
                 status: 'warning',
             });
         }

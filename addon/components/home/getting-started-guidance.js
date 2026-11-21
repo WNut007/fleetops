@@ -10,6 +10,7 @@ const ACCENT_CLASS = {
 };
 
 export default class HomeGettingStartedGuidanceComponent extends Component {
+    @service intl;
     @service gettingStarted;
     @service router;
     @service docsPanel;
@@ -52,10 +53,12 @@ export default class HomeGettingStartedGuidanceComponent extends Component {
     @action
     statusText(step) {
         if (step.completed) {
-            return 'Done';
+            return this.intl.t('fleetops-ui.js.components.home.getting-started-guidance.done');
         }
 
-        return this.isActiveStep(step) ? 'Next' : 'Not started';
+        return this.isActiveStep(step)
+            ? this.intl.t('fleetops-ui.js.components.home.getting-started-guidance.next')
+            : this.intl.t('fleetops-ui.js.components.home.getting-started-guidance.not-started');
     }
 
     @action

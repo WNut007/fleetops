@@ -5,6 +5,7 @@ import { action } from '@ember/object';
 import { next } from '@ember/runloop';
 
 export default class MapDrawerGeofenceEventListingComponent extends Component {
+    @service intl;
     @service fetch;
     @service geofenceEventBus;
     @service currentUser;
@@ -81,14 +82,14 @@ export default class MapDrawerGeofenceEventListingComponent extends Component {
     @action
     geofenceTypeLabel(type) {
         if (type === 'service_area') {
-            return 'Service Area';
+            return this.intl.t('fleetops-ui.js.components.map.drawer.geofence-event-listing.service-area');
         }
 
         if (type === 'zone') {
-            return 'Zone';
+            return this.intl.t('fleetops-ui.js.components.map.drawer.geofence-event-listing.zone');
         }
 
-        return type ?? 'Geofence';
+        return type ?? this.intl.t('fleetops-ui.js.components.map.drawer.geofence-event-listing.geofence');
     }
 
     @action

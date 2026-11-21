@@ -419,7 +419,7 @@ export default class MapDrawerPositionListingComponent extends Component {
 
             this.mapManager.addMarker(overlayId, lat, lng, {
                 content: dot,
-                title: `Position ${index + 1}`,
+                title: this.intl.t('fleetops-ui.js.components.map.drawer.position-listing.position-value', { value: index + 1 }),
                 onClick: () => this.onPositionClicked(pos),
             });
             this.positionOverlayIds = [...this.positionOverlayIds, overlayId];

@@ -91,7 +91,9 @@ export default class ModalsOrderChangeDestinationComponent extends Component {
 
         try {
             const order = yield this.fetch.patch(`orders/set-destination/${this.order.id}/${waypointId}`);
-            this.notifications.success(`Current destination changed to ${waypoint.name ?? waypoint.address ?? waypointId}.`);
+            this.notifications.success(
+                this.intl.t('fleetops-ui.js.components.modals.order-change-destination.current-destination-changed-to-value', { value: waypoint.name ?? waypoint.address ?? waypointId })
+            );
 
             if (typeof this.args.options?.onChange === 'function') {
                 yield this.args.options.onChange(order, waypoint);

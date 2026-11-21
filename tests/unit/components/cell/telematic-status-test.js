@@ -1,8 +1,17 @@
 import { module, test } from 'qunit';
 import CellTelematicStatusComponent from 'dummy/components/cell/telematic-status';
 
+// The labels are translation keys whose last segment is the English label, e.g. ...telematic-status.not-tested.
+const intl = {
+    t(key) {
+        const text = key.split('.').pop().replace(/-/g, ' ');
+        return text.charAt(0).toUpperCase() + text.slice(1);
+    },
+};
+
 function makeStatusCell(status) {
     const component = Object.create(CellTelematicStatusComponent.prototype);
+    Object.defineProperty(component, 'intl', { value: intl });
     component.args = { row: { status } };
 
     return component;

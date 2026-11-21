@@ -764,7 +764,7 @@ export default class CustomerCreateOrderFormComponent extends Component {
             this,
             () => {
                 this.modalsManager.show('modals/service-quote-purchase-form', {
-                    title: `Complete Payment for ${this.orderConfig.name} Service`,
+                    title: this.intl.t('fleetops-ui.js.components.customer.create-order-form.complete-payment-for-name-service', { name: this.orderConfig.name }),
                     modalClass: 'service-quote-extension-purchase',
                     modalFooterClass: 'hidden-i',
                     serviceQuote,

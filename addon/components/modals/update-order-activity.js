@@ -191,7 +191,7 @@ export default class ModalsUpdateOrderActivityComponent extends Component {
 
             this.modalsManager.setOption('activityCreated', activity);
             this.modalsManager.setOption('proofCreated', this.hasUploadedProof ? this.proof : null);
-            this.notifications.success(`Order activity has been updated to ${activity.status}`);
+            this.notifications.success(this.intl.t('fleetops-ui.js.components.modals.update-order-activity.order-activity-has-been-updated-to', { status: activity.status }));
             modal.done();
         } catch (error) {
             this.notifications.serverError(error);

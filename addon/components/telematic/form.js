@@ -125,7 +125,7 @@ export default class TelematicFormComponent extends Component {
             return this.args.isSaving ? this.args.savingLabel : this.args.saveLabel;
         }
 
-        return 'Continue';
+        return this.intl.t('fleetops-ui.js.components.telematic.form.continue');
     }
 
     get primaryFooterIcon() {
@@ -171,27 +171,27 @@ export default class TelematicFormComponent extends Component {
 
     get connectionStateTitle() {
         if (this.connectionState === 'testing') {
-            return 'Testing provider credentials...';
+            return this.intl.t('fleetops-ui.js.components.telematic.form.testing-provider-credentials');
         }
 
         if (this.connectionState === 'success') {
-            return 'Connection verified';
+            return this.intl.t('fleetops-ui.js.components.telematic.form.connection-verified');
         }
 
         if (this.connectionState === 'failed') {
-            return 'Connection failed';
+            return this.intl.t('fleetops-ui.js.components.telematic.form.connection-failed');
         }
 
-        return 'Ready to test';
+        return this.intl.t('fleetops-ui.js.components.telematic.form.ready-to-test');
     }
 
     get connectionStateMessage() {
         if (this.connectionState === 'testing') {
-            return 'Sending the configured credentials to the provider and waiting for a response.';
+            return this.intl.t('fleetops-ui.js.components.telematic.form.sending-the-configured-credentials-to-the');
         }
 
         if (this.connectionState === 'idle') {
-            return 'Run a connection test to verify credentials before saving. You can still continue if the provider does not support live credential testing.';
+            return this.intl.t('fleetops-ui.js.components.telematic.form.run-a-connection-test-to-verify');
         }
 
         if (this.isDuplicateConnectionMessage) {
@@ -242,20 +242,23 @@ export default class TelematicFormComponent extends Component {
         entries.push({
             time: this.formatDiagnosticTime(startedAt),
             tone: 'muted',
-            text: `Provider selected: ${providerLabel}${providerKey ? ` (${providerKey})` : ''}`,
+            text: this.intl.t('fleetops-ui.js.components.telematic.form.provider-selected-providerlabel-value', {
+                providerLabel: providerLabel,
+                value: providerKey ? ` (${providerKey})` : '',
+            }),
         });
 
         if (this.areCredentialsValid) {
             entries.push({
                 time: this.formatDiagnosticTime(startedAt),
                 tone: 'muted',
-                text: `Credentials prepared: ${this.requiredCredentialFields.length} required fields present`,
+                text: this.intl.t('fleetops-ui.js.components.telematic.form.credentials-prepared-length-required-fields-present', { length: this.requiredCredentialFields.length }),
             });
         } else {
             entries.push({
                 time: this.formatDiagnosticTime(startedAt),
                 tone: 'warning',
-                text: `Credentials incomplete: ${this.missingCredentialFields.length} required fields missing`,
+                text: this.intl.t('fleetops-ui.js.components.telematic.form.credentials-incomplete-length-required-fields-missing', { length: this.missingCredentialFields.length }),
             });
         }
 
@@ -293,7 +296,9 @@ export default class TelematicFormComponent extends Component {
             entries.push({
                 time: this.formatDiagnosticTime(completedAt),
                 tone: 'muted',
-                text: `Provider metadata: ${this.connectionMetadataEntries.map((entry) => `${entry.label}=${entry.value}`).join(', ')}`,
+                text: this.intl.t('fleetops-ui.js.components.telematic.form.provider-metadata-value', {
+                    value: this.connectionMetadataEntries.map((entry) => `${entry.label}=${entry.value}`).join(', '),
+                }),
             });
         }
 
@@ -309,7 +314,9 @@ export default class TelematicFormComponent extends Component {
         entries.push({
             time: this.formatDiagnosticTime(completedAt),
             tone: 'danger',
-            text: `Connection failed${this.connectionTestResult?.message ? `: ${this.formatDiagnosticValue(this.connectionTestResult.message)}` : ''}`,
+            text: this.intl.t('fleetops-ui.js.components.telematic.form.connection-failed-value', {
+                value: this.connectionTestResult?.message ? `: ${this.formatDiagnosticValue(this.connectionTestResult.message)}` : '',
+            }),
         });
 
         return entries;

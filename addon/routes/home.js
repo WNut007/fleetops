@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 
 export default class HomeRoute extends Route {
+    @service intl;
     /**
      * Inject the `loader` service.
      *
@@ -11,7 +12,7 @@ export default class HomeRoute extends Route {
     @service loader;
 
     @action loading(transition) {
-        const loader = this.loader.show({ loadingMessage: `Loading Fleet-Ops...` });
+        const loader = this.loader.show({ loadingMessage: this.intl.t('fleetops-ui.js.routes.home.loading-fleet-ops') });
 
         transition.finally(() => {
             this.loader.removeLoader(loader);

@@ -91,31 +91,31 @@ export default class ConnectivityTelematicsDetailsController extends Controller 
     get statusLabel() {
         switch (this.model?.status) {
             case 'initialized':
-                return 'Not tested';
+                return this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.not-tested');
             case 'connected':
-                return 'Connected';
+                return this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.connected');
             case 'synchronizing':
-                return 'Syncing';
+                return this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.syncing');
             case 'active':
-                return 'Connected';
+                return this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.connected');
             case 'error':
-                return 'Needs attention';
+                return this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.needs-attention');
             case null:
             case undefined:
-                return 'Unknown';
+                return this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.unknown');
             default:
-                return 'Unknown';
+                return this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.unknown');
         }
     }
 
     get connectionTestLabel() {
         switch (this.model?.meta?.last_test_result) {
             case 'success':
-                return 'Verified';
+                return this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.verified');
             case 'failed':
-                return 'Failed';
+                return this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.failed');
             default:
-                return 'Not tested';
+                return this.intl.t('fleetops-ui.js.controllers.connectivity.telematics.details.not-tested');
         }
     }
 

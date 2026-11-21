@@ -13,7 +13,7 @@ export default class IssueActionsService extends ResourceActionService {
         super(...arguments);
         this.initialize('issue', {
             defaultAttributes: {
-                title: `Issue reported on ${format(new Date(), 'dd MMM yy, HH:mm')}`,
+                title: this.intl.t('fleetops-ui.js.services.issue-actions.issue-reported-on-value', { value: format(new Date(), 'dd MMM yy, HH:mm') }),
                 status: 'pending',
                 priority: 'low',
                 type: 'operational',
@@ -188,7 +188,7 @@ export default class IssueActionsService extends ResourceActionService {
 
     confirmReopenIssue(issue, options = {}) {
         this.modalsManager.confirm({
-            title: `Re-open ${issue.public_id || 'issue'}?`,
+            title: this.intl.t('fleetops-ui.js.services.issue-actions.re-open-value', { value: issue.public_id || 'issue' }),
             body: this.intl.t('fleetops-ui.js.services.issue-actions.this-will-move-the-issue-back'),
             acceptButtonText: this.intl.t('fleetops-ui.js.services.issue-actions.re-open-issue'),
             acceptButtonIcon: 'rotate-left',

@@ -70,7 +70,7 @@ export default class FuelIntegrationHubComponent extends Component {
             .filter(Boolean)
             .map((value) => new Date(value).getTime())
             .filter(Number.isFinite);
-        return dates.length ? fuelDate(Math.max(...dates)) : 'Not synced';
+        return dates.length ? fuelDate(Math.max(...dates)) : this.intl.t('fleetops-ui.js.components.fuel-integration.hub.not-synced');
     }
 
     get kpiWidgets() {

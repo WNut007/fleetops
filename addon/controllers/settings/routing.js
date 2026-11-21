@@ -41,7 +41,9 @@ export default class SettingsRoutingController extends Controller {
     }
 
     get osrmSystemHelpText() {
-        return this.osrmSystemHost ? `Otherwise this organization uses ${this.osrmSystemHost}.` : 'Otherwise this organization uses the platform OSRM server.';
+        return this.osrmSystemHost
+            ? this.intl.t('fleetops-ui.js.controllers.settings.routing.otherwise-this-organization-uses-osrmsystemhost', { osrmSystemHost: this.osrmSystemHost })
+            : this.intl.t('fleetops-ui.js.controllers.settings.routing.otherwise-this-organization-uses-the-platform');
     }
 
     get hasEngineOverrides() {

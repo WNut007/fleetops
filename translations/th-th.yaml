@@ -4705,7 +4705,7 @@ fleetops-ui:
                     driver: คนขับ - {value}
                     edit-details: แก้ไขรายละเอียด
                     filter-resources: กรองทรัพยากร...
-                    live-operations: Live Operations
+                    live-operations: ปฏิบัติการสด
                     locate-on-map: ดูบนแผนที่
                     offline: ออฟไลน์
                     online: ออนไลน์
@@ -6350,6 +6350,7 @@ fleetops-ui:
                     straight-line-estimate-no-routing-calls: ประมาณแบบเส้นตรง (ไม่เรียกบริการเส้นทาง)
                     valhalla: Valhalla
                     vroom: VROOM
+                    the-osrm-server-organizations-use-unless: เซิร์ฟเวอร์ OSRM ที่องค์กรใช้ถ้าไม่ได้ตั้งเอง เซิร์ฟเวอร์เดโมสาธารณะ (router.project-osrm.org) ใช้วาดเส้นทางบนแผนที่เท่านั้น ไม่ใช้คำนวณระยะทางและ ETA ของออเดอร์{environment}
                 telematics-settings:
                     system-telematics-settings-saved: บันทึกการตั้งค่า Telematics ของระบบแล้ว
                 tracking-page-settings:
@@ -6365,6 +6366,7 @@ fleetops-ui:
                     new-place: สถานที่ใหม่
                     save-changes: บันทึกการเปลี่ยนแปลง
                     something-went-wrong-trying-to-complete: เกิดข้อผิดพลาดระหว่างทำรายการสั่งซื้อ
+                    complete-payment-for-name-service: ชำระเงินสำหรับบริการ {name}
                 orders:
                     delivery-instructions-saved: บันทึกคำแนะนำการจัดส่งแล้ว
                     done: เสร็จสิ้น
@@ -6378,12 +6380,16 @@ fleetops-ui:
                     processing: กำลังประมวลผล
                     provider: ผู้ให้บริการ
                     severity: ความรุนแรง
+                    processed: ประมวลผลแล้ว
+                    unprocessed: ยังไม่ประมวลผล
             device:
                 details:
                     connection: การเชื่อมต่อ
                     events: เหตุการณ์
                     sensors: เซนเซอร์
                     vehicle: รถ
+                    unknown: ไม่ทราบ
+                    unattached: ยังไม่ติดตั้ง
                 panel-tabs:
                     events:
                         code: รหัส
@@ -6401,6 +6407,9 @@ fleetops-ui:
                         type: ประเภท
                         unit: หน่วย
                         value: ค่า
+                telemetry:
+                    no-valid-position: ไม่มีตำแหน่งที่ถูกต้อง
+                    ageseconds-s-ago: '{ageSeconds} วินาทีที่แล้ว'
             driver:
                 details:
                     edit: แก้ไข
@@ -6415,6 +6424,14 @@ fleetops-ui:
                     drivers: คนขับ
                     online: ออนไลน์
                     vehicles: รถ
+                    collapse-all: ย่อทั้งหมด
+                    expand-all: ขยายทั้งหมด
+                    no-matching-resources: ไม่มีทรัพยากรที่ตรง
+                    no-fleet-resources-assigned: ไม่มีทรัพยากรใน Fleet
+                    clear-the-current-search-or-filter: ล้างการค้นหาหรือตัวกรองเพื่อดูโครงสร้าง Fleet ทั้งหมด
+                    assign-drivers-or-vehicles-to-make: มอบหมายคนขับหรือรถให้ Fleet นี้เพื่อใช้งานจริง
+                    value-value2-drivers-online-value3-value4: คนขับออนไลน์ {value}/{value2} - รถออนไลน์ {value3}/{value4}
+                    offline: ออฟไลน์
             fuel-integration:
                 form:
                     choose-a-fuel-integration-provider-first: เลือกผู้ให้บริการ Fuel Integration ก่อน
@@ -6426,6 +6443,14 @@ fleetops-ui:
                     sync: ซิงก์
                     test: ทดสอบ
                     unable-to-copy-diagnostics: คัดลอกข้อมูลวินิจฉัยไม่ได้
+                    sandbox: Sandbox
+                    production: Production
+                    testing-provider-credentials: กำลังทดสอบข้อมูลเข้าระบบ...
+                    connection-verified: ยืนยันการเชื่อมต่อแล้ว
+                    connection-failed: เชื่อมต่อไม่สำเร็จ
+                    ready-to-test: พร้อมทดสอบ
+                    run-a-live-credential-test-before: ทดสอบข้อมูลเข้าระบบแบบสดก่อนบันทึก เพื่อให้มั่นใจว่า Integration นำเข้าข้อมูลน้ำมันได้
+                    the-configured-credentials-are-being-checked: กำลังตรวจข้อมูลเข้าระบบกับผู้ให้บริการ Fuel Integration
                 hub:
                     connected-integrations: Integration ที่เชื่อมต่อ
                     last-sync: ซิงก์ล่าสุด
@@ -6435,6 +6460,7 @@ fleetops-ui:
                     review-sync: ดูการซิงก์
                     review-matches: ตรวจการจับคู่
                     open-ledger: เปิดบัญชี
+                    not-synced: ยังไม่ซิงก์
             fuel-transaction-status:
                 unknown: ไม่ทราบ
             layout:
@@ -6455,6 +6481,11 @@ fleetops-ui:
                         create-driver: สร้างคนขับ
                         create-vehicle: สร้างรถ
                         create-fleet: สร้าง Fleet
+                        onlinedrivercount-drivers-online: คนขับออนไลน์ {onlineDriverCount} คน
+                        onlinevehiclecount-vehicles-online: รถออนไลน์ {onlineVehicleCount} คัน
+                        no-resources-match-this-search-2: ไม่มีทรัพยากรที่ตรงกับคำค้นนี้
+                        no-activetab-available: ไม่มี{activeTab}
+                        value-drivers-value2-vehicles: คนขับ {value} - รถ {value2}
             maintenance:
                 cost-panel:
                     please-enter-a-description-for-the: ใส่คำอธิบายของรายการ
@@ -6488,17 +6519,26 @@ fleetops-ui:
                         replay-is-already-running: กำลังเล่นย้อนหลังอยู่แล้ว
                         speed-km-h: ความเร็ว (กม./ชม.)
                         timestamp: เวลา
+                        position-value: ตำแหน่ง {value}
                     positions: ตำแหน่ง
                     vehicles: รถ
+                    geofence-event-listing:
+                        service-area: พื้นที่ให้บริการ
+                        zone: โซน
+                        geofence: Geofence
             modals:
                 convert-customer-to-vendor:
                     customer-converted-to-vendor-account: เปลี่ยนลูกค้าเป็นบัญชี Vendor แล้ว
                 fuel-connection-diagnostics:
                     connection-diagnostics-copied: คัดลอกข้อมูลวินิจฉัยการเชื่อมต่อแล้ว
                     unable-to-copy-diagnostics: คัดลอกข้อมูลวินิจฉัยไม่ได้
+                    run-a-connection-test-using-this: ทดสอบการเชื่อมต่อด้วยข้อมูลเข้าระบบที่บันทึกไว้ของ Integration นี้ ตรวจสิทธิ์เข้าถึงผู้ให้บริการโดยไม่นำเข้ารายการ
+                    waiting-for-the-provider-to-respond: รอผู้ให้บริการตอบกลับ…
                 fuel-transaction-action:
                     refresh-the-ledger-to-see-the: รีเฟรชบัญชีเพื่อดูธุรกรรมล่าสุด
                     the-change-was-saved-but-the: บันทึกแล้ว แต่รีเฟรชธุรกรรมที่แสดงไม่ได้ รีเฟรชบัญชีเพื่อดูสถานะล่าสุด
+                    vehicle: รถ
+                    order-trip: ออเดอร์ / เที่ยววิ่ง
                 issue-assign:
                     customers-cannot-be-assigned-to-issues: มอบหมายปัญหาให้ลูกค้าไม่ได้
                     issue-assignment-updated: อัปเดตผู้รับผิดชอบปัญหาแล้ว
@@ -6509,6 +6549,7 @@ fleetops-ui:
                     issue-status-updated: อัปเดตสถานะปัญหาแล้ว
                 order-change-destination:
                     select-a-destination-first: เลือกปลายทางก่อน
+                    current-destination-changed-to-value: เปลี่ยนปลายทางปัจจุบันเป็น {value} แล้ว
                 telematic-connection-diagnostics:
                     awaiting-provider-response: รอผู้ให้บริการตอบกลับ
                     connection-diagnostics-copied: คัดลอกข้อมูลวินิจฉัยการเชื่อมต่อแล้ว
@@ -6517,15 +6558,29 @@ fleetops-ui:
                     provider-response-received: ได้รับคำตอบจากผู้ให้บริการ
                     sending-saved-provider-connection-test-request: กำลังส่งคำขอทดสอบการเชื่อมต่อผู้ให้บริการที่บันทึกไว้
                     unable-to-copy-connection-diagnostics: คัดลอกข้อมูลวินิจฉัยการเชื่อมต่อไม่ได้
+                    provider: ผู้ให้บริการ
+                    testing-provider-connection: กำลังทดสอบการเชื่อมต่อผู้ให้บริการ...
+                    connection-failed: เชื่อมต่อไม่สำเร็จ
+                    ready-to-test: พร้อมทดสอบ
+                    waiting-for-the-provider-to-accept: รอผู้ให้บริการยอมรับข้อมูลเข้าระบบที่บันทึกไว้
+                    run-a-connection-test-to-verify: ทดสอบการเชื่อมต่อเพื่อยืนยันข้อมูลเข้าระบบที่บันทึกไว้
+                    provider-selected-providerlabel-value: 'ผู้ให้บริการที่เลือก: {providerLabel}{value}'
+                    provider-metadata-value: 'Metadata ผู้ให้บริการ: {value}'
+                    connection-failed-value: เชื่อมต่อไม่สำเร็จ{value}
                 update-order-activity:
                     photo-proof-of-delivery-is-still: รูปหลักฐานการส่งมอบยังอัปโหลดอยู่
                     photo-proof-of-delivery-uploaded: อัปโหลดรูปหลักฐานการส่งมอบแล้ว
                     upload-photo-proof-of-delivery-or: อัปโหลดรูปหลักฐานการส่งมอบ หรือเลือกข้ามหลักฐาน
+                    order-activity-has-been-updated-to: อัปเดตกิจกรรมออเดอร์เป็น {status} แล้ว
+                add-driver-shift:
+                    weekly-on-days-times: ทุกสัปดาห์ วัน{days}{times}
             orchestrator-workbench:
                 allocate: จัดสรร
             order-config-manager:
                 custom-fields:
                     untitled-field: ฟิลด์ไม่มีชื่อ
+                details:
+                    order-config-name-was-deleted: ลบ Order Config {name} แล้ว
             order:
                 details:
                     metadata:
@@ -6550,6 +6605,27 @@ fleetops-ui:
                         provider: ผู้ให้บริการ
                         traffic-aware: คำนึงถึงจราจร
                         warnings: คำเตือน
+                        order-has-been-completed: ออเดอร์เสร็จสิ้นแล้ว
+                        order-has-been-canceled: ออเดอร์ถูกยกเลิกแล้ว
+                        order-has-been-dispatched-estimated-start: จ่ายงานออเดอร์แล้ว เวลาเริ่มโดยประมาณคิดจากเส้นทางของคนขับไปยังจุดแรก
+                        live-eta-will-begin-once-the: ETA สดจะเริ่มเมื่อออเดอร์เริ่มงาน
+                        order-completed: ออเดอร์เสร็จสิ้น
+                        order-canceled: ออเดอร์ถูกยกเลิก
+                        order-dispatched: จ่ายงานออเดอร์แล้ว
+                        tracking-pending-start: รอเริ่มติดตาม
+                        pending-driver-assignment: รอมอบหมายคนขับ
+                        pending-gps-fix: รอสัญญาณ GPS
+                        pending-start: รอเริ่ม
+                        driver-live: คนขับออนไลน์
+                        driver-stale: ตำแหน่งคนขับไม่อัปเดต
+                        driver-missing-gps: คนขับไม่มี GPS
+                        no-driver-assigned: ยังไม่ได้มอบหมายคนขับ
+                        driver-offline: คนขับออฟไลน์
+                        now-heading-to: กำลังไปที่
+                        now-heading-to-stop-activestopindex-of: กำลังไปที่ - จุดที่ {activeStopIndex} จาก {totalStops}
+                        stale-driver-location: ตำแหน่งคนขับไม่อัปเดต
+                        tracking-estimate-warning: คำเตือนค่าประมาณการติดตาม
+                        1-warning: คำเตือน 1 รายการ
                 route-editor:
                     return: จุดส่งคืน
             part:
@@ -6587,6 +6663,7 @@ fleetops-ui:
                     synced: ซิงก์แล้ว
                     syncing: กำลังซิงก์
                     verified: ยืนยันแล้ว
+                    unattached-devices-count-synced-devices-are: อุปกรณ์ที่ซิงก์ {unattached_devices_count} ตัวรอติดตั้งกับรถ
                 form:
                     awaiting-provider-response: รอผู้ให้บริการตอบกลับ
                     choose-a-provider-to-continue: เลือกผู้ให้บริการเพื่อดำเนินการต่อ
@@ -6607,6 +6684,17 @@ fleetops-ui:
                     test-connection: ทดสอบการเชื่อมต่อ
                     unable-to-copy-connection-diagnostics: คัดลอกข้อมูลวินิจฉัยการเชื่อมต่อไม่ได้
                     webhook: Webhook
+                    continue: ดำเนินการต่อ
+                    testing-provider-credentials: กำลังทดสอบข้อมูลเข้าระบบ...
+                    connection-failed: เชื่อมต่อไม่สำเร็จ
+                    ready-to-test: พร้อมทดสอบ
+                    sending-the-configured-credentials-to-the: กำลังส่งข้อมูลเข้าระบบไปยังผู้ให้บริการและรอการตอบกลับ
+                    run-a-connection-test-to-verify: ทดสอบการเชื่อมต่อเพื่อยืนยันข้อมูลเข้าระบบก่อนบันทึก ถ้าผู้ให้บริการไม่รองรับการทดสอบสดก็ยังดำเนินการต่อได้
+                    provider-selected-providerlabel-value: 'ผู้ให้บริการที่เลือก: {providerLabel}{value}'
+                    credentials-prepared-length-required-fields-present: 'เตรียมข้อมูลเข้าระบบแล้ว: มีฟิลด์บังคับครบ {length} ฟิลด์'
+                    credentials-incomplete-length-required-fields-missing: 'ข้อมูลเข้าระบบไม่ครบ: ขาดฟิลด์บังคับ {length} ฟิลด์'
+                    provider-metadata-value: 'Metadata ผู้ให้บริการ: {value}'
+                    connection-failed-value: เชื่อมต่อไม่สำเร็จ{value}
                 hub:
                     health-warnings: คำเตือนด้านสุขภาพระบบ
                     provider-count: จำนวนผู้ให้บริการ
@@ -6635,6 +6723,43 @@ fleetops-ui:
                     contact: ผู้ติดต่อ
                     user: ผู้ใช้
                     vendor: Vendor
+            ai:
+                create-order-preview:
+                    this-order-creation-preview-was-cancelled: ยกเลิกตัวอย่างการสร้างออเดอร์นี้แล้ว
+                    fleet-ops-order-was-created: สร้างออเดอร์ Fleet-Ops แล้ว
+                    select-order-type: เลือกประเภทออเดอร์
+                    add-schedule: เพิ่มกำหนดการ
+                    add-pickup: เพิ่มจุดรับ
+                    add-dropoff: เพิ่มจุดส่ง
+                    assign-driver: มอบหมายคนขับ
+                    assign-vehicle: มอบหมายรถ
+                    add-order-notes: เพิ่มหมายเหตุออเดอร์
+                route-preview-map:
+                    unable-to-calculate-route: คำนวณเส้นทางไม่ได้
+                    unable-to-preview-the-route-right: ตอนนี้ดูตัวอย่างเส้นทางไม่ได้
+                    select-pickup-and-dropoff-with-coordinates: เลือกจุดรับและจุดส่งที่มีพิกัดเพื่อดูตัวอย่างเส้นทาง
+            cell:
+                telematic-status:
+                    connected: เชื่อมต่อ
+                    syncing: กำลังซิงก์
+                    not-tested: ยังไม่ทดสอบ
+                    needs-attention: ต้องตรวจสอบ
+                    unknown: ไม่ทราบ
+            issue:
+                details:
+                    issue-closed: ปิดปัญหาแล้ว
+                    issue-re-opened: เปิดปัญหาอีกครั้งแล้ว
+                    awaiting-resolution: รอการแก้ไข
+                    this-issue-has-been-closed-and: ปิดปัญหานี้แล้ว ไม่ต้องดำเนินการเพิ่ม
+                    this-issue-was-previously-closed-and: ปัญหานี้เคยปิดไปแล้วและถูกเปิดใหม่เพื่อติดตามต่อ
+                    no-resolution-details-have-been-recorded: ยังไม่ได้บันทึกรายละเอียดการแก้ไข
+                panel-header:
+                    issue-reported-on-value: แจ้งปัญหาเมื่อ {value}
+            home:
+                getting-started-guidance:
+                    done: เสร็จสิ้น
+                    next: ถัดไป
+                    not-started: ยังไม่เริ่ม
         controllers:
             analytics:
                 reports:
@@ -6690,6 +6815,9 @@ fleetops-ui:
                         provider: ผู้ให้บริการ
                         severity: ความรุนแรง
                         state: จังหวัด/รัฐ
+                    details:
+                        processed: ประมวลผลแล้ว
+                        unprocessed: ยังไม่ประมวลผล
                 fuel-providers:
                     details:
                         close: ปิด
@@ -6704,6 +6832,15 @@ fleetops-ui:
                         sync: ซิงก์
                         test-fuel-connection: ทดสอบการเชื่อมต่อน้ำมัน
                         transactions: ธุรกรรม
+                        sandbox-test-account: บัญชี Sandbox / ทดสอบ
+                        production-account: บัญชี Production
+                        draft: ฉบับร่าง
+                        configured: ตั้งค่าแล้ว
+                        connected: เชื่อมต่อ
+                        active: ใช้งาน
+                        needs-attention: ต้องตรวจสอบ
+                        disabled: ปิดใช้
+                        unknown: ไม่ทราบ
                     edit:
                         fuel-integration-settings-saved: บันทึกการตั้งค่า Fuel Integration แล้ว
                     index:
@@ -6724,6 +6861,7 @@ fleetops-ui:
                         test-connection: ทดสอบการเชื่อมต่อ
                         test-fuel-connection: ทดสอบการเชื่อมต่อน้ำมัน
                         unmatched-in-last-sync: ยังไม่จับคู่ในการซิงก์ล่าสุด
+                        sync-length-selected: ซิงก์ {length} รายการที่เลือก
                     new:
                         fuel-integration-connected: เชื่อมต่อ Fuel Integration แล้ว
                 sensors:
@@ -6830,6 +6968,13 @@ fleetops-ui:
                         test: ทดสอบ
                         test-connection: ทดสอบการเชื่อมต่อ
                         vehicle-attachments: การติดตั้งกับรถ
+                        not-tested: ยังไม่ทดสอบ
+                        connected: เชื่อมต่อ
+                        syncing: กำลังซิงก์
+                        needs-attention: ต้องตรวจสอบ
+                        unknown: ไม่ทราบ
+                        verified: ยืนยันแล้ว
+                        failed: ไม่ผ่าน
                     edit:
                         close: ปิด
                         run-test: ทดสอบ
@@ -6909,6 +7054,7 @@ fleetops-ui:
                 drivers:
                     index:
                         change-the-layout: เปลี่ยนเลย์เอาต์
+                        issue-reported-for-name: แจ้งปัญหาสำหรับ {name}
                 fleets:
                     index:
                         details:
@@ -6944,6 +7090,13 @@ fleetops-ui:
                         transaction: ธุรกรรม
                         trip: เที่ยววิ่ง
                         vehicle: รถ
+                        no-unmatched-fuel-transactions: ไม่มีรายการน้ำมันที่ยังไม่จับคู่
+                        no-transactions-imported-for-this-integration: ยังไม่มีรายการนำเข้าสำหรับ Integration นี้
+                        no-fuel-transactions-imported-yet: ยังไม่มีรายการน้ำมันที่นำเข้า
+                        fleet-ops-did-not-find-imported: Fleet-Ops ไม่พบบิลที่นำเข้าที่ยังต้องจับคู่รถหรือเที่ยววิ่ง
+                        run-a-sync-from-the-fuel: ซิงก์จากหน้ารายละเอียด Fuel Integration เพื่อนำเข้าบิลของผู้ให้บริการมาที่บัญชีนี้
+                        connect-petroapp-or-another-fuel-integration: เชื่อมต่อ PetroApp หรือ Fuel Integration อื่น แล้วซิงก์รายการ บิลที่นำเข้าจากผู้ให้บริการจะแสดงที่นี่ก่อนสร้าง Fuel Report ที่เชื่อมโยง
+                        reprocess-length-selected: ประมวลผลใหม่ {length} รายการที่เลือก
                 issues:
                     index:
                         details:
@@ -7073,6 +7226,8 @@ fleetops-ui:
                     kilometers: กิโลเมตร
                     miles: ไมล์
                     routing-and-tracking-settings-saved: บันทึกการตั้งค่าเส้นทางและการติดตามแล้ว
+                    otherwise-this-organization-uses-osrmsystemhost: ถ้าไม่ตั้ง องค์กรนี้จะใช้ {osrmSystemHost}
+                    otherwise-this-organization-uses-the-platform: ถ้าไม่ตั้ง องค์กรนี้จะใช้เซิร์ฟเวอร์ OSRM ของแพลตฟอร์ม
         extension:
             active-orders: ออเดอร์ที่กำลังวิ่ง
             average-revenue-per-completed-order-with: รายได้เฉลี่ยต่อออเดอร์ที่เสร็จพร้อมแนวโน้ม
@@ -7149,6 +7304,8 @@ fleetops-ui:
                     onboard:
                         this-system-is-unable-to-acceot: ระบบยังรับหรือประมวลผลการชำระเงินไม่ได้ ติดต่อผู้ดูแลระบบเพื่อตั้งค่า
                         your-account-is-already-enabled-to: บัญชีของคุณเปิดรับชำระเงินแล้ว
+            home:
+                loading-fleet-ops: กำลังโหลด Fleet-Ops...
         services:
             driver-scheduling:
                 availability-set-successfully: ตั้งเวลาว่างแล้ว
@@ -7178,12 +7335,15 @@ fleetops-ui:
                 issue-re-opened: เปิดปัญหาอีกครั้งแล้ว
                 re-open-issue: เปิดปัญหาอีกครั้ง
                 this-will-move-the-issue-back: ปัญหาจะกลับเป็นสถานะเปิดอีกครั้งและล้างวันที่แก้ไข
+                issue-reported-on-value: แจ้งปัญหาเมื่อ {value}
+                re-open-value: เปิด {value} อีกครั้ง?
             maintenance-schedule-actions:
                 add-to-google-calendar: เพิ่มลง Google Calendar
                 download-ics: ดาวน์โหลด .ics
                 schedule-paused-successfully: หยุดกำหนดการชั่วคราวแล้ว
                 schedule-resumed-successfully: เริ่มกำหนดการต่อแล้ว
                 trigger-work-order-now: สร้างใบสั่งงานตอนนี้
+                work-order-value-created-from-schedule: สร้างใบสั่งงาน {value} จากกำหนดการแล้ว
             order-import:
                 import-order-s-with-spreadsheets: นำเข้าออเดอร์จากสเปรดชีต
                 start-upload: เริ่มอัปโหลด
@@ -7198,6 +7358,11 @@ fleetops-ui:
                 service-area-required-to-create-zone: ต้องมีพื้นที่ให้บริการก่อนสร้างโซน!
                 use-drawing-controls-to-the-right: ใช้เครื่องมือวาดด้านขวาเพื่อวาดพื้นที่ให้บริการ เชื่อมจุดให้ครบเพื่อบันทึก
                 use-the-drawing-controls-to-the: ใช้เครื่องมือวาดทางขวาเพื่อวาดโซนภายในพื้นที่ให้บริการ เชื่อมจุดให้ครบเพื่อบันทึกโซน
+                new-selectedlayertype-name-saved: บันทึก{selectedLayerType}ใหม่ ''{name}'' แล้ว
+                new-service-area-name-saved: บันทึกพื้นที่ให้บริการใหม่ ''{name}'' แล้ว
+                new-zone-name-added-to-name2: เพิ่มโซนใหม่ ''{name}'' ในพื้นที่ให้บริการ ''{name2}'' แล้ว
+                service-area-value: พื้นที่ให้บริการ ({value})
+                zone-value: โซน ({value})
             vehicle-actions:
                 devices: อุปกรณ์
                 maintenance: ซ่อมบำรุง

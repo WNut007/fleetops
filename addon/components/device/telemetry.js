@@ -6,6 +6,7 @@ import { task } from 'ember-concurrency';
 import { action, get } from '@ember/object';
 
 export default class DeviceTelemetryComponent extends Component {
+    @service intl;
     @service socket;
     @tracked clock = Date.now();
     @tracked connectionError = false;
@@ -53,7 +54,9 @@ export default class DeviceTelemetryComponent extends Component {
     }
 
     get ageLabel() {
-        return this.ageSeconds === null ? 'No valid position' : `${this.ageSeconds}s ago`;
+        return this.ageSeconds === null
+            ? this.intl.t('fleetops-ui.js.components.device.telemetry.no-valid-position')
+            : this.intl.t('fleetops-ui.js.components.device.telemetry.ageseconds-s-ago', { ageSeconds: this.ageSeconds });
     }
 
     get positionTime() {

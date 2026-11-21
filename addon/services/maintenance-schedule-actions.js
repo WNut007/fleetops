@@ -115,7 +115,9 @@ export default class MaintenanceScheduleActionsService extends ResourceActionSer
     @action async triggerNow(schedule) {
         try {
             const response = await this.fetch.post(`maintenance-schedules/${schedule.id}/trigger`);
-            this.notifications.success(`Work order ${response?.work_order?.public_id ?? ''} created from schedule.`);
+            this.notifications.success(
+                this.intl.t('fleetops-ui.js.services.maintenance-schedule-actions.work-order-value-created-from-schedule', { value: response?.work_order?.public_id ?? '' })
+            );
             this.refresh();
         } catch (error) {
             this.notifications.serverError(error);

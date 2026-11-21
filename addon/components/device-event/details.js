@@ -49,7 +49,7 @@ export default class DeviceEventDetailsComponent extends Component {
     }
 
     get processedLabel() {
-        return this.isProcessed ? 'Processed' : 'Unprocessed';
+        return this.isProcessed ? this.intl.t('fleetops-ui.js.components.device-event.details.processed') : this.intl.t('fleetops-ui.js.components.device-event.details.unprocessed');
     }
 
     get severityAccentClass() {

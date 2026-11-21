@@ -43,7 +43,9 @@ export default class ConnectivityFuelProvidersIndexDetailsController extends Con
         return (this.totals?.spend ?? []).map((row) => fuelMoney(row.amount, row.currency)).join(' · ') || 'No spend recorded';
     }
     get environmentLabel() {
-        return this.model?.environment === 'sandbox' ? 'Sandbox / test account' : 'Production account';
+        return this.model?.environment === 'sandbox'
+            ? this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.sandbox-test-account')
+            : this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.production-account');
     }
 
     @action async refreshActivity() {
@@ -84,19 +86,19 @@ export default class ConnectivityFuelProvidersIndexDetailsController extends Con
     get statusLabel() {
         switch (this.model?.status) {
             case 'draft':
-                return 'Draft';
+                return this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.draft');
             case 'configured':
-                return 'Configured';
+                return this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.configured');
             case 'connected':
-                return 'Connected';
+                return this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.connected');
             case 'active':
-                return 'Active';
+                return this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.active');
             case 'error':
-                return 'Needs attention';
+                return this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.needs-attention');
             case 'disabled':
-                return 'Disabled';
+                return this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.disabled');
             default:
-                return 'Unknown';
+                return this.intl.t('fleetops-ui.js.controllers.connectivity.fuel-providers.details.unknown');
         }
     }
 

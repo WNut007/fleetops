@@ -7,6 +7,7 @@ import { task } from 'ember-concurrency';
 import { formatDistanceStrict, isValid } from 'date-fns';
 
 export default class IssueDetailsComponent extends Component {
+    @service intl;
     @service hostRouter;
     @service issueActions;
     @service store;
@@ -105,26 +106,26 @@ export default class IssueDetailsComponent extends Component {
 
     get resolutionTitle() {
         if (this.isResolved) {
-            return 'Issue closed';
+            return this.intl.t('fleetops-ui.js.components.issue.details.issue-closed');
         }
 
         if (this.isReopened) {
-            return 'Issue re-opened';
+            return this.intl.t('fleetops-ui.js.components.issue.details.issue-re-opened');
         }
 
-        return 'Awaiting resolution';
+        return this.intl.t('fleetops-ui.js.components.issue.details.awaiting-resolution');
     }
 
     get resolutionDescription() {
         if (this.isResolved) {
-            return this.resolutionMeta.note || 'This issue has been closed and no further action is currently required.';
+            return this.resolutionMeta.note || this.intl.t('fleetops-ui.js.components.issue.details.this-issue-has-been-closed-and');
         }
 
         if (this.isReopened) {
-            return this.lastReopen?.note || 'This issue was previously closed and has been re-opened for follow-up.';
+            return this.lastReopen?.note || this.intl.t('fleetops-ui.js.components.issue.details.this-issue-was-previously-closed-and');
         }
 
-        return 'No resolution details have been recorded yet.';
+        return this.intl.t('fleetops-ui.js.components.issue.details.no-resolution-details-have-been-recorded');
     }
 
     get resolutionDate() {

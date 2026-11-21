@@ -79,7 +79,7 @@ export default class AdminRoutingSettingsComponent extends Component {
     get osrmHelpText() {
         const environment = this.osrmEnvironmentHost ? ` Empty uses OSRM_HOST (${this.osrmEnvironmentHost}).` : '';
 
-        return `The OSRM server organizations use unless they set their own. The public demo server (router.project-osrm.org) only draws map routes; order distance and ETAs never use it.${environment}`;
+        return this.intl.t('fleetops-ui.js.components.admin.routing-settings.the-osrm-server-organizations-use-unless', { environment: environment });
     }
 
     applyProviderPolicy(policy = {}) {

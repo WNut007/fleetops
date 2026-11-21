@@ -350,7 +350,9 @@ export default class ServiceAreasService extends Service {
                 record.setProperties({ border });
 
                 return record.save().then((record) => {
-                    this.notifications.success(`New ${selectedLayerType} '${record.name}' saved.`);
+                    this.notifications.success(
+                        this.intl.t('fleetops-ui.js.services.service-areas.new-selectedlayertype-name-saved', { selectedLayerType: selectedLayerType, name: record.name })
+                    );
 
                     // remove drawn layer
                     map.removeLayer(drawFeatureGroupLayer);
@@ -440,7 +442,7 @@ export default class ServiceAreasService extends Service {
                 modal.startLoading();
 
                 return serviceArea.save().then((serviceArea) => {
-                    this.notifications.success(`New service area '${serviceArea.name}' saved.`);
+                    this.notifications.success(this.intl.t('fleetops-ui.js.services.service-areas.new-service-area-name-saved', { name: serviceArea.name }));
 
                     this.clearLayerCreationContext();
                     this.addToCache(serviceArea);
@@ -553,7 +555,7 @@ export default class ServiceAreasService extends Service {
                 modal.startLoading();
 
                 return zone.save().then(() => {
-                    this.notifications.success(`New zone '${zone.name}' added to '${serviceArea.name}' service area.`);
+                    this.notifications.success(this.intl.t('fleetops-ui.js.services.service-areas.new-zone-name-added-to-name2', { name: zone.name, name2: serviceArea.name }));
 
                     this.clearLayerCreationContext();
                     this.clearZoneServiceAreaContext();
@@ -606,7 +608,7 @@ export default class ServiceAreasService extends Service {
      */
     @action viewServiceAreaInDialog(serviceArea, options = {}) {
         this.modalsManager.show('modals/view-service-area', {
-            title: `Service Area (${serviceArea.get('name')})`,
+            title: this.intl.t('fleetops-ui.js.services.service-areas.service-area-value', { value: serviceArea.get('name') }),
             modalClass: 'modal-lg',
             acceptButtonText: this.intl.t('common.done'),
             acceptButtonIcon: 'check',
@@ -626,7 +628,7 @@ export default class ServiceAreasService extends Service {
      */
     @action viewZoneInDialog(zone, options = {}) {
         this.modalsManager.show('modals/view-zone', {
-            title: `Zone (${zone.get('name')})`,
+            title: this.intl.t('fleetops-ui.js.services.service-areas.zone-value', { value: zone.get('name') }),
             modalClass: 'modal-lg',
             acceptButtonText: this.intl.t('common.done'),
             acceptButtonIcon: 'check',

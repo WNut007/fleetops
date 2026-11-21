@@ -85,7 +85,7 @@ export default class ModalsAddDriverShiftComponent extends Component {
         const days = this.selectedDays.map((d) => dayMap[d]).join(', ');
         const opts = this.args.options;
         const times = opts.shiftStartTime && opts.shiftEndTime ? ` · ${opts.shiftStartTime}–${opts.shiftEndTime}` : '';
-        return `Weekly on ${days}${times}`;
+        return this.intl.t('fleetops-ui.js.components.modals.add-driver-shift.weekly-on-days-times', { days: days, times: times });
     }
 
     /**

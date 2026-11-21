@@ -76,7 +76,9 @@ export default class FleetHierarchyTreeComponent extends Component {
     }
 
     get expandCollapseHelpText() {
-        return this.allFleetNodesExpanded ? 'Collapse all' : 'Expand all';
+        return this.allFleetNodesExpanded
+            ? this.intl.t('fleetops-ui.js.components.fleet.hierarchy-tree.collapse-all')
+            : this.intl.t('fleetops-ui.js.components.fleet.hierarchy-tree.expand-all');
     }
 
     get visibleRows() {
@@ -89,18 +91,18 @@ export default class FleetHierarchyTreeComponent extends Component {
 
     get emptyTitle() {
         if (this.hasControlsApplied) {
-            return 'No matching resources';
+            return this.intl.t('fleetops-ui.js.components.fleet.hierarchy-tree.no-matching-resources');
         }
 
-        return 'No fleet resources assigned';
+        return this.intl.t('fleetops-ui.js.components.fleet.hierarchy-tree.no-fleet-resources-assigned');
     }
 
     get emptyDescription() {
         if (this.hasControlsApplied) {
-            return 'Clear the current search or filter to show the full fleet hierarchy.';
+            return this.intl.t('fleetops-ui.js.components.fleet.hierarchy-tree.clear-the-current-search-or-filter');
         }
 
-        return 'Assign drivers or vehicles to make this fleet operationally useful.';
+        return this.intl.t('fleetops-ui.js.components.fleet.hierarchy-tree.assign-drivers-or-vehicles-to-make');
     }
 
     get initialExpandedFleetIds() {
@@ -179,15 +181,26 @@ export default class FleetHierarchyTreeComponent extends Component {
     }
 
     @action fleetSubtitle(fleet) {
-        return `${this.fleetOnlineDriverCount(fleet)}/${this.fleetDriverCount(fleet)} drivers online - ${this.fleetOnlineVehicleCount(fleet)}/${this.fleetVehicleCount(fleet)} vehicles online`;
+        return this.intl.t('fleetops-ui.js.components.fleet.hierarchy-tree.value-value2-drivers-online-value3-value4', {
+            value: this.fleetOnlineDriverCount(fleet),
+            value2: this.fleetDriverCount(fleet),
+            value3: this.fleetOnlineVehicleCount(fleet),
+            value4: this.fleetVehicleCount(fleet),
+        });
     }
 
     @action driverSubtitle(driver) {
-        return [driver?.vehicle_name, driver?.status, driver?.public_id].filter(Boolean).join(' - ') || (driver?.online ? 'Online' : 'Offline');
+        return (
+            [driver?.vehicle_name, driver?.status, driver?.public_id].filter(Boolean).join(' - ') ||
+            (driver?.online ? this.intl.t('fleetops-ui.js.components.fleet.hierarchy-tree.online') : this.intl.t('fleetops-ui.js.components.fleet.hierarchy-tree.offline'))
+        );
     }
 
     @action vehicleSubtitle(vehicle) {
-        return [vehicle?.driver_name, vehicle?.plate_number, vehicle?.vin, vehicle?.status, vehicle?.public_id].filter(Boolean).join(' - ') || (vehicle?.online ? 'Online' : 'Offline');
+        return (
+            [vehicle?.driver_name, vehicle?.plate_number, vehicle?.vin, vehicle?.status, vehicle?.public_id].filter(Boolean).join(' - ') ||
+            (vehicle?.online ? this.intl.t('fleetops-ui.js.components.fleet.hierarchy-tree.online') : this.intl.t('fleetops-ui.js.components.fleet.hierarchy-tree.offline'))
+        );
     }
 
     @action fleetHasChildren(fleet) {

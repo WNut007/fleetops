@@ -111,19 +111,19 @@ export default class OrderDetailsTrackingComponent extends Component {
 
     get defaultLifecycleMessage() {
         if (this.statusCode === 'completed') {
-            return 'Order has been completed.';
+            return this.intl.t('fleetops-ui.js.components.order.details.tracking.order-has-been-completed');
         }
 
         if (this.statusCode === 'canceled') {
-            return 'Order has been canceled.';
+            return this.intl.t('fleetops-ui.js.components.order.details.tracking.order-has-been-canceled');
         }
 
         if (this.isDispatchedLifecycle) {
-            return 'Order has been dispatched. Estimated start is based on the assigned driver route to the first stop.';
+            return this.intl.t('fleetops-ui.js.components.order.details.tracking.order-has-been-dispatched-estimated-start');
         }
 
         if (this.isPreStartLifecycle) {
-            return 'Live ETA will begin once the order is started.';
+            return this.intl.t('fleetops-ui.js.components.order.details.tracking.live-eta-will-begin-once-the');
         }
 
         return null;
@@ -132,14 +132,14 @@ export default class OrderDetailsTrackingComponent extends Component {
     get lifecycleMessageTitle() {
         switch (this.lifecycleMode) {
             case 'completed':
-                return 'Order completed';
+                return this.intl.t('fleetops-ui.js.components.order.details.tracking.order-completed');
             case 'canceled':
-                return 'Order canceled';
+                return this.intl.t('fleetops-ui.js.components.order.details.tracking.order-canceled');
             case 'dispatched':
-                return 'Order dispatched';
+                return this.intl.t('fleetops-ui.js.components.order.details.tracking.order-dispatched');
             case 'pre_start':
             case 'created':
-                return 'Tracking pending start';
+                return this.intl.t('fleetops-ui.js.components.order.details.tracking.tracking-pending-start');
             default:
                 return null;
         }
@@ -194,14 +194,14 @@ export default class OrderDetailsTrackingComponent extends Component {
 
     get smartAdjustedEtaUnavailableLabel() {
         if (this.driverSignal === 'Unassigned') {
-            return 'Pending driver assignment';
+            return this.intl.t('fleetops-ui.js.components.order.details.tracking.pending-driver-assignment');
         }
 
         if (this.driverSignal === 'Missing' || this.driverSignal === 'Stale') {
-            return 'Pending GPS fix';
+            return this.intl.t('fleetops-ui.js.components.order.details.tracking.pending-gps-fix');
         }
 
-        return 'Pending start';
+        return this.intl.t('fleetops-ui.js.components.order.details.tracking.pending-start');
     }
 
     get hasCompletionEta() {
@@ -239,15 +239,15 @@ export default class OrderDetailsTrackingComponent extends Component {
     get driverStatusLabel() {
         switch (this.driverSignal) {
             case 'Live':
-                return 'Driver live';
+                return this.intl.t('fleetops-ui.js.components.order.details.tracking.driver-live');
             case 'Stale':
-                return 'Driver stale';
+                return this.intl.t('fleetops-ui.js.components.order.details.tracking.driver-stale');
             case 'Missing':
-                return 'Driver missing GPS';
+                return this.intl.t('fleetops-ui.js.components.order.details.tracking.driver-missing-gps');
             case 'Unassigned':
-                return 'No driver assigned';
+                return this.intl.t('fleetops-ui.js.components.order.details.tracking.no-driver-assigned');
             default:
-                return 'Driver offline';
+                return this.intl.t('fleetops-ui.js.components.order.details.tracking.driver-offline');
         }
     }
 
@@ -357,10 +357,10 @@ export default class OrderDetailsTrackingComponent extends Component {
 
     get activeStopLabel() {
         if (!this.activeStopIndex || !this.totalStops) {
-            return 'NOW HEADING TO';
+            return this.intl.t('fleetops-ui.js.components.order.details.tracking.now-heading-to');
         }
 
-        return `NOW HEADING TO - STOP ${this.activeStopIndex} OF ${this.totalStops}`;
+        return this.intl.t('fleetops-ui.js.components.order.details.tracking.now-heading-to-stop-activestopindex-of', { activeStopIndex: this.activeStopIndex, totalStops: this.totalStops });
     }
 
     get activeStopMarkerLabel() {
@@ -426,11 +426,11 @@ export default class OrderDetailsTrackingComponent extends Component {
 
     get etaUnavailableLabel() {
         if (this.driverSignal === 'Unassigned') {
-            return 'Pending driver assignment';
+            return this.intl.t('fleetops-ui.js.components.order.details.tracking.pending-driver-assignment');
         }
 
         if (this.driverSignal === 'Missing' || this.driverSignal === 'Stale') {
-            return 'Pending GPS fix';
+            return this.intl.t('fleetops-ui.js.components.order.details.tracking.pending-gps-fix');
         }
 
         return '-';
@@ -439,13 +439,13 @@ export default class OrderDetailsTrackingComponent extends Component {
     get operatorWarningTitle() {
         switch (this.driverSignal) {
             case 'Unassigned':
-                return 'No driver assigned';
+                return this.intl.t('fleetops-ui.js.components.order.details.tracking.no-driver-assigned');
             case 'Missing':
-                return 'Pending GPS fix';
+                return this.intl.t('fleetops-ui.js.components.order.details.tracking.pending-gps-fix');
             case 'Stale':
-                return 'Stale driver location';
+                return this.intl.t('fleetops-ui.js.components.order.details.tracking.stale-driver-location');
             default:
-                return 'Tracking estimate warning';
+                return this.intl.t('fleetops-ui.js.components.order.details.tracking.tracking-estimate-warning');
         }
     }
 
@@ -462,7 +462,7 @@ export default class OrderDetailsTrackingComponent extends Component {
     }
 
     get diagnosticsSummaryLabel() {
-        return this.warningsCount === 1 ? '1 warning' : `${this.warningsCount} warnings`;
+        return this.warningsCount === 1 ? this.intl.t('fleetops-ui.js.components.order.details.tracking.1-warning') : `${this.warningsCount} warnings`;
     }
 
     get totalProgressPercentage() {

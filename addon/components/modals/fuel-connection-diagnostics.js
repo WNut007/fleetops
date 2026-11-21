@@ -38,8 +38,8 @@ export default class FuelConnectionDiagnosticsComponent extends Component {
         return { ready: 'Ready to test', testing: 'Testing connection…', success: 'Connection verified', failed: 'Connection failed' }[this.state];
     }
     get message() {
-        if (this.state === 'ready') return 'Run a connection test using this integration’s saved credentials. This checks provider access without importing transactions.';
-        if (this.state === 'testing') return 'Waiting for the provider to respond…';
+        if (this.state === 'ready') return this.intl.t('fleetops-ui.js.components.modals.fuel-connection-diagnostics.run-a-connection-test-using-this');
+        if (this.state === 'testing') return this.intl.t('fleetops-ui.js.components.modals.fuel-connection-diagnostics.waiting-for-the-provider-to-respond');
         return this.result.message;
     }
     get metadata() {

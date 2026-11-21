@@ -29,7 +29,7 @@ export default class ModalsTelematicConnectionDiagnosticsComponent extends Compo
     }
 
     get providerLabel() {
-        return this.telematic?.provider_descriptor?.label ?? this.telematic?.provider ?? 'Provider';
+        return this.telematic?.provider_descriptor?.label ?? this.telematic?.provider ?? this.intl.t('fleetops-ui.js.components.modals.telematic-connection-diagnostics.provider');
     }
 
     get providerKey() {
@@ -50,27 +50,27 @@ export default class ModalsTelematicConnectionDiagnosticsComponent extends Compo
 
     get connectionStateTitle() {
         if (this.connectionState === 'testing') {
-            return 'Testing provider connection...';
+            return this.intl.t('fleetops-ui.js.components.modals.telematic-connection-diagnostics.testing-provider-connection');
         }
 
         if (this.connectionState === 'success') {
-            return 'Connection verified';
+            return this.intl.t('fleetops-ui.js.components.modals.telematic-connection-diagnostics.connection-verified');
         }
 
         if (this.connectionState === 'failed') {
-            return 'Connection failed';
+            return this.intl.t('fleetops-ui.js.components.modals.telematic-connection-diagnostics.connection-failed');
         }
 
-        return 'Ready to test';
+        return this.intl.t('fleetops-ui.js.components.modals.telematic-connection-diagnostics.ready-to-test');
     }
 
     get connectionStateMessage() {
         if (this.connectionState === 'testing') {
-            return 'Waiting for the provider to accept the saved credentials.';
+            return this.intl.t('fleetops-ui.js.components.modals.telematic-connection-diagnostics.waiting-for-the-provider-to-accept');
         }
 
         if (this.connectionState === 'idle') {
-            return 'Run a connection test to verify the saved provider credentials.';
+            return this.intl.t('fleetops-ui.js.components.modals.telematic-connection-diagnostics.run-a-connection-test-to-verify');
         }
 
         if (this.isDuplicateConnectionMessage) {
@@ -119,7 +119,10 @@ export default class ModalsTelematicConnectionDiagnosticsComponent extends Compo
         entries.push({
             time: this.formatDiagnosticTime(startedAt),
             tone: 'muted',
-            text: `Provider selected: ${this.providerLabel}${this.providerKey ? ` (${this.providerKey})` : ''}`,
+            text: this.intl.t('fleetops-ui.js.components.modals.telematic-connection-diagnostics.provider-selected-providerlabel-value', {
+                providerLabel: this.providerLabel,
+                value: this.providerKey ? ` (${this.providerKey})` : '',
+            }),
         });
 
         entries.push({
@@ -156,7 +159,9 @@ export default class ModalsTelematicConnectionDiagnosticsComponent extends Compo
             entries.push({
                 time: this.formatDiagnosticTime(completedAt),
                 tone: 'muted',
-                text: `Provider metadata: ${this.connectionMetadataEntries.map((entry) => `${entry.label}=${entry.value}`).join(', ')}`,
+                text: this.intl.t('fleetops-ui.js.components.modals.telematic-connection-diagnostics.provider-metadata-value', {
+                    value: this.connectionMetadataEntries.map((entry) => `${entry.label}=${entry.value}`).join(', '),
+                }),
             });
         }
 
@@ -172,7 +177,9 @@ export default class ModalsTelematicConnectionDiagnosticsComponent extends Compo
         entries.push({
             time: this.formatDiagnosticTime(completedAt),
             tone: 'danger',
-            text: `Connection failed${this.result?.message ? `: ${this.formatDiagnosticValue(this.result.message)}` : ''}`,
+            text: this.intl.t('fleetops-ui.js.components.modals.telematic-connection-diagnostics.connection-failed-value', {
+                value: this.result?.message ? `: ${this.formatDiagnosticValue(this.result.message)}` : '',
+            }),
         });
 
         return entries;

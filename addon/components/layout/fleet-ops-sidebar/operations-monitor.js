@@ -89,11 +89,11 @@ export default class LayoutFleetOpsSidebarOperationsMonitorComponent extends Com
     }
 
     get driverOnlineSummary() {
-        return `${this.onlineDriverCount} drivers online`;
+        return this.intl.t('fleetops-ui.js.components.layout.fleet-ops-sidebar.operations-monitor.onlinedrivercount-drivers-online', { onlineDriverCount: this.onlineDriverCount });
     }
 
     get vehicleOnlineSummary() {
-        return `${this.onlineVehicleCount} vehicles online`;
+        return this.intl.t('fleetops-ui.js.components.layout.fleet-ops-sidebar.operations-monitor.onlinevehiclecount-vehicles-online', { onlineVehicleCount: this.onlineVehicleCount });
     }
 
     get activeResources() {
@@ -102,10 +102,10 @@ export default class LayoutFleetOpsSidebarOperationsMonitorComponent extends Com
 
     get emptyMessage() {
         if (this.query) {
-            return 'No resources match this search.';
+            return this.intl.t('fleetops-ui.js.components.layout.fleet-ops-sidebar.operations-monitor.no-resources-match-this-search-2');
         }
 
-        return `No ${this.activeTab} available.`;
+        return this.intl.t('fleetops-ui.js.components.layout.fleet-ops-sidebar.operations-monitor.no-activetab-available', { activeTab: this.activeTab });
     }
 
     get emptyState() {
@@ -225,7 +225,10 @@ export default class LayoutFleetOpsSidebarOperationsMonitorComponent extends Com
     }
 
     @action fleetSubtitle(fleet) {
-        return `${this.fleetDriverCount(fleet)} drivers - ${this.fleetVehicleCount(fleet)} vehicles`;
+        return this.intl.t('fleetops-ui.js.components.layout.fleet-ops-sidebar.operations-monitor.value-drivers-value2-vehicles', {
+            value: this.fleetDriverCount(fleet),
+            value2: this.fleetVehicleCount(fleet),
+        });
     }
 
     @action isFleetExpanded(fleet) {

@@ -18,6 +18,7 @@ function toDate(value) {
 }
 
 export default class ConnectivityEventsDetailsController extends Controller {
+    @service intl;
     @service deviceEventActions;
     @service hostRouter;
 
@@ -36,7 +37,9 @@ export default class ConnectivityEventsDetailsController extends Controller {
     }
 
     get processedLabel() {
-        return this.isProcessed ? 'Processed' : 'Unprocessed';
+        return this.isProcessed
+            ? this.intl.t('fleetops-ui.js.controllers.connectivity.events.details.processed')
+            : this.intl.t('fleetops-ui.js.controllers.connectivity.events.details.unprocessed');
     }
 
     @action goBack() {

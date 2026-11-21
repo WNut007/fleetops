@@ -71,11 +71,11 @@ export default class FuelIntegrationFormComponent extends Component {
     }
 
     get sandboxLabel() {
-        return this.selectedProvider?.metadata?.environment_labels?.sandbox ?? 'Sandbox';
+        return this.selectedProvider?.metadata?.environment_labels?.sandbox ?? this.intl.t('fleetops-ui.js.components.fuel-integration.form.sandbox');
     }
 
     get productionLabel() {
-        return this.selectedProvider?.metadata?.environment_labels?.production ?? 'Production';
+        return this.selectedProvider?.metadata?.environment_labels?.production ?? this.intl.t('fleetops-ui.js.components.fuel-integration.form.production');
     }
 
     get baseUrl() {
@@ -124,23 +124,23 @@ export default class FuelIntegrationFormComponent extends Component {
     get connectionStateTitle() {
         switch (this.connectionState) {
             case 'testing':
-                return 'Testing provider credentials...';
+                return this.intl.t('fleetops-ui.js.components.fuel-integration.form.testing-provider-credentials');
             case 'success':
-                return 'Connection verified';
+                return this.intl.t('fleetops-ui.js.components.fuel-integration.form.connection-verified');
             case 'failed':
-                return 'Connection failed';
+                return this.intl.t('fleetops-ui.js.components.fuel-integration.form.connection-failed');
             default:
-                return 'Ready to test';
+                return this.intl.t('fleetops-ui.js.components.fuel-integration.form.ready-to-test');
         }
     }
 
     get connectionStateMessage() {
         if (this.connectionState === 'idle') {
-            return 'Run a live credential test before saving so operators know the integration can import fuel data.';
+            return this.intl.t('fleetops-ui.js.components.fuel-integration.form.run-a-live-credential-test-before');
         }
 
         if (this.connectionState === 'testing') {
-            return 'The configured credentials are being checked with the fuel integration provider.';
+            return this.intl.t('fleetops-ui.js.components.fuel-integration.form.the-configured-credentials-are-being-checked');
         }
 
         return this.connectionTestResult?.message;

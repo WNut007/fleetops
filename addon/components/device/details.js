@@ -58,7 +58,7 @@ export default class DeviceDetailsComponent extends Component {
     }
 
     get connectionLabel() {
-        return this.connectionStatus ? this.connectionStatus.replaceAll('_', ' ') : 'Unknown';
+        return this.connectionStatus ? this.connectionStatus.replaceAll('_', ' ') : this.intl.t('fleetops-ui.js.components.device.details.unknown');
     }
 
     get attachedVehicleName() {
@@ -66,7 +66,7 @@ export default class DeviceDetailsComponent extends Component {
     }
 
     get attachmentLabel() {
-        return this.attachedVehicleName ?? 'Unattached';
+        return this.attachedVehicleName ?? this.intl.t('fleetops-ui.js.components.device.details.unattached');
     }
 
     get attachmentTone() {
