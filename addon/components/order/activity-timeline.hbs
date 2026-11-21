@@ -1,27 +1,20 @@
 {{#let (or @activity @resource.tracking_statuses) as |activity|}}
     {{#if activity.length}}
-        {{! Timeline (ember-ui) copies @activity once, when it is created, so a status added later
-            never appeared until the page was reloaded. A new list is a new array: each keyed on
-            identity creates a fresh Timeline for it. }}
-        {{#each (array activity) as |list|}}
-            <Timeline @activity={{list}} @arrowClass="bg-gray-600 border border-gray-900 shadow-md" as |TimelineItem|>
-                <TimelineItem @activeStatus={{@resource.status}} as |trackingStatus|>
-                    <div class="flex flex-col px-3 py-2 rounded text-sm leading-4 space-y-2 bg-gray-100 dark:bg-gray-900 dark:text-white">
-                        <div class="flex flex-col space-y-1">
-                            <div class="text-xs font-semibold truncate">{{trackingStatus.status}}</div>
-                            <div class="text-xs truncate">{{n-a trackingStatus.details}}</div>
-                            <div class="text-xs">{{format-date-fns trackingStatus.created_at "d MMM HH:mm"}}</div>
-                        </div>
-                        <Attach::Tooltip @class="clean" @animation="scale" @placement="top">
-                            <InputInfo>
-                                <div class="text-xs">{{or trackingStatus.details trackingStatus.status}}</div>
-                                <div class="text-xs">{{format-date-fns trackingStatus.created_at "d MMM yyyy HH:mm"}}</div>
-                            </InputInfo>
-                        </Attach::Tooltip>
-                    </div>
-                </TimelineItem>
-            </Timeline>
-        {{/each}}
+        <Order::ActivitySteps @activity={{activity}} @activeStatus={{@resource.status}} @arrowClass="bg-gray-600 border border-gray-900 shadow-md" as |trackingStatus|>
+            <div class="flex flex-col px-3 py-2 rounded text-sm leading-4 space-y-2 bg-gray-100 dark:bg-gray-900 dark:text-white">
+                <div class="flex flex-col space-y-1">
+                    <div class="text-xs font-semibold truncate">{{trackingStatus.status}}</div>
+                    <div class="text-xs truncate">{{n-a trackingStatus.details}}</div>
+                    <div class="text-xs">{{format-date-fns trackingStatus.created_at "d MMM HH:mm"}}</div>
+                </div>
+                <Attach::Tooltip @class="clean" @animation="scale" @placement="top">
+                    <InputInfo>
+                        <div class="text-xs">{{or trackingStatus.details trackingStatus.status}}</div>
+                        <div class="text-xs">{{format-date-fns trackingStatus.created_at "d MMM yyyy HH:mm"}}</div>
+                    </InputInfo>
+                </Attach::Tooltip>
+            </div>
+        </Order::ActivitySteps>
     {{else}}
         <div class="min-h-24 p-4">
             <div class="flex items-center justify-center border border-dashed border-gray-300 dark:border-gray-600 p-6 rounded-xl bg-gray-50 dark:bg-gray-800">

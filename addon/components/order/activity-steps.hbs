@@ -1,0 +1,27 @@
+<div class="timeline timeline-activity-{{this.activity.length}}" data-test-activity-steps ...attributes>
+    <div class="timeline-controls">
+        <div class="timeline-controls-button-wrapper">
+            <button
+                class="timeline-arrow-left {{@arrowClass}}"
+                disabled={{if this.canGoBack false true}}
+                type="button"
+                data-test-activity-previous
+                {{on "click" this.previous}}
+            >&larr;</button>
+        </div>
+    </div>
+
+    <div class="timeline-wrapper">
+        <div class="timeline-items-container">
+            {{#each this.visible as |item|}}
+                <div class="timeline-item {{if item.isActive 'active'}}" data-test-activity-step>{{yield item.status}}</div>
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="timeline-controls">
+        <div class="timeline-controls-button-wrapper">
+            <button class="timeline-arrow-right {{@arrowClass}}" disabled={{if this.canGoForward false true}} type="button" data-test-activity-next {{on "click" this.next}}>&rarr;</button>
+        </div>
+    </div>
+</div>
