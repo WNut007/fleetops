@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { EventBuffer } from '@fleetbase/fleetops-engine/services/movement-tracker';
+import { EventBuffer, serverTime } from '@fleetbase/fleetops-engine/services/movement-tracker';
 
 // A driver record stand-in: records what the buffer writes to it.
 function driver() {
@@ -55,5 +55,25 @@ module('Unit | Service | movement-tracker | EventBuffer', function () {
 
         assert.deepEqual(model.location, point(100.5, 13.7));
         assert.strictEqual(model.updated_at, undefined);
+    });
+
+    test('a server time stamp without a zone is read as UTC', async function (assert) {
+        const model = driver();
+        const buffer = new EventBuffer(model, { mapManager: noMarkers });
+
+        buffer.add({ event: 'driver.location_changed', created_at: '2026-11-21 04:44:12', data: { location: point(100.7381, 13.7262) } });
+        await buffer.process.perform();
+
+        assert.strictEqual(model.updated_at.toISOString(), '2026-11-21T04:44:12.000Z', 'not 7 hours off in Bangkok');
+    });
+});
+
+module('Unit | Service | movement-tracker | serverTime', function () {
+    test('only zone-less stamps are marked UTC', function (assert) {
+        assert.strictEqual(serverTime('2026-11-21 04:44:12'), '2026-11-21T04:44:12Z');
+        assert.strictEqual(serverTime('2026-11-21T04:44:12'), '2026-11-21T04:44:12Z');
+        assert.strictEqual(serverTime('2026-11-21T04:44:12.000000Z'), '2026-11-21T04:44:12.000000Z');
+        assert.strictEqual(serverTime('2026-11-21T11:44:12+07:00'), '2026-11-21T11:44:12+07:00');
+        assert.strictEqual(serverTime(undefined), undefined);
     });
 });

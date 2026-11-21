@@ -23,6 +23,19 @@ import telemetryTimestamp from '../utils/telemetry-timestamp';
 import getModelName from '@fleetbase/ember-core/utils/get-model-name';
 import LeafletTrackingMarkerComponent from '../components/leaflet-tracking-marker';
 
+/**
+ * The server stamps socket events with a UTC time and no zone ("2026-11-21 04:44:12"). The
+ * browser parses that as local time, which put "last seen" hours off (7 in Bangkok). Read such
+ * a stamp as UTC; anything with a zone or offset passes through unchanged.
+ */
+export function serverTime(value) {
+    if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}(:\d{2}(\.\d+)?)?$/.test(value)) {
+        return `${value.replace(' ', 'T')}Z`;
+    }
+
+    return value;
+}
+
 export class EventBuffer {
     @tracked events = [];
     @tracked waitTime = 1000 * 3;
@@ -46,7 +59,7 @@ export class EventBuffer {
 
     /** Whether an event sent at `createdAt` is newer than every one applied so far. */
     #isNewer(createdAt) {
-        const sentAt = new Date(createdAt).getTime();
+        const sentAt = new Date(serverTime(createdAt)).getTime();
         if (!Number.isFinite(sentAt) || (this.latestSentAt !== null && sentAt < this.latestSentAt)) {
             return false;
         }
@@ -130,7 +143,7 @@ export class EventBuffer {
                 // A location pushed by the driver app (/drivers/{id}/track) carries no telematics
                 // timestamp. Without this only the marker moved: tables showed the old location and
                 // "last seen" until the page was reloaded.
-                const sentAt = new Date(output.created_at);
+                const sentAt = new Date(serverTime(output.created_at));
                 this.model?.setProperties?.({ location: data.location, speed: data.speed, heading: data.heading, updated_at: sentAt });
             }
 

@@ -42,7 +42,7 @@ export default class MapDrawerVehicleListingComponent extends Component {
                 label: this.intl.t('column.location'),
                 valuePath: 'location',
                 width: '80px',
-                cellComponent: 'table/cell/point',
+                cellComponent: 'cell/live-point',
                 onClick: this.locate,
             },
             {
