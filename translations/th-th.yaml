@@ -1,276 +1,4219 @@
+fleet-ops:
+  extension-name: Fleet-Ops
+common:
+  last-modified: แก้ไขล่าสุด
+  'yes': ใช่
+  'no': ไม่
+  proof-of-delivery: หลักฐานการส่งมอบ (POD)
+  ad-hoc: Ad-hoc
+  bulk-dispatch: Dispatch หลายรายการ
+  dispatch-orders: Dispatch ออเดอร์
+  dispatch-order: Dispatch ออเดอร์
+  assign-driver: มอบหมายคนขับ
+  unassign-driver: ยกเลิกการมอบหมายคนขับ
+  assign-drivers: มอบหมายคนขับ
+  no-driver-assigned: ยังไม่ได้มอบหมายคนขับ
+  no-vehicle-assigned: ยังไม่ได้มอบหมายรถ
+  details: รายละเอียด
+  name: ชื่อ
+  title: หัวข้อ
+  email: อีเมล
+  phone: โทรศัพท์
+  internal-id: รหัสภายใน
+  type: ประเภท
+  address: ที่อยู่
+  create-order: สร้างออเดอร์
+  coordinates: พิกัด
+  city: เมือง
+  country: ประเทศ
+  status: สถานะ
+  upload-new-photo: อัปโหลดรูปใหม่
+  resource-actions: การดำเนินการ{resource}
+  resource-location: ตำแหน่ง{resource}
+  search-countries: ค้นหาประเทศ
+  select-resource-filter-by: เลือก{resource}เพื่อกรอง
+  table-view: มุมมองตาราง
+  grid-view: มุมมองตาราง (กริด)
+  calendar-view: มุมมองปฏิทิน
+  change-layout: เปลี่ยนรูปแบบการแสดงผล
+  livemap: แผนที่สด
+  tracking: การติดตาม
+  activity: กิจกรรม
+  eta: ETA
+  position: ตำแหน่ง
+  positions: ตำแหน่ง
+  pos: POS
+  edit-address: แก้ไขที่อยู่
+  new-address: ที่อยู่ใหม่
+  select-address: เลือกที่อยู่
+  save: บันทึก
+  save-changes: บันทึกการเปลี่ยนแปลง
+  done: เสร็จสิ้น
+  delete: ลบ
+  overview: ภาพรวม
+  notes: หมายเหตุ
+  schedule: กำหนดเวลา
+  optional: ไม่บังคับ
+  unauthorized-access: คุณไม่มีสิทธิ์เข้าถึงข้อมูลนี้
+  online: ออนไลน์
+  offline: ออฟไลน์
+  refresh: รีเฟรช
+  loading-route: กำลังโหลดเส้นทาง...
+  hover-to-load-route: กำลังโหลดตัวอย่างเส้นทาง...
+  unable-to-load-route: โหลดตัวอย่างเส้นทางไม่ได้
+menu:
+  operations: ปฏิบัติการ
+  dashboard: แดชบอร์ด
+  radar: Radar
+  orders: ออเดอร์
+  service-rates: อัตราค่าบริการ
+  scheduler: ตารางงาน
+  order-config: Order Config
+  resources: ทรัพยากร
+  drivers: คนขับ
+  vehicles: รถ
+  trailers: หางพ่วง
+  fleets: Fleet
+  vendors: Vendor
+  contacts: ผู้ติดต่อ
+  places: สถานที่
+  fuel-reports: รายงานน้ำมัน
+  fuel-transactions: รายการเติมน้ำมัน
+  issues: ปัญหา
+  maintenance: ซ่อมบำรุง
+  schedules: กำหนดการ
+  work-orders: ใบสั่งงาน
+  inspection-forms: แบบฟอร์มตรวจสภาพ
+  inspections: การตรวจสภาพ
+  equipment: อุปกรณ์
+  parts: อะไหล่
+  maintenance-history: ประวัติการซ่อมบำรุง
+  connectivity: การเชื่อมต่อ
+  telematics: Telematics
+  fuel-providers: การเชื่อมต่อผู้ให้บริการน้ำมัน
+  devices: อุปกรณ์
+  sensors: เซนเซอร์
+  events: เหตุการณ์
+  tracking: การติดตาม
+  analytics: การวิเคราะห์
+  reports: รายงาน
+  settings: ตั้งค่า
+  navigator-app: แอป Navigator
+  payments: การชำระเงิน
+  notifications: การแจ้งเตือน
+  routing: การวางเส้นทาง
+  dispatch: Dispatch
+  map: แผนที่
+  custom-fields: ฟิลด์กำหนดเอง
+  order-board: บอร์ดออเดอร์
+  avatars: ไอคอน
+  scheduling: การจัดตาราง
+  maintenances: งานซ่อมบำรุง
+  orchestrator: Orchestrator
+  orchestrator-settings: ตั้งค่า Orchestrator
+  telematics-settings: Telematics
+trailer:
+  navigation-description: จัดการหางพ่วง การเชื่อมต่อกับรถลาก อุปกรณ์ และ Telematics
+  sections:
+    details: รายละเอียด
+    identification: ข้อมูลระบุหางพ่วง
+    classification: การจัดประเภทและสถานะ
+    registration: ทะเบียน
+    location: ตำแหน่ง
+    dimensions: ขนาดและความจุ
+    measurement: การวัดและการใช้งาน
+    dimensions-fields: ขนาด ({unit})
+    weight: น้ำหนัก ({unit})
+    running-gear: เพลา เบรก และข้อต่อพ่วง
+    refrigeration: ระบบทำความเย็น
+    ownership: กรรมสิทธิ์และการเงิน
+    finance: ข้อมูลการเงิน
+    connection: การเชื่อมต่อรถลาก
+    telemetry: ตำแหน่งและ Telematics
+    notes: หมายเหตุและประวัติ
+  fields:
+    photo: รูปภาพ
+    id: ID
+    name: ชื่อ
+    code: รหัส
+    description: คำอธิบาย
+    type: ประเภทหางพ่วง
+    body-type: ประเภทตัวถัง
+    color: สี
+    status: สถานะ
+    category: หมวดหมู่
+    vin: VIN
+    plate-number: เลขทะเบียน
+    serial-number: หมายเลขซีเรียล
+    make: ยี่ห้อ
+    model: รุ่น
+    year: ปี
+    vendor: Vendor
+    warranty: การรับประกัน
+    vehicle: รถลาก
+    attachment-state: สถานะการพ่วง
+    attached-at: พ่วงตั้งแต่
+    position: ตำแหน่งการพ่วง
+    source: แหล่งที่มา
+    connected-at: เชื่อมต่อเมื่อ
+    disconnected-at: ปลดการเชื่อมต่อเมื่อ
+    duration: ระยะเวลา
+    connectivity: การเชื่อมต่อ
+    last-online: ออนไลน์ล่าสุด
+    last-provider: ผู้ให้บริการ Telemetry
+    last-event-at: เหตุการณ์ Telemetry ล่าสุด
+    coordinates: พิกัด
+    speed: ความเร็ว
+    heading: ทิศทาง
+    altitude: ความสูง
+    devices-count: อุปกรณ์ที่ติดตั้ง
+    equipment-count: อุปกรณ์เสริมที่ติดตั้ง
+    measurement-system: ระบบหน่วยวัด
+    odometer: เลขไมล์ / ฮับมิเตอร์ {unit}
+    odometer-unit: หน่วยเลขไมล์
+    length: ความยาว ({unit})
+    width: ความกว้าง ({unit})
+    height: ความสูง ({unit})
+    cargo-volume: ปริมาตรบรรทุก ({unit})
+    tare-weight: น้ำหนักรถเปล่า ({unit})
+    gvwr: น้ำหนักรวมสูงสุด GVWR ({unit})
+    payload-capacity: น้ำหนักบรรทุกได้ ({unit})
+    axle-count: จำนวนเพลา
+    tire-count: จำนวนยาง
+    door-count: จำนวนประตู
+    coupling-type: ประเภทข้อต่อพ่วง
+    brake-type: ประเภทเบรก
+    abs: ABS
+    ebs: EBS
+    refrigerated: ห้องเย็น
+    temperature-min: อุณหภูมิต่ำสุด ({unit})
+    temperature-max: อุณหภูมิสูงสุด ({unit})
+    reefer-hours: ชั่วโมงเครื่องทำความเย็น
+    ownership-type: กรรมสิทธิ์
+    financing-status: สถานะการผ่อนชำระ
+    currency: สกุลเงิน
+    acquisition-cost: ราคาที่ซื้อ
+    current-value: มูลค่าปัจจุบัน
+    insurance-value: ทุนประกัน
+    depreciation-rate: อัตราค่าเสื่อม (% ต่อปี)
+    purchased-at: วันที่ซื้อ
+    lease-expires-at: วันสิ้นสุดสัญญาเช่า
+    notes: หมายเหตุ
+    created-at: สร้างเมื่อ
+    updated-at: อัปเดตล่าสุด
+  placeholders:
+    filter-vendor: กรองตาม Vendor
+    name: เช่น ห้องเย็น 12
+    code: รหัสภายใน Fleet เช่น TRL-0012
+    description: หางพ่วงนี้ใช้ทำอะไร
+    type: เลือกประเภทหางพ่วง
+    status: เลือกสถานะ
+    body-type: เช่น ตู้ทึบ ม่านข้าง พื้นเรียบ
+    color: เช่น ขาว
+    category: เลือกหมวดหมู่ (ไม่บังคับ)
+    vin: VIN 17 หลัก
+    plate-number: ป้ายทะเบียน
+    serial-number: หมายเลขซีเรียลจากผู้ผลิต
+    make: เช่น Utility, Schmitz, Wabash
+    model: เช่น 3000R
+    year: เช่น 2024
+    vendor: เลือก Vendor (ไม่บังคับ)
+    warranty: เลือกการรับประกัน (ไม่บังคับ)
+    vehicle: เลือกรถ
+    trailer: เลือกหางพ่วง
+    equipment: เลือกอุปกรณ์
+    filter-vehicle: กรองตามรถลาก
+    position: '1'
+    measurement-system: เลือกระบบหน่วยวัด
+    odometer-unit: เลือกหน่วย
+    odometer: ค่าปัจจุบัน
+    length: '0.000'
+    width: '0.000'
+    height: '0.000'
+    cargo-volume: '0.000'
+    tare-weight: '0.000'
+    gvwr: '0.000'
+    payload-capacity: '0.000'
+    axle-count: เช่น 2
+    tire-count: เช่น 8
+    door-count: เช่น 2
+    coupling-type: เลือกประเภทข้อต่อพ่วง
+    brake-type: เลือกประเภทเบรก
+    temperature-min: เช่น -20
+    temperature-max: เช่น 4
+    reefer-hours: ชั่วโมงการทำงานของเครื่องทำความเย็น
+    ownership-type: เลือกกรรมสิทธิ์
+    financing-status: เช่น ผ่อนหมดแล้ว, ผ่อนถึงปี 2028
+    depreciation-rate: เช่น 10
+    date: DD-MM-YYYY
+    notes: หมายเหตุภายในเกี่ยวกับหางพ่วงนี้
+  help:
+    photo: อัปโหลดรูปหางพ่วงนี้
+    name: ชื่อที่แสดงทั่วทั้ง Fleet-Ops (จำเป็น)
+    code: รหัสอ้างอิงภายใน Fleet ของคุณสำหรับหางพ่วงนี้
+    type: ประเภทจะกำหนดว่าใช้ส่วนไหนบ้าง เช่น ระบบทำความเย็นสำหรับห้องเย็น
+    status: สถานะตลอดอายุการใช้งาน ส่วนสถานะการพ่วงและการเชื่อมต่อติดตามแยกกัน
+    body-type: คำอธิบายตัวถังแบบอิสระ ใช้สำหรับจัดประเภทและค้นหา
+    category: การจัดกลุ่ม (ไม่บังคับ) ที่ใช้ร่วมกับทรัพยากรอื่นใน Fleet
+    vin: หมายเลขตัวถังหรือหมายเลข VIN ที่ตอกไว้บนหางพ่วง
+    coordinates: ตำแหน่งล่าสุดที่ทราบหรือตำแหน่งประจำ อุปกรณ์ Telematics จะอัปเดตให้อัตโนมัติ
+    measurement-system: กำหนดหน่วยที่ใช้กับขนาด น้ำหนัก ปริมาตร และอุณหภูมิ
+    odometer: ค่าฮับมิเตอร์หรือเลขไมล์ ในหน่วยที่เลือก
+    cargo-volume: ปริมาตรบรรทุกที่ใช้งานได้จริงของตัวหางพ่วง
+    tare-weight: น้ำหนักหางพ่วงเปล่า
+    gvwr: น้ำหนักรวมสูงสุดที่อนุญาตเมื่อบรรทุกเต็ม (GVWR)
+    payload-capacity: น้ำหนักสินค้าสูงสุดที่หางพ่วงบรรทุกได้
+    coupling-type: วิธีที่หางพ่วงต่อเข้ากับรถลาก
+    abs: มีระบบเบรก ABS
+    ebs: มีระบบเบรกอิเล็กทรอนิกส์ EBS
+    refrigerated: เปิดสำหรับหางพ่วงควบคุมอุณหภูมิ เพื่อบันทึกค่าเครื่องทำความเย็น
+    temperature: ช่วงอุณหภูมิการทำงานของเครื่องทำความเย็น
+    reefer-hours: ชั่วโมงการทำงานที่บันทึกไว้ในเครื่องทำความเย็น
+    ownership-type: รูปแบบการถือครองหางพ่วงนี้ ข้อมูลการเช่าและผ่อนชำระจะแสดงเมื่อเกี่ยวข้อง
+    lease-expires-at: วันสิ้นสุดสัญญาเช่า เช่ารายวัน หรือสัญญาผ่อนชำระ
+    vendor: Vendor หรือผู้ให้เช่าที่จัดหาหางพ่วงนี้
+    warranty: การรับประกันที่คุ้มครองหางพ่วงนี้
+    acquisition-cost: ราคาซื้อหรือต้นทุนที่บันทึกเป็นสินทรัพย์ ในสกุลเงินที่เลือก
+    depreciation-rate: ค่าเสื่อมราคาต่อปีที่ใช้ประมาณมูลค่าปัจจุบัน
+    attach-vehicle: หางพ่วงจะถูกพ่วงกับรถที่เลือก หางพ่วงหนึ่งคันพ่วงได้กับรถคันเดียวในเวลาเดียวกัน
+    select-trailer: แสดงเฉพาะหางพ่วงที่ยังไม่ได้พ่วง
+    select-equipment: แสดงเฉพาะอุปกรณ์ที่ยังไม่ได้ติดตั้ง
+    position: ตำแหน่งการพ่วงหลังรถ ตำแหน่ง 1 อยู่ต่อจากหัวลากทันที ใช้ 2 ขึ้นไปสำหรับรถพ่วงหลายตอน
+  units:
+    length-metric: ม.
+    length-imperial: ฟุต
+    weight-metric: กก.
+    weight-imperial: ปอนด์
+    volume-metric: ลบ.ม.
+    volume-imperial: ลบ.ฟุต
+    temperature-metric: °C
+    temperature-imperial: °F
+  actions:
+    new: เพิ่มหางพ่วง
+    locate: ดูบนแผนที่
+    attach-vehicle: พ่วงกับรถ
+    detach-vehicle: ปลดจากรถ
+    attach-device: ติดตั้งอุปกรณ์
+    attach-equipment: ติดตั้งอุปกรณ์เสริม
+    detach-equipment: ถอดอุปกรณ์เสริม
+    schedule-maintenance: ตั้งกำหนดการซ่อมบำรุง
+    create-work-order: สร้างใบสั่งงาน
+    log-maintenance: บันทึกการซ่อมบำรุง
+  prompts:
+    attach-vehicle-title: พ่วง {trailerName} กับรถ
+    select-vehicle-warning: เลือกรถที่จะพ่วงหางพ่วงนี้
+    attach-vehicle-success: พ่วง {trailerName} กับ {vehicleName} แล้ว
+    detach-vehicle-title: ปลด {trailerName}?
+    detach-vehicle-body: จะสิ้นสุดการพ่วงปัจจุบันระหว่าง {trailerName} กับ {vehicleName} ข้อมูลการพ่วงยังเก็บไว้ในประวัติของหางพ่วง
+    detach-vehicle-success: ปลด {trailerName} ออกจาก {vehicleName} แล้ว
+    not-attached-warning: '{trailerName} ยังไม่ได้พ่วงกับรถ'
+    attach-device-title: ติดตั้งอุปกรณ์ให้ {trailerName}
+    select-device-warning: เลือกอุปกรณ์ที่จะติดตั้งกับหางพ่วงนี้
+    attach-device-success: ติดตั้งอุปกรณ์ให้ {trailerName} แล้ว
+    attach-equipment-title: ติดตั้งอุปกรณ์เสริมให้ {resourceName}
+    select-equipment-warning: เลือกอุปกรณ์เสริมที่จะติดตั้ง
+    attach-equipment-success: ติดตั้ง {equipmentName} ให้ {resourceName} แล้ว
+    detach-equipment-title: ถอด {equipmentName}?
+    detach-equipment-body: '{equipmentName} จะไม่ได้ติดตั้งกับ {resourceName} อีกต่อไป'
+    detach-equipment-success: ถอด {equipmentName} ออกจาก {resourceName} แล้ว
+    no-location-warning: '{trailerName} ยังไม่มีตำแหน่งที่บันทึกไว้'
+    photo-upload-error: 'อัปโหลดรูปไม่ได้: {message}'
+  empty:
+    title: เพิ่มหางพ่วงคันแรก
+    description: หางพ่วงใช้ติดตามการพ่วง อุปกรณ์และอุปกรณ์เสริมที่ติดตั้ง Telemetry แบบสด และการซ่อมบำรุงของทรัพย์สินที่ถูกลาก
+    filtered-title: ไม่มีหางพ่วงที่ตรงกับตัวกรอง
+    filtered-description: ปรับคำค้นหาหรือตัวกรองเพื่อหาหางพ่วงอื่น
+    connections: ยังไม่มีประวัติการพ่วง
+    connections-description: พ่วงหางพ่วงนี้กับรถเพื่อเริ่มบันทึกประวัติการพ่วง
+    equipment: ยังไม่มีอุปกรณ์เสริม
+    equipment-description: ติดตั้งอุปกรณ์เสริม เช่น ลิฟต์ท้าย สายรัด หรือเครื่องทำความเย็น ให้หางพ่วงนี้
+    schedules: ยังไม่มีกำหนดการซ่อมบำรุง
+    schedules-description: สร้างกำหนดการเพื่อวางแผนตรวจสภาพหรือเข้าศูนย์เป็นประจำสำหรับหางพ่วงนี้
+    work-orders: ยังไม่มีใบสั่งงาน
+    work-orders-description: เปิดใบสั่งงานเพื่อติดตามการซ่อมหรือเข้าศูนย์ของหางพ่วงนี้
+    maintenance: ยังไม่มีประวัติการซ่อมบำรุง
+    maintenance-description: การซ่อมบำรุงที่บันทึกไว้ของหางพ่วงนี้จะแสดงที่นี่
+  docs:
+    title: คู่มือหางพ่วง
+    link: เปิดคู่มือหางพ่วง
+  tabs:
+    overview: ภาพรวม
+    positions: ตำแหน่ง
+    devices: อุปกรณ์
+    equipment: อุปกรณ์เสริม
+    connections: ประวัติการพ่วง
+    schedules: กำหนดการ
+    work-orders: ใบสั่งงาน
+    maintenance: ซ่อมบำรุง
+  columns:
+    name: ชื่อ
+    id: ID
+    code: รหัส
+    type: ประเภท
+    plate-number: เลขทะเบียน
+    status: สถานะ
+    vehicle: รถลาก
+    attachment-state: การพ่วง
+    connectivity: การเชื่อมต่อ
+    last-online: ออนไลน์ล่าสุด
+    location: ตำแหน่ง
+    devices: อุปกรณ์
+    equipment: อุปกรณ์เสริม
+    vin: VIN
+    serial-number: หมายเลขซีเรียล
+    make: ยี่ห้อ
+    model: รุ่น
+    year: ปี
+    vendor: Vendor
+    ownership: กรรมสิทธิ์
+    axles: เพลา
+    gvwr: GVWR
+    payload-capacity: น้ำหนักบรรทุกได้
+    length: ความยาว
+    refrigerated: ห้องเย็น
+    created-at: สร้างเมื่อ
+    updated-at: อัปเดตเมื่อ
+  filters:
+    created-between: สร้างระหว่าง
+    updated-between: อัปเดตระหว่าง
+    last-online-between: ออนไลน์ล่าสุดระหว่าง
+  connections:
+    description: รถทุกคันที่หางพ่วงนี้เคยพ่วง เรียงจากล่าสุด
+    ongoing: กำลังพ่วงอยู่
+    connected: พ่วงเมื่อ {date}
+    disconnected: ปลดเมื่อ {date}
+    still-attached: ยังพ่วงอยู่
+  equipment:
+    description: อุปกรณ์เสริมที่ติดตั้งกับหางพ่วงนี้อยู่ตอนนี้
+  telemetry:
+    no-location: ยังไม่มีตำแหน่งที่บันทึกไว้
+  maintenance:
+    interval: รอบระยะ
+    next-due: ครบกำหนดครั้งถัดไป
+    code: รหัส
+    subject: หัวข้อ
+    priority: ความสำคัญ
+    due: ครบกำหนด
+    summary: สรุป
+    odometer: เลขไมล์
+    total-cost: ค่าใช้จ่ายรวม
+    date: วันที่
+  statuses:
+    available: พร้อมใช้งาน
+    in_use: กำลังใช้งาน
+    maintenance: อยู่ระหว่างซ่อมบำรุง
+    out_of_service: งดใช้งาน
+    retired: ปลดระวาง
+  status-descriptions:
+    available: พร้อมจ่ายงานหรือพ่วง
+    in_use: กำลังทำงานหรือพ่วงกับรถอยู่
+    maintenance: อยู่ระหว่างเข้าศูนย์ ตรวจสภาพ หรือซ่อม
+    out_of_service: ใช้งานไม่ได้จนกว่าจะแจ้งเปลี่ยนแปลง
+    retired: ปลดออกจากการใช้งานถาวร
+  attachment:
+    attached: พ่วงอยู่
+    detached: ไม่ได้พ่วง
+    no-vehicle: ไม่ได้พ่วงกับรถ
+    towed-by: ลากโดย
+    position: ตำแหน่ง {position}
+  connectivity:
+    online: ออนไลน์
+    recently_offline: เพิ่งออฟไลน์
+    offline: ออฟไลน์
+    never_connected: ไม่เคยเชื่อมต่อ
+  measurement:
+    metric: เมตริก
+    imperial: อิมพีเรียล
+  measurement-descriptions:
+    metric: เมตร กิโลกรัม ลูกบาศก์เมตร และเซลเซียส
+    imperial: ฟุต ปอนด์ ลูกบาศก์ฟุต และฟาเรนไฮต์
+  odometer-units:
+    km: กิโลเมตร
+    mi: ไมล์
+  coupling-types:
+    fifth_wheel: จานพ่วง (Fifth wheel)
+    pintle_hook: ขอพ่วงแบบ Pintle
+    ball_hitch: หัวบอลพ่วง
+    gooseneck: คอห่าน (Gooseneck)
+    drawbar: คานพ่วง
+    other: อื่นๆ
+  brake-types:
+    air: เบรกลม
+    electric: เบรกไฟฟ้า
+    hydraulic_surge: เบรกไฮดรอลิกแบบ Surge
+    none: ไม่มีเบรก
+    other: อื่นๆ
+  ownership-types:
+    owned: เป็นเจ้าของ
+    leased: ลีสซิ่ง
+    financed: ผ่อนชำระ
+    rented: เช่า
+  types:
+    dry_van: ตู้ทึบ
+    reefer: ตู้เย็น
+    flatbed: พื้นเรียบ
+    step_deck: พื้นต่ำแบบขั้น
+    lowboy: โลว์เบด
+    tanker: แท็งก์
+    bulk: บรรทุกสินค้าเทกอง
+    dump: ดั๊มพ์
+    chassis: หางพ่วงโครงคอนเทนเนอร์
+    curtain_side: ม่านข้าง
+    car_carrier: บรรทุกรถยนต์
+    livestock: บรรทุกสัตว์
+    logging: บรรทุกไม้ซุง
+    dolly: ดอลลี่
+    specialty: เฉพาะทาง
+    other: อื่นๆ
+resource:
+  asset: ทรัพย์สิน
+  assets: ทรัพย์สิน
+  trailer: หางพ่วง
+  trailers: หางพ่วง
+  activity: กิจกรรม
+  activities: กิจกรรม
+  contact: ผู้ติดต่อ
+  contacts: ผู้ติดต่อ
+  customer-contact: ผู้ติดต่อลูกค้า
+  customer-contacts: ผู้ติดต่อลูกค้า
+  customer-vendor: Vendor ที่เป็นลูกค้า
+  customer-vendors: Vendor ที่เป็นลูกค้า
+  customer: ลูกค้า
+  customers: ลูกค้า
+  custom-entity: รายการกำหนดเอง
+  custom-entities: รายการกำหนดเอง
+  device-event: เหตุการณ์อุปกรณ์
+  device-events: เหตุการณ์อุปกรณ์
+  device: อุปกรณ์
+  devices: อุปกรณ์
+  driver: คนขับ
+  drivers: คนขับ
+  entity: รายการสินค้า
+  entities: รายการสินค้า
+  equipment: อุปกรณ์เสริม
+  equipments: อุปกรณ์เสริม
+  facilitator-contact: ผู้ติดต่อผู้ประสานงาน
+  facilitator-contacts: ผู้ติดต่อผู้ประสานงาน
+  facilitator-customer: ลูกค้าผู้ประสานงาน
+  facilitator-customers: ลูกค้าผู้ประสานงาน
+  facilitator-integrated-vendor: Vendor เชื่อมระบบที่เป็นผู้ประสานงาน
+  facilitator-integrated-vendors: Vendor เชื่อมระบบที่เป็นผู้ประสานงาน
+  facilitator-vendor: Vendor ผู้ประสานงาน
+  facilitator-vendors: Vendor ผู้ประสานงาน
+  facilitator: ผู้ประสานงาน
+  facilitators: ผู้ประสานงาน
+  fleet-driver: คนขับใน Fleet
+  fleet-drivers: คนขับใน Fleet
+  fleet: Fleet
+  fleets: Fleet
+  fuel-report: รายงานน้ำมัน
+  fuel-reports: รายงานน้ำมัน
+  inspection: การตรวจสภาพ
+  inspections: การตรวจสภาพ
+  integrated-vendor: Vendor เชื่อมระบบ
+  integrated-vendors: Vendor เชื่อมระบบ
+  issue: ปัญหา
+  issues: ปัญหา
+  maintenance: งานซ่อมบำรุง
+  maintenances: งานซ่อมบำรุง
+  maintenance-schedule: กำหนดการซ่อมบำรุง
+  maintenance-schedules: กำหนดการซ่อมบำรุง
+  order-config: Order Config
+  order-configs: Order Config
+  order: ออเดอร์
+  orders: ออเดอร์
+  part: อะไหล่
+  parts: อะไหล่
+  payload: Payload
+  payloads: Payload
+  place: สถานที่
+  places: สถานที่
+  purchase-rate: อัตราที่ซื้อ
+  purchase-rates: อัตราที่ซื้อ
+  route: เส้นทาง
+  routes: เส้นทาง
+  sensor: เซนเซอร์
+  sensors: เซนเซอร์
+  service-area: พื้นที่ให้บริการ
+  service-areas: พื้นที่ให้บริการ
+  service-quote-item: รายการในใบเสนอราคา
+  service-quote-items: รายการในใบเสนอราคา
+  service-quote: ใบเสนอราคาค่าบริการ
+  service-quotes: ใบเสนอราคาค่าบริการ
+  service-rate-fee: ค่าธรรมเนียมในอัตราค่าบริการ
+  service-rate-fees: ค่าธรรมเนียมในอัตราค่าบริการ
+  service-rate-parcel-fee: ค่าธรรมเนียมพัสดุ
+  service-rate-parcel-fees: ค่าธรรมเนียมพัสดุ
+  service-rate: อัตราค่าบริการ
+  service-rates: อัตราค่าบริการ
+  telematic: Telematics
+  telematics: Telematics
+  tracking-number: เลขติดตามพัสดุ
+  tracking-numbers: เลขติดตามพัสดุ
+  tracking-status: สถานะการติดตาม
+  tracking-statuses: สถานะการติดตาม
+  vehicle-device: อุปกรณ์ประจำรถ
+  vehicle-devices: อุปกรณ์ประจำรถ
+  vehicle: รถ
+  vehicles: รถ
+  vendor: Vendor
+  vendors: Vendor
+  warranty: การรับประกัน
+  warranties: การรับประกัน
+  waypoint: จุดแวะ
+  waypoints: จุดแวะ
+  work-order: ใบสั่งงาน
+  work-orders: ใบสั่งงาน
+  zone: โซน
+  zones: โซน
+order-status:
+  created: สร้างแล้ว
+  ready: พร้อม
+  dispatched: จ่ายงานแล้ว
+  started: เริ่มแล้ว
+  completed: เสร็จสิ้น
+  canceled: ยกเลิก
+column:
+  target: เป้าหมาย
+  address: ที่อยู่
+  country: ประเทศ
+  created-at: สร้างเมื่อ
+  id: ID
+  internal-id: รหัสภายใน
+  name: ชื่อ
+  phone: โทรศัพท์
+  route-type: ประเภทเส้นทาง
+  status: สถานะ
+  type: ประเภท
+  updated-at: อัปเดตเมื่อ
+  vehicle: รถ
+  vendor: Vendor
+  created: สร้างเมื่อ
+  email: อีเมล
+  title: หัวข้อ
+  updated: อัปเดตเมื่อ
+  fleet: Fleet
+  license: ใบขับขี่
+  active-manpower: กำลังคนที่ทำงานอยู่
+  manpower: กำลังคน
+  parent-fleet: Fleet หลัก
+  service-area: พื้นที่ให้บริการ
+  task: งาน
+  zone: โซน
+  driver: คนขับ
+  edit-fuel: แก้ไขน้ำมัน
+  odometer: เลขไมล์
+  reporter: ผู้รายงาน
+  view: ดู
+  volume: ปริมาณ
+  assignee: ผู้รับผิดชอบ
+  category: หมวดหมู่
+  priority: ความสำคัญ
+  city: เมือง
+  neighborhood: ย่าน
+  postal-code: รหัสไปรษณีย์
+  state: จังหวัด/รัฐ
+  make: ยี่ห้อ
+  model: รุ่น
+  plate-number: เลขทะเบียน
+  year: ปี
+  website-url: เว็บไซต์
+  created-by: สร้างโดย
+  customer: ลูกค้า
+  driver-assigned: คนขับที่มอบหมาย
+  dropoff: จุดส่ง
+  facilitator: ผู้ประสานงาน
+  items: รายการ
+  payload: Payload
+  pickup: จุดรับ
+  scheduled-at: กำหนดเวลา
+  tracking: การติดตาม
+  transaction: ธุรกรรม
+  updated-by: อัปเดตโดย
+  vehicle-assigned: รถที่มอบหมาย
+  service: บริการ
+  location: ตำแหน่ง
+  coordinates: พิกัด
+  current-job: งานปัจจุบัน
+  last-seen: พบล่าสุด
+  place: สถานที่
+  subject: หัวข้อ
+  summary: สรุป
+  total-cost: ค่าใช้จ่ายรวม
+  due-at: ครบกำหนด
+  serial-number: หมายเลขซีเรียล
+  manufacturer: ผู้ผลิต
+  part-number: รหัสอะไหล่
+  quantity-on-hand: จำนวนคงเหลือ
+  quantity: จำนวน
+  unit-cost: ราคาต่อหน่วย
+  code: รหัส
+  interval: รอบระยะ
+  next-due: ครบกำหนดครั้งถัดไป
+  asset: ทรัพย์สิน
+  performed-by: ดำเนินการโดย
+map:
+  visibility-controls:
+    title: การแสดงผลบนแผนที่
+    hide-places: ซ่อนสถานที่ทั้งหมด
+    show-places: แสดงสถานที่ทั้งหมด
+    driver-controls: การแสดงคนขับ
+    driver-visibility-controls: ตั้งค่าการแสดงคนขับ
+    show-drivers: แสดงคนขับทั้งหมด
+    hide-drivers: ซ่อนคนขับทั้งหมด
+    show-online-drivers: แสดงเฉพาะคนขับที่ออนไลน์
+    show-offline-drivers: แสดงเฉพาะคนขับที่ออฟไลน์
+    vehicle-controls: การแสดงรถ
+    vehicle-visibility-controls: ตั้งค่าการแสดงรถ
+    hide-vehicles: ซ่อนรถทั้งหมด
+    show-vehicles: แสดงรถทั้งหมด
+    show-online-vehicles: แสดงเฉพาะรถที่ออนไลน์
+    show-offline-vehicles: แสดงเฉพาะรถที่ออฟไลน์
+  zones-panel:
+    title: พื้นที่ให้บริการ
+    create-service: สร้างพื้นที่ให้บริการใหม่
+    show: แสดงพื้นที่ให้บริการทั้งหมด
+    hide: ซ่อนพื้นที่ให้บริการทั้งหมด
+    action: การดำเนินการ
+    focus: โฟกัส
+    focus-resource: 'โฟกัส: {resource}'
+    blur: ซ่อนพื้นที่ให้บริการ
+    blur-resource: 'ซ่อน: {resource}'
+    create-zone: สร้างโซนภายใน
+    create-zone-inside: 'สร้างโซน: {serviceAreaName}'
+    edit-resource-boundaries: แก้ไขขอบเขต{resource}
+    edit-boundaries: 'แก้ไขขอบเขต: {resource}'
+  toolbar:
+    create: สร้างออเดอร์
+    view-order: ดูออเดอร์
+    view-service-area: ดูพื้นที่ให้บริการ
+    visibility: การแสดงผลบนแผนที่
+    scope: ขอบเขต
+activity:
+  form:
+    code: รหัส
+    code-help-text: ใส่รหัสที่ไม่ซ้ำสำหรับกิจกรรมนี้
+    completes-order: ปิดออเดอร์
+    details: รายละเอียด
+    details-help-text: อธิบายกิจกรรมโดยละเอียดให้ผู้ใช้ปลายทางเข้าใจ
+    key: Key
+    key-help-text: '"ใส่ key ที่ใช้ตัดสินใจในโปรแกรม key นี้ใช้แทนกิจกรรมเดียวหรือหลายกิจกรรมที่มีตัวระบุเดียวกันได้ หมายเหตุ: key ไม่จำเป็นต้องไม่ซ้ำ"'
+    pod-method-placeholder: เลือกวิธียืนยันการส่งมอบ
+    require-pod: ต้องมีหลักฐานการส่งมอบ
+    require-pod-help-text: กิจกรรมนี้ต้องสร้างหลักฐานก่อนจึงจะใช้กับออเดอร์ได้
+    select-pod-method: วิธียืนยันการส่งมอบ
+    status: สถานะ
+    status-help-text: ระบุสถานะที่แสดงให้ผู้ใช้ปลายทางเห็นเมื่อกิจกรรมนี้เกิดขึ้น
+    logic-builder:
+      activity-logic: เงื่อนไขของกิจกรรม
+      activity-logic-help-text: กำหนดเงื่อนไขว่ากิจกรรมจะพร้อมใช้ในขั้นตอนงานเมื่อไร ช่วยปรับลำดับงานตามเกณฑ์เฉพาะ ให้แต่ละกิจกรรมเกิดขึ้นเมื่อเงื่อนไขที่ตั้งไว้ครบเท่านั้น
+      activity-logic-add-logic-help-text: สร้างชุดเงื่อนไขใหม่ที่กำหนดว่ากิจกรรมจะเปิดใช้เมื่อไร คลิกเพื่อเริ่มสร้างกฎใหม่
+      activity-logic-select-logic-type-help-text: เลือกประเภทตรรกะของเงื่อนไขนี้ เลือก 'If' สำหรับเงื่อนไขตรง 'And'/'Or' สำหรับเงื่อนไขผสม หรือ 'Not' เพื่อกลับค่าเงื่อนไข
+      activity-logic-add-condition-help-text: เพิ่มข้อกำหนดที่ต้องเป็นจริงในชุดเงื่อนไขนี้ ใช้ระบุเกณฑ์เพิ่มเติมที่ควบคุมว่ากิจกรรมจะพร้อมใช้หรือไม่
+      field: ฟิลด์
+      value: ค่า
+      add-logic: เพิ่มเงื่อนไข
+      types:
+        and: 'AND: จริงเมื่อทุกเงื่อนไขเป็นจริง'
+        or: 'OR: จริงเมื่อมีอย่างน้อยหนึ่งเงื่อนไขเป็นจริง'
+        not: 'NOT: กลับค่าความจริงของเงื่อนไข'
+        if: 'IF: ทำการดำเนินการถัดไปเมื่อเงื่อนไขเป็นจริง'
+      operators:
+        equal: ตรวจว่าค่าสองค่าเท่ากัน
+        not-equal: ตรวจว่าค่าสองค่าไม่เท่ากัน
+        greater-than: ตรวจว่าค่ามากกว่าอีกค่า
+        less-than: ตรวจว่าค่าน้อยกว่าอีกค่า
+        greater-than-or-equal: ตรวจว่าค่ามากกว่าหรือเท่ากับอีกค่า
+        less-than-or-equal: ตรวจว่าค่าน้อยกว่าหรือเท่ากับอีกค่า
+        exists: ตรวจว่ามีฟิลด์หรือค่านี้อยู่
+        has: ตรวจว่า object มี property นี้ หรือชุดข้อมูลมีสมาชิกนี้
+        contains: ตรวจว่าข้อความมีข้อความย่อยนี้ หรืออาร์เรย์มีสมาชิกนี้
+        begins-with: ตรวจว่าข้อความขึ้นต้นด้วยข้อความที่ระบุ
+        ends-with: ตรวจว่าข้อความลงท้ายด้วยข้อความที่ระบุ
+        in: ตรวจว่าค่าอยู่ในชุดหรือช่วงที่กำหนด
+        not-in: ตรวจว่าค่าไม่อยู่ในชุดหรือช่วงที่กำหนด
+        and: 'AND: จริงเมื่อทั้งสองค่าเป็นจริง'
+        or: 'OR: จริงเมื่อมีอย่างน้อยหนึ่งค่าเป็นจริง'
+        not: 'NOT: กลับค่าความจริง'
+    event-selector:
+      activity-events: เหตุการณ์ของกิจกรรม
+      activity-events-select-to-fire: เลือกเหตุการณ์ที่จะเกิดขึ้นเมื่อกิจกรรมนี้เกิด
+      activity-events-select-events-info: เลือกเหตุการณ์ที่ต้องการให้ทำงานเมื่อเกิดกิจกรรมนี้
+      select-event-to-add: เลือกเหตุการณ์ที่จะเพิ่ม...
+      events:
+        order:
+          dispatched: ทำงานเมื่อ Dispatch ออเดอร์สำเร็จ
+          failed: ทำงานเมื่อออเดอร์ล้มเหลวจากข้อผิดพลาด
+          canceled: ทำงานเมื่อออเดอร์ถูกยกเลิกโดยผู้ใช้ คนขับ หรือระบบ
+          completed: ทำงานเมื่อคนขับหรือระบบปิดออเดอร์
+contact:
+  fields:
+    contact-details: รายละเอียดผู้ติดต่อ
+    upload-new-photo: อัปโหลดรูปใหม่
+customer:
+  fields:
+    addresses: ที่อยู่
+    no-addresses: ลูกค้ารายนี้ยังไม่มีที่อยู่ที่บันทึกไว้
+    primary-address: หลัก
+    customer-details: รายละเอียดลูกค้า
+    select-address: เลือกที่อยู่
+    new-address: ที่อยู่ใหม่
+    select-user: เลือกผู้ใช้
+    send-welcome-email: ส่งอีเมลต้อนรับเข้าพอร์ทัลลูกค้า
+    send-welcome-email-help-text: สร้างรหัสผ่านชั่วคราวแล้วส่งลิงก์เข้าสู่ระบบพอร์ทัลลูกค้าให้ลูกค้ารายนี้ทางอีเมล
+    upload-new-photo: อัปโหลดรูปใหม่
+    user-account: บัญชีผู้ใช้
+    user-account-help-text: โปรไฟล์ลูกค้าแต่ละรายต้องผูกกับบัญชีผู้ใช้หนึ่งบัญชี เพื่อใช้ยืนยันตัวตน ให้ลูกค้าเข้าถึงและจัดการโปรไฟล์และบริการอื่นได้อย่างปลอดภัย
+custom-entity:
+  fields:
+    description: คำอธิบาย
+    details: รายละเอียด
+    entity-image: รูปรายการ
+    height: ความสูง
+    height-text: ข้อความความสูง
+    length: ความยาว
+    length-text: ข้อความความยาว
+    measurements: ขนาด
+    name: ชื่อ
+    type: ประเภท
+    weight: น้ำหนัก
+    weight-text: ข้อความน้ำหนัก
+    width: ความกว้าง
+    width-text: ข้อความความกว้าง
+driver:
+  fields:
+    avatar: ไอคอน
+    driver-details: รายละเอียดคนขับ
+    select-vehicle: เลือกรถ
+    upload-new-photo: อัปโหลดรูปใหม่
+    user-account: บัญชีผู้ใช้
+    vendor: Vendor
+    select-vendor: เลือก Vendor
+    driver-license: ใบขับขี่
+    license-expiry: วันหมดอายุใบขับขี่
+    no-vehicle-assigned: ยังไม่ได้มอบหมายรถ
+  actions:
+    unassign-orders: ยกเลิกการมอบหมายออเดอร์
+    unassign-vehicle: ยกเลิกการมอบหมายรถ
+    create-issue: แจ้งปัญหา
+    assign-order: มอบหมายออเดอร์ให้คนขับ
+    assign-vehicle: มอบหมายรถให้คนขับ
+    locate-driver: ดูคนขับบนแผนที่
+  prompts:
+    assign-order-title: มอบหมายออเดอร์ให้ {driverName}
+    assign-order-success: มอบหมายออเดอร์ให้ {driverName} แล้ว
+    select-order-warning: เลือกออเดอร์ที่จะมอบหมาย
+    assign-vehicle-title: มอบหมายรถให้ {driverName}
+    assign-vehicle-success: มอบหมายรถให้ {driverName} แล้ว
+    select-vehicle-warning: เลือกรถที่จะมอบหมาย
+    no-assigned-orders-warning: ไม่พบออเดอร์ที่มอบหมายให้ {driverName}
+    select-orders-warning: เลือกออเดอร์อย่างน้อยหนึ่งรายการเพื่อยกเลิกการมอบหมาย
+    unassign-orders-title: ยกเลิกการมอบหมายออเดอร์ของ {driverName}
+    confirm-unassign-orders-title: ยกเลิกการมอบหมาย {count} ออเดอร์ของ {driverName}?
+    confirm-unassign-orders-body: 'จะนำ {driverName} ออกจากออเดอร์เหล่านี้: {orders}'
+    unassign-orders-success: ยกเลิกการมอบหมาย {driverName} จาก {count} ออเดอร์แล้ว
+    no-vehicle-assigned-warning: ยังไม่ได้มอบหมายรถให้ {driverName}
+    unassign-vehicle-title: ยกเลิกการมอบหมาย {vehicleName} ของ {driverName}?
+    unassign-vehicle-body: จะนำ {driverName} ออกจาก {vehicleName} การมอบหมายออเดอร์ไม่เปลี่ยน
+    unassign-vehicle-success: ยกเลิกการมอบหมาย {vehicleName} ของ {driverName} แล้ว
+    issue-title: ปัญหาที่แจ้งสำหรับ {driverName}
+profile-account:
+  staff-linked-helper: ผูกกับบัญชีพนักงานแล้ว จัดการอีเมลและโทรศัพท์ได้ที่ IAM
+  will-link-to-staff: จะผูกกับพนักงานที่มีอยู่ {name}
+  actions:
+    reset-password: รีเซ็ตรหัสผ่าน
+    send-credentials: ส่งข้อมูลเข้าสู่ระบบ
+    deactivate-login: ปิดการเข้าสู่ระบบ
+    reactivate-login: เปิดการเข้าสู่ระบบอีกครั้ง
+    convert-to-vendor: เปลี่ยนเป็น Vendor
+  prompts:
+    send-credentials-title: ส่งข้อมูลเข้าสู่ระบบ
+    send-credentials-body: สร้างรหัสผ่านชั่วคราวใหม่และส่งข้อมูลเข้าสู่ระบบให้ {name}
+    send-credentials-success: ส่งข้อมูลเข้าสู่ระบบให้ {name} แล้ว
+    deactivate-login-body: ปิดการเข้าสู่ระบบของ {name} โปรไฟล์และประวัติจะยังเก็บไว้
+    deactivate-login-success: ปิดการเข้าสู่ระบบของ {name} แล้ว
+    reactivate-login-body: เปิดการเข้าสู่ระบบของ {name} อีกครั้ง
+    reactivate-login-success: เปิดการเข้าสู่ระบบของ {name} อีกครั้งแล้ว
+    send-portal-credentials-title: ส่งข้อมูลเข้าพอร์ทัล
+    send-portal-credentials-body: สร้างรหัสผ่านชั่วคราวใหม่และส่งข้อมูลเข้าพอร์ทัลให้ผู้ติดต่อรายนี้ทางอีเมล
+    send-portal-credentials-success: ส่งข้อมูลเข้าพอร์ทัลแล้ว
+    deactivate-portal-login-body: ปิดการเข้าพอร์ทัลของผู้ติดต่อรายนี้ โปรไฟล์และประวัติจะยังเก็บไว้
+    deactivate-portal-login-success: ปิดการเข้าพอร์ทัลแล้ว
+    reactivate-portal-login-body: เปิดการเข้าพอร์ทัลของผู้ติดต่อรายนี้อีกครั้ง
+    reactivate-portal-login-success: เปิดการเข้าพอร์ทัลอีกครั้งแล้ว
+    reset-password-title: รีเซ็ตข้อมูลเข้าสู่ระบบ
+    reset-password-heading: คุณกำลังจะรีเซ็ตรหัสผ่านของ {name}
+    reset-password-body: ใส่รหัสผ่านใหม่และยืนยันด้านล่าง ติ๊กช่องเพื่อส่งข้อมูลเข้าสู่ระบบใหม่ได้ (ไม่บังคับ)
+    reset-password-accept: รีเซ็ตข้อมูลเข้าสู่ระบบ
+    reset-password-success: รีเซ็ตรหัสผ่านแล้ว
+    new-password: รหัสผ่านใหม่
+    confirm-new-password: ยืนยันรหัสผ่านใหม่
+    send-new-credentials: ส่งข้อมูลเข้าสู่ระบบใหม่ให้บัญชีนี้
+device:
+  attachment:
+    title: ทรัพย์สินที่ติดตั้ง
+    description: ข้อมูล Fleet ประกอบ Telemetry จากอุปกรณ์นี้
+    open: เปิดทรัพย์สิน
+    asset: ทรัพย์สินที่ติดตั้ง
+    synced-device: อุปกรณ์ที่ซิงก์
+    asset-type: ประเภททรัพย์สิน
+    select-asset-type: เลือกประเภททรัพย์สิน
+    locate: ดูตำแหน่ง
+    change: เปลี่ยนทรัพย์สิน
+    detach: ถอดออก
+    attached-device: อุปกรณ์ที่ติดตั้ง
+    last-seen: อุปกรณ์พบล่าสุด
+    none-title: ยังไม่ได้ติดตั้งกับทรัพย์สิน
+    none-message: ติดตั้งอุปกรณ์นี้กับรถหรือหางพ่วง เพื่อให้ Telemetry มีข้อมูล Fleet ประกอบ
+    latest-positions: ตำแหน่งล่าสุด
+    positions-description: พิกัดล่าสุดของทรัพย์สินที่รายงานผ่านอุปกรณ์นี้
+    full-history: ประวัติทั้งหมด
+    no-positions: ไม่มีตำแหน่งล่าสุด
+    no-positions-message: ทรัพย์สินนี้ยังไม่มีประวัติตำแหน่งล่าสุด
+    attach-or-change: ติดตั้งหรือเปลี่ยนทรัพย์สิน
+    view-attached: ดูทรัพย์สินที่ติดตั้ง
+    locate-attached: ดูทรัพย์สินที่ติดตั้งบนแผนที่
+    unknown: ไม่ทราบทรัพย์สิน
+  fields:
+    title: รายละเอียดอุปกรณ์
+    device-name: ชื่ออุปกรณ์
+    device-name-placeholder: ชื่ออุปกรณ์
+    device-type: ประเภทอุปกรณ์
+    device-type-placeholder: เลือกประเภทอุปกรณ์
+    device-id: ID อุปกรณ์
+    device-id-placeholder: ID อุปกรณ์
+    device-provider: ผู้ให้บริการอุปกรณ์
+    device-provider-placeholder: ผู้ให้บริการอุปกรณ์
+    device-model: รุ่นอุปกรณ์
+    device-model-placeholder: รุ่นอุปกรณ์
+    manufacturer: ผู้ผลิต
+    manufacturer-placeholder: ผู้ผลิต
+    serial-number: หมายเลขซีเรียล
+    serial-number-placeholder: หมายเลขซีเรียล
+    device-location: ตำแหน่งอุปกรณ์
+    device-location-placeholder: ตำแหน่งอุปกรณ์
+    installation-date: วันที่ติดตั้ง
+    installation-date-placeholder: เลือกวันที่ติดตั้ง
+    last-maintenance-date: วันที่ซ่อมบำรุงล่าสุด
+    last-maintenance-date-placeholder: เลือกวันที่ซ่อมบำรุงล่าสุด
+    data-frequency: ความถี่ข้อมูล
+    data-frequency-placeholder: ความถี่ข้อมูล
+    status: สถานะ
+    status-placeholder: เลือกสถานะ
+    telematic: Telematics
+    telematic-placeholder: เลือก Telematics
+    warranty: การรับประกัน
+    warranty-placeholder: เลือกการรับประกัน
+    notes: หมายเหตุ
+    notes-placeholder: หมายเหตุ
+  actions:
+    attach-device: ติดตั้งอุปกรณ์
+    attach-to-vehicle: ติดตั้งกับรถ
+    detach-from-vehicle: ถอดออกจากรถ
+    attach-to-asset: ติดตั้งกับทรัพย์สิน
+  prompts:
+    attach-to-vehicle-title: ติดตั้งอุปกรณ์กับรถ
+    attach-device-to-vehicle-title: ติดตั้ง {deviceName} กับรถ
+    select-vehicle-warning: เลือกรถที่จะติดตั้งอุปกรณ์นี้
+    attach-to-vehicle-success: ติดตั้งอุปกรณ์กับรถแล้ว
+    attach-to-asset-title: ติดตั้งอุปกรณ์กับทรัพย์สิน
+    select-asset-warning: เลือกรถหรือหางพ่วงที่จะติดตั้งอุปกรณ์นี้
+    attach-to-asset-success: ติดตั้งอุปกรณ์กับทรัพย์สินแล้ว
+    detach-from-asset-title: ถอด {deviceName} ออกจากทรัพย์สิน?
+    detach-from-asset-body: จะถอด {deviceName} ออกจาก {assetName} และหยุดอัปเดต Telemetry ของทรัพย์สินจนกว่าจะติดตั้งใหม่
+    detach-from-asset-success: ถอดอุปกรณ์ออกจากทรัพย์สินแล้ว
+    not-attached-warning: '{deviceName} ยังไม่ได้ติดตั้งกับรถ'
+    detach-from-vehicle-title: ถอด {deviceName} ออกจากรถ?
+    detach-from-vehicle-body: จะถอด {deviceName} ออกจาก {vehicleName} และหยุดอัปเดต Telemetry ของรถจนกว่าจะติดตั้งใหม่
+    detach-from-vehicle-success: ถอดอุปกรณ์ออกจากรถแล้ว
+    select-device-to-attach-title: เลือกอุปกรณ์ที่จะติดตั้งกับ {resourceName}
+    confirm-attach-device: ยืนยันและติดตั้งอุปกรณ์
+    attach-device-success: ติดตั้งอุปกรณ์สำเร็จ
+    detach-from-resource-title: ถอด {deviceName} ออกจาก {resourceName}?
+    detach-from-resource-body: จะถอด {deviceName} ออกจาก {resourceName} และหยุดอัปเดต Telemetry และเหตุการณ์ของ{resourceType}นี้
+    detach-from-resource-success: ถอด {deviceName} ออกจาก {resourceName} แล้ว
+    detach-telematic-device-title: ถอด {deviceName} ออกจากรถ?
+    detach-telematic-device-body: '{deviceName} จะยังซิงก์จากผู้ให้บริการ แต่จะไม่ผูกกับรถอีกต่อไป'
+    manager-description: อุปกรณ์ Telematics ที่ติดตั้งกับ{resourceType}นี้ ติดตั้งอุปกรณ์เพื่อเริ่มรับตำแหน่งและเหตุการณ์
+    no-devices-attached-title: ยังไม่ได้ติดตั้งอุปกรณ์
+    no-devices-attached-body: คลิก ติดตั้งอุปกรณ์ ด้านบนเพื่อเริ่มรับข้อมูล Telematics ของ{resourceType}นี้
+entity:
+  fields:
+    declare: สำแดง
+    declare-text: ข้อความสำแดง
+    description: คำอธิบาย
+    description-text: ข้อความคำอธิบาย
+    height: ความสูง
+    height-text: ข้อความความสูง
+    id-text: ข้อความ ID
+    length: ความยาว
+    length-text: ข้อความความยาว
+    measurement-title: ขนาด
+    name-text: ข้อความชื่อ
+    price: ราคา
+    price-text: ข้อความราคา
+    price-title: ราคา
+    sale-price: ราคาขาย
+    sale-price-text: ข้อความราคาขาย
+    sku: SKU
+    sku-text: ข้อความ SKU
+    weight: น้ำหนัก
+    weight-text: ข้อความน้ำหนัก
+    width: ความกว้าง
+    width-text: ข้อความความกว้าง
+fleet:
+  fields:
+    fleet-details: รายละเอียด Fleet
+    fleet-name: ชื่อ Fleet
+    parent-fleet: Fleet หลัก
+    select-parent-fleet: เลือก Fleet หลักที่จะสังกัด
+    select-service: เลือกพื้นที่ให้บริการของ Fleet
+    select-status: เลือกสถานะ
+    select-status-fleet: เลือกสถานะของ Fleet
+    select-vendor: เลือก Vendor ของ Fleet
+    select-zone: เลือกโซนของ Fleet
+    service-title: กำหนดพื้นที่ให้บริการ
+    task-mission-title: งาน / ภารกิจ
+    task-text: อธิบายงานหรือภารกิจหลักของ Fleet นี้ (ถ้ามี)
+    zone-title: กำหนดโซน
+    active-manpower: กำลังคนที่ทำงานอยู่
+    task: งาน
+  driver-listing:
+    search-driver: ค้นหาคนขับใน Fleet
+    add-driver: เพิ่มคนขับเข้า Fleet
+    loading-message: กำลังโหลดคนขับใน Fleet...
+  vehicle-listing:
+    search-vehicle: ค้นหารถใน Fleet
+    add-vehicle: เพิ่มรถเข้า Fleet
+    loading-message: กำลังโหลดรถใน Fleet...
+  actions:
+    assign-vehicle: เพิ่มรถเข้า Fleet
+    assign-driver: เพิ่มคนขับเข้า Fleet
+  prompts:
+    assign-driver-title: เพิ่มคนขับเข้า {fleetName}
+    assign-vehicle-title: เพิ่มรถเข้า {fleetName}
+    select-driver-warning: เลือกคนขับที่จะเพิ่ม
+    select-vehicle-warning: เลือกรถที่จะเพิ่ม
+    assign-driver-success: เพิ่มคนขับเข้า {fleetName} แล้ว
+    assign-vehicle-success: เพิ่มรถเข้า {fleetName} แล้ว
+fuel-report:
+  fields:
+    details: รายละเอียดรายงานน้ำมัน
+    reporter: ผู้รายงาน
+    select-reporter: เลือกผู้รายงาน
+    fuel-cost: ค่าน้ำมัน
+    odometer: เลขไมล์
+    select-volume-help-text: เลือกหน่วยและปริมาณน้ำมันที่จะรายงาน
+    fuel-volume: น้ำมัน / ปริมาณ
+issue:
+  fields:
+    title: หัวข้อ
+    add-tags: เพิ่มแท็ก
+    assigned-to: มอบหมายให้
+    category: หมวดหมู่ปัญหา
+    issue-report: รายงานปัญหา
+    priority: ความสำคัญของปัญหา
+    report: รายงานปัญหา
+    reported-by: แจ้งโดย
+    select-assign: เลือกผู้รับผิดชอบ
+    select-category: เลือกหมวดหมู่ปัญหา
+    select-priority: เลือกความสำคัญของปัญหา
+    select-reporter: เลือกผู้แจ้ง
+    select-status: เลือกสถานะปัญหา
+    select-type: เลือกประเภทปัญหา
+    tags: แท็กปัญหา
+    type: ประเภทปัญหา
+order:
+  placeholders:
+    filter-internal-id: พิมพ์หรือสแกนรหัสภายใน
+  card:
+    linked-order: ออเดอร์ที่เชื่อมโยง
+    unknown-order: ไม่ทราบออเดอร์
+    no-type: ไม่มีประเภท
+    pickup: จุดรับ
+    dropoff: จุดส่ง
+    return: จุดส่งคืน
+    waypoints: จุดแวะ
+    additional-stop: จุดแวะเพิ่มเติม
+    additional-stops: จุดแวะเพิ่มเติม
+    no-pickup-address: ไม่มีที่อยู่จุดรับ
+    no-dropoff-address: ไม่มีที่อยู่จุดส่ง
+    no-route-details: ไม่มีรายละเอียดเส้นทาง
+    no-order-linked: ปัญหานี้ไม่ได้เชื่อมโยงกับออเดอร์
+  fields:
+    ad-hoc: Ad-hoc
+    ad-hoc-help-text: เปิด Ad-hoc เพื่อให้ระบบแจ้งคนขับที่อยู่ใกล้จุดรับ คนขับที่ว่างคนแรกรับงานได้ เป็นทางเลือกแทนการมอบหมายคนขับเองสำหรับออเดอร์เร่งด่วน
+    add-entity: เพิ่มรายการสินค้า
+    add-item-button: เพิ่มรายการ
+    add-item-order: เพิ่มรายการในออเดอร์
+    add-waypoint: เพิ่มจุดแวะ
+    add-waypoint-help-text: ใช้ปุ่ม `เพิ่มจุดแวะ` เพื่อเพิ่มจุดแวะของออเดอร์นี้ ระบบจะปรับเส้นทางให้เหมาะสมอัตโนมัติทุกครั้งที่เพิ่มหรือลบจุด
+    adhoc-ping: ระยะแจ้งงาน Ad-hoc
+    adhoc-strategy: วิธีเสนองาน
+    adhoc-strategy-help-text: วิธีเสนอออเดอร์นี้ให้คนขับที่อยู่ใกล้ ค่าเริ่มต้นมาจาก Order Config แล้วจึงมาจาก ตั้งค่า → Dispatch
+    adhoc-strategy-default: ค่าเริ่มต้น
+    required-vehicle-type: ประเภทรถ
+    required-vehicle-type-placeholder: รถทุกประเภท
+    required-vehicle-type-help-text: เสนอออเดอร์ให้เฉพาะคนขับที่ใช้รถประเภทนี้
+    adhoc-ping-help-text: กำหนดระยะที่จะแจ้งงาน Ad-hoc ของออเดอร์นี้ ถ้าไม่ตั้งจะใช้ค่าเริ่มต้น
+    adhoc-ping-message: ระยะทางต้องเป็นเมตร
+    apply-service-rate: ใช้อัตราค่าบริการ
+    assign-driver: มอบหมายคนขับ
+    assign-driver-help-text: เลือกคนขับที่จะรับออเดอร์นี้
+    assign-driver-placeholder: เลือกคนขับ
+    assign-vehicle: มอบหมายรถ
+    assign-vehicle-help-text: เลือกรถที่จะใช้ทำออเดอร์นี้
+    assign-vehicle-placeholder: เลือกรถ
+    breakdown: รายละเอียดค่าใช้จ่าย
+    customer: ลูกค้า
+    customer-help-text: เลือกลูกค้าของออเดอร์นี้ (ไม่บังคับ) ถ้าเป็นลูกค้าใหม่ ใช้ปุ่ม 'ลูกค้าใหม่' ด้านบน
+    customer-placeholder: เลือกลูกค้า
+    dispatch: Dispatch
+    dispatch-help-text: เปิดเพื่อ Dispatch ออเดอร์นี้ทันทีหลังสร้าง
+    documents-panel-title: เอกสารและไฟล์
+    dropoff: จุดส่ง
+    edit-address: แก้ไขที่อยู่
+    edit-item: แก้ไขรายการ
+    facilitator: ผู้ประสานงาน
+    facilitator-help-text: เลือกผู้ประสานงานของออเดอร์นี้ (ไม่บังคับ) เช่น ผู้รับเหมาช่วงหรือบริการภายนอกที่ช่วยขนส่งออเดอร์นี้
+    facilitator-placeholder: เลือกผู้ประสานงาน
+    info-text: เลือกใบเสนอราคาแบบเรียลไทม์เพื่อใช้กับออเดอร์นี้ เมื่อใช้แล้วจะกลายเป็นอัตราที่ซื้อ และธุรกรรมจะถูกบันทึกใน Ledger
+    internal-id: รหัสภายใน
+    internal-id-help-text: ใช้ช่องนี้ตั้งรหัสอ้างอิงหรือรหัสภายในของออเดอร์ (ไม่บังคับ)
+    invalid-coordinates: พิกัดไม่ถูกต้อง!
+    items-drop: ส่งสินค้าที่
+    loading-message: กำลังโหลดใบเสนอราคา...
+    updating-service-quotes-message: กำลังอัปเดตใบเสนอราคา...
+    notes-placeholder: ใส่หมายเหตุออเดอร์ที่นี่...
+    notes-title: หมายเหตุ
+    optimize-route: ปรับเส้นทางให้เหมาะสม
+    optimize-route-help-text: ระบบจะปรับเส้นทางให้เหมาะสมอัตโนมัติ
+    order-type: ประเภทออเดอร์
+    order-type-help-text: ประเภทออเดอร์จะกำหนดว่าระบบใช้ Order Config ตัวไหน
+    order-type-placeholder: เลือกประเภทออเดอร์
+    payload-entities: Payload / รายการสินค้า
+    pickup: จุดรับ
+    proof-delivery: หลักฐานการส่งมอบ
+    proof-delivery-help-text: เลือกประเภทหลักฐานการส่งมอบที่ต้องการ สแกน QR code หรือลายเซ็น
+    proof-delivery-placeholder: เลือกวิธียืนยันการส่งมอบ
+    refresh-button: รีเฟรช
+    require-proof: ต้องมีหลักฐานการส่งมอบ
+    require-proof-help-text: เปิดเพื่อบังคับให้คนขับทำหลักฐานการส่งมอบ
+    return: จุดส่งคืน
+    route: เส้นทาง
+    route-error: ปรับเส้นทางไม่สำเร็จ ตรวจสอบจุดในเส้นทางแล้วลองใหม่
+    route-label: หลายจุดส่ง
+    schedule: กำหนดเวลา
+    schedule-help-text: วันและเวลาที่จะ Dispatch ออเดอร์ ถ้าถึงเวลาแล้วยังไม่มีคนขับ การ Dispatch จะล้มเหลว ถ้าเป็นออเดอร์ Ad-hoc ระบบจะแจ้งคนขับที่อยู่ใกล้จุดรับ
+    select-destination: เลือกปลายทาง
+    select-dropoff: เลือกจุดส่ง
+    select-pickup: เลือกจุดรับ
+    select-return: เลือกจุดส่งคืน
+    select-waypoint: เลือกจุดแวะ
+    service: บริการ
+    select-service-rate: เลือกอัตราค่าบริการ
+    service-help-text: เลือกอัตราค่าบริการเพื่อคำนวณใบเสนอราคาแบบเรียลไทม์สำหรับออเดอร์นี้
+    service-quotes-help-text: เลือกอัตราค่าบริการที่จะดึงใบเสนอราคา
+    service-type: ประเภทบริการ
+    service-type-placeholder: เลือกประเภทบริการ
+    sku: SKU
+    activity: กิจกรรม
+    comments-title: ความคิดเห็น
+    date-dispatched: วันที่ Dispatch
+    date-scheduled: วันที่กำหนด
+    date-started: วันที่เริ่ม
+    driver: คนขับ
+    driver-assigned: คนขับที่มอบหมาย
+    no-driver-assigned: ยังไม่ได้มอบหมายคนขับ
+    get-label: พิมพ์ฉลาก
+    order-notes-updated: อัปเดตหมายเหตุออเดอร์แล้ว
+    payload: Payload
+    proof-of-delivery: หลักฐานการส่งมอบ
+    purchase-rate-panel-title: อัตราที่ซื้อ
+    route-panel-title: เส้นทาง
+    save-order-note: บันทึกหมายเหตุออเดอร์
+    tracking: การติดตาม
+    tracking-number: เลขติดตามพัสดุ
+    vehicle-assigned: รถที่มอบหมาย
+    view-activity: ดูกิจกรรม
+    no-order-activity: ยังไม่มีกิจกรรมของออเดอร์
+    waypoint-actions: การดำเนินการจุดแวะ
+    documents-files: เอกสารและไฟล์
+    order-metadata: Metadata ของออเดอร์
+    order-label: ฉลากออเดอร์
+    waypoint-label: ฉลากจุดแวะ
+    entity-label: ฉลากรายการสินค้า
+    current-eta: ETA ปัจจุบัน
+    ect: ECT
+    current-destination: ปลายทางปัจจุบัน
+    no-service-quotes: ไม่มีใบเสนอราคา
+    input-order-routes: ใส่เส้นทางของออเดอร์เพื่อดูใบเสนอราคา
+    service-quote-info: เลือกใบเสนอราคาแบบเรียลไทม์เพื่อใช้กับออเดอร์นี้ เมื่อใช้แล้วจะกลายเป็นอัตราที่ซื้อ และธุรกรรมจะถูกบันทึกใน Ledger
+  prompts:
+    update-details-success: อัปเดตรายละเอียด {orderId} แล้ว
+    route-error: ปรับเส้นทางไม่สำเร็จ ตรวจสอบจุดในเส้นทางแล้วลองใหม่
+    route-update-success: อัปเดตเส้นทาง {orderId} แล้ว
+    unassign-driver-title: ยืนยันยกเลิกการมอบหมายคนขับ ({driverName}) จากออเดอร์นี้ใช่หรือไม่?
+    unassign-driver-body: เมื่อยกเลิกแล้ว คนขับจะไม่เห็นรายละเอียดออเดอร์นี้อีก
+    unassign-driver-success: ยกเลิกการมอบหมายคนขับจากออเดอร์นี้แล้ว
+    no-driver-assigned-error: ออเดอร์นี้ยังไม่ได้มอบหมายคนขับ
+    failed-to-load-order-label: โหลดฉลากออเดอร์ไม่สำเร็จ
+    failed-to-load-waypoint-label: โหลดฉลากจุดแวะไม่สำเร็จ
+    failed-to-load-entity-label: โหลดฉลากรายการสินค้าไม่สำเร็จ
+    unable-to-add-entity: เพิ่มรายการสินค้าในออเดอร์ไม่ได้
+    assign-driver-success: มอบหมายคนขับ ({driverName}) ให้ออเดอร์ {orderId} แล้ว
+    cancel-title: ยืนยันยกเลิกออเดอร์นี้ใช่หรือไม่?
+    cancel-body: เมื่อยกเลิกแล้ว ยังดูข้อมูลออเดอร์ได้ แต่เพิ่มกิจกรรมไม่ได้
+    cancel-success: ยกเลิกออเดอร์ {orderId} แล้ว
+    dispatch-title: ยืนยัน Dispatch ออเดอร์นี้ใช่หรือไม่?
+    dispatch-body: เมื่อ Dispatch แล้ว ระบบจะแจ้งคนขับที่ได้รับมอบหมาย
+    dispatch-success: Dispatch ออเดอร์ {orderId} แล้ว
+    order-bulk-search: ใส่ ID ออเดอร์หรือเลขติดตามพัสดุ คั่นด้วยจุลภาค เพื่อค้นหาหลายรายการ
+  actions:
+    create-new-customer: สร้างลูกค้าใหม่
+    create-new-facilitator: สร้างผู้ประสานงานใหม่
+    create-new-place: สร้างสถานที่ใหม่
+    change-driver: เปลี่ยนคนขับ
+    assign-driver: มอบหมายคนขับ
+    update-activity: อัปเดตกิจกรรม
+    reload-activity: โหลดกิจกรรมใหม่
+    view-activity-as-timeline: ดูแบบไทม์ไลน์
+    view-activity-as-list: ดูแบบรายการ
+    cancel-order: ยกเลิกออเดอร์
+    dispatch-order: Dispatch ออเดอร์
+    dispatch-orders: Dispatch ออเดอร์
+    assign-driver-to-orders: มอบหมายคนขับให้ออเดอร์
+    edit-order-details: แก้ไขรายละเอียดออเดอร์
+    edit-order-route: แก้ไขเส้นทางออเดอร์
+    edit-order-metadata: แก้ไข Metadata ของออเดอร์
+    update-order-activity: อัปเดตกิจกรรมออเดอร์
+    submit-new-activity: บันทึกกิจกรรมใหม่
+    add-entity: เพิ่มรายการสินค้า
+    unassign-driver-name: 'ยกเลิกการมอบหมายคนขับ: {driverName}'
+  schedule-card:
+    destination: ปลายทาง
+    unassign-driver: ยกเลิกการมอบหมายคนขับ?
+    unassign-text: คุณกำลังจะยกเลิกการมอบหมายคนขับของออเดอร์ {orderId} คลิกดำเนินการต่อเพื่อยืนยัน
+    unassign-button: ดำเนินการต่อและยกเลิกการมอบหมาย
+    assign-driver: มอบหมายคนขับใหม่?
+    assign-text: คุณกำลังจะมอบหมายคนขับใหม่ ({driverName}) ให้ออเดอร์ {orderId} คลิกดำเนินการต่อเพื่อยืนยัน
+    assign-button: ดำเนินการต่อและมอบหมายคนขับ
+    date: วันที่กำหนด
+    date-created: วันที่สร้าง
+    driver-assigned: คนขับ
+    vehicle-assigned: รถ
+    no-driver: ไม่มีคนขับ
+    no-vehicle: ไม่มีรถ
+    select-driver: เลือกคนขับ
+    select-vehicle: เลือกรถ
+  kanban:
+    status-updated: อัปเดตกิจกรรมออเดอร์เป็นสถานะ {status} แล้ว
+    cannot-update-status: ย้ายออเดอร์ไปสถานะ {status} ไม่ได้
+order-config-manager:
+  title: การตั้งค่าออเดอร์
+  message: Order Config ใช้กำหนดการทำงานของออเดอร์แต่ละประเภทแบบยืดหยุ่น
+  configuration: การตั้งค่า
+  new-order-config: Order Config ใหม่
+  select-order-config: เลือก Order Config
+  create-new-title: สร้าง Order Config ใหม่
+  create-warning-message: Order Config ต้องมีชื่อ
+  create-success-message: สร้าง Order Config ใหม่สำเร็จ
+  no-order-config-selected: ยังไม่ได้เลือก Order Config
+  saved-success-message: บันทึกการตั้งค่า {orderConfigName} แล้ว
+  cloned-success-message: คัดลอก Order Config สำเร็จ
+  enter-clone-name: ใส่ชื่อ Config ที่คัดลอก
+  no-config-name-warning-message: ยังไม่ได้ใส่ชื่อ Config
+  delete-warning-message: เมื่อลบ Order Config นี้แล้ว จะสร้างออเดอร์ด้วย Config นี้ไม่ได้อีก ยืนยันใช่หรือไม่?
+  uninstall-order-config: ถอนการติดตั้ง Config
+  uninstall-order-config-success-message: ถอนการติดตั้งส่วนขยาย {extensionName} แล้ว
+  select-order-config-to-start: เลือกหรือสร้าง Order Config เพื่อเริ่มต้น
+  template: เริ่มจาก
+  template-help-text: Config สำเร็จรูปสำหรับงานแต่ละแบบ พร้อมลำดับขั้นตอน นโยบาย และ Trigger แก้ไขได้ทุกอย่างหลังสร้าง
+  blank-template: Config เปล่า
+  tabs:
+    overview: ภาพรวม
+    details: รายละเอียด
+    custom-fields: ฟิลด์กำหนดเอง
+    activity-flow: ลำดับกิจกรรม
+    lifecycle: วงจรชีวิต
+    entities: รายการสินค้า
+    policies: นโยบาย
+  policies:
+    on-this-page: ในหน้านี้
+    nav-defaults: ค่าเริ่มต้น
+    nav-set: ตั้งค่าแล้ว {count}
+    nav-unsaved: ยังไม่บันทึก {count}
+    legend-title: วิธีอ่านหน้านี้
+    legend-default: 'ไม่ได้แก้: ใช้ค่าเริ่มต้นที่แสดง'
+    legend-set: ตั้งค่าเฉพาะ Config นี้ กดรีเซ็ตเพื่อกลับไปใช้ค่าเริ่มต้น
+    legend-click: คลิกคำที่ไฮไลต์เพื่อเปลี่ยน
+    defaults-banner: 'ทุกนโยบายในหน้านี้ใช้ค่าเริ่มต้น Config นี้จึงทำงานเหมือนออเดอร์ Fleet-Ops ปกติ: ทีมของคุณมอบหมายคนขับ และลูกค้ายกเลิกได้จนกว่างานจะเสร็จ เปลี่ยนเฉพาะที่งานของคุณต้องการ'
+    save-hint: นโยบายที่บันทึกจะใช้กับออเดอร์ใหม่ ออเดอร์ที่กำลังวิ่งอยู่ใช้นโยบายเดิมที่เริ่มไว้
+    save-hint-errors: '{count, plural, one {แก้ค่าที่ไฮไลต์เพื่อบันทึก} other {แก้ค่าที่ไฮไลต์เพื่อบันทึก}}'
+    saved: บันทึกนโยบายแล้ว ออเดอร์ใหม่ใช้ได้ทันที
+    applies-when-offered: ใช้เฉพาะเมื่อเสนอออเดอร์ของลูกค้าให้คนขับที่อยู่ใกล้
+    offering:
+      title: เสนอออเดอร์ให้คนขับอย่างไร?
+      nav: การเสนองานให้คนขับ
+      description: ออเดอร์ของลูกค้าจะส่งไปยังคนขับใกล้จุดรับหรือไม่ และอย่างไร
+      customer-orders:
+        sentence: ออเดอร์ที่ลูกค้าสั่ง {choice}
+        wait: รอเจ้าหน้าที่มอบหมาย
+        offer: เสนอให้คนขับที่อยู่ใกล้
+      customer-orders-aria: สิ่งที่เกิดกับออเดอร์ของลูกค้า
+      customer-orders-help: ออเดอร์ที่ทีมของคุณสร้าง ทีมของคุณเป็นผู้มอบหมายหรือ Dispatch เสมอ
+      strategy:
+        sentence: เสนอให้{strategy} โดยให้คนขับแต่ละคนตอบรับภายใน {seconds} วินาที
+        sequential: คนขับทีละคน
+        broadcast: คนขับที่อยู่ใกล้ทุกคนพร้อมกัน
+      strategy-only: เสนอให้{strategy}
+      strategy-aria: วิธีเสนอออเดอร์
+      seconds-aria: เวลาที่คนขับแต่ละคนมีให้ตอบรับ (วินาที)
+      strategy-help: 'ถ้าเว้นว่าง จะใช้ค่าจาก ตั้งค่า → Dispatch: {strategy}, {seconds} วินาที'
+      radius: หาคนขับในรัศมี {metres} เมตรจากจุดรับ
+      radius-aria: รัศมีค้นหา (เมตร)
+      radius-help: ถ้าเว้นว่าง จะใช้ค่าจาก ตั้งค่า → Dispatch ({metres} ม.)
+      exhausted:
+        sentence: ถ้าไม่มีคนขับตอบรับ ให้{choice}
+        keep-open: เปิดออเดอร์ค้างไว้ให้เจ้าหน้าที่
+        cancel: ยกเลิกออเดอร์
+      exhausted-aria: ถ้าไม่มีคนขับตอบรับ
+      exhausted-help: เปิดค้างไว้เพื่อให้ทีมของคุณมอบหมายเองได้
+    drivers:
+      title: คนขับคนไหนรับงานได้?
+      nav: คนขับที่รับงานได้
+      description: จำกัดว่าจะเสนอออเดอร์ให้ใคร
+      vehicle:
+        sentence: เสนอออเดอร์ให้คนขับที่ใช้{choice}
+        any: รถประเภทใดก็ได้
+        match: รถที่ตรงกับประเภทบริการ
+      vehicle-aria: การจับคู่รถ
+      vehicle-help: ประเภทบริการคือประเภทที่ลูกค้าเลือกตอนสั่ง
+      busy:
+        sentence: คนขับที่มีออเดอร์อยู่แล้ว {choice}
+        offered: ยังได้รับข้อเสนองานใหม่
+        skipped: จะถูกข้าม
+      busy-aria: คนขับที่ไม่ว่าง
+      busy-help: คนขับถือว่าไม่ว่าง ถ้ามีออเดอร์ที่ยังไม่ถึงขั้นตอนที่ปิดงาน
+    ordering:
+      title: ลูกค้าต้องมีอะไรบ้างจึงจะสั่งได้?
+      nav: การสั่งออเดอร์
+      description: สำหรับออเดอร์ที่สั่งผ่านแอปลูกค้าหรือ API ลูกค้า
+      payment: ลูกค้าชำระเงินได้ด้วย{methods}
+      payment-aria: วิธีชำระเงินที่ลูกค้าเลือกได้
+      payment-empty: ไม่มีให้เลือก
+      payment-help: ถ้าเว้นว่าง ลูกค้าจะไม่ต้องเลือกวิธีชำระเงิน
+      quote:
+        sentence: ใบเสนอราคาก่อนสั่ง {choice}
+        optional: ไม่บังคับ
+        required: บังคับ
+      quote-aria: ใบเสนอราคาก่อนสั่ง
+      quote-help: บังคับ หมายถึงลูกค้าต้องเห็นและยอมรับราคาก่อน
+      settlement: ไม่ให้สั่งออเดอร์ใหม่ ถ้ามีออเดอร์ก่อนหน้าที่ชำระด้วย{methods}ยังค้างชำระ
+      settlement-aria: วิธีชำระเงินที่ต้องชำระให้เรียบร้อย
+      settlement-empty: ทุกวิธี · ไม่บล็อก
+      settlement-help: 'ปกติคือบัตรหรือโอนเงิน: เงินสดคนขับเก็บตอนจบงาน'
+      method:
+        cash: เงินสด
+        card: บัตร
+        bank_transfer: โอนเงิน
+        wallet: Wallet
+    cancelling:
+      title: ลูกค้ายกเลิกได้หรือไม่?
+      nav: การยกเลิก
+      description: ลูกค้ายกเลิกออเดอร์ของตัวเอง
+      until: ลูกค้า{choice}ออเดอร์ของตัวเองได้จนกว่า{step}
+      'off': ลูกค้า{choice}ออเดอร์ของตัวเอง ทีมของคุณยังยกเลิกได้
+      can: ยกเลิก
+      cannot: ยกเลิกไม่ได้
+      finishes: งานเสร็จ
+      reaches: ถึงขั้น {step}
+      enabled-aria: ลูกค้ายกเลิก
+      until-aria: ยกเลิกได้จนถึง
+    cancelling-help: ตั้งแต่ขั้นนั้นเป็นต้นไป เฉพาะทีมของคุณที่ยกเลิกได้
+    interactions:
+      title: ลูกค้าทำอะไรกับคนขับได้บ้าง?
+      nav: ลูกค้าและคนขับ
+      description: การติดต่อและความเห็นระหว่างลูกค้ากับคนขับของออเดอร์
+      sentence: ลูกค้า{message}ถึงคนขับ {rate}หลังงานเสร็จ และ{share}ลิงก์ติดตามแบบสด
+      message:
+        'on': ส่งข้อความได้
+        'off': ส่งข้อความไม่ได้
+      rate:
+        'on': ให้คะแนนได้
+        'off': ให้คะแนนไม่ได้
+      share:
+        'on': แชร์ได้
+        'off': แชร์ไม่ได้
+      message-aria: ส่งข้อความถึงคนขับ
+      rate-aria: ให้คะแนนคนขับ
+      share-aria: แชร์การติดตามแบบสด
+    interactions-help: แชตจะเปิดและปิดตามสิ่งที่เกิดขึ้นในขั้นตอนที่คุณเลือกใน ลำดับกิจกรรม
+    price:
+      title: คิดราคาอย่างไร?
+      nav: ราคา
+      description: ราคาสุดท้ายเมื่อออเดอร์เสร็จ
+      reprice: เมื่องานเสร็จ {choice} โดยวัดจาก{step}
+      no-reprice: เมื่องานเสร็จ {choice}
+      stands: ใช้ราคาตามใบเสนอราคา
+      recalculate: คำนวณราคาใหม่จากระยะทางและเวลาจริง
+      from-start: ตอนเริ่มออเดอร์
+      reprice-aria: ราคาสุดท้าย
+      from-aria: วัดจาก
+    price-help: การคำนวณใหม่ใช้อัตราค่าบริการที่ออเดอร์ได้รับใบเสนอราคา และอัปเดตใบแจ้งหนี้
+    extension-badge: ส่วนขยาย
+    extension-fallback: '{label}: {control}'
+    extension-on: เปิด
+    extension-off: ปิด
+    extension-none: ไม่ได้ตั้งค่า
+    extension-aria: การตั้งค่า
+  details:
+    details: รายละเอียด
+    name: ชื่อ
+    description: คำอธิบาย
+    tags: แท็ก
+    add-tags: เพิ่มแท็ก
+    key: Key
+    version: เวอร์ชัน
+    namespace: Namespace
+    controls: การจัดการ
+    delete-config: ลบ Config
+    delete:
+      delete-title: ลบ Order Config นี้?
+      delete-body-message: เมื่อลบแล้วจะกู้คืนไม่ได้ และการตั้งค่าทั้งหมดจะหายไป
+      confirm-delete: ลบ
+  lifecycle:
+    title: ออเดอร์เริ่มและจบอย่างไร?
+    description: ขั้นตอนไหนเริ่มและปิดออเดอร์ และออเดอร์ต้องเดินตามลำดับเคร่งครัดแค่ไหน แก้ไขขั้นตอนได้ที่ ลำดับกิจกรรม
+    system-banner: ขั้นตอนมาจากเทมเพลต การเริ่มและจบของออเดอร์จึงแก้ไขไม่ได้
+    mode:
+      sentence: ออเดอร์เดินตาม{choice}
+      standard: ขั้นตอน Dispatch มาตรฐาน
+      own: ขั้นตอนของ Config นี้เอง
+    mode-aria: ขั้นตอนที่ออเดอร์เดินตาม
+    mode-help-standard: สร้างแล้ว → จ่ายงานแล้ว → เริ่มแล้ว → เสร็จสิ้น หรือ ยกเลิก เลือกขั้นตอนของ Config นี้เองเพื่อกำหนดจุดเริ่มและจุดจบ
+    mode-help-own: ออเดอร์เดินตามขั้นตอนใน ลำดับกิจกรรม
+    not-set: ไม่ได้ตั้งค่า
+    initial: ออเดอร์ใหม่เริ่มที่ {step}
+    initial-aria: จุดเริ่มของออเดอร์ใหม่
+    initial-help: ออเดอร์ที่ทีมของคุณ ลูกค้า หรือ API สร้าง เริ่มที่นี่ทั้งหมด
+    completed: ออเดอร์เสร็จเมื่อถึง {step}
+    completed-aria: ขั้นตอนที่ปิดออเดอร์
+    completed-help: เมื่อเสร็จ ออเดอร์จะนับว่าเสร็จในรายงานและใบแจ้งหนี้
+    canceled: การยกเลิกออเดอร์จะย้ายไปที่ {step}
+    canceled-aria: ขั้นตอนของออเดอร์ที่ยกเลิก
+    canceled-help: ยกเลิกออเดอร์ได้จากทุกขั้นตอนที่ยังไม่จบงาน
+    terminal: 'ขั้นตอนเหล่านี้ก็จบออเดอร์ด้วย: {steps}'
+    terminal-aria: ขั้นตอนอื่นที่จบออเดอร์
+    terminal-none: ไม่มี
+    terminal-help: ออเดอร์ที่จบแล้วย้ายต่อไม่ได้ ขั้นตอนเสร็จสิ้นและยกเลิกจบออเดอร์เสมอ
+    dispatch:
+      sentence: ออเดอร์{choice}
+      'on': Dispatch ให้คนขับได้
+      'off': ไม่ถูก Dispatch เลย
+    dispatch-aria: Dispatch
+    dispatch-help: ปิด Dispatch สำหรับออเดอร์ที่ไม่ต้องใช้คนขับ เช่น รับสินค้าที่ร้าน
+    strict:
+      sentence: ออเดอร์ย้ายได้{choice}
+      'off': ไปทุกขั้นตอน
+      'on': ตามลูกศรในลำดับงานเท่านั้น
+    strict-aria: การย้ายระหว่างขั้นตอน
+    strict-help: ตามลูกศร ช่วยกันคนขับและทีมของคุณข้ามขั้นตอนโดยไม่ตั้งใจ
+    checks: การตรวจสอบ
+    check-completable: ออเดอร์ใหม่ไปถึง {step} ได้
+    check-no-dead-ends: ทุกขั้นตอนไปต่อได้หรือจบออเดอร์
+    check-dead-end: '{step} ไปต่อไม่ได้'
+    check-dead-end-body: ขั้นนี้ไม่มีขั้นถัดไปและไม่จบออเดอร์ ออเดอร์ที่มาถึงจะค้างอยู่
+    check-dead-end-fix: ให้ขั้นนี้จบออเดอร์
+    problem-initial-required: เลือกขั้นตอนเริ่มต้นของออเดอร์ใหม่
+    problem-missing-activity: “{code}” ไม่ใช่ขั้นตอนในลำดับงาน
+    save-blocked: แก้กฎที่ไฮไลต์เพื่อบันทึก
+    save-hint: ออเดอร์ที่กำลังวิ่งคงสถานะเดิม กฎใหม่ใช้ตอนเปลี่ยนสถานะครั้งถัดไป
+    saved: บันทึกวงจรชีวิตของ {orderConfigName} แล้ว
+    at-a-glance: สรุปย่อ
+    glance-starts: เริ่มที่
+    glance-along: ระหว่างทาง
+    glance-ends: จบที่
+    glance-rules: กฎ
+    glance-complete: เสร็จสิ้น
+    glance-canceled: ยกเลิก
+    glance-dispatched: Dispatch ให้คนขับ
+    glance-never-dispatched: ไม่ Dispatch
+    glance-strict: เดินตามลูกศร
+    glance-any: ย้ายได้ทุกขั้นตอน
+    standard:
+      created: สร้างแล้ว
+      dispatched: จ่ายงานแล้ว
+      started: เริ่มแล้ว
+      completed: เสร็จสิ้น
+      canceled: ยกเลิก
+  activity-flow:
+    save-activity-flow: บันทึกลำดับกิจกรรม
+    edit-activity-unique-code-warning: รหัสกิจกรรมต้องไม่ซ้ำ!
+  custom-fields:
+    new-field-group: กลุ่มฟิลด์ใหม่
+    new-custom-field: สร้างฟิลด์กำหนดเองใหม่
+    grid-size: ขนาดกริด
+    delete-custom-field-prompt:
+      modal-title: ลบฟิลด์กำหนดเองนี้?
+      delete-body-message: เมื่อลบแล้วจะกู้คืนไม่ได้ และการตั้งค่าทั้งหมดจะหายไป
+      confirm-delete: ลบ
+    delete-custom-field-group-prompt:
+      modal-title: ลบกลุ่มฟิลด์นี้?
+      delete-body-message: เมื่อลบแล้วจะกู้คืนไม่ได้ และฟิลด์กำหนดเองทั้งหมดในกลุ่มจะหายไป
+      confirm-delete: ลบ
+  entities:
+    new-custom-entity: รายการกำหนดเองใหม่
+    name: ชื่อ
+    description: ของที่มักขนไปกับออเดอร์ประเภทนี้ เช่น ตู้คอนเทนเนอร์ ลัง หรือพาเลท เพิ่มเข้า Payload ของออเดอร์ได้ในคลิกเดียว พร้อมขนาดและน้ำหนักที่กรอกไว้แล้ว
+    type: ประเภท
+    length: ความยาว
+    width: ความกว้าง
+    height: ความสูง
+    weight: น้ำหนัก
+    delete-custom-entity-title: ลบรายการกำหนดเองนี้?
+    delete-custom-entity-body: เมื่อลบแล้วจะกู้คืนไม่ได้ และการตั้งค่าทั้งหมดจะหายไป
+    confirm-delete: ยืนยัน
+    title: รายการสินค้า
+    edit: แก้ไข {name}
+    no-size: ไม่มีขนาด
+    no-weight: ไม่มีน้ำหนัก
+    empty-title: Config นี้ยังไม่มีรายการสินค้า
+    empty-body: ไม่เป็นไร ออเดอร์ยังใส่สินค้าอะไรก็ได้ เพิ่มรายการสำหรับของที่ขนบ่อย จะได้ไม่ต้องพิมพ์ขนาดและน้ำหนักซ้ำ
+    start-from: 'เริ่มจาก:'
+    suggest:
+      pallet: พาเลทยุโรป
+      parcel: พัสดุขนาดเล็ก
+      crate: ลังไม้
+      container: ตู้คอนเทนเนอร์ 20 ฟุต
+      suitcase: กระเป๋าเดินทาง
+    name-placeholder: เช่น ตู้คอนเทนเนอร์ 20 ฟุต
+    name-help: แสดงตอนเพิ่มเข้าออเดอร์
+    name-required: ตั้งชื่อรายการ
+    type-placeholder: เช่น คอนเทนเนอร์
+    type-help: ใช้จัดกลุ่มรายการในตัวเลือก
+    description-placeholder: เช่น ตู้แห้งมาตรฐาน น้ำหนักตอนว่าง
+    photo-help: ไม่บังคับ แสดงตอนเลือกเข้าออเดอร์
+    photo-needs-name: ตั้งชื่อรายการก่อน
+    size-help: ขนาดภายนอก ใช้คำนวณความจุและจับคู่รถ
+    preview: ตอนเพิ่มเข้า Payload ของออเดอร์
+    name-preview: ชื่อรายการ
+    type-preview: ประเภท
+  types:
+    no-order-installed: ยังไม่ได้ติดตั้ง Order Config!
+    you-have-no-configs: ตอนนี้ยังไม่มี Order Config ที่ติดตั้ง ดูที่ส่วนขยายเพื่อติดตั้ง Order Config และเริ่มต้นใช้งาน
+    view-extensions: ดูส่วนขยาย
+  common:
+    default: ค่าเริ่มต้น
+    default-suffix: '{value} · ค่าเริ่มต้น'
+    reset-to-default: รีเซ็ตเป็นค่าเริ่มต้น
+    unsaved: ยังไม่บันทึก
+    unsaved-changes: มีการเปลี่ยนแปลงที่ยังไม่บันทึก
+    unsaved-count: '{count, plural, one {ยังไม่บันทึก # รายการ} other {ยังไม่บันทึก # รายการ}}'
+    discard: ทิ้ง
+    save-changes: บันทึกการเปลี่ยนแปลง
+    add: + เพิ่ม
+    edit: แก้ไข
+    remove: ลบ
+    remove-item: ลบ {item}
+    undo: เลิกทำ
+    done: เสร็จสิ้น
+    cancel: ยกเลิก
+    only-if: เฉพาะเมื่อ
+    or: หรือ
+    system-title: Config ของระบบ
+    system-banner: สร้างจากเทมเพลต จึงลบไม่ได้และขั้นตอนแก้ไขไม่ได้ แต่นโยบายและสิ่งที่เกิดในแต่ละขั้นยังเปลี่ยนได้
+    readonly-title: ดูได้อย่างเดียว
+    readonly-banner: คุณดูการทำงานของ Config นี้ได้แต่แก้ไขไม่ได้ ขอสิทธิ์ “Update order configs” จากผู้ดูแลระบบ
+    steps-readonly: ขั้นตอนของ Config ระบบนี้แก้ไขไม่ได้
+    number-range-error: ใส่ตัวเลขระหว่าง {min} ถึง {max}
+  new-config:
+    title: Order Config ใหม่
+    intro: เริ่มจากเทมเพลตที่ตั้งขั้นตอน นโยบาย และ Trigger ไว้แล้วสำหรับงานแต่ละแบบ แก้ไขได้ทั้งหมดภายหลัง
+    step-label: ขั้นที่ {number}
+    step-choose: เลือกจุดเริ่มต้น
+    step-name: ตั้งชื่อ
+    selected: เลือกแล้ว
+    more-templates: เทมเพลตอื่น เช่น ส่งพัสดุและงานเช่า จะแสดงที่นี่เมื่อมีเพิ่ม
+    preview-empty-title: เลือกเทมเพลตเพื่อดูว่าตั้งค่าอะไรไว้
+    preview-empty-hint: ไม่แน่ใจ? Transport เหมาะกับงานส่งของและขนส่งส่วนใหญ่
+    preview-title: สิ่งที่ {template} ตั้งไว้
+    summary: '{steps, plural, =0 {ไม่มีขั้นตอน} one {# ขั้นตอน} other {# ขั้นตอน}} · {policies, plural, =0 {นโยบายเป็นค่าเริ่มต้น} one {# นโยบาย} other {# นโยบาย}} · {triggers, plural, =0 {ไม่มี Trigger} one {# Trigger} other {# Trigger}}{fields, plural, =0 {} one { · # ฟิลด์กำหนดเอง} other { · # ฟิลด์กำหนดเอง}}'
+    summary-blank: ขั้นตอนมาตรฐาน · นโยบายเป็นค่าเริ่มต้น · ไม่มี Trigger
+    name: ชื่อ
+    name-help: แสดงตอนสร้างออเดอร์ และใช้สร้าง Key
+    name-placeholder: เช่น ส่งด่วนภายในวัน
+    name-placeholder-empty: เลือกจุดเริ่มต้นก่อน
+    tags: แท็ก
+    tags-help: ไม่บังคับ ช่วยค้นหา Config ภายหลัง
+    tags-placeholder: เช่น on-demand, ในเมือง
+    description: คำอธิบาย
+    create: สร้าง Config
+    create-from: สร้างจาก {template}
+  templates:
+    transport:
+      name: Transport
+      description: งานส่งของและขนส่งที่ทีมของคุณ Dispatch เป็นค่าเริ่มต้นของทุกบริษัท
+      name-placeholder: เช่น ส่งด่วนภายในวัน
+      fact-1: ทีมของคุณเป็นผู้มอบหมายหรือ Dispatch ออเดอร์
+      fact-2: ทุกนโยบายใช้ค่าเริ่มต้นของ Fleet-Ops
+      fact-3: ยังไม่มีการแจ้งเตือนอัตโนมัติ
+    passenger:
+      name: Passenger
+      description: งานรับส่งผู้โดยสารที่ลูกค้าจองเอง เสนอให้คนขับที่อยู่ใกล้ และคิดราคาจากการเดินทางจริง
+      name-placeholder: เช่น รถรับส่งสนามบิน
+      fact-1: เสนอให้คนขับใกล้เคียงทีละคน ยกเลิกถ้าไม่มีใครรับ
+      fact-2: ลูกค้ายกเลิก ส่งข้อความ ให้คะแนน และแชร์ได้ งานที่จ่ายด้วยบัตรต้องชำระก่อนจองครั้งถัดไป
+      fact-3: แจ้งลูกค้าทุกขั้นตอน คำนวณราคาใหม่เมื่องานเสร็จ และเพิ่มฟิลด์จำนวนผู้โดยสาร
+    blank:
+      name: เปล่า
+      description: Config สำหรับกระบวนการที่คุณอยากสร้างเองทีละขั้น
+      name-placeholder: เช่น เช่าอุปกรณ์
+      fact-1: เริ่มด้วยขั้นตอนมาตรฐาน แล้วสร้างของคุณเองใน ลำดับกิจกรรม
+      fact-2: ทุกนโยบายใช้ค่าเริ่มต้นของ Fleet-Ops
+      fact-3: เพิ่มสิ่งที่เกิดในแต่ละขั้นได้ระหว่างทาง
+  flow:
+    reset: รีเซ็ต
+    click-a-step: คลิกขั้นตอนเพื่อดูและเปลี่ยนสิ่งที่เกิดขึ้นในขั้นนั้น
+    order-events: เหตุการณ์ของออเดอร์
+    legend: คำอธิบายสัญลักษณ์
+    zoom: ซูม
+    zoom-in: ซูมเข้า
+    zoom-out: ซูมออก
+    fit: พอดีหน้าจอ
+    fullscreen: เต็มจอ
+    exit-fullscreen: ออกจากเต็มจอ
+    add-step: เพิ่มขั้นตอน
+    tidy-layout: จัดเรียงใหม่
+    role-start: เริ่มต้น
+    role-complete: ปิดออเดอร์
+    role-end: จบออเดอร์
+    legend-notification: การแจ้งเตือน
+    legend-chat: แชต
+    legend-invoice: ใบแจ้งหนี้
+  step:
+    sections: ส่วนของขั้นตอน
+    kicker: ขั้นที่ {position} จาก {total}
+    saved: บันทึกขั้นตอนแล้ว
+    tab-details: รายละเอียด
+    tab-happens: สิ่งที่เกิดขึ้น · {count}
+    tab-conditions: เงื่อนไข
+    when-reaches: 'เมื่อออเดอร์ถึง {step}:'
+    then: แล้ว
+    what-happens: สิ่งที่เกิดขึ้น
+    choose-action: เลือกสิ่งที่จะเกิด
+    new: ใหม่
+    edited: แก้ไขแล้ว
+    no-action-error: เลือกสิ่งที่ควรเกิดขึ้น
+    removed-note: จะถูกลบเมื่อบันทึก
+    every-time: ทุกครั้ง
+    only-if-count: '{count, plural, one {เฉพาะเมื่อผ่าน # เงื่อนไข} other {เฉพาะเมื่อผ่าน # เงื่อนไข}}'
+    push-notification: Push notification
+    title: หัวข้อ
+    title-placeholder: 'เว้นว่างเพื่อใช้: {status}'
+    title-placeholder-event: เช่น คนขับใกล้ถึงแล้ว
+    message: ข้อความ
+    message-placeholder: เว้นว่างเพื่อใช้รายละเอียดของขั้นตอน
+    message-fallback: ใช้รายละเอียดของขั้นตอน
+    insert: 'แทรก:'
+    insert-token: แทรก {token}
+    preview: ตัวอย่างด้วยข้อมูลจำลอง
+    add-condition: เพิ่มเงื่อนไข
+    condition-hint: ทำงานทุกครั้ง เว้นแต่จะเพิ่มเงื่อนไข ทุกเงื่อนไขต้องผ่าน
+    add: เพิ่มสิ่งที่เกิดในขั้นนี้
+    quick-add: 'เพิ่มด่วน:'
+    empty: ขั้นนี้ยังไม่มีอะไรเกิดขึ้น ออเดอร์จะไปต่อเลย
+    quick:
+      notify_customer: แจ้งลูกค้า
+      notify_driver: แจ้งคนขับ
+      open_chat: เปิดแชต
+      close_chat: ปิดแชต
+      send_invoice: ส่งใบแจ้งหนี้
+    footnote: รายการเหล่านี้ทำงานทุกครั้งที่ออเดอร์ถึงขั้นนี้ ตามลำดับ โดยไม่ทำให้ออเดอร์ค้าง สำหรับเรื่องที่ไม่ผูกกับขั้นใดขั้นหนึ่ง เช่น ออเดอร์ถูกยกเลิก ให้ใช้ เหตุการณ์ของออเดอร์ บนแผนผัง
+    details-readonly: ขั้นนี้เป็นของ Config ระบบหรือขั้นตอน Dispatch มาตรฐาน รายละเอียดจึงแก้ไขไม่ได้
+    status-placeholder: เช่น ถึงจุดรับแล้ว
+    status-help: สิ่งที่ลูกค้าและทีมของคุณเห็น
+    code-placeholder: เช่น arrived
+    code-help: ใช้โดย API และแอป
+    key-placeholder: เช่น arrived
+    details-placeholder: เช่น คนขับรออยู่ที่จุดรับ
+    details-help: แสดงในหน้าติดตาม และใช้เป็นข้อความแจ้งเตือนเมื่อไม่ได้ตั้งข้อความเอง
+    completes-order: ปิดออเดอร์
+    completes-order-help: เมื่อถึงขั้นนี้ ออเดอร์จะเสร็จสิ้น
+    requires-pod: ต้องมีหลักฐานการส่งมอบ
+    requires-pod-help: คนขับต้องเก็บหลักฐาน เช่น รูปถ่ายหรือลายเซ็น จึงจะถึงขั้นนี้ได้
+    developer-events: เหตุการณ์สำหรับนักพัฒนา
+    developer-events-help: Webhook ที่ส่งเมื่อออเดอร์ถึงขั้นนี้ สำหรับการเชื่อมระบบ ถ้าเป็นการแจ้งเตือนหรือการทำงานอื่น ใช้ สิ่งที่เกิดขึ้น
+    conditions-lead: เงื่อนไขกำหนดว่าออเดอร์ย้ายไป {step} ได้หรือไม่ ไม่ใช่สิ่งที่เกิดหลังย้าย
+    conditions-readonly: แก้ไขไม่ได้ใน Config ระบบและขั้นตอน Dispatch มาตรฐาน
+  actions:
+    notify_customer: แจ้งลูกค้า
+    notify_customer-description: Push notification ไปที่แอปลูกค้า
+    notify_driver: แจ้งคนขับ
+    notify_driver-description: Push notification ไปที่แอปคนขับ
+    open_chat: เปิดแชตกับลูกค้า
+    open_chat-description: ลูกค้ากับคนขับส่งข้อความหากันได้
+    close_chat: ปิดแชตกับลูกค้า
+    close_chat-description: ปิดแชต ประวัติยังเก็บไว้
+    set_meta: ตั้งค่า Meta ของออเดอร์
+    set_meta-description: เก็บค่าไว้ในออเดอร์สำหรับรายงานหรือการเชื่อมระบบ
+    cancel: ยกเลิกออเดอร์
+    cancel-description: ยกเลิกด้วยเหตุผลที่คุณระบุ
+  events:
+    title: เหตุการณ์ของออเดอร์
+    intro: สิ่งที่เกิดขึ้นเมื่อมีเหตุการณ์กับออเดอร์นอกเหนือจากขั้นตอน ถ้าต้องการกำหนดสิ่งที่เกิดเมื่อออเดอร์ถึงขั้นใด ให้คลิกที่ขั้นนั้น
+    add: เพิ่มเหตุการณ์ของออเดอร์
+    when: เมื่อ{event}
+    remove: ลบเหตุการณ์นี้
+    then-also: แล้วยัง…
+    empty: ยังไม่มีเหตุการณ์ของออเดอร์
+    empty-actions: ยังไม่มีอะไรเกิดขึ้น เพิ่มสิ่งที่ควรเกิด
+    created: ออเดอร์ถูกสร้าง
+    created-menu: ออเดอร์ถูกสร้าง
+    created-description: ทันทีที่มีคนสร้าง ไม่ว่าใครก็ตาม
+    completed: ออเดอร์เสร็จสิ้น
+    completed-menu: ออเดอร์เสร็จสิ้น
+    completed-description: ไม่ว่าขั้นไหนจะเป็นขั้นที่ปิดออเดอร์
+    canceled: ออเดอร์ถูกยกเลิก
+    canceled-menu: ออเดอร์ถูกยกเลิก
+    canceled-description: โดยลูกค้า ทีมของคุณ หรือนโยบาย
+    exhausted: ไม่มีคนขับรับออเดอร์
+    exhausted-menu: ไม่มีคนขับรับออเดอร์
+    exhausted-description: คนขับที่อยู่ใกล้ทุกคนปฏิเสธหรือปล่อยให้ข้อเสนอหมดเวลา
+    approaching: เมื่อคนขับอยู่ห่างจาก{target}ไม่เกิน {metres} เมตร
+    approaching-menu: คนขับใกล้ถึง
+    approaching-description: อยู่ในระยะที่กำหนดจากจุดรับหรือจุดส่ง
+    approaching-short: คนขับห่างจาก{target}ไม่เกิน {metres} ม.
+    target-pickup: จุดรับ
+    target-dropoff: จุดส่ง
+    target-aria: จุดรับหรือจุดส่ง
+    distance-aria: ระยะทาง (เมตร)
+    approaching-help: ตรวจทุกครั้งที่ตำแหน่งคนขับอัปเดต ทำงานครั้งเดียวต่อออเดอร์
+    approaching-help-dropoff: ตรวจทุกครั้งที่ตำแหน่งคนขับอัปเดต ทำงานครั้งเดียวต่อออเดอร์ หลังรับสินค้าแล้ว
+    save: บันทึกเหตุการณ์ของออเดอร์
+    saved: บันทึกเหตุการณ์ของออเดอร์แล้ว
+  overview:
+    title: สิ่งที่เกิดกับออเดอร์ {config}
+    readonly-hint: สรุปแบบอ่านอย่างเดียว ใช้ลิงก์เพื่อแก้ไข
+    before: ก่อนสั่งออเดอร์
+    edit-policies: แก้ไขนโยบาย
+    edit-step: แก้ไขสิ่งที่เกิดขึ้น
+    edit-events: แก้ไขเหตุการณ์ของออเดอร์
+    happens-here: เกิดที่นี่
+    policies-apply: นโยบายที่ใช้
+    nothing: ไม่มี
+    none: ไม่มี
+    any-time: ทุกเวลา
+    at-a-glance: สรุปย่อ
+    no-events: ไม่มีเหตุการณ์ของออเดอร์
+    has-condition: เฉพาะเมื่อเงื่อนไขผ่าน
+    tag-completes: ปิดออเดอร์
+    tag-ends: จบออเดอร์
+    branch-from: จบออเดอร์ · แยกจาก {step}
+    rule-payment: ลูกค้าชำระด้วย{methods}
+    rule-quote: ลูกค้าต้องยอมรับใบเสนอราคาก่อน
+    rule-settlement: ลูกค้าที่มีออเดอร์{methods}ค้างชำระ สั่งใหม่ไม่ได้
+    rule-interactions: ลูกค้า{list}
+    interaction-chat: ส่งข้อความถึงคนขับได้
+    interaction-rating: ให้คะแนนคนขับได้
+    interaction-share_tracking: แชร์การติดตามได้
+    rule-offered: เสนอให้คนขับที่อยู่ใกล้ ไม่ใช่ทีมของคุณมอบหมาย
+    rule-vehicle: เฉพาะคนขับที่รถตรงกับประเภทบริการ
+    rule-can-cancel: ลูกค้ายังยกเลิกได้
+    rule-cannot-cancel: ลูกค้ายกเลิกไม่ได้แล้ว
+    rule-metering: เริ่มวัดระยะทางและเวลาจากที่นี่
+    rule-repriced: คำนวณราคาใหม่จากการเดินทางจริง
+    rule-rating: ลูกค้าให้คะแนนคนขับได้
+    glance-steps: '{count, plural, one {# ขั้นตอน} other {# ขั้นตอน}} · {ends, plural, =0 {ไม่มีขั้นที่จบออเดอร์} one {# ขั้นจบออเดอร์} other {# ขั้นจบออเดอร์}}'
+    glance-automatic: '{count, plural, =0 {ไม่มีอะไรทำงานอัตโนมัติ} one {มี # อย่างที่ทำงานอัตโนมัติ} other {มี # อย่างที่ทำงานอัตโนมัติ}}'
+    glance-policies: '{count, plural, =0 {ทุกนโยบายเป็นค่าเริ่มต้น} one {เปลี่ยนนโยบายจากค่าเริ่มต้น # ค่า} other {เปลี่ยนนโยบายจากค่าเริ่มต้น # ค่า}}'
+place:
+  fields:
+    details: รายละเอียดสถานที่
+    building: อาคาร
+    neighborhood: ย่าน
+    postal-code: รหัสไปรษณีย์
+    security-access-code: รหัสผ่านเข้าอาคาร
+    city: เมือง/อำเภอ
+    province: จังหวัด
+    country: ประเทศ
+    state: รัฐ/จังหวัด
+    street-1: ที่อยู่ บรรทัด 1
+    street-2: ที่อยู่ บรรทัด 2
+    coordinates: พิกัด
+    phone: โทรศัพท์
+  prompts:
+    vendor-assigned-success: กำหนด {placeName} เป็นสถานที่ใหม่ของ Vendor แล้ว
+  actions:
+    locate-place: ดูสถานที่บนแผนที่
+service-area:
+  actions:
+    edit-boundary: แก้ไขขอบเขตบนแผนที่
+  fields:
+    details: รายละเอียดพื้นที่ให้บริการ
+    area-color: สีพื้น
+    area-color-help-text: กำหนดสีพื้นของพื้นที่ให้บริการนี้
+    border-color: สีขอบ
+    border-color-help-text: กำหนดสีขอบของพื้นที่ให้บริการนี้
+    country: ประเทศ
+    country-help-text: ระบุประเทศที่พื้นที่ให้บริการนี้ตั้งอยู่ (ไม่บังคับ)
+    name: ชื่อ
+    name-help-text: ตั้งชื่อที่แสดงของพื้นที่ให้บริการ
+    type: ประเภท
+    type-help-text: เลือกประเภทของพื้นที่ให้บริการนี้
+service-rate:
+  fields:
+    details: รายละเอียดอัตราค่าบริการ
+    terms: เงื่อนไข
+    add-drop-off-button: เพิ่มช่วงจำนวนจุดส่ง
+    additional-fee: ค่าธรรมเนียมเพิ่มเติม
+    algorithm-help-text: กำหนดสูตรที่ใช้คำนวณอัตราค่าบริการนี้
+    algorithm-label: สูตรคำนวณ
+    algorithm-placeholder: (( '{distance}' / 50 ) * .05 ) + (( '{time}' / 60 ) * .01)
+    base-fee-help-text: ตั้งค่าบริการขั้นต่ำของบริการนี้
+    base-fee-label: ค่าบริการพื้นฐาน
+    calculation-method-help-text: วิธีคำนวณค่าธรรมเนียมเก็บเงินปลายทาง (COD)
+    calculation-method-label: วิธีคำนวณค่าธรรมเนียม COD
+    calculation-method-placeholder: เลือกวิธีคำนวณค่าธรรมเนียม COD
+    cash-delivery-label: เพิ่มค่าธรรมเนียมสำหรับออเดอร์ `เก็บเงินปลายทาง` หรือไม่?
+    cash-delivery-title: เก็บเงินปลายทาง (COD)
+    custom-algorithm-info-message: ตัวเลือกนี้ใช้กำหนดสูตรคำนวณค่าบริการเองด้วยตัวแปร
+    custom-algorithm-info-second-message: ตัวแปรต้องอยู่ในวงเล็บปีกกาชั้นเดียว
+    custom-algorithm-title: สูตรกำหนดเอง
+    delivery-flat-fee: ค่าธรรมเนียม COD แบบคงที่
+    delivery-flat-fee-help-text: ค่าธรรมเนียมคงที่ที่บวกเพิ่ม
+    deminsions-unit: หน่วยขนาด
+    distance: ระยะทาง
+    distance-continue-message: '- ระยะทางเป็นเมตรของเส้นทางออเดอร์'
+    distance-message: distance
+    distance-unit: หน่วยระยะทาง
+    distance-unit-help-text: หน่วยระยะทางเป็นต่อกิโลเมตรหรือต่อเมตร
+    distance-unit-placeholder: เลือกหน่วยระยะทาง
+    duration-terms-help-text: เพิ่มเงื่อนไขเรื่องระยะเวลาของอัตราค่าบริการนี้
+    duration-terms-label: เงื่อนไขระยะเวลา
+    duration-terms-placeholder: เงื่อนไขระยะเวลา (ถ้ามี)
+    estimated-days: จำนวนวันจัดส่งโดยประมาณ
+    estimated-days-help-text: จำนวนวันโดยประมาณที่บริการนี้ใช้ ถ้าส่งภายในวันใช้ `0`
+    example: ตัวอย่าง
+    example-message: ถ้าออเดอร์มีระยะทาง 2,200 เมตร และ ETA 30 นาที
+    example-second-message: สูตรต่อไปนี้จะคำนวณค่าบริการได้ $2.50 ซึ่งจะบวกเข้ากับค่าบริการพื้นฐาน
+    fee: ค่าธรรมเนียม
+    fee-percentage: ค่าธรรมเนียม COD แบบเปอร์เซ็นต์
+    fee-percentage-help-text: ค่าธรรมเนียม COD คิดเป็นเปอร์เซ็นต์ของยอดรวมก่อนค่าธรรมเนียม
+    fixed-meter: ตัวเลือกคิดตามระยะคงที่
+    fixed-meter-example-text: 'ตัวอย่าง: กำหนดค่าคงที่ทุก 1 กิโลเมตร ถ้าออเดอร์วิ่ง 3,300 เมตร จะบวกค่าคงที่ของกิโลเมตรที่ 3 เข้ากับค่าบริการพื้นฐาน'
+    fixed-meter-text: ตัวเลือกนี้กำหนดค่าคงที่ต่อกิโลเมตร
+    flat-fee-help-text: ค่าธรรมเนียมคงที่ที่บวกเพิ่มในช่วงเวลาเร่งด่วน
+    flat-fee-label: ค่าธรรมเนียมช่วงเร่งด่วนแบบคงที่
+    height-label: ความสูง
+    height-placeholder: ความสูงเป็น {parcelFeeDimension}
+    length-label: ความยาว
+    length-placeholder: ความยาวเป็น {parcelFeeDimension}
+    max: สูงสุด
+    max-drop: จุดส่งสูงสุด
+    maximum-distance: ระยะทางสูงสุด
+    maximum-distance-help-text: ระยะทางสูงสุดที่ให้บริการได้
+    min: ต่ำสุด
+    min-drop: จุดส่งต่ำสุด
+    order-type-placeholder: ประเภทออเดอร์
+    peak-hours-end-help-text: เวลาที่ค่าธรรมเนียมช่วงเร่งด่วนสิ้นสุด
+    peak-hours-end-label: สิ้นสุดช่วงเร่งด่วน
+    peak-hours-fee-help-text: วิธีคำนวณค่าธรรมเนียมช่วงเร่งด่วน
+    peak-hours-fee-label: วิธีคำนวณค่าธรรมเนียมช่วงเร่งด่วน
+    peak-hours-fee-placeholder: เลือกวิธีคำนวณค่าธรรมเนียมช่วงเร่งด่วน
+    peak-hours-label: เพิ่มค่าธรรมเนียมสำหรับออเดอร์ที่สั่งใน `ช่วงเร่งด่วน` ที่กำหนดหรือไม่?
+    peak-hours-percentage-help-text: ค่าธรรมเนียมช่วงเร่งด่วนคิดเป็นเปอร์เซ็นต์ของยอดรวมก่อนค่าธรรมเนียม
+    peak-hours-percentage-label: ค่าธรรมเนียมช่วงเร่งด่วน (%)
+    peak-hours-start-help-text: เวลาที่ค่าธรรมเนียมช่วงเร่งด่วนเริ่ม
+    peak-hours-start-label: เริ่มช่วงเร่งด่วน
+    peak-hours-title: ช่วงเวลาเร่งด่วน
+    per-drop-off-example-text: 'ตัวอย่าง: ออเดอร์ที่มี 1-5 จุดส่งคิด $x และ 5-10 จุดส่งคิด $x โดยบวกเข้ากับค่าบริการพื้นฐาน'
+    per-drop-off-text: ตัวเลือกนี้กำหนดค่าคงที่ตามจำนวนจุดส่ง
+    per-drop-off-title: ตัวเลือกคิดตามจำนวนจุดส่ง
+    per-meter: ต่อระยะทาง
+    per-meter-example-text: 'ตัวอย่าง: ''{fee}'' * ''{distance}'' + ''{baseFee}'''
+    per-meter-rate-fee: อัตราคงที่ต่อหน่วยระยะทาง
+    per-meter-rate-fee-help-text: ค่าคงที่ที่จะคูณกับระยะทาง
+    per-meter-text: ตัวเลือกนี้คิดค่าบริการต่อกิโลเมตรหรือต่อเมตร โดยกำหนดอัตราคงที่แล้วคูณกับระยะทาง
+    percel-fee-title: ค่าธรรมเนียมพัสดุ
+    percentage-placeholder: เปอร์เซ็นต์
+    rate-calculation-help-text: วิธีที่บริการนี้ใช้คำนวณราคาเมื่อขอใบเสนอราคา
+    rate-calculation-label: วิธีคำนวณราคา
+    rate-calculation-placeholder: เลือกวิธีคำนวณราคา
+    restrict-service-title: จำกัดการให้บริการ
+    select-unit-placeholder: เลือกหน่วย
+    select-order-type: เลือกประเภทออเดอร์
+    service-area-help-text: จำกัดบริการนี้ให้ใช้กับออเดอร์ที่เริ่มจากพื้นที่ให้บริการนี้
+    service-area-label: พื้นที่ให้บริการ
+    service-area-placeholder: จำกัดเฉพาะพื้นที่ให้บริการ
+    service-name: ชื่อบริการ
+    service-name-help-text: ชื่อที่แสดงของบริการนี้
+    service-order-help-text: เลือก Order Config ที่จะใช้อัตราค่าบริการนี้เท่านั้น เฉพาะออเดอร์ที่สร้างด้วย Config นี้จึงใช้อัตรานี้ได้
+    service-order-label: ประเภทออเดอร์ของบริการ
+    time-continue-message: '- ETA ของเส้นทางเป็นวินาที'
+    time-message: time
+    weight-label: น้ำหนัก
+    weight-unit: หน่วยน้ำหนัก
+    width-label: ความกว้าง
+    width-placeholder: ความกว้างเป็น {parcelFeeDimension}
+    zone-help-text: จำกัดบริการนี้ให้ใช้กับออเดอร์ที่เริ่มจากโซนนี้
+    zone-label: โซน
+    zone-placeholder: จำกัดเฉพาะโซน
+    cod-fee-label: ชื่อค่าธรรมเนียม COD
+vehicle:
+  placeholders:
+    filter-internal-id: พิมพ์หรือสแกนรหัสภายใน
+  filters:
+    has-trailer: มีหางพ่วง
+    has-driver: มีคนขับ
+    has-device: มีอุปกรณ์
+    any: ทั้งหมด
+    attached: ติดตั้งแล้ว
+    not-attached: ยังไม่ติดตั้ง
+    assigned: มอบหมายแล้ว
+    not-assigned: ยังไม่มอบหมาย
+  fields:
+    updated-at: อัปเดตล่าสุด
+    avatar: ไอคอน
+    driver-assigned: คนขับที่มอบหมาย
+    make: ยี่ห้อ
+    model: รุ่น
+    plate-number: เลขทะเบียน
+    select-driver: เลือกคนขับ
+    upload-new-photo: อัปโหลดรูปใหม่
+    vehicle-make: ยี่ห้อรถ
+    vehicle-model: รุ่นรถ
+    vehicle-year: ปีรถ
+    vin-number: หมายเลข VIN
+    year: ปี
+  actions:
+    attach-trailer: พ่วงหางพ่วง
+    attach-equipment: ติดตั้งอุปกรณ์เสริม
+    detach-equipment: ถอดอุปกรณ์เสริม
+    attach-device: ติดตั้งอุปกรณ์
+    unassign-orders: ยกเลิกการมอบหมายออเดอร์
+    create-issue: แจ้งปัญหา
+    locate-vehicle: ดูรถบนแผนที่
+    schedule-maintenance: ตั้งกำหนดการซ่อมบำรุง
+    create-work-order: สร้างใบสั่งงาน
+    log-maintenance: บันทึกการซ่อมบำรุง
+  empty:
+    trailers: ยังไม่มีหางพ่วง
+    trailers-description: พ่วงหางพ่วงที่ว่างอยู่กับรถคันนี้เพื่อเริ่มการพ่วง
+    equipment: ยังไม่มีอุปกรณ์เสริม
+    equipment-description: ติดตั้งอุปกรณ์เสริม เช่น ลิฟต์ท้าย เครื่องมือ หรืออุปกรณ์นิรภัย ให้รถคันนี้
+    inspections: ยังไม่มีการตรวจสภาพ
+    inspections-description: การตรวจสภาพที่คนขับบันทึกสำหรับรถคันนี้จะแสดงที่นี่
+  trailers:
+    description: หางพ่วงที่พ่วงกับรถคันนี้อยู่ตอนนี้
+  equipment:
+    description: อุปกรณ์เสริมที่ติดตั้งกับรถคันนี้อยู่ตอนนี้
+  prompts:
+    attach-trailer-title: พ่วงหางพ่วงกับ {vehicleName}
+    select-trailer-warning: เลือกหางพ่วงที่จะพ่วงกับรถคันนี้
+    attach-trailer-success: พ่วง {trailerName} กับ {vehicleName} แล้ว
+    attach-device-title: ติดตั้งอุปกรณ์ให้ {vehicleName}
+    select-device-warning: เลือกอุปกรณ์ที่จะติดตั้ง
+    attach-device-success: ติดตั้งอุปกรณ์ให้ {vehicleName} แล้ว
+    no-assigned-orders-warning: ไม่พบออเดอร์ที่มอบหมายให้ {vehicleName}
+    select-orders-warning: เลือกออเดอร์อย่างน้อยหนึ่งรายการเพื่อยกเลิกการมอบหมาย
+    unassign-orders-title: ยกเลิกการมอบหมายออเดอร์ของ {vehicleName}
+    confirm-unassign-orders-title: ยกเลิกการมอบหมาย {count} ออเดอร์ของ {vehicleName}?
+    confirm-unassign-orders-body: 'จะนำ {vehicleName} ออกจากออเดอร์เหล่านี้: {orders}'
+    unassign-orders-success: ยกเลิกการมอบหมาย {vehicleName} จาก {count} ออเดอร์แล้ว
+    issue-title: ปัญหาที่แจ้งสำหรับ {vehicleName}
+vendor:
+  fields:
+    setup-vendor: ตั้งค่า Vendor
+    choose-vendor: เลือกผู้ให้บริการ Vendor เชื่อมระบบ
+    email-help-text: อีเมลของ Vendor ใช้ส่งอีเมลถึง Vendor ได้
+    name-help-text: ชื่อ Vendor ปกติเป็นชื่อธุรกิจ
+    phone-text: เบอร์โทรของ Vendor ใช้ส่ง SMS หรือข้อความถึง Vendor ได้
+    website: เว็บไซต์
+    edit-address: แก้ไขที่อยู่
+    new-address: ที่อยู่ใหม่
+    select-address: เลือกที่อยู่
+    select-vendor-status: เลือกสถานะ Vendor
+    select-vendor-type: เลือกประเภท Vendor
+    title: ตั้งค่า
+    vendor-details: รายละเอียด Vendor
+    website-help-text: เว็บไซต์ของ Vendor ใส่ไว้เพื่ออ้างอิง (ไม่บังคับ)
+integrated-vendor:
+  fields:
+    provider: ผู้ให้บริการ
+    credentials: ข้อมูลรับรอง
+    credentials-configure-help-text: ใส่ {param} ของคุณเองเพื่อตั้งค่า Vendor นี้ (ไม่บังคับ)
+    options: ตัวเลือก
+    choose-vendor: เลือกผู้ให้บริการ Vendor เชื่อมระบบ
+    select-integrated: เลือกผู้ให้บริการ Vendor เชื่อมระบบ
+    advanced-options: ตัวเลือกขั้นสูง
+    cancel-credentials: ยกเลิกการรีเซ็ตข้อมูลรับรอง
+    sensitive-credentials: ข้อมูลรับรองที่เป็นความลับทำได้แค่รีเซ็ต ถ้าจะอัปเดตต้องกรอกใหม่ทั้งหมด
+    reset-credentials: คลิกเพื่อรีเซ็ตข้อมูลรับรอง
+    sandbox: Sandbox
+    webhook: Webhook URL
+    webhook-help-text: Vendor เชื่อมระบบมักต้องใช้ค่านี้เพื่อส่งอัปเดตกิจกรรมของออเดอร์กลับมา อย่าเปลี่ยนถ้าไม่แน่ใจ! การเปลี่ยนอาจทำให้อัปเดตออเดอร์ใช้ไม่ได้!
+    host: Host กำหนดเอง
+    host-help-text: ระบุ host ที่จะใช้กับการเชื่อมระบบนี้ (ไม่บังคับ)
+    namespace: Namespace กำหนดเอง
+    namespace-help-text: ระบุ namespace หรือเวอร์ชัน API ที่จะใช้กับการเชื่อมระบบนี้ (ไม่บังคับ)
+zone:
+  actions:
+    edit-boundary: แก้ไขขอบเขตบนแผนที่
+  fields:
+    details: รายละเอียดโซน
+    border-color: สีขอบ
+    customize-border: กำหนดสีขอบ
+    customize-fill-color: กำหนดสีพื้น
+    description: คำอธิบาย
+    name: ชื่อ
+    name-help-text: ตั้งชื่อโซนนี้
+    zone-color: สีโซน
+activity-logic-builder:
+  activity-logic: เงื่อนไขของกิจกรรม
+  activity-logic-help-text: กำหนดเงื่อนไขว่ากิจกรรมจะพร้อมใช้ในขั้นตอนงานเมื่อไร ช่วยปรับลำดับงานตามเกณฑ์เฉพาะ ให้แต่ละกิจกรรมเกิดขึ้นเมื่อเงื่อนไขที่ตั้งไว้ครบเท่านั้น
+  activity-logic-add-logic-help-text: สร้างชุดเงื่อนไขใหม่ที่กำหนดว่ากิจกรรมจะเปิดใช้เมื่อไร คลิกเพื่อเริ่มสร้างกฎใหม่
+  activity-logic-select-logic-type-help-text: เลือกประเภทตรรกะของเงื่อนไขนี้ เลือก 'If' สำหรับเงื่อนไขตรง 'And'/'Or' สำหรับเงื่อนไขผสม หรือ 'Not' เพื่อกลับค่าเงื่อนไข
+  activity-logic-add-condition-help-text: เพิ่มข้อกำหนดที่ต้องเป็นจริงในชุดเงื่อนไขนี้ ใช้ระบุเกณฑ์เพิ่มเติมที่ควบคุมว่ากิจกรรมจะพร้อมใช้หรือไม่
+  field: ฟิลด์
+  value: ค่า
+  add-logic: เพิ่มเงื่อนไข
+activity-event-selector:
+  activity-events: เหตุการณ์ของกิจกรรม
+  activity-events-select-to-fire: เลือกเหตุการณ์ที่จะเกิดขึ้นเมื่อกิจกรรมนี้เกิด
+  activity-events-select-events-info: เลือกเหตุการณ์ที่ต้องการให้ทำงานเมื่อเกิดกิจกรรมนี้
+  select-event-to-add: เลือกเหตุการณ์ที่จะเพิ่ม...
+custom-field-form-panel:
+  meta-col-span: 'Meta: จำนวนคอลัมน์'
+  col-span-size: จำนวนคอลัมน์ที่ใช้
+  custom-field-title-concat: 'ฟิลด์กำหนดเอง: '
+  new-custom-field: ฟิลด์กำหนดเองใหม่
+  close-new-custom-field: ยกเลิกการเปลี่ยนแปลงฟิลด์
+  save-custom-field: บันทึกการเปลี่ยนแปลง
+  create-custom-field: สร้างฟิลด์ใหม่
+  field-name: ชื่อฟิลด์
+  field-label: ป้ายชื่อฟิลด์
+  field-type: ประเภทฟิลด์
+  select-field-type: เลือกประเภทฟิลด์...
+  field-description: คำอธิบายฟิลด์
+  field-help-text: ข้อความช่วยเหลือ
+  field-default-value: ค่าเริ่มต้น
+  field-is-required: จำเป็นต้องกรอก
+  field-is-editable: แก้ไขได้
+  field-options: ตัวเลือกของฟิลด์
+  field-validation-rules: กฎการตรวจสอบ
+  field-model-type: ประเภท Model
+  field-select-model-type: เลือกประเภท Model
+  add-new-option: เพิ่มตัวเลือกใหม่
+activity-form-panel:
+  title-concat: 'กิจกรรม: '
+  new-activity-title: สร้างกิจกรรมใหม่
+  key: Key
+  code: รหัส
+  status: สถานะ
+  details: รายละเอียด
+  proof-of-delivery: หลักฐานการส่งมอบ
+  require-pod: ต้องมีหลักฐานการส่งมอบ
+  require-pod-help-text: กิจกรรมนี้ต้องสร้างหลักฐานก่อนจึงจะใช้กับออเดอร์ได้
+  select-pod-method: วิธียืนยันการส่งมอบ
+  pod-method-placeholder: เลือกวิธียืนยันการส่งมอบ
+  completes-order: ปิดออเดอร์
+  complete: เสร็จสิ้น
+  key-help: 'ใส่ key ที่ใช้ตัดสินใจในโปรแกรม key นี้ใช้แทนกิจกรรมเดียวหรือหลายกิจกรรมที่มีตัวระบุเดียวกันได้ หมายเหตุ: key ไม่จำเป็นต้องไม่ซ้ำ'
+  code-help: ใส่รหัสที่ไม่ซ้ำสำหรับกิจกรรมนี้
+  status-help: ระบุสถานะที่แสดงให้ผู้ใช้ปลายทางเห็นเมื่อกิจกรรมนี้เกิดขึ้น
+  details-help: อธิบายกิจกรรมโดยละเอียดให้ผู้ใช้ปลายทางเข้าใจ
+custom-entity-issue-form-panel:
+  new-custom-entity: รายการกำหนดเองใหม่
+  name: ชื่อ
+  description: คำอธิบาย
+  details: รายละเอียด
+  type: ประเภท
+  length: ความยาว
+  width: ความกว้าง
+  height: ความสูง
+  weight: น้ำหนัก
+  entity-image: รูปรายการ
+  measurements: ขนาด
+avatar-picker:
+  avatar: ไอคอน
+  select-map-avatar: เลือกไอคอนบนแผนที่
+  select-avatar-rendering: เลือกไอคอนที่จะแสดงบนแผนที่เมื่อใช้การติดตามตำแหน่ง
+  select-avatar: เลือกไอคอน
+  select-for-preview: เลือกเพื่อดูตัวอย่าง
+admin:
+  navigator-app:
+    title: แอป Navigator
+    name: URL สำหรับเชื่อมระบบ
+    message: ใช้ URL นี้เชื่อมแอป Navigator เข้ากับระบบของ {companyName} เปิด URL นี้บนมือถือแล้วแอป Navigator จะเปิดขึ้นและอัปเดตการตั้งค่าและแบรนด์
+    settings: ตั้งค่ารายการสินค้า
+    select-input: ให้คนขับแก้ไขรายละเอียดรายการสินค้าได้
+    driver-settings: ตั้งค่าคนขับ
+    description: เปิดให้คนขับสมัครเองได้
+    upload-document: บังคับให้คนขับอัปโหลดเอกสาร
+    upload-body: เพิ่มเอกสาร
+    document: เอกสาร
+  avatar-management:
+    upload-avatar: อัปโหลดไอคอน
+    view-avatar: ดูไอคอน
+    vehicles: รถ
+    drivers: คนขับ
+    places: สถานที่
+entity-field-editing-settings:
+  entitiy-field-editing-settings: ตั้งค่าการแก้ไขฟิลด์รายการสินค้า
+  entity-field-editing-settings-help-text: กำหนดว่าคนขับแก้ไขฟิลด์ใดของรายการสินค้าได้ผ่านแอป Navigator
+  select-order-config: เลือก Order Config
+  select-order-config-help-text: เลือก Order Config ที่จะใช้การตั้งค่านี้
+  enable-driver-to-edit-entity-fields: ให้คนขับแก้ไขรายละเอียดรายการสินค้าได้
+  enable-driver-to-edit-entity-fields-help-text: เปิดเพื่อให้คนขับแก้ไขฟิลด์ที่เลือกด้านล่างได้
+navigator-app-review-settings:
+  title: การตรวจแอปของสโตร์
+  lede: Apple และ Google จะทดสอบแอป Navigator ก่อนเผยแพร่ และผู้ตรวจรับ SMS ไม่ได้ เปิดตัวเลือกนี้เพื่อให้ผู้ตรวจเข้าสู่ระบบเป็นคนขับทดสอบด้วยเบอร์โทรและรหัสที่คุณให้สโตร์
+  'on': เปิด
+  'off': ปิด
+  phone-label: เบอร์โทรของผู้ตรวจ
+  phone-help: เบอร์ทดสอบที่ไม่มีการส่ง SMS จริง รหัสจะกำหนดว่าเข้าสู่องค์กรไหน
+  code-label: รหัสเข้าสู่ระบบ
+  code-new: คัดลอกรหัสนี้ตอนนี้ จะแสดงแค่ครั้งเดียว
+  code-hidden: สร้างรหัสเมื่อ {date} รหัสแสดงแค่ครั้งเดียว ถ้าทำหายให้สร้างใหม่
+  code-none: ยังไม่มีรหัส การเปิดใช้จะสร้างให้
+  where: ใน App Store Connect ใส่ทั้งสองค่าที่ App Review Information ช่อง Sign-in required ใน Google Play Console ใส่ที่ App content ส่วน App access
+  driver: ผู้ตรวจจะเข้าสู่ระบบเป็นคนขับทดสอบชื่อ App Reviewer ในรายชื่อคนขับ ระบบจะไม่เสนอหรือมอบหมายออเดอร์ให้อัตโนมัติ ถ้าต้องการให้เห็นออเดอร์ ให้มอบหมายเอง
+  turn-on: เปิด
+  turn-off: ปิด
+  turn-off-title: ปิดการเข้าถึงสำหรับผู้ตรวจแอป?
+  turn-off-body: ผู้ตรวจจะเข้าสู่แอป Navigator ไม่ได้อีก ปิดเมื่อแอปได้รับอนุมัติ แล้วเปิดใหม่ก่อนส่งอัปเดต
+  regenerate: สร้างรหัสใหม่
+  regenerate-title: สร้างรหัสใหม่?
+  regenerate-body: รหัสปัจจุบันจะใช้ไม่ได้ทันที ใส่รหัสใหม่ใน App Store Connect และ Google Play Console
+  turned-on: เปิดการเข้าถึงสำหรับผู้ตรวจแอปแล้ว
+  turned-off: ปิดการเข้าถึงสำหรับผู้ตรวจแอปแล้ว
+  regenerated: สร้างรหัสใหม่แล้ว
+driver-onboard-settings:
+  driver-onboard-settings: ตั้งค่าการสมัครของคนขับ
+  enable-driver-onboard-from-app: ให้คนขับสมัครผ่านแอป Navigator ได้
+  enable-driver-onboard-from-app-help-text: เปิดเพื่อให้คนขับสมัครและสร้างบัญชีเองผ่านแอป Navigator
+  select-onboard-method: เลือกวิธีสมัครของคนขับ
+  select-onboard-method-help-text: กำหนดวิธีที่คนขับสร้างบัญชีผ่านแอป Navigator เลือก 'Invite' ถ้าคนขับต้องได้รับคำเชิญทางอีเมลก่อน เลือก 'Button' ถ้าต้องการปุ่มในแอปที่ให้ใครก็สร้างบัญชีคนขับได้
+  require-driver-to-upload-onboard-documents: บังคับให้คนขับอัปโหลดเอกสารตอนสมัคร
+  require-driver-to-upload-onboard-documents-help-text: กำหนดเอกสารที่คนขับต้องส่งก่อนสร้างบัญชีได้
+  required-onboard-documents: เอกสารที่ต้องใช้ตอนสมัคร
+  required-onboard-documents-help-text: ใส่เอกสารทั้งหมดที่คนขับต้องส่งด้านล่าง ด้วยปุ่ม "เพิ่มเอกสารการสมัคร"
+  enter-document-name: ใส่ชื่อเอกสาร
+  add-onboard-document: เพิ่มเอกสารการสมัคร
+cell:
+  driver-name:
+    not-assigned: ยังไม่ได้มอบหมายคนขับ
+live-map-drawer:
+  driver-listing:
+    location: ตำแหน่ง
+    current-job: งานปัจจุบัน
+    last-seen: พบล่าสุด
+    view-driver: ดูรายละเอียดคนขับ...
+    edit-driver: แก้ไขคนขับ...
+    locate-driver: ดูตำแหน่งคนขับ...
+    delete-driver: ลบคนขับ...
+    warning-message: หาตำแหน่งคนขับไม่พบ
+    message: กรองคนขับด้วยคำค้น...
+  place-listing:
+    location: ตำแหน่ง
+    place: สถานที่
+    view-place: ดูรายละเอียดสถานที่...
+    edit-place: แก้ไขสถานที่...
+    locate-place: ดูตำแหน่งสถานที่...
+    delete-place: ลบสถานที่...
+    warning-message: หาตำแหน่งสถานที่ไม่พบ
+    message: กรองสถานที่ด้วยคำค้น...
+  vehicle-listing:
+    location: ตำแหน่ง
+    last-seen: พบล่าสุด
+    view-vehicle: ดูรายละเอียดรถ...
+    edit-vehicle: แก้ไขรถ...
+    locate-vehicle: ดูตำแหน่งรถ...
+    delete-vehicle: ลบรถ...
+    warning-message: หาตำแหน่งรถไม่พบ
+    message: กรองรถด้วยคำค้น...
+scheduler:
+  success-message: กำหนดเวลาออเดอร์ {orderId} เป็น {orderAt} แล้ว
+  info-message: ยกเลิกกำหนดเวลาออเดอร์ {orderId} แล้ว
+  title: ตารางงาน
+  unscheduled-orders: ออเดอร์ที่ยังไม่กำหนดเวลา
+  scheduled-orders: ออเดอร์ที่กำหนดเวลาแล้ว
+  unauthorized-to-schedule: คุณไม่มีสิทธิ์กำหนดเวลาออเดอร์
+  scheduling-for: กำหนดเวลาให้ {orderId}
+  add-shift: เพิ่มกะ
+  create-shift: สร้างกะ
+  edit-shift: แก้ไขกะ
+  delete-shift: ลบกะ
+  delete-shift-confirm: ยืนยันลบกะนี้ใช่หรือไม่? การลบย้อนกลับไม่ได้
+  shift-created: สร้างกะสำเร็จ
+  shift-updated: อัปเดตกะสำเร็จ
+  shift-title: ชื่อกะ
+  shift-title-placeholder: เช่น รอบส่งของเช้า
+  shift-start: เริ่มกะ
+  shift-end: จบกะ
+  shift-notes-placeholder: หมายเหตุเกี่ยวกับกะนี้ (ไม่บังคับ)
+  select-start-datetime: เลือกวันและเวลาเริ่ม
+  select-end-datetime: เลือกวันและเวลาสิ้นสุด
+  select-driver: เลือกคนขับ
+  upcoming-shifts: กะที่กำลังจะมาถึง
+  no-upcoming-shifts: ยังไม่มีกะที่กำหนดไว้
+  hours-of-service: ชั่วโมงการทำงาน
+  daily-driving-hours: ชั่วโมงขับต่อวัน
+  weekly-hours: ชั่วโมงต่อสัปดาห์
+  compliance-status: สถานะการปฏิบัติตามกฎ
+  set-availability: ตั้งเวลาว่าง
+  availability-set: บันทึกเวลาว่างสำเร็จ
+  availability-time-off: เวลาว่างและวันลา
+  no-availability-restrictions: ยังไม่ได้ตั้งข้อจำกัดเวลาว่าง
+  available: ว่าง
+  unavailable: ไม่ว่าง
+  unavailable-time-off: ไม่ว่าง / ลา
+  availability-type: ประเภทเวลาว่าง
+  request-time-off: ขอลา
+  submit-request: ส่งคำขอ
+  time-off-requested: ส่งคำขอลาแล้ว
+  delete-availability: ลบเวลาว่าง
+  delete-availability-confirm: ยืนยันลบบันทึกเวลาว่างนี้ใช่หรือไม่?
+  availability-deleted: ลบบันทึกเวลาว่างแล้ว
+  start-date: วันที่เริ่ม
+  end-date: วันที่สิ้นสุด
+  select-start-date: เลือกวันที่เริ่ม
+  select-end-date: เลือกวันที่สิ้นสุด
+  reason: เหตุผล
+  reason-placeholder: เช่น ธุระส่วนตัว
+  notes-placeholder: หมายเหตุเพิ่มเติม (ไม่บังคับ)
+  shift: กะ
+  add-shift-hint: คลิก "เพิ่มกะ" เพื่อสร้างกะใหม่
+  time-off-exceptions: วันลาและข้อยกเว้น
+  no-exceptions: ยังไม่มีวันลาหรือข้อยกเว้น
+  exception-approved: อนุมัติข้อยกเว้นแล้ว
+  exception-rejected: ปฏิเสธข้อยกเว้นแล้ว
+  exception-deleted: ลบข้อยกเว้นแล้ว
+  delete-exception: ลบข้อยกเว้น
+  delete-exception-confirm: ยืนยันลบข้อยกเว้นนี้ใช่หรือไม่?
+  approve: อนุมัติ
+  reject: ปฏิเสธ
+  recurring-schedule-created: สร้างตารางประจำและสร้างกะแล้ว
+  recurring-schedule: ตารางประจำ
+  is-recurring: ทำซ้ำ
+  recurrence-pattern: รูปแบบการทำซ้ำ
+  recurrence-start-date: เริ่มวันที่
+  recurrence-end-date: สิ้นสุดวันที่ (ไม่บังคับ)
+  template-name: ชื่อแม่แบบ
+  template-name-placeholder: เช่น สัปดาห์มาตรฐาน
+  schedule-name: ชื่อตาราง
+  schedule-name-placeholder: เช่น สัปดาห์มาตรฐาน
+  one-off-shift: กะครั้งเดียว
+  one-off-shift-help: เปิดเพื่อเพิ่มกะครั้งเดียวในวันและเวลาที่ระบุ แทนตารางประจำ
+  template-color: สี
+  shift-start-time: เวลาเริ่มกะ
+  shift-end-time: เวลาจบกะ
+  break-start-time: เวลาเริ่มพัก
+  break-end-time: เวลาจบพัก
+  day-monday: วันจันทร์
+  day-tuesday: วันอังคาร
+  day-wednesday: วันพุธ
+  day-thursday: วันพฤหัสบดี
+  day-friday: วันศุกร์
+  day-saturday: วันเสาร์
+  day-sunday: วันอาทิตย์
+  frequency-daily: รายวัน
+  frequency-weekly: รายสัปดาห์
+  frequency-monthly: รายเดือน
+  today: วันนี้
+  orders-tab: ตารางออเดอร์
+  fleet-schedule-tab: ตาราง Fleet
+  break-start: เริ่มพัก
+  break-end: จบพัก
+  select-break-start: เลือกเวลาเริ่มพัก
+  select-break-end: เลือกเวลาจบพัก
+  select-date: เลือกวันที่
+  working-days: วันทำงาน
+  recurrence-start: เริ่มวันที่
+  recurrence-end: สิ้นสุดวันที่
+  recurring-schedule-help: กำหนดรูปแบบกะประจำด้วยวันและเวลา ระบบจะสร้างกะให้คนขับอัตโนมัติ
+  shift-deleted: ลบกะสำเร็จ
+  day-mon: จ.
+  day-tue: อ.
+  day-wed: พ.
+  day-thu: พฤ.
+  day-fri: ศ.
+  day-sat: ส.
+  day-sun: อา.
+  view-day: วัน
+  view-week: สัปดาห์
+  undo: เลิกทำล่าสุด
+  redo: ทำซ้ำล่าสุด
+  search-orders: ค้นหาออเดอร์...
+  select-all: เลือกทั้งหมด
+  all-scheduled: กำหนดเวลาออเดอร์ครบแล้ว
+  not-scheduled: ยังไม่กำหนดเวลา
+  expand-sidebar: ขยายแถบข้าง
+  collapse-sidebar: ย่อแถบข้าง
+  bulk-assign: มอบหมาย {count} ออเดอร์
+  bulk-assign-title: มอบหมาย {count} ออเดอร์พร้อมกัน
+  bulk-assign-success: มอบหมาย {count} ออเดอร์สำเร็จ
+  bulk-assign-order-count: เลือก {count} ออเดอร์เพื่อมอบหมาย
+  bulk-assign-spacing-hint: ออเดอร์จะเรียงต่อกันตั้งแต่วันและเวลาที่เลือก เว้นช่วงตามระยะเวลาโดยประมาณ
+  assign-to-driver: มอบหมายให้คนขับ
+  assign-orders: มอบหมายออเดอร์
+  orders-to-assign: '{count} ออเดอร์ที่จะมอบหมาย'
+  scheduled-date: วันที่กำหนด
+  conflict-title: พบตารางเวลาซ้อนกัน
+  conflict-description: '{orderTracking} ซ้อนกับออเดอร์ที่มีอยู่ของ {driverName}'
+  conflicting-orders: ออเดอร์ที่ซ้อนกัน
+  conflict-resolution-prompt: ต้องการแก้การซ้อนกันอย่างไร?
+  auto-adjust: ปรับเวลาอัตโนมัติ
+  assign-anyway: มอบหมายต่อไป
+  clear-selection: ล้างการเลือก
+modals:
+  new-custom-field-group:
+    modal-title: สร้างกลุ่มฟิลด์กำหนดเองใหม่
+    group-name: ชื่อกลุ่ม
+  assign-driver:
+    select-driver: เลือกคนขับ
+    select-assign: เลือกคนขับที่จะมอบหมาย
+  clone-config-form:
+    name: ชื่อ Config
+    description: คำอธิบาย Config
+  driver-assign-order:
+    order: เลือกออเดอร์
+    assign-order: เลือกออเดอร์ที่จะมอบหมาย
+  driver-assign-vehicle:
+    vehicle: เลือกรถ
+    assign-vehicle: เลือกรถที่จะมอบหมาย
+  driver-assign-vendor:
+    vendor: เลือก Vendor
+  driver-details:
+    job: งานปัจจุบัน
+    view: ดูบนแผนที่
+  driver-form:
+    select-vendor: เลือก Vendor
+    select-vehicle: เลือกรถ
+  edit-meta-form:
+    add: เพิ่ม Meta Field
+  entity-form:
+    name-text: ชื่อสินค้าหรือรายการ
+    id-text: ใช้ช่องนี้ตั้งรหัสอ้างอิงหรือรหัสภายในของรายการ (ไม่บังคับ)
+    sku: SKU
+    sku-text: รหัส SKU (ถ้ามี)
+    description: คำอธิบาย
+    description-text: คำอธิบายเพิ่มเติมของรายการ
+    price-title: ราคาและมูลค่า
+    price: ราคา
+    price-text: ราคาของรายการ
+    sale-price: ราคาขาย
+    sale-price-text: ราคาขายหรือราคาลดของรายการ
+    declare: มูลค่าที่สำแดง
+    declare-text: มูลค่าที่สำแดงของรายการ ใช้กรณีทำประกัน
+    measurement-title: ขนาดและน้ำหนัก
+    length: ความยาว
+    length-text: ความยาวของรายการ
+    width: ความกว้าง
+    width-text: ความกว้างของรายการ
+    height: ความสูง
+    height-text: ความสูงของรายการ
+    weight: น้ำหนัก
+    weight-text: น้ำหนักของรายการ
+  entity-meta-field-prompt:
+    name: Key ของ Meta Field
+  fleet-form:
+    title: ชื่อ Fleet
+    assign: กำหนดพื้นที่ให้บริการ
+    assign-text: เลือกพื้นที่ให้บริการของ Fleet
+    zone: กำหนดโซน
+    zone-text: เลือกโซนของ Fleet
+    task: งาน / ภารกิจ
+    task-text: อธิบายงานหรือภารกิจหลักของ Fleet นี้ (ถ้ามี)
+    select-task: เลือกงาน
+    status-text: เลือกสถานะของ Fleet
+    select-status: เลือกสถานะ
+  fuel-report-details:
+    fuel: น้ำมัน / ปริมาณ
+  fuel-report-form:
+    select-driver: เลือกคนขับ
+    select-vehicle: เลือกรถ
+    volume: ปริมาณ
+    volume-text: เลือกหน่วยและปริมาณน้ำมันที่จะรายงาน
+  group-details:
+    name: ชื่อกลุ่ม
+    member: สมาชิก
+    address: ที่อยู่
+  group-form:
+    title: ชื่อกลุ่ม
+    users-add: เลือกผู้ใช้ที่จะเพิ่มเข้ากลุ่ม
+    search: ค้นหาและเลือกผู้ใช้ที่จะเพิ่มเข้ากลุ่มนี้
+    select-user: เลือกผู้ใช้ที่จะเพิ่มเข้ากลุ่ม
+    no-users: ยังไม่มีผู้ใช้ในกลุ่ม
+  install-prompt:
+    message: คุณกำลังจะติดตั้งส่วนขยาย {extensionName} ยืนยันดำเนินการติดตั้งใช่หรือไม่?
+    sub-message: ส่วนขยายบางตัวต้องเข้าถึงข้อมูลของคุณ
+  issue-details:
+    assigned: มอบหมายให้
+    type: ประเภทปัญหา
+    category: หมวดหมู่ปัญหา
+  issue-form:
+    reported: แจ้งโดย
+    select-reporter: เลือกผู้แจ้ง
+    assigned: มอบหมายให้
+    select-assignee: เลือกผู้รับผิดชอบ
+    select-driver: เลือกคนขับ
+    select-vehicle: เลือกรถ
+    select-type: เลือกประเภท
+    select-category: เลือกหมวดหมู่
+    type: ประเภทปัญหา
+    type-text: เลือกประเภทปัญหา
+    category: หมวดหมู่ปัญหา
+    category-text: เลือกหมวดหมู่ปัญหา
+    report: รายงานปัญหา
+    tags: แท็กปัญหา
+    add-tags: เพิ่มแท็ก
+    select-status: เลือกสถานะปัญหา
+  map-layer-form:
+    layer-type: ประเภทเลเยอร์
+    layer-type-text: เลือกประเภทเลเยอร์ที่ต้องการสร้าง
+    select-layer-type: เลือกประเภทเลเยอร์...
+    service-area: พื้นที่ให้บริการ
+    service-area-text: เลือกพื้นที่ให้บริการที่โซนนี้สังกัด
+    select-service-area: เลือกพื้นที่ให้บริการ
+    set-name: ตั้งชื่อที่แสดงของ{options}
+    service-type: ประเภทพื้นที่ให้บริการ
+    service-type-text: เลือกประเภทของพื้นที่ให้บริการนี้
+    select-service-type: เลือกประเภทพื้นที่ให้บริการ...
+    customize-border: กำหนดสีขอบของ{options}นี้
+    customize-fill-color: กำหนดสีพื้นของ{options}นี้
+    service-area-country: ประเทศของพื้นที่ให้บริการ
+    service-area-country-text: ระบุประเทศที่พื้นที่ให้บริการนี้ตั้งอยู่ (ไม่บังคับ)
+  new-order-config:
+    name: ชื่อ Config
+    description: คำอธิบาย Config
+    tags: แท็ก Config
+    add-tags: เพิ่มแท็ก
+  order-assign-driver:
+    select-driver: เลือกคนขับ
+    select-assign: เลือกคนขับที่จะมอบหมาย
+  order-config-new-status:
+    new-status: สถานะใหม่
+    status-text: ใส่สถานะกิจกรรมใหม่ที่จะเพิ่มในลำดับงาน
+  order-event:
+    schedule: กำหนดเวลา
+    unschedule: ยกเลิกกำหนดเวลา
+  order-form:
+    id-text: ใช้ช่องนี้ตั้งรหัสอ้างอิงหรือรหัสภายในของออเดอร์ (ไม่บังคับ)
+    schedule-text: วันและเวลาที่จะ Dispatch ออเดอร์ ถ้าถึงเวลาแล้วยังไม่มีคนขับ การ Dispatch จะล้มเหลว ถ้าเป็นออเดอร์ Ad-hoc ระบบจะแจ้งคนขับที่อยู่ใกล้จุดรับ
+    customer: ลูกค้า
+    customer-text: เลือกลูกค้าของออเดอร์นี้ (ไม่บังคับ) ถ้าเป็นลูกค้าใหม่ ใช้ปุ่ม 'ลูกค้าใหม่' ด้านบน
+    select-customer: เลือกลูกค้า
+    facilitator: ผู้ประสานงาน
+    facilitator-text: เลือกผู้ประสานงานของออเดอร์นี้ (ไม่บังคับ) เช่น ผู้รับเหมาช่วงหรือบริการภายนอกที่ช่วยขนส่งออเดอร์นี้
+    select-facilitator: เลือกผู้ประสานงาน
+    assign-driver: มอบหมายคนขับ
+    assign-driver-text: เลือกคนขับที่จะรับออเดอร์นี้
+    select-driver: เลือกคนขับ
+    assign-vehicle: มอบหมายรถ
+    assign-vehicle-text: เลือกรถที่จะใช้ทำออเดอร์นี้
+    select-vehicle: เลือกรถ
+  order-import:
+    loading-message: กำลังนำเข้า...
+    drop-upload: วางเพื่ออัปโหลด
+    invalid: ไม่ถูกต้อง
+    ready-upload: พร้อมอัปโหลด
+    upload-spreadsheets: อัปโหลดสเปรดชีต
+    drag-drop: ลากไฟล์สเปรดชีตมาวางที่นี่
+    button-text: หรือเลือกไฟล์สเปรดชีตเพื่ออัปโหลด
+    spreadsheets: สเปรดชีต
+    upload-queue: คิวอัปโหลด
+  order-label:
+    loading: กำลังโหลดฉลาก...
+  order-new-activity:
+    select-message: เลือกสถานะกิจกรรมเพื่ออัปเดตการติดตามออเดอร์ หรือใส่กิจกรรมกำหนดเอง
+    order-currently-message: ออเดอร์นี้อยู่ในสถานะ {options} การเพิ่มกิจกรรมจะเขียนทับสถานะนี้
+    not-recommend-message: ไม่แนะนำให้ทำ เว้นแต่คุณแน่ใจจริงๆ
+    activity-options: ตัวเลือกกิจกรรม
+    activity: กิจกรรม
+    dispatch: จะทำให้ออเดอร์ถูก Dispatch
+    status: สถานะกิจกรรมกำหนดเอง
+    details: รายละเอียดกิจกรรมกำหนดเอง
+    code: รหัสกิจกรรมกำหนดเอง
+    fleetbase-message: ไม่แนะนำให้ทำ เว้นแต่คุณแน่ใจจริงๆ
+  order-route-form:
+    toggle: เปิด/ปิดหลายจุดส่ง
+    optimize: ปรับเส้นทางให้เหมาะสม
+    optimize-text: ระบบจะปรับเส้นทางให้เหมาะสมอัตโนมัติ
+    add: เพิ่มจุดแวะ
+    add-text: ใช้ปุ่ม `เพิ่มจุดแวะ` เพื่อเพิ่มจุดแวะของออเดอร์นี้ ระบบจะปรับเส้นทางให้เหมาะสมอัตโนมัติทุกครั้งที่เพิ่มหรือลบจุด
+    select-waypoint: เลือกจุดแวะ
+    pickup: จุดรับ
+    edit-address: แก้ไขที่อยู่
+    select-pickup: เลือกจุดรับ
+    invalid: พิกัดไม่ถูกต้อง!
+    dropoff: จุดส่ง
+    select-dropoff: เลือกจุดส่ง
+    return: จุดส่งคืน
+    select-return: เลือกจุดส่งคืน
+  place-assign-vendor:
+    select-vendor: เลือก Vendor
+  place-details:
+    view: ดูบนแผนที่
+  policy-form:
+    name: ชื่อ Policy
+    name-text: ตั้งชื่อ Policy
+    description: คำอธิบาย Policy
+    description-text: ใส่คำอธิบาย Policy
+    permissions: เลือกสิทธิ์
+  role-form:
+    name: ชื่อบทบาท
+    name-text: ตั้งชื่อบทบาทนี้
+    permissions: เลือกสิทธิ์
+  select-payment-method:
+    card-ending: บัตรลงท้ายด้วย {method}
+  service-area-form:
+    name: ชื่อพื้นที่ให้บริการ
+    name-text: ตั้งชื่อที่แสดงของพื้นที่ให้บริการ
+    type: ประเภทพื้นที่ให้บริการ
+    type-text: เลือกประเภทของพื้นที่ให้บริการนี้
+    select-type: เลือกประเภทพื้นที่ให้บริการ...
+    border-color: สีขอบพื้นที่ให้บริการ
+    customize-border-color: กำหนดสีขอบของพื้นที่ให้บริการนี้
+    area-color: สีพื้นที่ให้บริการ
+    customize-area-color: กำหนดสีพื้นของพื้นที่ให้บริการนี้
+    country: ประเทศของพื้นที่ให้บริการ
+    country-text: ระบุประเทศที่พื้นที่ให้บริการนี้ตั้งอยู่ (ไม่บังคับ)
+  set-password:
+    message: ยินดีต้อนรับ! ก่อนเริ่มใช้งาน ตั้งรหัสผ่านใหม่ด้านล่าง
+    new-password: รหัสผ่านใหม่
+    confirm-password: ยืนยันรหัสผ่าน
+    help-text: ใส่รหัสผ่านอย่างน้อย 8 ตัวอักษร
+  uninstall-prompt:
+    message: คุณกำลังจะถอนการติดตั้งส่วนขยาย "{options}" ยืนยันดำเนินการใช่หรือไม่?
+    sub-message: การตั้งค่าและการปรับแต่งทั้งหมดจะหายไป
+  vehicle-details:
+    make: ยี่ห้อ
+    model: รุ่น
+    year: ปี
+    driver-assigned: คนขับที่มอบหมาย
+    no-driver-assigned: ยังไม่ได้มอบหมายคนขับ
+    vehicle-assigned: รถที่มอบหมาย
+    no-vehicle-assigned: ยังไม่ได้มอบหมายรถ
+    avatar: ไอคอน
+    model-information: ข้อมูลรุ่น
+    acceleration: 0-100 กม./ชม.
+    body: ตัวถัง
+    doors: ประตู
+    length: ความยาว (มม.)
+    seats: ที่นั่ง
+    top-speed: ความเร็วสูงสุด (กม./ชม.)
+    transmission: ระบบเกียร์
+    weight: น้ำหนัก (กก.)
+    wheelbase: ฐานล้อ (มม.)
+    width: ความกว้าง (มม.)
+    engine-information: ข้อมูลเครื่องยนต์
+    engine-bore: กระบอกสูบ (มม.)
+    cc: ซีซี
+    compression: อัตราส่วนกำลังอัด
+    cylinder: จำนวนสูบ
+    position: ตำแหน่งเครื่องยนต์
+    power-ps: กำลัง (PS)
+    power-rpm: กำลัง (รอบ/นาที)
+    stroke: ช่วงชัก (มม.)
+    torque-nm: แรงบิด (นิวตันเมตร)
+    torque-rpm: แรงบิด (รอบ/นาที)
+    valves: วาล์วต่อสูบ
+    fuel-information: ข้อมูลเชื้อเพลิง
+    fuel: เชื้อเพลิง
+    fuel-cap: ความจุถังน้ำมัน (ลิตร)
+    liters-city: ลิตรต่อกม. ในเมือง
+    liters-highway: ลิตรต่อกม. ทางหลวง
+    liters-mixed: ลิตรต่อกม. ผสม
+  vehicle-form:
+    map-avatar: เลือกไอคอนบนแผนที่
+    map-avatar-text: เลือกไอคอนที่จะแสดงบนแผนที่เมื่อใช้การติดตามตำแหน่ง
+    select-avatar: เลือกไอคอน
+    make: ยี่ห้อรถ
+    model: รุ่นรถ
+    year: ปีรถ
+    select-driver: เลือกคนขับ
+    body: ประเภทตัวถัง
+    doors: จำนวนประตู
+    type: ระบบขับเคลื่อน
+    length: ความยาวรถ (มม.)
+    seats: จำนวนที่นั่ง
+    top-speed: ความเร็วสูงสุด (กม./ชม.)
+    transmission: ระบบเกียร์
+    weight: น้ำหนักรถ (กก.)
+    wheelbase: ฐานล้อ (มม.)
+    width: ความกว้างรถ (มม.)
+    engine-bore: กระบอกสูบ (มม.)
+    cc: ซีซี
+    compression: อัตราส่วนกำลังอัด
+    cylinder: จำนวนสูบ
+    position: ตำแหน่งเครื่องยนต์
+    power-ps: กำลังเครื่องยนต์ (PS)
+    power-rpm: กำลังเครื่องยนต์ (รอบ/นาที)
+    stroke: ช่วงชัก (มม.)
+    torque-nm: แรงบิด (นิวตันเมตร)
+    torque-rpm: แรงบิด (รอบ/นาที)
+    fuel-type: ประเภทเชื้อเพลิง
+    fuel-cap: ความจุถังน้ำมัน (ลิตร)
+  vendor-details:
+    sandbox: Sandbox
+    host: Host
+    namespace: Namespace
+  vendor-form:
+    choose-vendor: เลือก Vendor เชื่อมระบบ
+    create-vendor: สร้าง Vendor เอง
+    credentials: ข้อมูลรับรอง
+    options: ตัวเลือก
+    hide-advanced: ซ่อนตัวเลือกขั้นสูง
+    show-advanced: แสดงตัวเลือกขั้นสูง
+    custom-host: Host กำหนดเอง
+    host-text: ระบุ host ที่จะใช้กับการเชื่อมระบบนี้ (ไม่บังคับ)
+    custom-namespace: Namespace กำหนดเอง
+    namespace-text: ระบุ namespace หรือเวอร์ชัน API ที่จะใช้กับการเชื่อมระบบนี้ (ไม่บังคับ)
+    webhook: Webhook URL
+    webhook-text: Vendor เชื่อมระบบมักต้องใช้ค่านี้เพื่อส่งอัปเดตกิจกรรมของออเดอร์กลับมา อย่าเปลี่ยนถ้าไม่แน่ใจ! การเปลี่ยนอาจทำให้อัปเดตออเดอร์ใช้ไม่ได้!
+    cancel-credentials: ยกเลิกการรีเซ็ตข้อมูลรับรอง
+    reset-message: ข้อมูลรับรองที่เป็นความลับทำได้แค่รีเซ็ต ถ้าจะอัปเดตต้องกรอกใหม่ทั้งหมด
+    optionally: ใส่ค่าของคุณเอง (ไม่บังคับ)
+    configure-vendor: เพื่อตั้งค่า Vendor นี้
+    select: เลือก
+    sandbox: Sandbox
+    name-text: ชื่อ Vendor ปกติเป็นชื่อธุรกิจ
+    email-text: อีเมลของ Vendor ใช้ส่งอีเมลถึง Vendor ได้
+    phone-text: เบอร์โทรของ Vendor ใช้ส่ง SMS หรือข้อความถึง Vendor ได้
+    website-text: เว็บไซต์ของ Vendor ใส่ไว้เพื่ออ้างอิง (ไม่บังคับ)
+    select-address: เลือกที่อยู่
+  zone-form:
+    name: ชื่อโซน
+    name-text: ตั้งชื่อที่แสดงของโซน
+    border-color: สีขอบโซน
+    customize-border: กำหนดสีขอบของโซนนี้
+    zone-color: สีโซน
+    customize-fill-color: กำหนดสีพื้นของโซนนี้
+    optionally: ใส่คำอธิบายโซน (ไม่บังคับ)
+    description-zone: คำอธิบายโซน
+radar:
+  title: Radar
+  eyebrow: ทรัพยากร
+  subtitle: ทุกเรื่องในทรัพยากร การซ่อมบำรุง การตรวจสภาพ และกำลังคนที่ต้องตัดสินใจ หนึ่งแถวต่อหนึ่งรายการ
+  summary: เปิดอยู่ {open} · เลื่อนไว้ {snoozed} · ซิงก์ล่าสุด {time}
+  search-placeholder: กรองรายการ
+  reload: โหลดใหม่
+  new-notice: ประกาศใหม่
+  showing: แสดง {count} จาก {total} · จัดกลุ่มตามวันครบกำหนด
+  sources-warning: 'โหลดข้อมูลบางแหล่งไม่ได้: {sources}'
+  briefing:
+    title: สรุปเช้านี้
+    score: คะแนนสุขภาพ Fleet
+    of-100: / 100
+    vs-yesterday: '{delta} เทียบกับเมื่อวาน'
+    no-history: ค่าแรก
+    generated: สร้างเมื่อ {time} · มีลิงก์แหล่งข้อมูล
+    yesterday: 'เมื่อวาน: ปิดช่องว่าง {closed} รายการ ยกยอดมา {rolled} รายการ'
+    decisions: เรื่องที่รอคุณตัดสินใจ
+    decisions-count: '{shown} จาก {total}'
+    nothing-to-decide: ไม่มีเรื่องรอตัดสินใจ
+    confirm: ยืนยัน
+    not-now: ไว้ทีหลัง
+    undo: เลิกทำ
+    wake-now: ปลุกตอนนี้
+    confirmed: ยืนยันเมื่อ {time}
+    snoozed-until: เลื่อนไปถึง {time}
+    filter: กรอง
+    collapse: ย่อสรุป
+    expand: แสดงสรุป
+    open-record: เปิดรายการ
+    working: กำลังทำงาน…
+  views:
+    list: รายการ
+    agenda: กำหนดการ
+  agenda:
+    window-24h: 24 ชม. ข้างหน้า
+    window-7d: 7 วัน
+    overdue: เลยกำหนด
+    later: ภายหลัง
+    anytime: เมื่อไรก็ได้
+    anytime-count: ไม่มีวันที่ {count}
+    no-events: ไม่มีเหตุการณ์ในช่วงนี้
+    drag-hint: ลากรายการไปวางในแถวเพื่อกำหนดเวลา
+    print: พิมพ์ใบส่งมอบงาน
+    see-all: ดูทั้งหมด {count} →
+    planned: วางแผนแล้ว
+    now: ตอนนี้
+    lanes:
+      shifts: กะ
+      maintenance: ซ่อมบำรุง
+      expiries: วันหมดอายุ
+      notices: ประกาศ
+    shift-states:
+      on_shift: อยู่ในกะ
+      not_online: ไม่ออนไลน์
+      upcoming: กำลังจะถึง
+      ended: จบแล้ว
+    summary: '{shifts} กะในช่วงนี้ · เลยกำหนด {overdue} · ไม่มีวันที่ {anytime}'
+  handover:
+    title: กะจะจบ
+    ends-in: ในอีก {minutes}
+    orders-on-driver: '{name} ยังมีออเดอร์ที่กำลังทำ {count} รายการ'
+    finishes-after: จะเสร็จหลังจบกะ
+    suggested: แนะนำให้ส่งต่อ
+    on-shift-till: อยู่ในกะถึง {time}
+    away: ห่าง {distance} กม.
+    reassign: ย้าย {count} ออเดอร์ให้ {name}
+    extend: ขยายกะ 1 ชม.
+    snooze: เลื่อน 1 ชม.
+    no-cover: ไม่มีคนในกะนานพอจะรับต่อ ขยายกะหรือย้ายงานเอง
+    reassigned: ย้ายออเดอร์ให้ {name} แล้ว
+    extended: ขยายกะ 1 ชั่วโมงแล้ว
+    loading: กำลังหาคนรับต่อ…
+  tabs:
+    open: เปิดอยู่
+    snoozed: เลื่อนไว้
+    resolved: แก้ไขแล้ว
+  pills:
+    overdue: เลยกำหนด
+    due_week: ครบกำหนดสัปดาห์นี้
+    unassigned: ยังไม่มอบหมาย
+    issues: ปัญหาที่เปิดอยู่
+    inspections: การตรวจสภาพ
+    shifts: การเปลี่ยนกะ
+    expiring: หมดอายุใน 30 วัน
+    low_stock: สต็อกต่ำ
+    fuel: น้ำมันที่ไม่ตรงกัน
+    notices: ประกาศ
+  groups:
+    overdue: เลยกำหนด
+    today: วันนี้
+    week: สัปดาห์นี้
+    later: ภายหลัง
+    none: ไม่มีวันที่
+  rules:
+    maintenance_overdue: ซ่อมบำรุง
+    maintenance_due_soon: ซ่อมบำรุง
+    inspection_due: ตรวจสภาพ
+    inspection_failed: ตรวจสภาพ
+    inspection_unresolved: ตรวจสภาพ
+    inspection_draft: ตรวจสภาพ
+    inspection_link_pending: ตรวจสภาพ
+    vehicle_inspection_failed: ตรวจสภาพ
+    work_order_overdue: ใบสั่งงาน
+    work_order_blocked: ใบสั่งงาน
+    issue_open: ปัญหา
+    shift_late_start: กะ
+    shift_no_vehicle: กะ
+    shift_handover: ส่งต่องาน
+    driver_without_vehicle: ไม่มีรถ
+    vehicle_without_driver: รถว่าง
+    vehicle_without_device: อุปกรณ์
+    device_unattached: อุปกรณ์
+    license_expiring: ใบขับขี่
+    lease_expiring: สัญญาเช่า
+    fuel_unmatched: น้ำมัน
+    part_low_stock: อะไหล่
+    notice: ประกาศ
+  actions:
+    acknowledge: รับทราบ
+    snooze: เลื่อน
+    wake: ปลุกตอนนี้
+    assign: มอบหมาย
+    unassign: ล้างผู้รับผิดชอบ
+    plan: กำหนดเวลา
+    unplan: ล้างเวลา
+    resolve: แก้ไขแล้ว
+    open-record: เปิดรายการ
+    assign-vehicle: มอบหมายรถ
+    assign-driver: มอบหมายคนขับ
+    create-work-order: สร้างใบสั่งงาน
+    create-issue: แจ้งปัญหา
+    mark-resolved: ทำเครื่องหมายว่าแก้ไขแล้ว
+    send-pin: ส่ง PIN
+    revoke-link: เพิกถอนลิงก์
+    revoke-links: เพิกถอน {count, plural, one {# ลิงก์} other {# ลิงก์}}
+    match-vehicle: จับคู่กับรถ
+    ignore: เพิกเฉย
+    attach: ติดตั้งกับรถ
+    call: โทร
+    cover-shift: หาคนแทนกะ
+    reassign: ย้ายออเดอร์
+    extend-shift: ขยายกะ 1 ชม.
+    select: เลือก
+    deselect: ยกเลิกการเลือก
+    more: เพิ่มเติม
+  snooze:
+    1h: 1 ชั่วโมง
+    4h: 4 ชั่วโมง
+    tomorrow: พรุ่งนี้เช้า
+    next-week: สัปดาห์หน้า
+    pick: เลือกวันที่…
+    pick-title: เลื่อนไปถึง
+    pick-label: ปลุกวันที่
+  state:
+    acknowledged-by: '{name} รับทราบเมื่อ {time}'
+    acknowledged: รับทราบแล้ว
+    snoozed-until: เลื่อนไว้ถึง {time}
+    assigned-to: มอบหมายให้ {name}
+    unassigned: ยังไม่มอบหมาย
+    planned-for: วางแผนไว้ {time}
+    resolved-by: '{name} แก้ไขเมื่อ {time}'
+    resolved-auto: ปิดตามข้อมูลในรายการ
+  bulk:
+    selected: เลือก {count} รายการ
+    clear: ล้าง
+    summary: '{count} รายการ'
+  keys:
+    move: เลื่อน
+    select: เลือก
+    acknowledge: รับทราบ
+    snooze: เลื่อน
+    assign: มอบหมาย
+    open: เปิดรายการ
+    close: ปิด
+  empty:
+    title: ไม่มีเรื่องที่ต้องตัดสินใจ
+    snoozed-hint: มี {count} รายการที่เลื่อนไว้จะกลับมาในสัปดาห์นี้
+    nothing-snoozed: ไม่มีรายการที่เลื่อนไว้
+    wakes: กลับมา {time}
+    filtered-title: ไม่มีรายการที่ตรงกับตัวกรอง
+    filtered-hint: ล้างตัวกรองหรือคำค้นเพื่อดูเพิ่ม
+    snoozed-title: ไม่มีรายการที่เลื่อนไว้
+    snoozed-tab-hint: รายการที่เลื่อนไว้จะกลับเข้ารายการเมื่อถึงเวลาปลุก
+    resolved-title: ไม่มีรายการที่แก้ไขใน 7 วันที่ผ่านมา
+    resolved-hint: รายการจะปิดที่นี่เมื่อข้อมูลที่เกี่ยวข้องเปลี่ยน หรือเมื่อประกาศถูกแก้ไข
+  saved-views:
+    title: มุมมอง
+    save-current: บันทึกมุมมองนี้
+    name-prompt: ตั้งชื่อมุมมองนี้
+    name-placeholder: เช่น ครบกำหนดสัปดาห์นี้
+    saved: บันทึกมุมมองแล้ว
+    delete: ลบมุมมอง
+    deleted: ลบมุมมองแล้ว
+    defaults:
+      my-assignments: งานของฉัน
+      shift-changes: การเปลี่ยนกะ
+      due-this-week: ครบกำหนดสัปดาห์นี้
+      unmatched-fuel: น้ำมันที่ไม่ตรงกัน
+  notice:
+    title: ประกาศใหม่
+    message: ข้อความ
+    message-placeholder: ลานจอดปิดวันเสาร์เพื่อซ่อมพื้น ย้ายหางพ่วงออกภายในศุกร์ 18:00
+    severity: ความรุนแรง
+    due: กำหนดเวลา
+    scope: ใช้กับ
+    scope-placeholder: ลานจอด 3 · ทั้ง Fleet
+    create: ประกาศ
+    created: ประกาศแล้ว
+    delete: ลบประกาศ
+    deleted: ลบประกาศแล้ว
+    severities:
+      info: ข้อมูล
+      warning: เตือน
+      critical: วิกฤต
+  drawer:
+    failed-items: รายการที่ไม่ผ่าน
+    state: สถานะ
+    subject: รายการ
+    due: ครบกำหนด
+    window: กะ
+    details: รายละเอียด
+  prompts:
+    select-vehicle: เลือกรถ
+    select-user: เลือกผู้รับผิดชอบ
+    assign-vehicle-title: มอบหมายรถให้ {name}
+    assign-driver-title: มอบหมายคนขับให้ {name}
+    match-vehicle-title: จับคู่รายการนี้กับรถ
+    create-work-order-title: สร้างใบสั่งงานจากกำหนดการนี้?
+    create-work-order-body: ใบสั่งงานจะเปิดพร้อมค่าเริ่มต้นและวันครบกำหนดของกำหนดการ
+    ignore-title: เพิกเฉยรายการนี้?
+    ignore-body: รายการจะออกจากคิวที่ไม่ตรงกันและไม่ผูกกับรถ
+    attach-device-title: ติดตั้งอุปกรณ์นี้กับรถ
+    revoke-link-title: เพิกถอนลิงก์ตรวจสภาพนี้?
+    send-pin-title: ส่ง PIN ตรวจสภาพ
+    send-pin-to: จะส่งลิงก์และ PIN ให้ {name} ทางไหน?
+    send-pin-body: จะส่งลิงก์และ PIN ทางไหน?
+    send-pin-unavailable: ผู้รับลิงก์ไม่มีอีเมลหรือเบอร์โทรสำหรับส่ง PIN
+    revoke-link-body: ลิงก์จะใช้ไม่ได้ทันที
+    bulk-revoke-link-title: เพิกถอน {count, plural, one {# ลิงก์ตรวจสภาพ} other {# ลิงก์ตรวจสภาพ}}?
+    bulk-revoke-link-body: ลิงก์จะใช้ไม่ได้ทันที รายการอื่นที่เลือกคงเดิม
+    assign-user-title: ใครรับผิดชอบเรื่องนี้?
+    assign-user-help: ผู้รับผิดชอบจะแสดงในแถวและในมุมมอง งานของฉัน
+    no-selection: เลือกก่อน
+  toasts:
+    acknowledged: รับทราบแล้ว
+    snoozed: เลื่อนไว้ถึง {time}
+    woken: กลับเข้ารายการแล้ว
+    assigned: มอบหมายให้ {name} แล้ว
+    unassigned: ล้างผู้รับผิดชอบแล้ว
+    planned: กำหนดเวลาแล้ว
+    resolved: แก้ไขแล้ว
+    work-order-created: สร้างใบสั่งงานแล้ว
+    vehicle-assigned: มอบหมายรถแล้ว
+    driver-assigned: มอบหมายคนขับแล้ว
+    matched: จับคู่รายการแล้ว
+    ignored: เพิกเฉยรายการแล้ว
+    device-attached: ติดตั้งอุปกรณ์แล้ว
+    pin-sent: ส่ง PIN แล้ว
+    link-revoked: เพิกถอนลิงก์แล้ว
+    links-revoked: '{count, plural, one {เพิกถอน # ลิงก์แล้ว} other {เพิกถอน # ลิงก์แล้ว}}'
+    links-revoke-failed: '{count, plural, one {เพิกถอนไม่ได้ # ลิงก์} other {เพิกถอนไม่ได้ # ลิงก์}}'
+    bulk-done: อัปเดต {count} รายการแล้ว
+widget:
+  refresh: รีเฟรช
+  radar:
+    title: Radar
+    description: เรื่องที่ต้องตัดสินใจทั่วทั้ง Fleet ตอนนี้
+    open: เปิดอยู่
+    overdue: เลยกำหนด
+    snoozed: เลื่อนไว้
+    open-radar: เปิด Radar
+  kpi-earnings:
+    title: รายได้
+  kpi-distance:
+    title: ระยะทางที่วิ่ง
+  kpi-aov:
+    title: มูลค่าเฉลี่ยต่อออเดอร์
+  kpi-active-orders:
+    title: ออเดอร์ที่กำลังวิ่ง
+  kpi-drivers-online:
+    title: คนขับออนไลน์
+  kpi-open-issues:
+    title: ปัญหาที่เปิดอยู่
+  operations-pulse:
+    title: ภาพรวมการปฏิบัติงาน
+  revenue-trend:
+    title: แนวโน้มรายได้
+  orders-by-status:
+    title: จำนวนออเดอร์ตามสถานะ
+  on-time-delivery:
+    title: ส่งตรงเวลา
+  top-drivers:
+    title: คนขับยอดเยี่ยม
+  fuel-efficiency:
+    title: ค่าน้ำมันและประสิทธิภาพ
+  issues-insights:
+    title: ข้อมูลเชิงลึกของปัญหา
+  maintenance-overview:
+    title: ภาพรวมการซ่อมบำรุง
+  geofence-violations:
+    title: การฝ่าฝืน Geofence
+  live-fleet:
+    title: แผนที่ Fleet แบบสด
+  proof-of-delivery:
+    title: หลักฐานการส่งมอบ
+    open-photo: เปิดรูป
+    empty: ยังไม่มีรูปหลักฐานการส่งมอบ
+  get-started:
+    title: เริ่มต้นใช้ Fleet-Ops
+    subtitle: ตั้งค่าสิ่งจำเป็นและ Dispatch ออเดอร์แรกให้สำเร็จ
+    completed: เสร็จแล้ว
+    preview-title: ขั้นตอนออเดอร์แรก
+  recommended-features:
+    title: ฟีเจอร์แนะนำสำหรับคุณ
+    subtitle: เครื่องมือที่ช่วยให้ทีมปฏิบัติการใหม่เริ่มงานได้เร็วขึ้น
+    learn-more: ดูเพิ่มเติม
+  fleet-ops-quickstart:
+    message: มาดูกันว่าจะเริ่มต้นการปฏิบัติงานอย่างไร...
+    start-task: เริ่มงาน
+  key-metrics:
+    title: ตัวชี้วัด Fleet-Ops
+    earnings: รายได้
+    fuel-expenses: ค่าน้ำมัน
+    traveled: ระยะทางที่วิ่ง
+    total-time: เวลารวม
+    order-scheduled: ออเดอร์ที่กำหนดเวลา
+    order-completed: ออเดอร์ที่เสร็จ
+    order-progress: ออเดอร์ที่กำลังทำ
+    order-canceled: ออเดอร์ที่ยกเลิก
+    driver-online: คนขับออนไลน์
+    customers: ลูกค้า
+    open-issue: ปัญหาที่เปิดอยู่
+    closed-issues: ปัญหาที่ปิดแล้ว
+  live-order-map:
+    loading: กำลังโหลดออเดอร์ที่กำลังทำ...
+    assigned: คนขับที่มอบหมาย
+    no-order: ไม่มีออเดอร์ที่กำลังทำ
+    message: ออเดอร์ที่กำลังทำจะแสดงในวิดเจ็ตนี้พร้อมความเคลื่อนไหวแบบเรียลไทม์
+  recent-orders:
+    title: ออเดอร์ล่าสุด
+    loading: กำลังโหลดออเดอร์ล่าสุด...
+    no-orders: ไม่มีออเดอร์สัปดาห์นี้
+    message-part-1: สัปดาห์นี้ยังไม่มีออเดอร์ เริ่มได้โดย
+    message-part-2: สร้างออเดอร์ใหม่
+    message-part-3: หรือให้ลูกค้าส่งออเดอร์ผ่าน API
+  transactions:
+    title: ธุรกรรมล่าสุด
+    loading: กำลังโหลดธุรกรรมล่าสุด...
+    no-transactions: ไม่มีธุรกรรมสัปดาห์นี้
+    message: เมื่อออเดอร์ใช้อัตราค่าบริการ ระบบจะบันทึกธุรกรรมให้อัตโนมัติ
+display-panel:
+  no-address: ไม่มีที่อยู่{type}!
+  no-address-message: ไม่มีที่อยู่!
+driver-card:
+  no-fleets: ไม่มี Fleet
+global-search:
+  search: ค้นหาด้วยคำค้น...
+integrated-order-details:
+  order-id: ID ออเดอร์
+  quotation-id: ID ใบเสนอราคา
+  driver-id: ID คนขับ
+  link: ลิงก์สำหรับแชร์
+  price-breakdown: รายละเอียดราคา
+  metadata: Metadata
+geofence:
+  prompts:
+    use-draw-controls-create-service-area: ใช้เครื่องมือวาดด้านขวาเพื่อวาดพื้นที่ให้บริการ เชื่อมจุดให้ครบเพื่อบันทึก
+    use-draw-controls-create-zone: ใช้เครื่องมือวาดด้านขวาเพื่อวาดโซนในพื้นที่ให้บริการ เชื่อมจุดให้ครบเพื่อบันทึก
+    no-layer-found-for-resource: ไม่พบเลเยอร์ของ{resource}นี้
+    editing-enabled: เปิดการแก้ไขแล้ว ปรับจุดแล้วคลิกเครื่องหมายถูกเพื่อบันทึก
+    resource-boundaries-updated: อัปเดตขอบเขต{resource}สำเร็จ
+    edit-canceled: ยกเลิกการแก้ไขแล้ว
+    failed-to-update-resource: อัปเดต{resource}ไม่สำเร็จ
+live-map:
+  show-coordinates: แสดงพิกัด
+  center-map: ตั้งเป็นกึ่งกลางแผนที่
+  zoom-in: ซูมเข้า
+  zoom-out: ซูมออก
+  toggle-draw-controls: เปิด/ปิดเครื่องมือวาด
+  hide-draw: ซ่อนเครื่องมือวาด
+  enable-draw: เปิดเครื่องมือวาด
+  create-new-service: สร้างพื้นที่ให้บริการใหม่
+  focus-service: 'โฟกัสพื้นที่ให้บริการ: {serviceName}'
+  view-driver: 'ดูคนขับ: {driverName}'
+  edit-driver: 'แก้ไขคนขับ: {driverName}'
+  delete-driver: 'ลบคนขับ: {driverName}'
+  view-vehicle-for: 'ดูรถของ: {driverName}'
+  view-vehicle: 'ดูรถ: {vehicleName}'
+  edit-vehicle: 'แก้ไขรถ: {vehicleName}'
+  delete-vehicle: 'ลบรถ: {vehicleName}'
+  edit-zone: 'แก้ไขโซน: {zoneName}'
+  delete-zone: 'ลบโซน: {zoneName}'
+  assign-zone: 'กำหนด Fleet ให้โซน: {zoneName}'
+  blur-service: 'ซ่อนพื้นที่ให้บริการ: {serviceName}'
+  create-zone: 'สร้างโซนภายใน: {serviceName}'
+  assign-fleet: 'กำหนด Fleet ให้พื้นที่ให้บริการ: {serviceName}'
+  edit-service: 'แก้ไขพื้นที่ให้บริการ: {serviceName}'
+  delete-service: 'ลบพื้นที่ให้บริการ: {serviceName}'
+  service-area: พื้นที่ให้บริการ
+  edit-boundaries: 'แก้ไขขอบเขต: {resource}'
+  zone: โซน
+order-config:
+  create-new-title: สร้าง Order Config ใหม่
+  warning-message: Order Config ต้องมีชื่อ
+  success-message: สร้าง Order Config ใหม่สำเร็จ
+  no-order-warning: ยังไม่ได้เลือก Order Config
+  saved-success: บันทึก Order Config {orderName} แล้ว
+  enter-name-title: ใส่ชื่อ Config ที่คัดลอก
+  no-config-warning: ยังไม่ได้ใส่ชื่อ Config
+  cloned-success: คัดลอก Order Config สำเร็จ
+  body: เมื่อลบ Order Config นี้แล้ว จะสร้างออเดอร์ด้วย Config นี้ไม่ได้อีก ยืนยันใช่หรือไม่?
+  uninstall-title: ถอนการติดตั้ง Config
+  uninstall-success: ถอนการติดตั้งส่วนขยาย {extensionName} แล้ว
+  activity-flow-editor:
+    add-status: เพิ่มสถานะใหม่ในลำดับงาน
+    no-status: ยังไม่ได้ใส่สถานะ
+    overwrite: จะเขียนทับสถานะที่มีอยู่!
+    overwrite-text: มีสถานะ {statusName} อยู่แล้วในลำดับงานนี้ ถ้าดำเนินการต่อ สถานะเดิมจะถูกเขียนทับ ต้องการเขียนทับสถานะ {statusName} เดิมหรือไม่?
+    overwrite-button: ใช่ เขียนทับ!
+    remove: ลบสถานะ
+    remove-text: ยืนยันลบสถานะนี้ใช่หรือไม่? กิจกรรมและเงื่อนไขที่เกี่ยวข้องจะถูกลบไปด้วย
+    delete-button: ใช่ ลบ
+    unable-warning: '{status} ต้องอยู่ในลำดับนี้ ย้ายไม่ได้'
+    order-warning: สถานะ สร้างแล้ว ต้องเป็นลำดับแรกของลำดับงานเสมอ
+    title: ลำดับกิจกรรม
+    message: ใช้กำหนดสถานะการติดตามแต่ละแบบของออเดอร์ประเภทนี้ และตั้งเงื่อนไขของลำดับกิจกรรมได้
+    order-flow: ลำดับงานออเดอร์
+    waypoint-flow: ลำดับงานจุดแวะ
+    new-activity: กิจกรรมใหม่
+    activity-details: รายละเอียดกิจกรรม
+    logic-stack: ชุดเงื่อนไข
+    add-logic: เพิ่มเงื่อนไข
+    select-field: เลือกฟิลด์
+    select-operator: เลือกตัวดำเนินการ
+    enter-value: ใส่ค่าที่จะเปรียบเทียบ
+    no-logic: ยังไม่มีเงื่อนไข
+  details-editor:
+    success: ติดตั้งแล้ว
+    key-text: ส่ง key นี้ในประเภทออเดอร์เพื่อใช้ Config นี้
+    namespace-text: Namespace ที่ไม่ซ้ำของส่วนขยายนี้
+    id: ID ส่วนขยาย
+    id-text: ID ที่ไม่ซ้ำของส่วนขยายนี้
+    version: เวอร์ชันส่วนขยาย
+    version-text: เวอร์ชันของส่วนขยายนี้
+    clone: คัดลอก Config
+    uninstall: ถอนการติดตั้ง Config
+    delete: ลบ Config
+  entities-editor:
+    warning-message: ยังไม่ได้ใส่ชื่อ key ของ Meta Field
+    title: รายการสินค้า
+    message: กำหนดรายการสินค้าแต่ละแบบที่เลือกได้ในออเดอร์ประเภทนี้ ใช้เป็นแม่แบบเพื่อสร้างออเดอร์เองได้เร็วขึ้น
+    type: ประเภทรายการ
+    add-meta: เพิ่ม Meta Field
+  fields-editor:
+    text-field: ช่องข้อความ
+    boolean: ใช่/ไม่ใช่
+    boolean-text: ให้ผู้ใช้ติ๊กช่องเพื่อเลือกจริงหรือเท็จ
+    dropdown: รายการแบบเลือก
+    dropdown-text: ให้ผู้ใช้เลือกหนึ่งตัวเลือกจากรายการ
+    datetime: ตัวเลือกวันเวลา
+    datetime-text: ให้ผู้ใช้เลือกวันและเวลา
+    port: ตัวเลือกท่าเรือ
+    port-text: ให้ผู้ใช้เลือกท่าเรือ
+    vessel: ตัวเลือกเรือ
+    vessel-text: ให้ผู้ใช้เลือกเรือ
+    warning-message: ยังไม่ได้ใส่ชื่อกลุ่ม
+    field-title: Meta Field
+    new-field: ฟิลด์กำหนดเองใหม่
+    new-custom-field: กลุ่มฟิลด์กำหนดเองใหม่
+    field-text: กำหนดช่องกรอกข้อมูลเองที่จะใช้กับออเดอร์
+    custom-field-group: กลุ่มฟิลด์กำหนดเอง
+    default-field: ฟิลด์เริ่มต้น
+    custom-field: ฟิลด์กำหนดเอง
+    type: ประเภทฟิลด์
+    select-type: เลือกประเภทฟิลด์
+    add-option: เพิ่มตัวเลือก
+  select-message: เลือก Order Config ที่จะแก้ไข หรือคลิก "Config ใหม่" เพื่อสร้างใหม่
+  new-config: Config ใหม่
+  loading-configuration: กำลังโหลด Order Config...
+  select-order: เลือก Order Config
+  save-changes: บันทึกการเปลี่ยนแปลง
+  details: รายละเอียด
+  fields: ฟิลด์กำหนดเอง
+  flow: ลำดับกิจกรรม
+  entities: รายการสินค้า
+order-list-overlay:
+  search: ค้นหาออเดอร์...
+  selected: เลือกแล้ว
+  assign: มอบหมายให้คนขับ...
+  cancel: ยกเลิกออเดอร์...
+  delete: ลบออเดอร์...
+  dispatch: Dispatch ออเดอร์...
+  actions: การดำเนินการ
+  create-order: สร้างออเดอร์ใหม่...
+  create-fleet: สร้าง Fleet ใหม่...
+  active-orders: ออเดอร์ที่กำลังวิ่ง
+  unassigned-orders: ออเดอร์ที่ยังไม่มอบหมาย
+route-list:
+  expand: แตะเพื่อขยาย
+  collapse: แตะเพื่อย่อ
+  more-waypoints: จุดแวะเพิ่มเติม
+settings:
+  dispatch:
+    title: Dispatch ของ Fleet-Ops
+    adhoc-orders: ค่าเริ่มต้นการ Dispatch แบบ Ad-hoc
+    intro: ค่าเริ่มต้นทั้งบริษัทสำหรับการเสนอออเดอร์ให้คนขับที่อยู่ใกล้
+    override-banner: ใช้กับทุก Order Config ที่เสนอออเดอร์ให้คนขับใกล้เคียงและเว้นค่าเหล่านี้ว่างไว้ Order Config ตั้งค่าของตัวเองได้ที่แท็บ นโยบาย
+    override-count: '{count, plural, one {มี # Config ที่ตั้งค่าเอง} other {มี # Config ที่ตั้งค่าเอง}}'
+    strategy: วิธีเสนอออเดอร์
+    strategy-placeholder: คนขับทีละคน
+    strategy-help-text: 'ทีละคน: เสนอให้คนขับที่ใกล้ที่สุดก่อน ถ้าปฏิเสธหรือหมดเวลาจึงเสนอคนถัดไป พร้อมกัน: เสนอให้คนขับใกล้เคียงทุกคน คนแรกที่รับได้งาน'
+    offer-timeout: เวลาให้คนขับแต่ละคนตอบรับ
+    offer-timeout-placeholder: '20'
+    offer-timeout-help-text: ระหว่าง 10 ถึง 120 เว้นว่างเพื่อใช้ 20 วินาที
+    offer-timeout-error: ใส่ตัวเลขระหว่าง 10 ถึง 120
+    ping-radius: รัศมีค้นหารอบจุดรับ
+    ping-radius-placeholder: '6000'
+    ping-radius-help-text: คนขับที่อยู่ไกลกว่านี้จะไม่ได้รับข้อเสนอ เว้นว่างเพื่อใช้ 6,000 ม.
+    seconds: วินาที
+    metres: เมตร
+    section-configs: Order Config ที่เสนอออเดอร์ให้คนขับ
+    uses-defaults: ใช้ค่าเริ่มต้นเหล่านี้
+    sets-own: 'ตั้งค่าเอง: {settings}'
+    setting-strategy: วิธีเสนอออเดอร์
+    setting-offer_timeout: เวลาตอบรับ
+    setting-radius: รัศมีค้นหา
+    saved: บันทึกการตั้งค่า Dispatch แล้ว
+  telematics:
+    telematics-settings: ตั้งค่า Telematics
+    intro: เลือกระยะเวลาเก็บเหตุการณ์อุปกรณ์และประวัติตำแหน่งขององค์กร ภายในขีดจำกัดที่ผู้ดูแลระบบกำหนด
+    use-system-default: ใช้ค่าเริ่มต้นของระบบ
+    history-policy-maximum: ผู้ดูแลระบบอนุญาตให้เก็บประวัติได้สูงสุด {days} วัน เก็บไม่จำกัดไม่ได้
+    history-policy-unlimited: ผู้ดูแลระบบอนุญาตให้เก็บประวัติไม่จำกัด ตั้งระยะเก็บเป็น 0 เพื่อเก็บตลอดไป
+    device-events: การเก็บเหตุการณ์อุปกรณ์
+    event-retention-days: เก็บเหตุการณ์อุปกรณ์ (วัน)
+    event-retention-days-help: เหตุการณ์ที่เก่ากว่านี้จะถูกลบถาวร ใช้กับทั้งการอัปเดต Telemetry และการแจ้งเตือนจากผู้ให้บริการ
+    event-compact-after-days: ลบข้อมูลดิบหลังจาก (วัน)
+    event-compact-after-days-help: เหตุการณ์ที่เก่ากว่านี้ยังเก็บประเภท ความรุนแรง ตำแหน่ง และข้อมูลที่แปลงแล้ว แต่ข้อมูลดิบจากผู้ให้บริการจะถูกลบ ข้อมูลดิบเป็นส่วนใหญ่ของขนาดเหตุการณ์
+    compaction-warning: ข้อมูลดิบจะถูกลบเฉพาะจากเหตุการณ์ที่ยังเก็บอยู่ ตั้งค่านี้ให้น้อยกว่าระยะเก็บเหตุการณ์ หรือตั้งเป็น 0 เพื่อปิด
+    positions: การเก็บประวัติตำแหน่ง
+    position-retention-days: เก็บตำแหน่ง (วัน)
+    position-retention-days-help: ประวัติตำแหน่งรถและหางพ่วงที่เก่ากว่านี้จะถูกลบถาวร การเล่นเส้นทางย้อนหลังดูได้ไกลสุดเท่านี้
+    inbox: การเก็บกล่องรับข้อมูลและประวัติการซิงก์
+    processed-retention-hours: เก็บข้อมูลที่ประมวลผลแล้ว (ชั่วโมง)
+    processed-retention-hours-help: ข้อมูลดิบจากผู้ให้บริการจะเก็บแบบเข้ารหัสจนประมวลผลเสร็จ และเก็บต่ออีกช่วงสั้นๆ เพื่อเล่นซ้ำและวินิจฉัย แต่ละชุดอาจใหญ่เกือบหนึ่งเมกะไบต์
+    quarantine-retention-days: เก็บข้อมูลที่ถูกกักไว้ (วัน)
+    quarantine-retention-days-help: ชุดข้อมูลที่ประมวลผลไม่ได้จะเก็บไว้ให้ตรวจและเล่นซ้ำได้นานเท่านี้
+    sync-run-retention-days: เก็บข้อมูลวินิจฉัยการซิงก์ (วัน)
+    sync-run-retention-days-help: บันทึกการซิงก์หนึ่งแถวต่อการเชื่อมต่อต่อการดึงข้อมูล การซิงก์ที่กำลังทำงานจะไม่ถูกลบ
+    activity-logging: บันทึกกิจกรรม Telemetry
+    log-telemetry-activity: บันทึกกิจกรรม Telemetry
+    log-telemetry-activity-help: บันทึกการบันทึกอุปกรณ์ เหตุการณ์ และรถที่มาจาก Telemetry ลงในบันทึกกิจกรรม ปิดเป็นค่าเริ่มต้น เพราะทุกการดึงข้อมูลจะเพิ่มหลายแถวต่ออุปกรณ์
+    storage-usage: พื้นที่จัดเก็บ Telematics ของระบบ
+    table: ตาราง
+    rows: แถว
+    estimated-rows: '{count} (ประมาณ)'
+    estimated-size: ขนาดโดยประมาณ
+    oldest: แถวเก่าที่สุด
+    not-available: ไม่มีข้อมูล
+    raw-payload-rows: '{count} แถวยังมีข้อมูลดิบ {compactable} แถวลบข้อมูลดิบได้ตอนนี้'
+    refresh: รีเฟรช
+    run-cleanup: ล้างข้อมูลทั้งระบบ
+    run-cleanup-confirm: จะเข้าคิวล้างข้อมูล Telematics ของทุกองค์กร ตามนโยบายระบบที่บันทึกไว้และค่าการเก็บประวัติของแต่ละองค์กร ข้อมูลที่หมดอายุจะถูกลบถาวรและกู้คืนไม่ได้ ดำเนินการต่อ?
+    cleanup-queued: เข้าคิวล้างข้อมูล Telematics ของทุกองค์กรแล้ว ข้อมูลการใช้พื้นที่จะรีเฟรชในไม่ช้า การล้างอาจยังทำงานอยู่
+    cleanup-unavailable: ยืนยันการล้างข้อมูล Telematics ทั้งระบบไม่ได้ ลองอีกครั้ง
+    usage-unavailable: โหลดข้อมูลการใช้พื้นที่ไม่ได้ กดรีเฟรชเพื่อลองใหม่
+    space-reclaim-note: รวมข้อมูล Telematics ทั้งระบบ จำนวนแถวที่ระบุว่าประมาณใช้สถิติของฐานข้อมูล ขนาดรวมข้อมูลตารางและดัชนี การลบจะคืนพื้นที่ให้ฐานข้อมูลใช้ซ้ำ แต่พื้นที่ดิสก์จริงอาจไม่ลดลงทันที
+    settings-saved: บันทึกการตั้งค่า Telematics แล้ว
+    settings-unavailable: โหลดการตั้งค่า Telematics ไม่ได้ ลองอีกครั้ง
+    tables:
+      device_events: เหตุการณ์อุปกรณ์
+      positions: ตำแหน่ง
+      telematic_deliveries: กล่องรับข้อมูล
+      telematic_sync_runs: ประวัติการซิงก์
+  avatar-management: จัดการไอคอน
+  custom-fields: ฟิลด์กำหนดเอง
+  notifications:
+    fleet-ops-notification-settings: ตั้งค่าการแจ้งเตือน Fleet-Ops
+    fleet-ops-notifications: การแจ้งเตือน Fleet-Ops
+    configure-notifications: ตั้งค่าการแจ้งเตือน
+    select-notifiables: เลือกผู้รับการแจ้งเตือน
+  routing:
+    fleet-ops-routing-settings: ตั้งค่าการวางเส้นทาง Fleet-Ops
+    fleet-ops-routing: การวางเส้นทาง Fleet-Ops
+    configure-routing: ตั้งค่าการวางเส้นทาง
+    select-routing-service: เลือกบริการวางเส้นทาง
+    routing-service: บริการวางเส้นทาง
+    routing-service-help-text: เลือกบริการที่วาดเส้นทางบนแผนที่และวัดระยะทาง เวลา และ ETA แบบสดของแต่ละออเดอร์
+    select-routing-distance-unit: เลือกหน่วยระยะทาง
+    routing-distance-unit: หน่วยระยะทาง
+    routing-distance-unit-help-text: หน่วยที่ใช้คำนวณระยะทางและเส้นทาง
+  map:
+    fleet-ops-map-settings: ตั้งค่าแผนที่ Fleet-Ops
+    fleet-ops-map: แผนที่ Fleet-Ops
+    configure-map: ตั้งค่าแผนที่
+    map-provider: ผู้ให้บริการแผนที่
+    map-provider-help-text: เลือกระบบแผนที่ที่ใช้แสดงแผนที่ปฏิบัติการแบบสด Leaflet ใช้แผนที่ OpenStreetMap ไม่ต้องใช้ API key ส่วน Google Maps ต้องใช้ Google Maps JavaScript API key ที่ถูกต้อง
+    select-map-provider: เลือกผู้ให้บริการแผนที่
+    leaflet-tile-url: URL ผู้ให้บริการ Tile ของ Leaflet
+    leaflet-tile-url-help-text: URL แม่แบบ XYZ tile (ไม่บังคับ) สำหรับแผนที่ Leaflet เว้นว่างเพื่อใช้ OpenStreetMap ที่ไม่ต้องใช้ API key ใช้เพื่อชี้ Leaflet ไปยังผู้ให้บริการ tile ของคุณเอง รวมถึงแบบที่ต้องใช้ key เช่น CARTO
+    leaflet-dark-tile-url: URL ผู้ให้บริการ Tile โหมดมืดของ Leaflet
+    leaflet-dark-tile-url-help-text: URL ผู้ให้บริการ tile (ไม่บังคับ) ที่ใช้เมื่อ console อยู่ในโหมดมืด เว้นว่างเพื่อใช้ URL ด้านบน หรือ OpenStreetMap
+    google-maps-map-type: ประเภทแผนที่
+    google-maps-map-type-help-text: รูปแบบแผนที่เริ่มต้นเมื่อใช้ Google Maps
+    select-map-type: เลือกประเภทแผนที่
+    show-traffic-layer: แสดงเลเยอร์การจราจร
+    show-traffic-layer-help-text: แสดงสภาพจราจรแบบเรียลไทม์บน Google Maps
+    show-transit-layer: แสดงเลเยอร์ขนส่งสาธารณะ
+    show-transit-layer-help-text: แสดงเส้นทางขนส่งสาธารณะบน Google Maps
+    settings-saved: บันทึกการตั้งค่าแผนที่สำเร็จ
+    settings-save-failed: บันทึกการตั้งค่าแผนที่ไม่สำเร็จ ลองอีกครั้ง
+    default-view: มุมมองแผนที่เริ่มต้น
+    default-view-help-text: ตำแหน่งที่แผนที่สดและวิดเจ็ตแผนที่ Fleet เปิดขึ้น ใช้จุดกึ่งกลางเริ่มต้นแทนตำแหน่งของเบราว์เซอร์ ถ้าไม่ตั้ง แผนที่จะเปิดใกล้ออเดอร์ที่กำลังวิ่งหรือตำแหน่งเบราว์เซอร์ แล้วจึงเป็นประเทศของบริษัท
+    default-center: จุดกึ่งกลางเริ่มต้น
+    default-center-help-text: ใส่พิกัดหรือเลือกจุดบนแผนที่ เว้นว่างเพื่อหาตำแหน่งผู้ใช้อัตโนมัติ
+    clear-default-center: ล้างจุดกึ่งกลางเริ่มต้น
+    default-zoom: ระดับซูมเริ่มต้น
+    default-zoom-help-text: ระดับซูม 1 (ทั้งโลก) ถึง 20 (ระดับถนน) ใช้คู่กับจุดกึ่งกลางเริ่มต้น ค่าเริ่มต้นคือ 12
+    fit-to-vehicles: ซูมให้เห็นรถทั้งหมด
+    fit-to-vehicles-help-text: เมื่อเปิดแผนที่ ให้แสดงรถทุกคันที่มีตำแหน่ง ถ้ายังไม่มีรถคันไหนมีตำแหน่ง จะใช้จุดกึ่งกลางเริ่มต้น
+  navigator-app:
+    navigator-app-settings: ตั้งค่าแอป Navigator
+  payments:
+    payments: การชำระเงิน
+    payment-settings: ตั้งค่าการชำระเงิน
+    account-not-setup-for-payments: บัญชีของคุณยังไม่ได้ตั้งค่าให้รับชำระเงิน
+    to-accept-payments: หากต้องการรับและประมวลผลการชำระเงิน ต้องลงทะเบียนผ่าน Stripe ให้เสร็จ
+    system-stripe-not-setup: ระบบยังรับหรือประมวลผลการชำระเงินไม่ได้ ติดต่อผู้ดูแลระบบเพื่อตั้งค่า
+    loading-settings: กำลังโหลดการตั้งค่าการชำระเงิน...
+    onboard:
+      header-title: ลงทะเบียนรับชำระเงิน
+      title-completed: ลงทะเบียนสำเร็จ!
+      title-incomplete: ลงทะเบียนให้เสร็จเพื่อรับชำระเงิน
+      subtitle-completed: ลงทะเบียนสำเร็จ ตอนนี้รับชำระเงินจากลูกค้าและบุคคลภายนอกได้แล้ว
+      subtitle-incomplete: ต้องลงทะเบียนให้เสร็จก่อนจึงจะรับชำระเงินค่าออเดอร์ได้
+      button-continue: ดำเนินการต่อ
+      button-start: เริ่มลงทะเบียน
+      button-in-progress: กำลังลงทะเบียน
+  scheduling:
+    scheduling-settings: ตั้งค่าตารางงาน
+    materialisation: การสร้างกะ
+    horizon-days: สร้างล่วงหน้า (วัน)
+    horizon-days-help: จำนวนวันล่วงหน้าที่จะสร้างกะเมื่อใช้แม่แบบตาราง
+    default-shift-duration: ระยะเวลากะเริ่มต้น (ชั่วโมง)
+    default-shift-duration-help: จำนวนชั่วโมงเริ่มต้นของกะเมื่อไม่ได้ระบุเวลาจบ
+    hours-of-service: ขีดจำกัดชั่วโมงทำงาน
+    hos-daily-limit: ขีดจำกัดการขับต่อวัน (ชั่วโมง)
+    hos-daily-limit-help: จำนวนชั่วโมงสูงสุดที่คนขับขับได้ในหนึ่งวัน
+    hos-weekly-limit: ขีดจำกัดการขับต่อสัปดาห์ (ชั่วโมง)
+    hos-weekly-limit-help: จำนวนชั่วโมงสูงสุดที่คนขับขับได้ในช่วง 7 วันต่อเนื่อง
+    behaviour: การทำงาน
+    auto-activate-schedule: เปิดใช้ตารางอัตโนมัติ
+    auto-activate-schedule-help: เปลี่ยนตารางจากฉบับร่างเป็นใช้งานอัตโนมัติเมื่อสร้างกะแรก
+    notify-drivers: แจ้งคนขับเมื่อกะเปลี่ยน
+    notify-drivers-help: ส่ง Push notification ถึงคนขับเมื่อกะถูกสร้าง อัปเดต หรือลบ
+    schedule-templates: แม่แบบตารางที่ใช้ซ้ำได้
+    no-templates: ยังไม่มีแม่แบบ
+    new-template: แม่แบบใหม่
+    edit-template: แก้ไขแม่แบบ
+    delete-template: ลบแม่แบบ
+    delete-template-confirm: ยืนยันลบแม่แบบ "{name}" ใช่หรือไม่? ตารางที่มีอยู่จะไม่ได้รับผลกระทบ
+    template-deleted: ลบแม่แบบสำเร็จ
+    settings-saved: บันทึกการตั้งค่าตารางงานแล้ว
+maintenance-schedule:
+  actions:
+    trigger-now: สร้างใบสั่งงานตอนนี้
+    pause: หยุดกำหนดการชั่วคราว
+    resume: ใช้กำหนดการต่อ
+work-order:
+  actions:
+    view: ดูใบสั่งงาน
+    edit: แก้ไขใบสั่งงาน
+    delete: ลบใบสั่งงาน
+maintenance:
+  actions:
+    view: ดูบันทึกการซ่อมบำรุง
+    edit: แก้ไขบันทึกการซ่อมบำรุง
+    delete: ลบบันทึกการซ่อมบำรุง
+equipment:
+  actions:
+    view: ดูอุปกรณ์เสริม
+    edit: แก้ไขอุปกรณ์เสริม
+    delete: ลบอุปกรณ์เสริม
+part:
+  actions:
+    view: ดูอะไหล่
+    edit: แก้ไขอะไหล่
+    delete: ลบอะไหล่
+orchestrator:
+  settings-title: ตั้งค่า Orchestrator
+  engine-settings: Engine การจัดสรร
+  active-engine: Engine การจัดสรรที่ใช้
+  active-engine-help: เลือก Engine ที่ใช้จัดสรรออเดอร์ให้คนขับและรถ
+  auto-allocate-on-create: จัดสรรอัตโนมัติเมื่อสร้างออเดอร์
+  auto-allocate-on-create-label: จัดสรรอัตโนมัติทุกครั้งที่มีออเดอร์ใหม่
+  auto-reallocate-on-complete: จัดสรรใหม่อัตโนมัติเมื่อส่งเสร็จ
+  auto-reallocate-on-complete-label: จัดสรรใหม่เมื่อส่งเสร็จ เพื่อใช้ความจุที่ว่างลง
+  constraint-settings: ข้อจำกัดการจัดสรร
+  max-travel-time: เวลาเดินทางสูงสุด (วินาที)
+  max-travel-time-help: เวลาเดินทางสูงสุดเป็นวินาทีที่มอบหมายให้คนขับได้ ใส่ 0 เพื่อไม่จำกัด
+  balance-workload: เกลี่ยงาน
+  balance-workload-label: กระจายออเดอร์ให้คนขับและรถที่ว่างอย่างเท่าๆ กัน
+  settings-saved: บันทึกการตั้งค่า Orchestrator แล้ว
+  workbench-title: Orchestrator Workbench
+  unassigned-orders: ออเดอร์ที่ยังไม่มอบหมาย
+  no-unassigned-orders: ไม่มีออเดอร์ค้างมอบหมาย เรียบร้อยแล้ว!
+  run-allocation: รัน Orchestrator
+  running: กำลังรัน…
+  plan-ready: แผนพร้อมแล้ว ตรวจสอบแล้ว Commit
+  commit-plan: Commit แผน
+  discard-plan: ทิ้ง
+  committed: Commit แล้ว มอบหมาย {count} ออเดอร์
+  committed-badge: Commit แผนแล้ว
+  overridden: แก้ไขเอง
+  on-shift: อยู่ในกะ
+  empty-state-title: ยังไม่มีแผน
+  empty-state-body: คลิก "รัน Orchestrator" เพื่อสร้างแผนมอบหมายที่เหมาะสมสำหรับออเดอร์ที่ยังไม่มอบหมาย
+  unassigned-warning: มีบางออเดอร์ที่มอบหมายไม่ได้ เพราะความจุรถไม่พอหรือไม่มีคนขับในกะ
+  run-orchestration: รัน Orchestrator
+  options: ตัวเลือก
+  mode: โหมด
+  mode-allocate: จัดสรรออเดอร์
+  mode-optimize: ปรับเส้นทาง
+  engine: Engine
+  allocation-strategy: กลยุทธ์การจัดสรร
+  allocation-strategy-route-aware: เส้นทาง + ความจุ
+  allocation-strategy-capacity-only: ความจุอย่างเดียว
+  vehicle-packing: การจัดรถ
+  vehicle-packing-minimize-vehicles: ใช้รถให้น้อยที่สุด
+  vehicle-packing-balanced: เกลี่ยเท่ากัน
+  respect-skills: คำนึงถึงทักษะ
+  respect-capacity: คำนึงถึงความจุ
+  return-to-depot: กลับคลัง
+  unassigned-count: 'ยังไม่มอบหมาย:'
+  clear: ล้าง
+  search-orders: ค้นหาออเดอร์…
+  filter-all: ทั้งหมด
+  filter-scheduled: กำหนดเวลาแล้ว
+  filter-urgent: ด่วน
+  filter-today: วันนี้
+  filter-unassigned: ยังไม่มอบหมาย
+  filter-imported: นำเข้า
+  advanced-filters: ตัวกรองขั้นสูง
+  filter-country: ประเทศ
+  filter-type: ประเภทออเดอร์
+  filter-status: สถานะ
+  filter-date: วันที่กำหนด
+  filter-country-placeholder: ทุกประเทศ
+  filter-type-placeholder: ทุกประเภท
+  filter-status-placeholder: ทุกสถานะ
+  filter-date-placeholder: ทุกวันที่
+  clear-filters: ล้างตัวกรอง
+  no-address: ไม่มีที่อยู่
+  selected: เลือกแล้ว
+  clear-selection: ล้าง
+  show-orders: แสดงรายการออเดอร์
+  hide-orders: ซ่อนรายการออเดอร์
+  show-drivers: แสดงทรัพยากร
+  hide-drivers: ซ่อนทรัพยากร
+  available-drivers: คนขับที่ว่าง
+  available-vehicles: รถที่ว่าง
+  no-available-drivers: ตอนนี้ไม่มีคนขับว่าง
+  no-available-vehicles: ตอนนี้ไม่มีรถว่าง
+  no-search-results: ไม่พบผลลัพธ์ที่ตรงกับคำค้น
+  search-drivers: ค้นหาคนขับ...
+  search-vehicles: ค้นหารถ...
+  no-position: ไม่มีตำแหน่ง
+  filter-online: ออนไลน์
+  filter-offline: ออฟไลน์
+  filter-on-shift: มีงาน
+  filter-on-job: มีงาน
+  filter-active: ใช้งาน
+  filter-no-driver: ไม่มีคนขับ
+  proposed-routes: เส้นทางที่เสนอ
+  stops: จุด
+  route: เส้นทาง
+  drivers-selected: คนขับที่เลือก
+  vehicles-selected: รถที่เลือก
+  drop-orders-here: วางออเดอร์ที่นี่
+  import-orders: นำเข้าออเดอร์
+  import-step-upload: อัปโหลด
+  import-step-map: จับคู่คอลัมน์
+  import-step-preview: ตรวจสอบและนำเข้า
+  drop-file-here: วางไฟล์ CSV หรือ Excel ที่นี่
+  or: หรือ
+  browse-file: เลือกไฟล์
+  accepted-formats: 'รองรับ: .csv, .xlsx, .xls'
+  remove-file: ลบไฟล์
+  download-template: ดาวน์โหลดแม่แบบนำเข้า
+  download-template-desc: ใช้แม่แบบเพื่อให้นำเข้าข้อมูลได้ถูกต้อง
+  download: ดาวน์โหลด
+  next: ถัดไป
+  back: ย้อนกลับ
+  map-columns-title: จับคู่คอลัมน์
+  map-columns-desc: จับคู่คอลัมน์ใน
+  col-target-field: ฟิลด์ปลายทาง
+  col-your-spreadsheet: สเปรดชีตของคุณ
+  mapped: จับคู่แล้ว
+  mapping-required-hint: ต้องจับคู่ ที่อยู่จุดส่ง บรรทัด 1 ก่อนจึงจะไปต่อได้
+  select-column: — ข้าม —
+  data-preview: 'ตัวอย่าง 3 ออเดอร์แรก:'
+  preview-import: ตรวจสอบการนำเข้า
+  preview-desc: '{count} ออเดอร์พร้อมนำเข้า'
+  errors: ข้อผิดพลาด
+  all-rows-valid: ทุกแถวถูกต้อง
+  validation-warning: มี {count} ออเดอร์ที่ผิดพลาดและจะถูกข้าม
+  import-confirm: ยืนยันการนำเข้า
+  importing: กำลังนำเข้า…
+  col-pickup: จุดรับ
+  col-dropoff: จุดส่ง
+  col-scheduled: กำหนดเวลา
+  col-weight: น้ำหนัก
+  col-customer: ลูกค้า
+  col-status: สถานะ
+  col-preview-ref: อ้างอิง / ID
+  col-preview-type: ประเภท
+  col-preview-facilitator: ผู้ประสานงาน
+  col-preview-vehicle: รถ
+  col-preview-driver: คนขับ
+  col-preview-entities: รายการ
+  col-preview-multi-stop: '{count} จุด'
+  col-preview-pickup-dropoff: จุดรับและจุดส่ง
+  col-preview-pickup-dropoff-stops: รับ-ส่ง + {count} จุด
+  error: ผิดพลาด
+  valid: ถูกต้อง
+  import-success: นำเข้า {count} ออเดอร์สำเร็จ
+  no-valid-rows: ไม่มีออเดอร์ที่ถูกต้องให้นำเข้า
+  invalid-file-type: อัปโหลดไฟล์ .csv, .xlsx หรือ .xls
+  parse-error: อ่านไฟล์ไม่ได้ ตรวจสอบรูปแบบไฟล์
+  read-error: อ่านไฟล์ไม่ได้
+  empty-file: ไฟล์ดูเหมือนจะว่างเปล่า
+  missing-dropoff: ต้องมีที่อยู่จุดส่ง บรรทัด 1
+  stops-count: '{count} จุด'
+  pickup: จุดรับ
+  dropoff: จุดส่ง
+  scheduled: กำหนดเวลา
+  customer: ลูกค้า
+  driver-assigned: คนขับที่มอบหมาย
+  vehicle-assigned: รถที่มอบหมาย
+  no-vehicle-assigned: ยังไม่ได้มอบหมายรถ
+  no-driver-assigned: ยังไม่ได้มอบหมายคนขับ
+  created: สร้างเมื่อ
+  phases: Phase
+  phases-description: สร้างการรันหลายขั้นตอน แต่ละ Phase ทำงานตามโหมดที่กำหนดตามลำดับ
+  add-phase: เพิ่ม Phase
+  no-phases: ยังไม่มี Phase เพิ่ม Phase เพื่อเริ่มต้น
+  phase-n: Phase {n}
+  phase-label: ชื่อ Phase
+  save-phase: บันทึก Phase
+  select-phase-to-edit: เลือก Phase เพื่อแก้ไขการตั้งค่า
+  run-phases: รัน {count} Phase
+  include-order-statuses: สถานะออเดอร์ที่รวม
+  constraints: ข้อจำกัด
+  auto-commit: Commit อัตโนมัติหลังจบ Phase
+  mode-assign-vehicles: มอบหมายรถ
+  mode-assign-drivers: มอบหมายคนขับ
+  mode-optimize-routes: ปรับเส้นทาง
+  status-created: สร้างแล้ว
+  status-dispatched: จ่ายงานแล้ว
+  status-started: เริ่มแล้ว
+  card-fields: ฟิลด์บนการ์ด
+  card-fields-description: เลือกฟิลด์ที่แสดงบนการ์ดออเดอร์ใน Workbench จัดกลุ่มตาม Order Config เพื่อปรับมุมมองของแต่ละประเภทออเดอร์
+  card-fields-saved: บันทึกฟิลด์บนการ์ดออเดอร์แล้ว
+  save-card-fields: บันทึกฟิลด์บนการ์ด
+  standard-fields: ฟิลด์มาตรฐาน
+  standard-fields-description: ฟิลด์เหล่านี้แสดงบนการ์ดออเดอร์ทุกใบ ไม่ว่าประเภทใด
+  config-fields-description: ฟิลด์กำหนดเองของออเดอร์ {name}
+  meta-fields: Meta Field
+  meta-fields-description: Metadata แบบอิสระที่ส่งมาจากระบบที่เชื่อมต่อ
+  no-custom-fields: Order Config นี้ยังไม่มีฟิลด์กำหนดเอง
+  field-tracking: เลขติดตามพัสดุ
+  field-status: สถานะ
+  field-scheduled-at: กำหนดเวลา
+  field-customer: ลูกค้า
+  field-type: ประเภท
+  field-notes: หมายเหตุ
+  field-priority: ความสำคัญ
+  field-dropoff: ที่อยู่จุดส่ง
+  field-pickup: ที่อยู่จุดรับ
+  filter-available: ว่าง
+  vehicle: รถ
+  expand-all: ขยายทั้งหมด
+  tab-routes: เส้นทาง
+  tab-timeline: ไทม์ไลน์
+  collapse-all: ย่อทั้งหมด
+  collapse-route: ย่อเส้นทาง
+  expand-route: ขยายเส้นทาง
+  no-plan: รัน Orchestrator เพื่อดูแผนที่เสนอ
+  unassigned-description: ออเดอร์เหล่านี้มอบหมายไม่ได้ จะค้างอยู่ในคิวเพื่อจัดสรรใหม่
+  unassigned: ยังไม่มอบหมาย
+  vehicles: รถ
+  drivers: คนขับ
+  orders: ออเดอร์
+  cancel: ยกเลิก
+  no-vehicles: ไม่พบรถ
+  no-drivers: ไม่พบคนขับ
+  no-orders: ไม่พบออเดอร์
+  expand-panel: ขยายแผง
+  collapse-panel: ย่อแผง
+  run-failed-title: ไม่มีการมอบหมาย
+  try-again: ลองใหม่
+  change-resources: เปลี่ยนทรัพยากร
+  no-assignments-returned: Orchestrator มอบหมายออเดอร์ไม่ได้เลย ตรวจสอบว่ารถมีความจุพอและคนขับอยู่ในกะ
+  stop-type-pickup: จุดรับ
+  stop-type-dropoff: จุดส่ง
+  pod-required: POD
+  no-pod: ไม่มี POD
+inspection:
+  form:
+    overview: ภาพรวม
+    submissions: การส่งแบบฟอร์ม
+    no-vehicle: ไม่มีรถ
+    no-submissions: ยังไม่มีการส่ง
+    no-submissions-description: การตรวจสภาพที่ส่งด้วยแบบฟอร์มนี้จะแสดงที่นี่
+    details: รายละเอียดแบบฟอร์ม
+    name: ชื่อ
+    name-placeholder: ตรวจสภาพรถประจำวัน
+    type: ประเภท
+    status: สถานะ
+    description: คำอธิบาย
+    description-placeholder: การตรวจนี้ครอบคลุมอะไรบ้าง
+    builder: ตัวสร้างแบบฟอร์ม
+    fields: ฟิลด์
+    published: เผยแพร่แล้ว
+    structure: โครงสร้างแบบฟอร์ม
+    loading-structure: กำลังโหลดโครงสร้างแบบฟอร์ม...
+    no-structure: แบบฟอร์มนี้ยังไม่มีกลุ่มฟิลด์
+    settings: ตั้งค่า
+    type-placeholder: เลือกประเภทการตรวจของแบบฟอร์มนี้
+    status-placeholder: เลือกสถานะ
+    setting-create-issue: เปิดบันทึกข้อบกพร่องเมื่อมีรายการไม่ผ่าน
+    setting-create-issue-help: การตรวจที่ไม่ผ่านจะแจ้งปัญหาของรถ เพื่อให้มีที่บันทึกความผิดปกติ
+    setting-create-work-order: เปิดใบสั่งงานเมื่อมีรายการไม่ผ่าน
+    setting-create-work-order-help: รายการที่ไม่ผ่านจะเป็นเช็กลิสต์ในใบสั่งงานของอู่ ต้องเปิดใช้ระบบอู่ก่อน
+    setting-require-signature: บังคับให้คนขับเซ็นชื่อ
+    setting-require-signature-help: แอปคนขับจะส่งไม่ได้ถ้าไม่มีลายเซ็น ถ้าต้องการให้อยู่ตำแหน่งเฉพาะ ให้เพิ่มฟิลด์ลายเซ็นในแบบฟอร์มแทน
+    legacy-checklist: เช็กลิสต์แบบเดิม
+    legacy-checklist-help: เช็กลิสต์จากเวอร์ชันแรก เก็บไว้แบบอ่านอย่างเดียว จะถูกย้ายเข้ากลุ่ม "Checklist" ของฟิลด์ผ่าน/ไม่ผ่าน
+    create: สร้างแบบฟอร์มตรวจสภาพ
+    created: สร้างแบบฟอร์มตรวจสภาพแล้ว
+    updated: อัปเดตแบบฟอร์มตรวจสภาพแล้ว
+  builder:
+    help: จัดกลุ่มสิ่งที่คนขับต้องตรวจ แล้วเพิ่มฟิลด์สำหรับแต่ละข้อ
+    loading: กำลังโหลดตัวสร้างแบบฟอร์ม...
+    new-group: กลุ่มฟิลด์ใหม่
+    new-field: ฟิลด์ใหม่
+    edit-field: 'แก้ไขฟิลด์: {label}'
+    save-field: บันทึกฟิลด์
+    untitled-group: กลุ่มไม่มีชื่อ
+    untitled-field: ฟิลด์ไม่มีชื่อ
+    group-name: ชื่อกลุ่ม
+    group-name-placeholder: ภายนอกรถ
+    group-description: คำอธิบายกลุ่ม
+    group-description-placeholder: กลุ่มนี้ครอบคลุมอะไร
+    grid-size: จำนวนคอลัมน์
+    move-up: เลื่อนขึ้น
+    move-down: เลื่อนลง
+    no-fields: กลุ่มนี้ยังไม่มีฟิลด์
+    empty-title: ยังไม่มีกลุ่มฟิลด์
+    empty-description: เพิ่มกลุ่มฟิลด์แรกเพื่อเริ่มสร้างแบบฟอร์มนี้
+    delete: ลบ
+    delete-group-title: ลบกลุ่มฟิลด์นี้?
+    delete-group-body: การลบกลุ่มจะลบทุกฟิลด์ในกลุ่มด้วย ย้อนกลับไม่ได้เมื่อบันทึกแบบฟอร์มแล้ว
+    delete-field-title: ลบฟิลด์นี้?
+    delete-field-body: การลบฟิลด์จะลบคำตอบทั้งหมดที่ส่งมาแล้วของฟิลด์นี้ด้วย ย้อนกลับไม่ได้เมื่อบันทึกแบบฟอร์มแล้ว
+  field:
+    label: ป้ายชื่อฟิลด์
+    label-placeholder: ไฟเบรก
+    name: ชื่อฟิลด์
+    name-help: ชื่อสำหรับระบบที่ใช้อ้างอิงฟิลด์นี้ จะเปลี่ยนตามป้ายชื่อจนกว่าคุณจะตั้งเอง
+    name-placeholder: brake-lights
+    type: ประเภทฟิลด์
+    description: คำอธิบายฟิลด์
+    description-placeholder: ต้องตรวจอะไร และแบบไหนถือว่าผ่าน
+    help-text: ข้อความช่วยเหลือ
+    help-text-placeholder: แสดงข้างฟิลด์ตอนกรอก
+    required: จำเป็นต้องกรอก
+    editable: แก้ไขได้
+    options: ตัวเลือกของฟิลด์
+    no-options: ยังไม่มีตัวเลือก
+    option-placeholder: เพิ่มตัวเลือก
+    add-option: เพิ่ม
+    unit: หน่วย
+    unit-help: แสดงข้างตัวเลข เช่น กม. หรือ ชั่วโมง
+    unit-placeholder: กม.
+    odometer-role: ฟิลด์นี้คือเลขไมล์
+    odometer-role-help: คำตอบจะถูกคัดลอกไปที่ช่องเลขไมล์ของการตรวจสภาพ
+    on-fail: เมื่อไม่ผ่าน
+    on-fail-help: คำตอบที่ไม่ผ่านหมายถึงอะไร และผู้ตรวจต้องใส่อะไรก่อนจึงจะยอมรับ
+    default-severity: ความรุนแรงเริ่มต้น
+    require-photo-on-fail: ต้องแนบรูปเมื่อไม่ผ่าน
+    require-comment-on-fail: ต้องใส่ความเห็นเมื่อไม่ผ่าน
+    unsafe-on-fail: ระบุว่ารถไม่ปลอดภัยเมื่อไม่ผ่าน
+    unsafe-on-fail-help: คำตอบที่ไม่ผ่านจะถือว่าไม่ปลอดภัยเป็นค่าเริ่มต้น ซึ่งคือข้อบกพร่องที่ต้องงดใช้รถ
+    instructions: คำแนะนำ
+    instructions-placeholder: วิธีตรวจข้อนี้ แสดงให้คนขับเห็น
+    column-span: จำนวนคอลัมน์
+  field-type:
+    pass-fail: ผ่าน / ไม่ผ่าน
+    input: ข้อความ
+    textarea: ข้อความยาว
+    number: ตัวเลข
+    select: รายการเลือก
+    radio-button: ปุ่มตัวเลือก
+    boolean: ใช่ / ไม่ใช่
+    date-picker: วันที่
+    date-time-input: วันและเวลา
+    file-upload: รูปหรือไฟล์
+    signature: ลายเซ็น
+  severity:
+    low: ต่ำ
+    medium: ปานกลาง
+    high: สูง
+    critical: วิกฤต
+  answer:
+    pass: ผ่าน
+    fail: ไม่ผ่าน
+    not-applicable: ไม่เกี่ยวข้อง
+    unanswered: ยังไม่ตอบ
+    severity: ความรุนแรง
+    unsafe: ไม่ปลอดภัยต่อการใช้งาน
+    comments: ความเห็น
+    comments-placeholder: ผิดปกติอย่างไร และต้องแก้อะไร
+    photos: รูปภาพ
+    add-photo: เพิ่มรูป
+    upload-photo: อัปโหลดรูป
+    no-photo: ไม่มีรูปแนบ
+    upload-signature: อัปโหลดลายเซ็น
+    no-signature: ไม่มีลายเซ็น
+    select-placeholder: เลือกคำตอบ
+    note-placeholder: เพิ่มหมายเหตุ
+    text-placeholder: พิมพ์คำตอบ
+    no-options: ฟิลด์นี้ไม่มีคำตอบให้เลือก
+    uploads-unavailable: เพิ่มได้จาก console หรือแอปคนขับ
+    comments-required: บอกว่าผิดปกติอย่างไร และต้องแก้อะไร
+    comment-required: ต้องใส่ความเห็นเมื่อไม่ผ่าน
+    photo-required: ต้องแนบรูปเมื่อไม่ผ่าน
+    comment-and-photo-required: ต้องใส่ความเห็นและรูปเมื่อไม่ผ่าน
+  record:
+    overview: ภาพรวม
+    inspection: การตรวจสภาพ
+    details: รายละเอียดการตรวจสภาพ
+    form: แบบฟอร์ม
+    select-form: เลือกแบบฟอร์มตรวจสภาพ
+    status: สถานะ
+    result: ผลลัพธ์
+    vehicle: รถ
+    select-vehicle: เลือกรถ
+    driver: คนขับ
+    select-driver: เลือกคนขับ
+    odometer: เลขไมล์
+    odometer-placeholder: เลขไมล์ปัจจุบัน
+    engine-hours: ชั่วโมงเครื่องยนต์
+    engine-hours-placeholder: ชั่วโมงเครื่องยนต์ปัจจุบัน
+    answers: คำตอบ
+    loading-form: กำลังโหลดแบบฟอร์มตรวจสภาพ...
+    loading-answers: กำลังโหลดคำตอบ...
+    form-has-no-fields: แบบฟอร์มนี้ยังไม่มีฟิลด์ สร้างฟิลด์ที่หน้าแบบฟอร์มตรวจสภาพก่อนกรอก
+    summary: สรุป
+    failed-of: ไม่ผ่าน {failed} จาก {total} ข้อที่ตรวจผ่าน/ไม่ผ่าน
+    metadata: Metadata
+    submitted: ส่งแล้ว
+    submitted-by: ส่งโดย
+    submission-title: การส่ง {form}
+    due: ครบกำหนด
+    create-issue: แจ้งปัญหา
+    create-work-order: สร้างใบสั่งงาน
+    resolve: แก้ไขแล้ว
+    via-link: ผ่านลิงก์สาธารณะ
+    via-link-pin: ผ่านลิงก์สาธารณะ ยืนยัน PIN แล้ว
+    signed-as: ลงชื่อว่า "{name}"
+    name-unverified: ชื่อตามที่พิมพ์ ไม่ใช่บัญชีที่เข้าสู่ระบบ
+    resolved: แก้ไขแล้ว
+    item-results: ผลแต่ละรายการ
+    no-item-results: ไม่มีผลรายการที่บันทึกไว้
+    follow-up: ติดตามผล
+    open-form: เปิดแบบฟอร์มตรวจสภาพนี้
+    failed: ไม่ผ่าน
+    failed-count: '{count, plural, one {ไม่ผ่าน #} other {ไม่ผ่าน #}}'
+    linked-inspections: '{count, plural, one {การตรวจสภาพที่เชื่อมโยง} other {การตรวจสภาพที่เชื่อมโยง}}'
+    linked-issue: ปัญหาที่เชื่อมโยง
+    linked-work-order: ใบสั่งงานที่เชื่อมโยง
+    photos: รูปภาพ
+    loading-photos: กำลังโหลดรูป...
+    audit: ประวัติการแก้ไข
+    create: สร้างการตรวจสภาพ
+    saved: บันทึกการตรวจสภาพแล้ว
+    updated: อัปเดตการตรวจสภาพแล้ว
+    form-help: แบบฟอร์มที่เผยแพร่แล้วซึ่งใช้กรอกการตรวจนี้
+    choose-a-form: เลือกแบบฟอร์มตรวจสภาพเพื่อเริ่ม
+    group-has-no-fields: ส่วนนี้ไม่มีข้อตรวจ
+    outstanding: ยังต้องตอบ
+    section-outstanding: '{count, plural, one {ค้าง #} other {ค้าง #}}'
+    outstanding-field: ต้องกรอก {label} ก่อนส่ง
+    review: ตรวจทาน →
+    jump-to: ไปที่ →
+  follow-up:
+    create-issue-title: แจ้งปัญหาจากการตรวจนี้?
+    create-issue-summary: จะแจ้งปัญหาของรถและคนขับ ระบุข้อที่ไม่ผ่านและใช้ความรุนแรงสูงสุดในนั้น การตรวจจะเชื่อมโยงกับปัญหานี้
+    create-issue-accept: แจ้งปัญหา
+    create-work-order-title: เปิดใบสั่งงานจากการตรวจนี้?
+    create-work-order-summary: จะเปิดใบสั่งงานของรถพร้อมเช็กลิสต์ข้อที่ไม่ผ่าน ถ้าการตรวจนี้ยังไม่มีปัญหาที่แจ้ง จะแจ้งปัญหาก่อน
+    create-work-order-accept: สร้างใบสั่งงาน
+    resolve-title: ปิดการตรวจนี้?
+    resolve-summary: การตรวจจะถูกทำเครื่องหมายว่าแก้ไขแล้วพร้อมเวลา ปัญหาหรือใบสั่งงานที่เปิดไว้ยังเปิดอยู่
+    resolve-accept: ปิดการตรวจ
+    from-these: '{count, plural, one {จากข้อที่ไม่ผ่านนี้} other {จาก # ข้อที่ไม่ผ่าน}}'
+    unsafe-note: '{count, plural, one {# ข้อระบุว่าไม่ปลอดภัยต่อการใช้งาน} other {# ข้อระบุว่าไม่ปลอดภัยต่อการใช้งาน}}'
+    due-note: ครบกำหนด {due} ตามความรุนแรงสูงสุดในนั้น
+    nothing-failed: การตรวจนี้ไม่มีข้อไม่ผ่าน จึงไม่มีอะไรต้องแจ้ง
+    submit-title: ส่งการตรวจนี้?
+    submit-summary: จะบันทึกการตรวจ ประทับเวลาส่ง และนับจำนวนผ่าน/ไม่ผ่านใหม่ ยกเลิกการส่งไม่ได้
+    submit-accept: ส่งการตรวจ
+    cancel: ยกเลิก
+  link:
+    public-links: ลิงก์สาธารณะ
+    existing: ลิงก์ที่สร้างแล้ว
+    modal-help: สร้างลิงก์ใช้ครั้งเดียวสำหรับ {form} ผู้ที่เปิดลิงก์ต้องใส่ PIN แล้วกรอกแบบฟอร์มนี้ได้โดยไม่ต้องเข้าสู่ระบบ
+    loading: กำลังโหลดลิงก์...
+    none: แบบฟอร์มนี้ยังไม่มีลิงก์ที่สร้าง
+    load-failed: โหลดลิงก์ไม่ได้
+    copy: คัดลอก
+    copied: คัดลอกลิงก์ตรวจสภาพแล้ว
+    revoke: เพิกถอน
+    revoked: เพิกถอนลิงก์ตรวจสภาพแล้ว
+    generated: สร้างเมื่อ
+    generated-toast: สร้างลิงก์ตรวจสภาพแล้ว
+    publish-first: เผยแพร่แบบฟอร์มตรวจสภาพนี้ก่อนสร้างลิงก์สาธารณะ
+    expires: หมดอายุ
+    no-expiry: ไม่หมดอายุ
+    used: ใช้แล้ว
+    viewed: เปิดล่าสุด
+    never-opened: ยังไม่เคยเปิด
+    unassigned: ใครก็ได้ที่มีลิงก์และ PIN
+    url-not-kept: ลิงก์นี้สร้างก่อนที่ระบบจะเก็บลิงก์ไว้ จึงแสดง URL อีกไม่ได้
+    state-active: ใช้งานได้
+    state-expired: หมดอายุ
+    state-used: ใช้แล้ว
+    state-revoked: เพิกถอนแล้ว
+    state-locked: ถูกล็อก
+    expires-at: หมดอายุเมื่อ
+    expires-help: ลิงก์หมดอายุ 72 ชั่วโมงหลังสร้าง เว้นแต่จะเลือกเวลาอื่น
+    assign-to: มอบหมายให้
+    assign-to-help: ไม่บังคับ ทุกคนในองค์กรกรอกการตรวจได้ และการส่งจะบันทึกเป็นของคนนั้น
+    select-assignee: เลือกผู้ใช้
+    pin: PIN
+    pin-delivery: ส่งลิงก์และ PIN
+    pin-delivery-none: ไม่ต้องส่ง ฉันจะแชร์เอง
+    pin-delivery-email: ทางอีเมล
+    pin-delivery-sms: ทาง SMS
+    pin-delivery-help: ส่งถึง {name} พร้อมลิงก์ที่ต้องเปิดและ PIN ที่ต้องใส่
+    pin-delivery-no-recipient: มอบหมายลิงก์ให้ใครสักคน หรือเลือกคนขับ เพื่อส่งให้เขา หรือแชร์ลิงก์และ PIN เอง ทั้งสองจะแสดงเมื่อสร้างลิงก์แล้ว
+    generated-title: สร้างลิงก์แล้ว
+    generated-help: คัดลอกลิงก์ไว้ในคลิปบอร์ดแล้ว ผู้ที่เปิดลิงก์ต้องใช้ PIN ด้วย
+    copied-pin: คัดลอก PIN แล้ว
+    email-pin: ส่งลิงก์ทางอีเมล
+    text-pin: ส่งลิงก์ทาง SMS
+    pin-sent-email: ส่งลิงก์และ PIN ทางอีเมลถึง {to} แล้ว
+    pin-sent-sms: ส่งลิงก์และ PIN ทาง SMS ถึง {to} แล้ว
+    pin-not-sent: 'ส่งลิงก์และ PIN ไม่ได้: {reason}'
+    pin-sent-by: '{via, select, email {ส่งทางอีเมล} sms {ส่งทาง SMS} other {ส่งแล้ว}}'
+    wrong-pins: '{count, plural, one {PIN ผิด # ครั้ง} other {PIN ผิด # ครั้ง}}'
+    no-pin: ไม่มี PIN ลิงก์นี้สร้างก่อนที่ลิงก์จะมี PIN
+  public:
+    submitted-title: ส่งการตรวจสภาพแล้ว
+    submitted-body: ขอบคุณ การตรวจสภาพนี้ถูกบันทึกแล้วและลิงก์ปิดแล้ว
+    unavailable-title: การตรวจสภาพนี้ไม่พร้อมใช้งาน
+    sign-off: ลงชื่อ
+    your-name: ชื่อของคุณ
+    your-name-help: บันทึกไว้ในการตรวจนี้ว่าใครเป็นผู้กรอก
+    your-name-placeholder: ชื่อ-นามสกุล
+    for: สำหรับ
+    pin-title: ใส่ PIN
+    pin-help: ใส่ PIN 6 หลักที่ได้รับสำหรับการตรวจนี้
+    pin-label: PIN
+    pin-continue: ดำเนินการต่อ
+    pin-wrong: PIN ไม่ถูกต้อง เหลืออีก {count, plural, one {# ครั้ง} other {# ครั้ง}} ก่อนลิงก์จะถูกล็อก
+    submit: ส่งการตรวจ
+    blocked-required: '{count, plural, one {ยังขาดคำตอบที่จำเป็น # ข้อ} other {ยังขาดคำตอบที่จำเป็น # ข้อ}}'
+    blocked-defects: '{count, plural, one {มี # ข้อที่ไม่ผ่านยังต้องใส่ความเห็นหรือรูป} other {มี # ข้อที่ไม่ผ่านยังต้องใส่ความเห็นหรือรูป}}'
+  flyout:
+    title: 'ข้อบกพร่อง: {label}'
+    done: เสร็จสิ้น
+    close: ปิด
+  defect:
+    edit: แก้ไขข้อบกพร่อง
+    photos: '{count, plural, one {# รูป} other {# รูป}}'
+    comment: ความเห็น
+    needs-comment: ต้องใส่ความเห็น
+    needs-photo: ต้องแนบรูป
+    needs-both: ต้องใส่ความเห็นและรูป
+    no-evidence: ยังไม่มีความเห็นหรือรูป
+  tray:
+    title: ข้อบกพร่อง
+    review: ตรวจทาน
+select-option:
+  vehicle:
+    vin: VIN
+    serial_number: S/N
+    call_sign: รหัสเรียกขาน
+resource-summary:
+  facts:
+    address: ที่อยู่
+    altitude: ความสูง
+    amount: จำนวนเงิน
+    arrived: มาถึง
+    assignee: ผู้รับผิดชอบ
+    attached-to: ติดตั้งกับ
+    attachment: การติดตั้ง
+    axles: เพลา
+    base-fee: ค่าบริการพื้นฐาน
+    body-coupling: ตัวถัง / ข้อต่อพ่วง
+    calculation: การคำนวณ
+    category: หมวดหมู่
+    cod: COD
+    code: รหัส
+    comments: ความเห็น
+    completion: ความคืบหน้า
+    connected: เชื่อมต่อ
+    coordinates: พิกัด
+    core-service: บริการหลัก
+    countries: ประเทศ
+    country: ประเทศ
+    coverage: ความคุ้มครอง
+    created: สร้างเมื่อ
+    customer: ลูกค้า
+    declared-value: มูลค่าที่สำแดง
+    description: คำอธิบาย
+    destination: ปลายทาง
+    details: รายละเอียด
+    device: อุปกรณ์
+    dimensions: ขนาด
+    disconnected: ปลดการเชื่อมต่อ
+    distance: ระยะทาง
+    driver: คนขับ
+    drivers: คนขับ
+    dropoff: จุดส่ง
+    due: ครบกำหนด
+    dwell: เวลาจอด
+    email: อีเมล
+    entities: รายการสินค้า
+    environment: สภาพแวดล้อม
+    equipped-to: ติดตั้งกับ
+    eta: ETA
+    event-type: ประเภทเหตุการณ์
+    expires: หมดอายุ
+    failed-items: รายการที่ไม่ผ่าน
+    fallback: สำรอง
+    fee: ค่าธรรมเนียม
+    fees: ค่าธรรมเนียม
+    firmware: Firmware
+    fitted-to: ติดตั้งอยู่ที่
+    fleet: Fleet
+    form: แบบฟอร์ม
+    fuel-report: รายงานน้ำมัน
+    heading: ทิศทาง
+    host: Host
+    imei: IMEI
+    installed: ติดตั้งเมื่อ
+    interval: รอบระยะ
+    items: รายการ
+    key: Key
+    last-error: ข้อผิดพลาดล่าสุด
+    last-online: ออนไลน์ล่าสุด
+    last-reading: ค่าล่าสุด
+    last-seen: พบล่าสุด
+    last-status: สถานะล่าสุด
+    last-synced: ซิงก์ล่าสุด
+    last-value: ค่าล่าสุด
+    licence: ใบขับขี่
+    location: ตำแหน่ง
+    maintainable: ทรัพย์สินที่ซ่อมบำรุง
+    make-model: ยี่ห้อ / รุ่น
+    model: รุ่น
+    namespace: Namespace
+    next-due: ครบกำหนดครั้งถัดไป
+    next-occurrence: ครั้งถัดไป
+    occurred: เกิดขึ้นเมื่อ
+    odometer: เลขไมล์
+    order: ออเดอร์
+    order-config: Order Config
+    performed-by: ดำเนินการโดย
+    period: ช่วงเวลา
+    phone: โทรศัพท์
+    pickup: จุดรับ
+    place: สถานที่
+    plate: ทะเบียน / VIN
+    policy: นโยบาย
+    priority: ความสำคัญ
+    progress: ความคืบหน้า
+    provider: ผู้ให้บริการ
+    published: เผยแพร่
+    purchase-price: ราคาซื้อ
+    quantity: จำนวน
+    reason: เหตุผล
+    recorded: บันทึกเมื่อ
+    region: ภูมิภาค
+    relationship: ความสัมพันธ์
+    reporter: ผู้รายงาน
+    request: คำขอ
+    route: เส้นทาง
+    sandbox: Sandbox
+    schedule: กำหนดการ
+    scheduled: กำหนดเวลา
+    sequence: ลำดับ
+    serial: ซีเรียล
+    service-area: พื้นที่ให้บริการ
+    service-quote: ใบเสนอราคา
+    service-rate: อัตราค่าบริการ
+    service-types: ประเภทบริการ
+    severity: ความรุนแรง
+    sku: SKU
+    speed: ความเร็ว
+    speed-limit: จำกัดความเร็ว
+    station: สถานี
+    status: สถานะ
+    subject: หัวข้อ
+    submitted: ส่งเมื่อ
+    submitted-by: ส่งโดย
+    target: เป้าหมาย
+    task: งาน
+    telematic: Telematics
+    threshold: เกณฑ์
+    timezone: เขตเวลา
+    title: หัวข้อ
+    total-cost: ค่าใช้จ่ายรวม
+    tracking: การติดตาม
+    trailer: หางพ่วง
+    transaction-at: ทำรายการเมื่อ
+    triggers: Trigger
+    type: ประเภท
+    unit-cost: ราคาต่อหน่วย
+    user: ผู้ใช้
+    vehicle: รถ
+    vehicles: รถ
+    vendor: Vendor
+    version: เวอร์ชัน
+    volume: ปริมาณ
+    warranty: การรับประกัน
+    waypoints: จุดแวะ
+    website: เว็บไซต์
+    weight: น้ำหนัก
+    window: ช่วงเวลา
+    work-order: ใบสั่งงาน
+    zone: โซน
+    zones: โซน
 tracking-page:
   settings:
-    title: "หน้าติดตามพัสดุ"
-    menu: "หน้าติดตามพัสดุ"
-    saved: "บันทึกการตั้งค่าหน้าติดตามพัสดุแล้ว"
-    load-failed: "โหลดการตั้งค่าหน้าติดตามพัสดุไม่สำเร็จ"
-    load-failed-help: "โหลดหน้านี้ใหม่เพื่อลองอีกครั้ง ถ้ายังเป็นอยู่ ให้ตรวจสอบว่าคุณมีสิทธิ์ดูการตั้งค่านี้"
-    pages: "หน้าเว็บ"
-    org-page-enabled: "หน้าติดตามพัสดุของคุณเอง"
-    org-page-enabled-help: "หน้าติดตามพัสดุที่ใช้แบรนด์ของคุณ มีที่อยู่เว็บของตัวเอง และค้นหาได้เฉพาะเลขติดตามของบริษัทคุณ"
-    slug: "ที่อยู่หน้าเว็บ"
-    slug-checking: "กำลังตรวจสอบที่อยู่..."
-    open-page: "เปิดหน้าเว็บ"
-    generic-page-allowed: "อนุญาตให้ติดตามผ่านหน้าส่วนกลาง"
-    generic-page-allowed-help: "ให้ลูกค้าค้นหาเลขติดตามของคุณได้ที่ {url} ปิดตัวเลือกนี้ถ้าต้องการให้ติดตามได้เฉพาะหน้าของคุณเอง"
-    links-target: "ลิงก์ในอีเมลและฉลาก"
-    links-target-help: "หน้าที่การแจ้งเตือนและฉลากจะพาลูกค้าไป"
-    links-target-auto: "หน้าของคุณเมื่อเปิดใช้ ไม่เช่นนั้นใช้หน้าส่วนกลาง"
-    links-target-org: "หน้าของคุณเสมอ"
-    links-target-generic: "หน้าส่วนกลางเสมอ"
-    branding: "แบรนด์"
-    display-name: "ชื่อที่แสดง"
-    logo-help: "หน้านี้ใช้โลโก้ของบริษัทคุณ ถ้าไม่มีโลโก้จะแสดงตัวอักษรย่อของชื่อที่แสดงแทน"
-    accent: "สีหลัก"
-    accent-hex: "สีหลักในรูปแบบรหัสสี hex"
-    placeholder-slug: "your-company"
-    placeholder-phone: "+66 2 000 0000"
-    placeholder-email: "support@example.com"
-    placeholder-website: "https://example.com"
-    placeholder-select: "เลือกตัวเลือก"
-    contrast-ok: "ข้อความบนสีนี้อ่านง่าย ({ratio}:1)"
-    contrast-low: "ข้อความบนสีนี้อ่านยาก ({ratio}:1) เลือกสีที่เข้มขึ้นหรืออ่อนลง"
-    accent-help: "ใช้กับปุ่ม แถบความคืบหน้า และจุดเน้น ระบบเลือกสีตัวอักษรบนสีนี้ให้อัตโนมัติ"
-    accent-dark: "สีหลักในโหมดมืด"
-    accent-dark-auto: "อัตโนมัติ"
-    support-phone: "เบอร์โทรฝ่ายบริการลูกค้า"
-    support-email: "อีเมลฝ่ายบริการลูกค้า"
-    website: "เว็บไซต์"
-    support-help: "เว้นว่างไว้เพื่อใช้ข้อมูลของบริษัท การโทรและข้อความจากลูกค้าจะส่งมาที่นี่"
-    powered-by: "แสดง \"Powered by Fleetbase\""
-    powered-by-help: "ข้อความเล็กๆ ที่ท้ายหน้า"
-    theme: "โหมดสว่างและมืด"
-    theme-system: "ตามอุปกรณ์ของลูกค้า"
-    theme-light: "สว่างเสมอ"
-    default-language: "ภาษาเริ่มต้น"
-    languages: "ภาษาที่ลูกค้าเลือกได้"
-    access: "การเข้าถึง"
-    public-status: "แสดงสถานะโดยไม่ต้องยืนยันตัวตน"
-    public-status-help: "เมื่อมีแค่เลขติดตาม ลูกค้าจะเห็นขั้นตอนการจัดส่งและวันที่อัปเดตล่าสุด ปิดตัวเลือกนี้ถ้าไม่ต้องการแสดงอะไรเลยจนกว่าจะยืนยันตัวตน"
-    channel-sms: "ยืนยันทาง SMS"
-    channel-sms-help: "ส่งรหัส 6 หลักไปที่เบอร์โทรในออเดอร์"
-    channel-sms-unavailable: "ระบบนี้ยังไม่ได้ตั้งค่าผู้ให้บริการ SMS จึงส่งรหัสทาง SMS ไม่ได้"
-    channel-email: "ยืนยันทางอีเมล"
-    channel-email-help: "ส่งรหัส 6 หลักไปที่อีเมลในออเดอร์"
-    session-hours: "คงสถานะยืนยันไว้ (ชั่วโมง)"
-    session-hours-help: "ระยะเวลาที่อุปกรณ์ยังคงสถานะยืนยันหลังกรอกรหัสถูก ระหว่าง 1 ถึง 168 ชั่วโมง"
-    account-sign-in: "ให้ลูกค้าเข้าสู่ระบบ"
-    account-sign-in-help: "ลูกค้าที่มีบัญชีพอร์ทัลลูกค้าเข้าสู่ระบบเพื่อดูออเดอร์ทั้งหมดได้โดยไม่ต้องใช้รหัส"
-    account-upsell: "แนะนำให้สร้างบัญชี"
-    account-upsell-help: "หลังส่งสินค้า ลูกค้าที่ยืนยันแล้วแต่ยังไม่มีบัญชีจะได้รับคำเชิญให้สร้างบัญชี"
-    customer-portal-missing: "ติดตั้งส่วนขยาย Customer Portal เพื่อให้ลูกค้าเข้าสู่ระบบและดูออเดอร์ทั้งหมดได้"
-    code-rules: "รหัสมี 6 หลักและหมดอายุใน 10 นาที ถ้ากรอกผิด 3 ครั้ง ระบบจะหยุดส่งรหัส 5 นาที"
-    visibility: "สิ่งที่ลูกค้าที่ยืนยันแล้วเห็น"
-    visibility-map: "แผนที่สด"
-    visibility-map-help: "เส้นทางและตำแหน่งรถระหว่างที่กำลังไปหาลูกค้า"
-    visibility-driver_name: "ชื่อจริงของคนขับ"
-    visibility-driver_name-help: "แสดงเฉพาะชื่อจริง ไม่แสดงนามสกุลหรือเบอร์โทร"
-    visibility-vehicle: "ข้อมูลรถ"
-    visibility-vehicle-help: "เช่น \"Toyota Hiace สีขาว\""
-    visibility-items: "สินค้าในการจัดส่ง"
-    visibility-items-help: "ชื่อ รายละเอียด จำนวน และรูปภาพ"
-    visibility-item_prices: "ราคาสินค้า"
-    visibility-item_prices-help: "แสดงเฉพาะลูกค้าที่เข้าสู่ระบบและเป็นผู้สั่งซื้อ"
-    visibility-pod_photo: "รูปถ่ายการส่งมอบ"
-    visibility-pod_photo-help: "รูปที่ถ่ายเป็นหลักฐานการส่งมอบ"
-    visibility-pod_signature: "ลายเซ็น"
-    visibility-pod_signature-help: "ลายเซ็นที่เก็บเป็นหลักฐานการส่งมอบ"
-    visibility-instructions_edit: "ให้ลูกค้าเพิ่มคำแนะนำการจัดส่ง"
-    visibility-instructions_edit-help: "เช่น รหัสประตู หรือจุดที่ให้วางพัสดุ"
-    visibility-report_problem: "แจ้งปัญหา"
-    visibility-report_problem-help: "ให้ลูกค้าส่งข้อความถึงคุณเกี่ยวกับการจัดส่ง"
-    driver-contact: "การโทรและข้อความส่งไปที่"
-    driver-contact-help: "ผู้ที่ลูกค้าติดต่อได้จากการ์ดคนขับ"
-    driver-contact-company: "ทีมบริการลูกค้าของคุณ"
-    driver-contact-driver: "คนขับโดยตรง"
-    privacy-rules: "ใช้เสมอ: ลูกค้าเห็นเฉพาะจุดส่งและสินค้าของตัวเอง แผนที่และคนขับจะถูกซ่อนหลังส่งมอบ และแสดงตำแหน่งคนขับเฉพาะตอนกำลังเดินทางมาเท่านั้น"
-    preview: "ตัวอย่าง"
-    preview-help: "ตัวอย่างในโหมดสว่างและมืด กดบันทึกเพื่อใช้การเปลี่ยนแปลง"
-    preview-chip: "ยืนยันแล้วบนอุปกรณ์นี้"
-    preview-headline: "ถึงวันนี้"
-    preview-sub: "14:10 ถึง 14:40 น."
-    preview-button: "ยืนยันตัวตน"
-    preview-powered-by: "Powered by Fleetbase"
+    title: หน้าติดตามพัสดุ
+    menu: หน้าติดตามพัสดุ
+    saved: บันทึกการตั้งค่าหน้าติดตามพัสดุแล้ว
+    load-failed: โหลดการตั้งค่าหน้าติดตามพัสดุไม่สำเร็จ
+    load-failed-help: โหลดหน้านี้ใหม่เพื่อลองอีกครั้ง ถ้ายังเป็นอยู่ ให้ตรวจสอบว่าคุณมีสิทธิ์ดูการตั้งค่านี้
+    pages: หน้าเว็บ
+    org-page-enabled: หน้าติดตามพัสดุของคุณเอง
+    org-page-enabled-help: หน้าติดตามพัสดุที่ใช้แบรนด์ของคุณ มีที่อยู่เว็บของตัวเอง และค้นหาได้เฉพาะเลขติดตามของบริษัทคุณ
+    slug: ที่อยู่หน้าเว็บ
+    slug-checking: กำลังตรวจสอบที่อยู่...
+    open-page: เปิดหน้าเว็บ
+    generic-page-allowed: อนุญาตให้ติดตามผ่านหน้าส่วนกลาง
+    generic-page-allowed-help: ให้ลูกค้าค้นหาเลขติดตามของคุณได้ที่ {url} ปิดตัวเลือกนี้ถ้าต้องการให้ติดตามได้เฉพาะหน้าของคุณเอง
+    links-target: ลิงก์ในอีเมลและฉลาก
+    links-target-help: หน้าที่การแจ้งเตือนและฉลากจะพาลูกค้าไป
+    links-target-auto: หน้าของคุณเมื่อเปิดใช้ ไม่เช่นนั้นใช้หน้าส่วนกลาง
+    links-target-org: หน้าของคุณเสมอ
+    links-target-generic: หน้าส่วนกลางเสมอ
+    branding: แบรนด์
+    display-name: ชื่อที่แสดง
+    logo-help: หน้านี้ใช้โลโก้ของบริษัทคุณ ถ้าไม่มีโลโก้จะแสดงตัวอักษรย่อของชื่อที่แสดงแทน
+    accent: สีหลัก
+    accent-hex: สีหลักในรูปแบบรหัสสี hex
+    placeholder-slug: your-company
+    placeholder-phone: +66 2 000 0000
+    placeholder-email: support@example.com
+    placeholder-website: https://example.com
+    placeholder-select: เลือกตัวเลือก
+    contrast-ok: ข้อความบนสีนี้อ่านง่าย ({ratio}:1)
+    contrast-low: ข้อความบนสีนี้อ่านยาก ({ratio}:1) เลือกสีที่เข้มขึ้นหรืออ่อนลง
+    accent-help: ใช้กับปุ่ม แถบความคืบหน้า และจุดเน้น ระบบเลือกสีตัวอักษรบนสีนี้ให้อัตโนมัติ
+    accent-dark: สีหลักในโหมดมืด
+    accent-dark-auto: อัตโนมัติ
+    support-phone: เบอร์โทรฝ่ายบริการลูกค้า
+    support-email: อีเมลฝ่ายบริการลูกค้า
+    website: เว็บไซต์
+    support-help: เว้นว่างไว้เพื่อใช้ข้อมูลของบริษัท การโทรและข้อความจากลูกค้าจะส่งมาที่นี่
+    powered-by: แสดง "Powered by Fleetbase"
+    powered-by-help: ข้อความเล็กๆ ที่ท้ายหน้า
+    theme: โหมดสว่างและมืด
+    theme-system: ตามอุปกรณ์ของลูกค้า
+    theme-light: สว่างเสมอ
+    default-language: ภาษาเริ่มต้น
+    languages: ภาษาที่ลูกค้าเลือกได้
+    access: การเข้าถึง
+    public-status: แสดงสถานะโดยไม่ต้องยืนยันตัวตน
+    public-status-help: เมื่อมีแค่เลขติดตาม ลูกค้าจะเห็นขั้นตอนการจัดส่งและวันที่อัปเดตล่าสุด ปิดตัวเลือกนี้ถ้าไม่ต้องการแสดงอะไรเลยจนกว่าจะยืนยันตัวตน
+    channel-sms: ยืนยันทาง SMS
+    channel-sms-help: ส่งรหัส 6 หลักไปที่เบอร์โทรในออเดอร์
+    channel-sms-unavailable: ระบบนี้ยังไม่ได้ตั้งค่าผู้ให้บริการ SMS จึงส่งรหัสทาง SMS ไม่ได้
+    channel-email: ยืนยันทางอีเมล
+    channel-email-help: ส่งรหัส 6 หลักไปที่อีเมลในออเดอร์
+    session-hours: คงสถานะยืนยันไว้ (ชั่วโมง)
+    session-hours-help: ระยะเวลาที่อุปกรณ์ยังคงสถานะยืนยันหลังกรอกรหัสถูก ระหว่าง 1 ถึง 168 ชั่วโมง
+    account-sign-in: ให้ลูกค้าเข้าสู่ระบบ
+    account-sign-in-help: ลูกค้าที่มีบัญชีพอร์ทัลลูกค้าเข้าสู่ระบบเพื่อดูออเดอร์ทั้งหมดได้โดยไม่ต้องใช้รหัส
+    account-upsell: แนะนำให้สร้างบัญชี
+    account-upsell-help: หลังส่งสินค้า ลูกค้าที่ยืนยันแล้วแต่ยังไม่มีบัญชีจะได้รับคำเชิญให้สร้างบัญชี
+    customer-portal-missing: ติดตั้งส่วนขยาย Customer Portal เพื่อให้ลูกค้าเข้าสู่ระบบและดูออเดอร์ทั้งหมดได้
+    code-rules: รหัสมี 6 หลักและหมดอายุใน 10 นาที ถ้ากรอกผิด 3 ครั้ง ระบบจะหยุดส่งรหัส 5 นาที
+    visibility: สิ่งที่ลูกค้าที่ยืนยันแล้วเห็น
+    visibility-map: แผนที่สด
+    visibility-map-help: เส้นทางและตำแหน่งรถระหว่างที่กำลังไปหาลูกค้า
+    visibility-driver_name: ชื่อจริงของคนขับ
+    visibility-driver_name-help: แสดงเฉพาะชื่อจริง ไม่แสดงนามสกุลหรือเบอร์โทร
+    visibility-vehicle: ข้อมูลรถ
+    visibility-vehicle-help: เช่น "Toyota Hiace สีขาว"
+    visibility-items: สินค้าในการจัดส่ง
+    visibility-items-help: ชื่อ รายละเอียด จำนวน และรูปภาพ
+    visibility-item_prices: ราคาสินค้า
+    visibility-item_prices-help: แสดงเฉพาะลูกค้าที่เข้าสู่ระบบและเป็นผู้สั่งซื้อ
+    visibility-pod_photo: รูปถ่ายการส่งมอบ
+    visibility-pod_photo-help: รูปที่ถ่ายเป็นหลักฐานการส่งมอบ
+    visibility-pod_signature: ลายเซ็น
+    visibility-pod_signature-help: ลายเซ็นที่เก็บเป็นหลักฐานการส่งมอบ
+    visibility-instructions_edit: ให้ลูกค้าเพิ่มคำแนะนำการจัดส่ง
+    visibility-instructions_edit-help: เช่น รหัสประตู หรือจุดที่ให้วางพัสดุ
+    visibility-report_problem: แจ้งปัญหา
+    visibility-report_problem-help: ให้ลูกค้าส่งข้อความถึงคุณเกี่ยวกับการจัดส่ง
+    driver-contact: การโทรและข้อความส่งไปที่
+    driver-contact-help: ผู้ที่ลูกค้าติดต่อได้จากการ์ดคนขับ
+    driver-contact-company: ทีมบริการลูกค้าของคุณ
+    driver-contact-driver: คนขับโดยตรง
+    privacy-rules: 'ใช้เสมอ: ลูกค้าเห็นเฉพาะจุดส่งและสินค้าของตัวเอง แผนที่และคนขับจะถูกซ่อนหลังส่งมอบ และแสดงตำแหน่งคนขับเฉพาะตอนกำลังเดินทางมาเท่านั้น'
+    preview: ตัวอย่าง
+    preview-help: ตัวอย่างในโหมดสว่างและมืด กดบันทึกเพื่อใช้การเปลี่ยนแปลง
+    preview-chip: ยืนยันแล้วบนอุปกรณ์นี้
+    preview-headline: ถึงวันนี้
+    preview-sub: 14:10 ถึง 14:40 น.
+    preview-button: ยืนยันตัวตน
+    preview-powered-by: Powered by Fleetbase
   page:
-    track-another: "ติดตามเลขอื่น"
-    unavailable-title: "ไม่สามารถติดตามพัสดุที่นี่ได้"
-    unavailable-help: "หน้าติดตามพัสดุนี้ยังไม่เปิดใช้งาน ใช้ลิงก์ในอีเมลแจ้งการจัดส่ง หรือติดต่อบริษัทที่ส่งสินค้าให้คุณ"
-    lookup-title: "ติดตามพัสดุของคุณ"
-    lookup-sub: "ดูว่าพัสดุอยู่ที่ไหนและจะมาถึงเมื่อไร"
-    tracking-number: "เลขติดตามพัสดุ"
-    tracking-number-placeholder: "เช่น DSV5529445373TH"
-    tracking-number-help: "ดูได้ในอีเมลยืนยันหรือบนฉลากพัสดุ"
-    lookup-neutral: "ไม่พบข้อมูลติดตามของเลขนี้ ตรวจสอบว่าตรงกับอีเมลหรือฉลากพัสดุแล้วลองอีกครั้ง"
-    lookup-rate: "คุณลองหลายครั้งติดกันแล้ว พักสักครู่แล้วลองใหม่อีกครั้งในอีกไม่กี่นาที"
-    looking-up: "กำลังค้นหา..."
-    track: "ติดตาม"
-    or: "หรือ"
-    your-orders: "ออเดอร์ของคุณ"
-    sign-in: "เข้าสู่ระบบเพื่อดูออเดอร์ทั้งหมด"
-    sign-in-account: "เข้าสู่ระบบบัญชีของคุณ"
-    back: "กลับ"
-    help: "ต้องการความช่วยเหลือ?"
-    language: "ภาษา"
-    powered-by: "Powered by Fleetbase"
-    dismiss: "ปิด"
-    chip-limited: "มุมมองแบบจำกัด · ยืนยันตัวตนเพื่อดูรายละเอียด"
-    chip-verified: "ยืนยันแล้วบนอุปกรณ์นี้"
-    chip-account: "เข้าสู่ระบบแล้ว"
-    chip-staff: "มุมมองพนักงาน: สิ่งที่ลูกค้ารายนี้เห็น"
-    status: "สถานะ"
-    verify-to-see: "ยืนยันตัวตนเพื่อดูการจัดส่งของคุณ"
-    last-update: "อัปเดตล่าสุด: {date}"
-    copy: "คัดลอก"
-    verify-title: "ดูรายละเอียดการจัดส่งทั้งหมด"
-    verify-help: "เพื่อความเป็นส่วนตัวของคุณ แผนที่ เวลาที่จะถึง และรายละเอียดการจัดส่งจะแสดงหลังยืนยันตัวตนสั้นๆ เราจะส่งรหัส 6 หลักไปที่เบอร์โทรหรืออีเมลในออเดอร์นี้"
-    verify-button: "ยืนยันตัวตน"
-    verify-unlock: "ยืนยันตัวตนเพื่อปลดล็อก"
-    locked-map: "แผนที่สด"
-    locked-arrival: "เวลาที่จะถึงและคนขับ"
-    locked-details: "อัปเดต สินค้า และหลักฐานการส่งมอบ"
-    stage-preparing: "กำลังเตรียมสินค้า"
-    stage-scheduled: "นัดส่งแล้ว"
-    stage-dispatched: "มอบหมายคนขับแล้ว"
-    stage-in_transit: "กำลังจัดส่ง"
-    stage-delivered: "ส่งถึงแล้ว"
-    stage-issue: "ต้องตรวจสอบ"
-    stage-canceled: "ยกเลิกแล้ว"
-    stage-toast-preparing: "กำลังเตรียมออเดอร์ของคุณ"
-    stage-toast-scheduled: "นัดส่งพัสดุของคุณแล้ว"
-    stage-toast-dispatched: "มอบหมายคนขับแล้ว"
-    stage-toast-in_transit: "ออเดอร์ของคุณกำลังเดินทาง"
-    stage-toast-delivered: "ออเดอร์ของคุณส่งถึงแล้ว"
-    stage-toast-issue: "มีอัปเดตเกี่ยวกับการจัดส่งของคุณ"
-    stage-toast-canceled: "ออเดอร์ของคุณถูกยกเลิก"
-    verify-title-short: "ยืนยันตัวตน"
-    verify-choose-help: "เพื่อปกป้องรายละเอียดการจัดส่ง เราจะส่งรหัส 6 หลักไปที่ช่องทางติดต่อในออเดอร์นี้"
-    send-by: "ส่งรหัสทาง"
-    channel-sms: "SMS"
-    channel-email: "อีเมล"
-    send-failed: "ส่งรหัสไม่สำเร็จ กรุณาลองอีกครั้ง"
-    sending: "กำลังส่งรหัส..."
-    send-code: "ส่งรหัส"
-    masked-note: "เราแสดงเบอร์โทรหรืออีเมลของคุณเพียงบางส่วนเท่านั้น"
-    no-contact-title: "ยืนยันตัวตนที่นี่ไม่ได้"
-    no-contact-help: "ออเดอร์นี้ไม่มีเบอร์โทรหรืออีเมลสำหรับส่งรหัส {name} ช่วยคุณเรื่องการจัดส่งได้"
-    call: "โทร {phone}"
-    renew-title: "ขอรหัสใหม่"
-    renew-expired: "รหัสนั้นหมดอายุแล้ว รหัสใช้ได้ 10 นาที"
-    renew-unlocked: "ลองใหม่ได้แล้ว เราจะส่งรหัสใหม่ให้ รหัสเดิมจะใช้ไม่ได้อีก"
-    renew-limited: "คุณขอรหัสหลายครั้งแล้ว กรุณารอสักครู่ก่อนขอรหัสใหม่"
-    renew-failed: "เกิดข้อผิดพลาด ขอรหัสใหม่เพื่อลองอีกครั้ง"
-    send-new-code: "ส่งรหัสใหม่"
-    verified-title: "ยืนยันตัวตนแล้ว"
-    locked-title: "หยุดส่งรหัสชั่วคราว"
-    enter-code: "กรอกรหัสของคุณ"
-    code-sent-sms: "เราส่งรหัส 6 หลักทาง SMS ไปที่ {masked} แล้ว"
-    code-sent-email: "เราส่งรหัส 6 หลักทางอีเมลไปที่ {masked} แล้ว"
-    code-label: "รหัส 6 หลัก"
-    code-expires: "รหัสจะหมดอายุใน 10 นาที"
-    code-wrong: "รหัสไม่ถูกต้อง เหลืออีก {count} ครั้ง"
-    code-locked: "ลองผิดหลายครั้งเกินไป เพื่อความปลอดภัย ระบบหยุดส่งรหัสชั่วคราว ลองใหม่ใน {time}"
-    code-success: "ยืนยันแล้ว กำลังเปิดข้อมูลการจัดส่ง..."
-    resend-in: "ส่งรหัสอีกครั้งได้ใน {time}"
-    resend: "ส่งรหัสอีกครั้ง"
-    switch-to-sms: "ส่งทาง SMS แทน"
-    switch-to-email: "ส่งทางอีเมลแทน"
-    stay-verified: "เมื่อยืนยันแล้ว อุปกรณ์นี้จะคงสถานะยืนยันไว้ {hours} ชั่วโมง ออกจากระบบได้ทุกเมื่อ"
-    verified-toast: "ยืนยันตัวตนแล้ว"
-    verified-toast-help: "อุปกรณ์นี้คงสถานะยืนยันไว้สำหรับการจัดส่งนี้"
-    signed-out-toast: "ออกจากระบบบนอุปกรณ์นี้แล้ว"
-    instructions-saved: "บันทึกคำแนะนำการจัดส่งแล้ว"
-    action-failed: "ทำรายการไม่สำเร็จ กรุณาลองอีกครั้ง"
-    report-sent: "ส่งข้อความแล้ว"
-    report-sent-help: "{name} จะติดต่อกลับหาคุณ"
-    share-copied: "คัดลอกลิงก์แล้ว"
-    share-copied-help: "ผู้ที่คุณแชร์ลิงก์ให้จะเห็นแบบจำกัดจนกว่าจะยืนยันตัวตนเอง"
-    your-stop: "จุดส่งที่ {number}"
-    your-stops: "จุดส่งของคุณ"
-    sign-out: "ไม่ใช่คุณ? ออกจากระบบ"
-    live: "สด"
-    reconnecting: "กำลังเชื่อมต่อใหม่... หยุดอัปเดตสดชั่วคราว"
-    timezone: "เวลาตามเขตเวลาของคุณ ({zone})"
-    timezone-company: "เวลาตามเขตเวลา {zone}"
-    progress: "ความคืบหน้าการจัดส่ง"
-    step-created: "สร้างออเดอร์"
-    step-dispatched: "มอบหมายงาน"
-    step-started: "รับสินค้าแล้ว"
-    step-enroute: "กำลังจัดส่ง"
-    step-delivered: "ส่งถึงแล้ว"
-    step-issue: "ส่งไม่สำเร็จ"
-    step-canceled: "ยกเลิก"
-    headline-preparing: "กำลังเตรียมออเดอร์ของคุณ"
-    headline-scheduled: "นัดส่งวันที่ {date}"
-    headline-dispatched: "มอบหมายคนขับแล้ว"
-    headline-delayed: "อาจล่าช้าเล็กน้อย"
-    headline-arriving: "ถึง{day}"
-    headline-in-transit: "กำลังเดินทาง"
-    headline-delivered: "ส่งถึงแล้ว"
-    headline-issue: "การจัดส่งของคุณมีปัญหา"
-    headline-canceled: "ออเดอร์นี้ถูกยกเลิก"
-    sub-arriving: "{window} · อีกประมาณ {minutes} นาที"
-    sub-window: "ช่วงเวลาจัดส่ง {window}"
-    sub-delivered: "{when}"
-    sub-dispatched: "การติดตามสดจะเริ่มเมื่อคนขับออกเดินทาง"
-    sub-preparing: "เราจะแจ้งให้ทราบเมื่อสินค้าออกเดินทาง"
-    sub-in-transit: "สินค้าออกเดินทางแล้ว กำลังมาหาคุณ"
-    delayed-title: "ล่าช้า"
-    delayed-help: "เราจะอัปเดตเวลาที่จะถึงให้เป็นปัจจุบันเสมอ"
-    stop-of: "การจัดส่งของคุณคือจุดที่ {position} จาก {total} จุด"
-    stops-private: "{count, plural, =0 {คุณคือจุดถัดไป} other {อีก # จุดก่อนถึงคุณ}} จุดส่งอื่นเป็นข้อมูลส่วนตัว คุณจึงเห็นเฉพาะของตัวเอง"
-    map: "แผนที่"
-    map-label: "แผนที่การจัดส่ง: รถกำลังเดินทางมาที่อยู่ของคุณ"
-    map-pickup: "จุดรับสินค้า"
-    map-driver: "คนขับ"
-    map-pickup-named: "จุดรับสินค้า · {name}"
-    map-fullscreen: "แผนที่เต็มจอ"
-    map-exit-fullscreen: "ออกจากโหมดเต็มจอ"
-    stop-card-title: "จัดส่งไปที่"
-    stop-upcoming: "กำลังจะถึง"
-    stop-complete: "ส่งถึงแล้ว"
-    map-hidden: "ซ่อนแผนที่แล้วเพราะส่งออเดอร์ถึงแล้ว เราหยุดแชร์ตำแหน่งคนขับเมื่อถึงหน้าประตูบ้านคุณ"
-    last-seen: "เห็นล่าสุด {minutes} นาทีที่แล้ว"
-    recenter: "จัดแผนที่ให้รถอยู่ตรงกลาง"
-    fit-route: "แสดงเส้นทางทั้งหมด"
-    eta: "เวลาที่คาดว่าจะถึง"
-    in-minutes: "อีกประมาณ {minutes} นาที"
-    window: "ช่วงเวลาจัดส่ง"
-    before-yours: "ก่อนถึงคุณ"
-    stops-count: "{count, plural, =0 {ไม่มี} other {# จุด}}"
-    estimate-may-change: "เวลาโดยประมาณอาจเปลี่ยนแปลง"
-    driver: "คนขับของคุณ"
-    online: "ออนไลน์"
-    location-paused: "หยุดแชร์ตำแหน่งชั่วคราว"
-    call-short: "โทร"
-    message: "ข้อความ"
-    contact-note: "การโทรและข้อความจะส่งไปที่ทีมบริการลูกค้าของ {name}"
-    proof: "หลักฐานการส่งมอบ"
-    open-photo: "เปิดรูปการส่งมอบ"
-    open-signature: "เปิดลายเซ็น"
-    open-scan: "เปิดผลการสแกน"
-    proof-photo: "รูปการส่งมอบ"
-    proof-signature: "ลายเซ็น"
-    proof-scan: "สแกนที่หน้าประตู"
-    instructions: "คำแนะนำการจัดส่ง"
-    edit: "แก้ไข"
-    instructions-help: "รหัสประตู จุดที่ให้วาง หรือผู้ที่เซ็นรับแทนได้"
-    cancel: "ยกเลิก"
-    save: "บันทึก"
-    no-instructions: "ยังไม่มีคำแนะนำ"
-    updates: "อัปเดต"
-    no-updates: "ยังไม่มีอัปเดต"
-    show-fewer: "แสดงอัปเดตน้อยลง"
-    show-earlier: "แสดงอัปเดตก่อนหน้า ({count})"
-    today: "วันนี้"
-    yesterday: "เมื่อวาน"
-    items: "สินค้าในการจัดส่งนี้"
-    item: "สินค้า"
-    quantity: "จำนวน {count}"
-    share: "แชร์การติดตาม"
-    report: "แจ้งปัญหา"
-    contact: "ติดต่อ {name}"
-    report-label: "การจัดส่งของคุณมีปัญหาอะไร?"
-    send: "ส่ง"
-    close: "ปิด"
-    no-orders: "ยังไม่มีออเดอร์"
-    no-orders-help: "การจัดส่งในบัญชีของคุณจะแสดงที่นี่"
+    track-another: ติดตามเลขอื่น
+    unavailable-title: ไม่สามารถติดตามพัสดุที่นี่ได้
+    unavailable-help: หน้าติดตามพัสดุนี้ยังไม่เปิดใช้งาน ใช้ลิงก์ในอีเมลแจ้งการจัดส่ง หรือติดต่อบริษัทที่ส่งสินค้าให้คุณ
+    lookup-title: ติดตามพัสดุของคุณ
+    lookup-sub: ดูว่าพัสดุอยู่ที่ไหนและจะมาถึงเมื่อไร
+    tracking-number: เลขติดตามพัสดุ
+    tracking-number-placeholder: เช่น DSV5529445373TH
+    tracking-number-help: ดูได้ในอีเมลยืนยันหรือบนฉลากพัสดุ
+    lookup-neutral: ไม่พบข้อมูลติดตามของเลขนี้ ตรวจสอบว่าตรงกับอีเมลหรือฉลากพัสดุแล้วลองอีกครั้ง
+    lookup-rate: คุณลองหลายครั้งติดกันแล้ว พักสักครู่แล้วลองใหม่อีกครั้งในอีกไม่กี่นาที
+    looking-up: กำลังค้นหา...
+    track: ติดตาม
+    or: หรือ
+    your-orders: ออเดอร์ของคุณ
+    sign-in: เข้าสู่ระบบเพื่อดูออเดอร์ทั้งหมด
+    sign-in-account: เข้าสู่ระบบบัญชีของคุณ
+    back: กลับ
+    help: ต้องการความช่วยเหลือ?
+    language: ภาษา
+    powered-by: Powered by Fleetbase
+    dismiss: ปิด
+    chip-limited: มุมมองแบบจำกัด · ยืนยันตัวตนเพื่อดูรายละเอียด
+    chip-verified: ยืนยันแล้วบนอุปกรณ์นี้
+    chip-account: เข้าสู่ระบบแล้ว
+    chip-staff: 'มุมมองพนักงาน: สิ่งที่ลูกค้ารายนี้เห็น'
+    status: สถานะ
+    verify-to-see: ยืนยันตัวตนเพื่อดูการจัดส่งของคุณ
+    last-update: 'อัปเดตล่าสุด: {date}'
+    copy: คัดลอก
+    verify-title: ดูรายละเอียดการจัดส่งทั้งหมด
+    verify-help: เพื่อความเป็นส่วนตัวของคุณ แผนที่ เวลาที่จะถึง และรายละเอียดการจัดส่งจะแสดงหลังยืนยันตัวตนสั้นๆ เราจะส่งรหัส 6 หลักไปที่เบอร์โทรหรืออีเมลในออเดอร์นี้
+    verify-button: ยืนยันตัวตน
+    verify-unlock: ยืนยันตัวตนเพื่อปลดล็อก
+    locked-map: แผนที่สด
+    locked-arrival: เวลาที่จะถึงและคนขับ
+    locked-details: อัปเดต สินค้า และหลักฐานการส่งมอบ
+    stage-preparing: กำลังเตรียมสินค้า
+    stage-scheduled: นัดส่งแล้ว
+    stage-dispatched: มอบหมายคนขับแล้ว
+    stage-in_transit: กำลังจัดส่ง
+    stage-delivered: ส่งถึงแล้ว
+    stage-issue: ต้องตรวจสอบ
+    stage-canceled: ยกเลิกแล้ว
+    stage-toast-preparing: กำลังเตรียมออเดอร์ของคุณ
+    stage-toast-scheduled: นัดส่งพัสดุของคุณแล้ว
+    stage-toast-dispatched: มอบหมายคนขับแล้ว
+    stage-toast-in_transit: ออเดอร์ของคุณกำลังเดินทาง
+    stage-toast-delivered: ออเดอร์ของคุณส่งถึงแล้ว
+    stage-toast-issue: มีอัปเดตเกี่ยวกับการจัดส่งของคุณ
+    stage-toast-canceled: ออเดอร์ของคุณถูกยกเลิก
+    verify-title-short: ยืนยันตัวตน
+    verify-choose-help: เพื่อปกป้องรายละเอียดการจัดส่ง เราจะส่งรหัส 6 หลักไปที่ช่องทางติดต่อในออเดอร์นี้
+    send-by: ส่งรหัสทาง
+    channel-sms: SMS
+    channel-email: อีเมล
+    send-failed: ส่งรหัสไม่สำเร็จ กรุณาลองอีกครั้ง
+    sending: กำลังส่งรหัส...
+    send-code: ส่งรหัส
+    masked-note: เราแสดงเบอร์โทรหรืออีเมลของคุณเพียงบางส่วนเท่านั้น
+    no-contact-title: ยืนยันตัวตนที่นี่ไม่ได้
+    no-contact-help: ออเดอร์นี้ไม่มีเบอร์โทรหรืออีเมลสำหรับส่งรหัส {name} ช่วยคุณเรื่องการจัดส่งได้
+    call: โทร {phone}
+    renew-title: ขอรหัสใหม่
+    renew-expired: รหัสนั้นหมดอายุแล้ว รหัสใช้ได้ 10 นาที
+    renew-unlocked: ลองใหม่ได้แล้ว เราจะส่งรหัสใหม่ให้ รหัสเดิมจะใช้ไม่ได้อีก
+    renew-limited: คุณขอรหัสหลายครั้งแล้ว กรุณารอสักครู่ก่อนขอรหัสใหม่
+    renew-failed: เกิดข้อผิดพลาด ขอรหัสใหม่เพื่อลองอีกครั้ง
+    send-new-code: ส่งรหัสใหม่
+    verified-title: ยืนยันตัวตนแล้ว
+    locked-title: หยุดส่งรหัสชั่วคราว
+    enter-code: กรอกรหัสของคุณ
+    code-sent-sms: เราส่งรหัส 6 หลักทาง SMS ไปที่ {masked} แล้ว
+    code-sent-email: เราส่งรหัส 6 หลักทางอีเมลไปที่ {masked} แล้ว
+    code-label: รหัส 6 หลัก
+    code-expires: รหัสจะหมดอายุใน 10 นาที
+    code-wrong: รหัสไม่ถูกต้อง เหลืออีก {count} ครั้ง
+    code-locked: ลองผิดหลายครั้งเกินไป เพื่อความปลอดภัย ระบบหยุดส่งรหัสชั่วคราว ลองใหม่ใน {time}
+    code-success: ยืนยันแล้ว กำลังเปิดข้อมูลการจัดส่ง...
+    resend-in: ส่งรหัสอีกครั้งได้ใน {time}
+    resend: ส่งรหัสอีกครั้ง
+    switch-to-sms: ส่งทาง SMS แทน
+    switch-to-email: ส่งทางอีเมลแทน
+    stay-verified: เมื่อยืนยันแล้ว อุปกรณ์นี้จะคงสถานะยืนยันไว้ {hours} ชั่วโมง ออกจากระบบได้ทุกเมื่อ
+    verified-toast: ยืนยันตัวตนแล้ว
+    verified-toast-help: อุปกรณ์นี้คงสถานะยืนยันไว้สำหรับการจัดส่งนี้
+    signed-out-toast: ออกจากระบบบนอุปกรณ์นี้แล้ว
+    instructions-saved: บันทึกคำแนะนำการจัดส่งแล้ว
+    action-failed: ทำรายการไม่สำเร็จ กรุณาลองอีกครั้ง
+    report-sent: ส่งข้อความแล้ว
+    report-sent-help: '{name} จะติดต่อกลับหาคุณ'
+    share-copied: คัดลอกลิงก์แล้ว
+    share-copied-help: ผู้ที่คุณแชร์ลิงก์ให้จะเห็นแบบจำกัดจนกว่าจะยืนยันตัวตนเอง
+    your-stop: จุดส่งที่ {number}
+    your-stops: จุดส่งของคุณ
+    sign-out: ไม่ใช่คุณ? ออกจากระบบ
+    live: สด
+    reconnecting: กำลังเชื่อมต่อใหม่... หยุดอัปเดตสดชั่วคราว
+    timezone: เวลาตามเขตเวลาของคุณ ({zone})
+    timezone-company: เวลาตามเขตเวลา {zone}
+    progress: ความคืบหน้าการจัดส่ง
+    step-created: สร้างออเดอร์
+    step-dispatched: มอบหมายงาน
+    step-started: รับสินค้าแล้ว
+    step-enroute: กำลังจัดส่ง
+    step-delivered: ส่งถึงแล้ว
+    step-issue: ส่งไม่สำเร็จ
+    step-canceled: ยกเลิก
+    headline-preparing: กำลังเตรียมออเดอร์ของคุณ
+    headline-scheduled: นัดส่งวันที่ {date}
+    headline-dispatched: มอบหมายคนขับแล้ว
+    headline-delayed: อาจล่าช้าเล็กน้อย
+    headline-arriving: ถึง{day}
+    headline-in-transit: กำลังเดินทาง
+    headline-delivered: ส่งถึงแล้ว
+    headline-issue: การจัดส่งของคุณมีปัญหา
+    headline-canceled: ออเดอร์นี้ถูกยกเลิก
+    sub-arriving: '{window} · อีกประมาณ {minutes} นาที'
+    sub-window: ช่วงเวลาจัดส่ง {window}
+    sub-delivered: '{when}'
+    sub-dispatched: การติดตามสดจะเริ่มเมื่อคนขับออกเดินทาง
+    sub-preparing: เราจะแจ้งให้ทราบเมื่อสินค้าออกเดินทาง
+    sub-in-transit: สินค้าออกเดินทางแล้ว กำลังมาหาคุณ
+    delayed-title: ล่าช้า
+    delayed-help: เราจะอัปเดตเวลาที่จะถึงให้เป็นปัจจุบันเสมอ
+    stop-of: การจัดส่งของคุณคือจุดที่ {position} จาก {total} จุด
+    stops-private: '{count, plural, =0 {คุณคือจุดถัดไป} other {อีก # จุดก่อนถึงคุณ}} จุดส่งอื่นเป็นข้อมูลส่วนตัว คุณจึงเห็นเฉพาะของตัวเอง'
+    map: แผนที่
+    map-label: 'แผนที่การจัดส่ง: รถกำลังเดินทางมาที่อยู่ของคุณ'
+    map-pickup: จุดรับสินค้า
+    map-driver: คนขับ
+    map-pickup-named: จุดรับสินค้า · {name}
+    map-fullscreen: แผนที่เต็มจอ
+    map-exit-fullscreen: ออกจากโหมดเต็มจอ
+    stop-card-title: จัดส่งไปที่
+    stop-upcoming: กำลังจะถึง
+    stop-complete: ส่งถึงแล้ว
+    map-hidden: ซ่อนแผนที่แล้วเพราะส่งออเดอร์ถึงแล้ว เราหยุดแชร์ตำแหน่งคนขับเมื่อถึงหน้าประตูบ้านคุณ
+    last-seen: เห็นล่าสุด {minutes} นาทีที่แล้ว
+    recenter: จัดแผนที่ให้รถอยู่ตรงกลาง
+    fit-route: แสดงเส้นทางทั้งหมด
+    eta: เวลาที่คาดว่าจะถึง
+    in-minutes: อีกประมาณ {minutes} นาที
+    window: ช่วงเวลาจัดส่ง
+    before-yours: ก่อนถึงคุณ
+    stops-count: '{count, plural, =0 {ไม่มี} other {# จุด}}'
+    estimate-may-change: เวลาโดยประมาณอาจเปลี่ยนแปลง
+    driver: คนขับของคุณ
+    online: ออนไลน์
+    location-paused: หยุดแชร์ตำแหน่งชั่วคราว
+    call-short: โทร
+    message: ข้อความ
+    contact-note: การโทรและข้อความจะส่งไปที่ทีมบริการลูกค้าของ {name}
+    proof: หลักฐานการส่งมอบ
+    open-photo: เปิดรูปการส่งมอบ
+    open-signature: เปิดลายเซ็น
+    open-scan: เปิดผลการสแกน
+    proof-photo: รูปการส่งมอบ
+    proof-signature: ลายเซ็น
+    proof-scan: สแกนที่หน้าประตู
+    instructions: คำแนะนำการจัดส่ง
+    edit: แก้ไข
+    instructions-help: รหัสประตู จุดที่ให้วาง หรือผู้ที่เซ็นรับแทนได้
+    cancel: ยกเลิก
+    save: บันทึก
+    no-instructions: ยังไม่มีคำแนะนำ
+    updates: อัปเดต
+    no-updates: ยังไม่มีอัปเดต
+    show-fewer: แสดงอัปเดตน้อยลง
+    show-earlier: แสดงอัปเดตก่อนหน้า ({count})
+    today: วันนี้
+    yesterday: เมื่อวาน
+    items: สินค้าในการจัดส่งนี้
+    item: สินค้า
+    quantity: จำนวน {count}
+    share: แชร์การติดตาม
+    report: แจ้งปัญหา
+    contact: ติดต่อ {name}
+    report-label: การจัดส่งของคุณมีปัญหาอะไร?
+    send: ส่ง
+    close: ปิด
+    no-orders: ยังไม่มีออเดอร์
+    no-orders-help: การจัดส่งในบัญชีของคุณจะแสดงที่นี่
