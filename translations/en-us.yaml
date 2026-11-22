@@ -4589,10 +4589,18 @@ fleetops-ui:
                 events:
                     recent-device-events-warning-signals-and: Recent device events, warning signals, and processing state.
                     telemetry-events: Telemetry Events
+                    hp:
+                        no-telemetry-events: No telemetry events
+                        events-appear-after-this-device-reports: Events appear after this device reports provider activity.
+                        refresh: Refresh
                 sensors:
                     device-sensors: Device Sensors
                     recent-sensor-readings-and-health-for: Recent sensor readings and health for this device.
                     sensor-inventory: Sensor Inventory
+                    hp:
+                        no-sensors-connected: No sensors connected
+                        sensors-appear-here-after-provider-telemetry: Sensors appear here after provider telemetry links them to this device.
+                        refresh: Refresh
             telemetry:
                 device: 'Device: {position_at}'
                 device-position: 'Device position: {positionTime}'
@@ -4754,6 +4762,10 @@ fleetops-ui:
                 manage-credentials-connection-health-sync-windows: Manage credentials, connection health, sync windows, and imported transaction status for each fuel integration.
                 manage-integration: Manage integration
                 sync-issues: '{syncErrorCount} sync issues'
+                hp:
+                    no-fuel-connections-found: No fuel connections found
+                    adjust-your-filters-or-connect-a: Adjust your filters or connect a fuel provider to import transactions.
+                    connect-provider: Connect provider
             matching-priority:
                 active: '{length} active'
                 all-identifiers-are-active: All identifiers are active
@@ -5032,6 +5044,9 @@ fleetops-ui:
                     filter-by-device: Filter by Device
                     filter-by-telematic: Filter by Telematic
                     select-date-range: Select date range
+                    hp:
+                        no-device-events: No device events
+                        events-appear-here-after-connected-devices: Events appear here after connected devices report activity for the selected filters.
                 geofence-event-listing:
                     clear: Clear
                     events-will-appear-here-in-real: Events will appear here in real time as drivers and vehicles cross zone and service area boundaries.
@@ -5049,6 +5064,27 @@ fleetops-ui:
                     step-backward: Step backward
                     step-forward: Step forward
                     stop: Stop
+                    hp:
+                        no-positions-loaded: No positions loaded
+                        select-a-trackable-and-date-range: Select a trackable and date range to load position history for replay.
+                driver-listing:
+                    hp:
+                        no-drivers-visible: No drivers visible
+                        drivers-appear-here-when-they-are: Drivers appear here when they are available in the live map context.
+                        no-drivers-match-this-search: No drivers match this search
+                        adjust-the-search-to-find-another: Adjust the search to find another driver.
+                place-listing:
+                    hp:
+                        no-places-visible: No places visible
+                        places-appear-here-when-they-are: Places appear here when they are available in the current map context.
+                        no-places-match-this-search: No places match this search
+                        adjust-the-search-to-find-another: Adjust the search to find another place.
+                vehicle-listing:
+                    hp:
+                        no-vehicles-visible: No vehicles visible
+                        vehicles-appear-here-when-they-are: Vehicles appear here when they are available in the live map context.
+                        no-vehicles-match-this-search: No vehicles match this search
+                        adjust-the-search-to-find-another: Adjust the search to find another vehicle.
             marker-card:
                 driver:
                     email: Email
@@ -5259,6 +5295,8 @@ fleetops-ui:
                     orchestrator-constraints: Orchestrator Constraints
                     priority: Priority
                     required-skills: Required Skills
+                    no-customer: No customer
+                    no-facilitator: No facilitator
                 metadata:
                     metadata: Metadata
                 notes:
@@ -5269,6 +5307,8 @@ fleetops-ui:
                     no-proof-of-delivery: No proof of delivery
                 route:
                     all-stops: All Stops - {routeStopsCount}
+                    hp:
+                        view-activity: View activity
                 tracking:
                     assign-driver: Assign driver
                     based-on-provider-route-and-driver: Based on provider route and driver signal
@@ -5329,6 +5369,7 @@ fleetops-ui:
             panel-header:
                 date-created: 'Date Created: {createdAt}'
                 type: 'Type: {type}'
+                dispatched-at: Dispatched at {date}
             route-editor:
                 add-a-stop-to-build-a: Add a stop to build a mixed route between pickup and dropoff.
                 configured: '{length} configured'
@@ -5665,6 +5706,11 @@ fleetops-ui:
                 provider-connections: Provider Connections
                 start-with-a-provider-connection-then: Start with a provider connection, then sync devices and attach them to vehicles.
                 warnings: '{healthWarningCount} warnings'
+                hp:
+                    no-provider-connections: No provider connections
+                    connect-a-telematics-provider-to-sync: Connect a telematics provider to sync devices, events, and vehicle attachments.
+                    connect-provider: Connect provider
+                    telematics-guide: Telematics guide
             settings:
                 advanced-connection-settings: Advanced connection settings
                 cancel: Cancel
@@ -6163,11 +6209,23 @@ fleetops-ui:
                             refresh: Refresh
                             telemetry-events: Telemetry Events
                             warning-signals-diagnostics-and-unprocessed-telemetry: Warning signals, diagnostics, and unprocessed telemetry.
+                            hp:
+                                no-telemetry-events: No telemetry events
+                                events-appear-after-this-device-reports: Events appear after this device reports provider activity.
+                                no-events-match-your-filters: No events match your filters
+                                adjust-the-search-severity-or-date: Adjust the search, severity, or date filters to review other events.
+                                refresh: Refresh
                         sensors:
                             device-sensors: Device Sensors
                             filter-by-type-status-and-last: Filter by type, status, and last reading.
                             readings-thresholds-and-reporting-health-for: Readings, thresholds, and reporting health for this device.
                             sensor-inventory-health: Sensor Inventory + Health
+                            hp:
+                                no-sensors-connected: No sensors connected
+                                sensors-appear-here-after-provider-telemetry: Sensors appear here after provider telemetry links them to this device.
+                                no-sensors-match-your-filters: No sensors match your filters
+                                adjust-the-search-or-filters-to: Adjust the search or filters to find another sensor.
+                                refresh: Refresh
                         vehicle:
                             altitude: Altitude
                             call-sign: Call Sign
@@ -6178,6 +6236,15 @@ fleetops-ui:
                             vehicle: Vehicle
                     new:
                         create-a-new-device: Create a new device
+                    hp:
+                        add-your-first-device: Add your first device
+                        devices-connect-vehicles-and-assets-to: Devices connect vehicles and assets to telemetry, events, tracking, and provider syncs.
+                        no-devices-match-your-filters: No devices match your filters
+                        adjust-the-search-or-filters-to: Adjust the search or filters to find another device.
+                        new-device: New device
+                        import: Import
+                        devices-guide: Devices guide
+                        device-guide: Device guide
             events:
                 details:
                     back: Back
@@ -6188,6 +6255,13 @@ fleetops-ui:
                     refresh: Refresh
                 index:
                     connectivity-events: Connectivity Events
+                    hp:
+                        no-connectivity-events-yet: No connectivity events yet
+                        events-appear-here-after-connected-devices: Events appear here after connected devices or providers begin sending telemetry signals.
+                        no-events-match-your-filters: No events match your filters
+                        adjust-the-search-provider-device-or: Adjust the search, provider, device, or date filters to review other events.
+                        refresh: Refresh
+                        events-guide: Events guide
             fuel-providers:
                 details:
                     back: Back
@@ -6241,6 +6315,13 @@ fleetops-ui:
                     transactions-label: 'Transactions: {transactions}'
                     transactions:
                         imported-transactions: Imported Transactions
+                        hp:
+                            no-transactions-match-your-filters: No transactions match your filters
+                            no-imported-transactions: No imported transactions
+                            adjust-or-clear-the-filters-to: Adjust or clear the filters to see other transactions.
+                            fuel-transactions-appear-here-after-this: Fuel transactions appear here after this provider syncs bills.
+                            adjust-filters-or-sync-the-provider: Adjust filters or sync the provider again to review imported transactions.
+                            refresh: Refresh
                 edit:
                     cancel: Cancel
                     changes-affect-credential-tests-transaction-sync: Changes affect credential tests, transaction sync, matching, and Fuel Report creation.
@@ -6260,6 +6341,14 @@ fleetops-ui:
                 index:
                     new:
                         create-a-new-sensor: Create a new sensor
+                    hp:
+                        add-your-first-sensor: Add your first sensor
+                        sensors-capture-telemetry-signals-that-can: Sensors capture telemetry signals that can power events, conditions, and operational visibility.
+                        no-sensors-match-your-filters: No sensors match your filters
+                        adjust-the-search-or-filters-to: Adjust the search or filters to find another sensor.
+                        new-sensor: New sensor
+                        import: Import
+                        sensors-guide: Sensors guide
             telematics:
                 details:
                     attachments:
@@ -6296,6 +6385,12 @@ fleetops-ui:
                         review-synced-provider-devices-connection-state: Review synced provider devices, connection state, and vehicle mapping from this connection.
                         search-provider-identifiers-filter-attachment-state: Search provider identifiers, filter attachment state, and open devices for troubleshooting.
                         synced-devices: Synced Devices
+                        hp:
+                            no-synced-devices: No synced devices
+                            run-a-provider-sync-or-adjust: Run a provider sync or adjust filters to review devices from this connection.
+                            no-devices-match-your-filters: No devices match your filters
+                            adjust-the-search-or-filters-to: Adjust the search or filters to find another synced device.
+                            refresh: Refresh
                     events:
                         event-review-triage: Event Review + Triage
                         filter-events-by-severity-device-type: Filter events by severity, device, type, and processed state before opening details.
@@ -6304,6 +6399,12 @@ fleetops-ui:
                         refresh: Refresh
                         review-provider-events-warning-signals-and: Review provider events, warning signals, and unprocessed telemetry for this connection.
                         telemetry-events: Telemetry Events
+                        hp:
+                            no-telemetry-events: No telemetry events
+                            events-appear-after-synced-devices-report: Events appear after synced devices report provider activity.
+                            no-events-match-your-filters: No events match your filters
+                            adjust-the-search-severity-or-date: Adjust the search, severity, or date filters to review other events.
+                            refresh: Refresh
                     last-sync: 'Last sync: {na}'
                     last-test: 'Last test: {na}'
                     logs:
@@ -6320,6 +6421,12 @@ fleetops-ui:
                         review-sensor-readings-discovered-from-synced: Review sensor readings discovered from synced devices and identify sensors that are not reporting.
                         sensor-inventory-health: Sensor Inventory + Health
                         sensor-readings: Sensor Readings
+                        hp:
+                            no-sensor-readings: No sensor readings
+                            sensor-readings-appear-after-devices-sync: Sensor readings appear after devices sync telemetry from this provider.
+                            no-readings-match-your-filters: No readings match your filters
+                            adjust-the-search-or-filters-to: Adjust the search or filters to find other sensor readings.
+                            refresh: Refresh
                     settings: Settings
                     sync-devices: Sync Devices
                     telematic-connection-sections: Telematic connection sections
@@ -6356,9 +6463,23 @@ fleetops-ui:
             inspection-forms:
                 index:
                     inspection-forms: Inspection Forms
+                    hp:
+                        create-your-first-inspection-form: Create your first inspection form
+                        build-dvir-and-safety-checklists-drivers: Build DVIR and safety checklists drivers can submit before defects become downtime.
+                        no-inspection-forms-match-your-filters: No inspection forms match your filters
+                        adjust-search-or-filters-to-find: Adjust search or filters to find another form.
+                        new-form: New form
+                        inspections-guide: Inspections guide
             inspection-submissions:
                 index:
                     inspections: Inspections
+                    hp:
+                        no-inspections-yet: No inspections yet
+                        capture-dvir-submissions-and-turn-failed: Capture DVIR submissions and turn failed items into issues or work orders.
+                        no-inspections-match-your-filters: No inspections match your filters
+                        adjust-search-or-filters-to-find: Adjust search or filters to find another inspection.
+                        new-inspection: New inspection
+                        inspections-guide: Inspections guide
             schedules:
                 index:
                     details:
@@ -6366,26 +6487,114 @@ fleetops-ui:
                             bull-opened: • Opened {formatdate}
                             no-work-orders-yet: No work orders yet
                             work-orders-will-appear-here-when: Work orders will appear here when this schedule triggers.
+                    hp:
+                        create-your-first-maintenance-schedule: Create your first maintenance schedule
+                        schedules-help-automate-preventive-work-and: Schedules help automate preventive work and keep service intervals visible before assets fall behind.
+                        no-maintenance-schedules-match-your-filters: No maintenance schedules match your filters
+                        adjust-the-search-or-filters-to: Adjust the search or filters to find another schedule.
+                        new-schedule: New schedule
+                        import: Import
+                        schedules-guide: Schedules guide
+            equipment:
+                index:
+                    hp:
+                        add-your-first-equipment-item: Add your first equipment item
+                        equipment-records-help-track-assigned-assets: Equipment records help track assigned assets, condition, service history, and operational readiness.
+                        no-equipment-matches-your-filters: No equipment matches your filters
+                        adjust-the-search-or-filters-to: Adjust the search or filters to find another equipment item.
+                        new-equipment: New equipment
+                        import: Import
+                        equipment-guide: Equipment guide
+            maintenances:
+                index:
+                    hp:
+                        no-maintenance-records-yet: No maintenance records yet
+                        log-maintenance-events-to-keep-service: Log maintenance events to keep service history, costs, and asset readiness visible.
+                        no-maintenance-records-match-your-filters: No maintenance records match your filters
+                        adjust-the-search-or-filters-to: Adjust the search or filters to find another maintenance record.
+                        new-maintenance: New maintenance
+                        import: Import
+            parts:
+                index:
+                    hp:
+                        add-your-first-part: Add your first part
+                        parts-keep-replacement-inventory-and-compatibility: Parts keep replacement inventory and compatibility details ready for maintenance work.
+                        no-parts-match-your-filters: No parts match your filters
+                        adjust-the-search-or-filters-to: Adjust the search or filters to find another part.
+                        new-part: New part
+                        import: Import
+                        parts-guide: Parts guide
+            work-orders:
+                index:
+                    hp:
+                        no-work-orders-yet: No work orders yet
+                        create-work-orders-to-assign-maintenance: Create work orders to assign maintenance tasks, track progress, and close out repairs.
+                        no-work-orders-match-your-filters: No work orders match your filters
+                        adjust-the-search-or-filters-to: Adjust the search or filters to find another work order.
+                        new-work-order: New work order
+                        import: Import
+                        work-orders-guide: Work orders guide
         management:
             contacts:
                 customers:
                     new:
                         create-a-new-customer: Create a new customer
+                    hp:
+                        add-your-first-customer: Add your first customer
+                        customers-give-orders-an-owner-contact: Customers give orders an owner, contact details, and account context for service history.
+                        no-customers-match-your-filters: No customers match your filters
+                        adjust-the-search-or-filters-to: Adjust the search or filters to find another customer.
+                        new-customer: New customer
+                        import: Import
                 index:
                     new:
                         create-a-new-contact: Create a new contact
+                    hp:
+                        add-your-first-contact: Add your first contact
+                        contacts-keep-customer-vendor-and-internal: Contacts keep customer, vendor, and internal stakeholder details ready for orders and communication.
+                        no-contacts-match-your-filters: No contacts match your filters
+                        adjust-the-search-or-filters-to: Adjust the search or filters to find another contact.
+                        new-contact: New contact
+                        import: Import
+                        contacts-guide: Contacts guide
             drivers:
                 index:
                     new:
                         create-a-new-driver: Create a new driver
+                    hp:
+                        add-your-first-driver: Add your first driver
+                        drivers-power-dispatching-live-fleet-visibility: Drivers power dispatching, live fleet visibility, assignments, and delivery activity.
+                        no-drivers-match-your-search: No drivers match your search
+                        adjust-the-search-or-filters-to: Adjust the search or filters to find another driver.
+                        new-driver: New driver
+                        import: Import
+                        drivers-guide: Drivers guide
+                        driver-guide: Driver guide
             fleets:
                 index:
                     new:
                         create-a-new-fleet: Create a new fleet
+                    hp:
+                        create-your-first-fleet: Create your first fleet
+                        fleets-help-group-vehicles-and-drivers: Fleets help group vehicles and drivers for dispatching, reporting, and operational coverage.
+                        no-fleets-match-your-filters: No fleets match your filters
+                        adjust-the-search-or-filters-to: Adjust the search or filters to find another fleet.
+                        new-fleet: New fleet
+                        import: Import
+                        fleets-guide: Fleets guide
+                        fleet-guide: Fleet guide
             fuel-reports:
                 index:
                     new:
                         create-a-new-fuel-report: Create a new fuel report
+                    hp:
+                        no-fuel-reports-yet: No fuel reports yet
+                        create-fuel-reports-to-track-vehicle: Create fuel reports to track vehicle fuel usage, cost, and supporting transaction records.
+                        no-fuel-reports-match-your-filters: No fuel reports match your filters
+                        adjust-the-search-or-filters-to: Adjust the search or filters to find another fuel report.
+                        new-fuel-report: New fuel report
+                        import: Import
+                        fuel-reports-guide: Fuel reports guide
             fuel-transactions:
                 index:
                     details:
@@ -6404,18 +6613,68 @@ fleetops-ui:
                         reprocess: Reprocess
                         review-this-purchase-or-exclude-it: Review this purchase or exclude it from automatic matching.
                         vehicle: Vehicle
+                    hp:
+                        no-transactions-match-your-filters: No transactions match your filters
+                        no-fuel-transactions: No fuel transactions
+                        imported-fuel-card-bills-and-provider: Imported fuel card bills and provider purchase records appear here after provider syncs complete.
+                        adjust-the-search-or-filters-to: Adjust the search or filters to review other imported transactions.
+                        refresh: Refresh
+                        fuel-reports-guide: Fuel reports guide
             issues:
                 index:
                     new:
                         create-a-new-issue: Create a new issue
+                    hp:
+                        no-issues-reported: No issues reported
+                        track-vehicle-driver-facility-and-service: Track vehicle, driver, facility, and service issues here so follow-up work stays visible.
+                        no-issues-match-your-filters: No issues match your filters
+                        clear-the-search-or-filters-to: Clear the search or filters to review other reported issues.
+                        new-issue: New issue
+                        import: Import
+                        issues-guide: Issues guide
             vehicles:
                 index:
                     new:
                         create-a-new-vehicle: Create a new vehicle
+                    hp:
+                        add-your-first-vehicle: Add your first vehicle
+                        vehicles-connect-assignments-live-tracking-fleet: Vehicles connect assignments, live tracking, fleet capacity, maintenance, and compliance history.
+                        no-vehicles-match-your-filters: No vehicles match your filters
+                        adjust-the-search-or-filters-to: Adjust the search or filters to find another vehicle.
+                        new-vehicle: New vehicle
+                        import: Import
+                        vehicles-guide: Vehicles guide
+                        vehicle-guide: Vehicle guide
             vendors:
                 index:
                     new:
                         create-a-new-vendor: Create a new vendor
+                    hp:
+                        add-your-first-vendor: Add your first vendor
+                        vendors-let-your-team-manage-external: Vendors let your team manage external carriers, service providers, and operational partners.
+                        no-vendors-match-your-filters: No vendors match your filters
+                        adjust-the-search-or-filters-to: Adjust the search or filters to find another vendor.
+                        new-vendor: New vendor
+                        import: Import
+                        vendors-guide: Vendors guide
+                        vendor-guide: Vendor guide
+                integrated:
+                    hp:
+                        no-integrated-vendors-yet: No integrated vendors yet
+                        integrated-vendor-records-appear-here-after: Integrated vendor records appear here after vendor integrations are connected and synchronized.
+                        no-integrated-vendors-match-your-filters: No integrated vendors match your filters
+                        adjust-the-search-or-filters-to: Adjust the search or filters to find another integrated vendor.
+                        integrated-vendors-guide: Integrated vendors guide
+            places:
+                index:
+                    hp:
+                        add-your-first-place: Add your first place
+                        places-keep-frequent-pickup-dropoff-facility: Places keep frequent pickup, dropoff, facility, and service locations ready for orders and routing.
+                        no-places-match-your-filters: No places match your filters
+                        adjust-the-search-or-filters-to: Adjust the search or filters to find another saved location.
+                        new-place: New place
+                        import: Import
+                        places-guide: Places guide
         settings:
             index:
                 compact-next-steps-for-operators: Compact next steps for operators.
@@ -6430,6 +6689,13 @@ fleetops-ui:
                 index:
                     start-payments-onboard: Start payments onboard
                     total: 'Total {currency}:'
+                    hp:
+                        no-payment-transactions-yet: No payment transactions yet
+                        completed-customer-payments-will-appear-here: Completed customer payments will appear here once Stripe starts sending transaction records.
+                        no-payments-match-your-filters: No payments match your filters
+                        adjust-filters-or-refresh-the-page: Adjust filters or refresh the page to review other payment transactions.
+                        refresh: Refresh
+                        payments-guide: Payments guide
             routing:
                 a-public-osrm-server-this-organization: A public OSRM server this organization''s routes, distances and ETAs use. Private network addresses are refused.
                 advanced-settings: Advanced Settings
@@ -6465,6 +6731,39 @@ fleetops-ui:
                 traffic-aware-eta: Traffic-Aware ETA
                 use-my-own-osrm-server: Use my own OSRM server
                 use-provider-traffic-data-when-supported: Use provider traffic data when supported.
+        analytics:
+            reports:
+                index:
+                    hp:
+                        no-reports-yet: No reports yet
+                        create-a-fleet-ops-report-to: Create a Fleet-Ops report to start tracking operational trends, utilization, and performance over time.
+                        no-reports-match-your-search: No reports match your search
+                        adjust-the-search-or-filters-to: Adjust the search or filters to find an existing report.
+                        new-report: New report
+                        refresh: Refresh
+                        reports-guide: Reports guide
+        operations:
+            orders:
+                index:
+                    hp:
+                        create-your-first-order: Create your first order
+                        orders-are-the-center-of-fleet: 'Orders are the center of Fleet-Ops: plan routes, assign drivers and vehicles, track progress, and collect proof.'
+                        no-orders-match-your-filters: No orders match your filters
+                        adjust-the-search-bulk-search-or: Adjust the search, bulk search, or filters to find another order.
+                        new-order: New order
+                        import: Import
+                        orders-guide: Orders guide
+                        order-guide: Order guide
+            service-rates:
+                index:
+                    hp:
+                        set-up-your-first-service-rate: Set up your first service rate
+                        service-rates-define-how-fleet-ops: Service rates define how Fleet-Ops prices routes, zones, distance, and other service rules.
+                        no-service-rates-match-your-filters: No service rates match your filters
+                        adjust-the-search-or-filters-to: Adjust the search or filters to find another service rate.
+                        new-service-rate: New service rate
+                        refresh: Refresh
+                        service-rates-guide: Service rates guide
     js:
         components:
             admin:
@@ -6754,6 +7053,26 @@ fleetops-ui:
                         stale-driver-location: Stale driver location
                         tracking-estimate-warning: Tracking estimate warning
                         1-warning: 1 warning
+                        provider-route: '{provider} route'
+                        confidence-level: '{confidence} confidence'
+                        fallback-provider: 'Fallback: {provider}'
+                        confidence-levels:
+                            high: High
+                            medium: Medium
+                            low: Low
+                            unknown: Unknown
+                        reported-from-existing-route-data: Reported from existing route data
+                        reported-eta-may-not-reflect-latest: Reported ETA may not reflect the latest tracking signal.
+                        n-warnings: '{count} warnings'
+                        'yes': 'Yes'
+                        'no': 'No'
+                        warning-assign-driver: Assign a driver to start live tracking and improve ETA accuracy.
+                        warning-location-missing: Driver location is missing, so ETA accuracy may be limited.
+                        warning-location-stale: Driver location is stale. ETA may not reflect the latest movement.
+                        warning-fallback: Using {provider} fallback because the preferred tracking provider was unavailable.
+                        warning-low-confidence: '{confidence} confidence ETA. Treat the estimate as directional.'
+                        warning-provider-error: Tracking provider returned an error. Showing the best available estimate.
+                        unable-to-ping-driver-app: Unable to ping driver app.
                 route-editor:
                     return: Return
             part:
@@ -7262,6 +7581,8 @@ fleetops-ui:
                             update-activity: Update activity
                             view-metadata: View metadata
                             view-order-label: View order label
+                            unassign-driver: Unassign driver
+                            assign-driver: Assign driver
                 service-rates:
                     index:
                         delete-selected: Delete selected...
@@ -9804,3 +10125,7 @@ fleetops-ui:
             scheduled:
                 description: Work has been planned for a specific service window
                 label: Scheduled
+    common:
+        item-n: Item {n}
+        current-odometer-unit: Current Odometer ({unit})
+        fuel-reported-on: Fuel reported on {date}

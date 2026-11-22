@@ -4461,10 +4461,18 @@ fleetops-ui:
                 events:
                     recent-device-events-warning-signals-and: เหตุการณ์อุปกรณ์ล่าสุด สัญญาณเตือน และสถานะการประมวลผล
                     telemetry-events: เหตุการณ์ Telemetry
+                    hp:
+                        no-telemetry-events: ยังไม่มีเหตุการณ์ Telemetry
+                        events-appear-after-this-device-reports: เหตุการณ์จะแสดงเมื่ออุปกรณ์นี้ส่งข้อมูลจากผู้ให้บริการเข้ามา
+                        refresh: รีเฟรช
                 sensors:
                     device-sensors: เซนเซอร์ของอุปกรณ์
                     recent-sensor-readings-and-health-for: ค่าที่อ่านล่าสุดและสุขภาพเซนเซอร์ของอุปกรณ์นี้
                     sensor-inventory: รายการเซนเซอร์
+                    hp:
+                        no-sensors-connected: ยังไม่มีเซนเซอร์ที่เชื่อมต่อ
+                        sensors-appear-here-after-provider-telemetry: เซนเซอร์จะแสดงที่นี่เมื่อข้อมูล Telemetry จากผู้ให้บริการผูกเข้ากับอุปกรณ์นี้
+                        refresh: รีเฟรช
             telemetry:
                 device: 'อุปกรณ์: {position_at}'
                 device-position: 'ตำแหน่งอุปกรณ์: {positionTime}'
@@ -4626,6 +4634,10 @@ fleetops-ui:
                 manage-credentials-connection-health-sync-windows: จัดการข้อมูลเข้าระบบ สุขภาพการเชื่อมต่อ ช่วงซิงก์ และสถานะธุรกรรมที่นำเข้าของแต่ละ Fuel Integration
                 manage-integration: จัดการ Integration
                 sync-issues: ปัญหาการซิงก์ {syncErrorCount}
+                hp:
+                    no-fuel-connections-found: ไม่พบการเชื่อมต่อผู้ให้บริการน้ำมัน
+                    adjust-your-filters-or-connect-a: ปรับตัวกรอง หรือเชื่อมต่อผู้ให้บริการน้ำมันเพื่อนำเข้าธุรกรรม
+                    connect-provider: เชื่อมต่อผู้ให้บริการ
             matching-priority:
                 active: ใช้งาน {length}
                 all-identifiers-are-active: ตัวระบุทั้งหมดใช้งานอยู่
@@ -4904,6 +4916,9 @@ fleetops-ui:
                     filter-by-device: กรองตามอุปกรณ์
                     filter-by-telematic: กรองตาม Telematics
                     select-date-range: เลือกช่วงวันที่
+                    hp:
+                        no-device-events: ยังไม่มีเหตุการณ์จากอุปกรณ์
+                        events-appear-here-after-connected-devices: เหตุการณ์จะแสดงที่นี่เมื่ออุปกรณ์ที่เชื่อมต่อส่งข้อมูลตามตัวกรองที่เลือก
                 geofence-event-listing:
                     clear: ล้าง
                     events-will-appear-here-in-real: เหตุการณ์จะแสดงที่นี่แบบเรียลไทม์เมื่อคนขับและรถข้ามขอบเขตโซนหรือพื้นที่ให้บริการ
@@ -4921,6 +4936,27 @@ fleetops-ui:
                     step-backward: ถอยหลังหนึ่งขั้น
                     step-forward: เดินหน้าหนึ่งขั้น
                     stop: หยุด
+                    hp:
+                        no-positions-loaded: ยังไม่ได้โหลดตำแหน่ง
+                        select-a-trackable-and-date-range: เลือกรถหรือคนขับและช่วงวันที่ เพื่อโหลดประวัติตำแหน่งมาเล่นย้อนหลัง
+                driver-listing:
+                    hp:
+                        no-drivers-visible: ไม่มีคนขับที่แสดงอยู่
+                        drivers-appear-here-when-they-are: คนขับจะแสดงที่นี่เมื่ออยู่ในแผนที่สด
+                        no-drivers-match-this-search: ไม่พบคนขับที่ตรงกับคำค้น
+                        adjust-the-search-to-find-another: ปรับคำค้นเพื่อหาคนขับคนอื่น
+                place-listing:
+                    hp:
+                        no-places-visible: ไม่มีสถานที่ที่แสดงอยู่
+                        places-appear-here-when-they-are: สถานที่จะแสดงที่นี่เมื่ออยู่ในขอบเขตแผนที่ปัจจุบัน
+                        no-places-match-this-search: ไม่พบสถานที่ที่ตรงกับคำค้น
+                        adjust-the-search-to-find-another: ปรับคำค้นเพื่อหาสถานที่อื่น
+                vehicle-listing:
+                    hp:
+                        no-vehicles-visible: ไม่มีรถที่แสดงอยู่
+                        vehicles-appear-here-when-they-are: รถจะแสดงที่นี่เมื่ออยู่ในแผนที่สด
+                        no-vehicles-match-this-search: ไม่พบรถที่ตรงกับคำค้น
+                        adjust-the-search-to-find-another: ปรับคำค้นเพื่อหารถคันอื่น
             marker-card:
                 driver:
                     email: อีเมล
@@ -5131,6 +5167,8 @@ fleetops-ui:
                     orchestrator-constraints: ข้อจำกัดของ Orchestrator
                     priority: ความสำคัญ
                     required-skills: ทักษะที่ต้องการ
+                    no-customer: ไม่มีลูกค้า
+                    no-facilitator: ไม่มีผู้ประสานงาน
                 metadata:
                     metadata: Metadata
                 notes:
@@ -5141,6 +5179,8 @@ fleetops-ui:
                     no-proof-of-delivery: ไม่มีหลักฐานการส่งมอบ
                 route:
                     all-stops: ทุกจุด - {routeStopsCount}
+                    hp:
+                        view-activity: ดูกิจกรรม
                 tracking:
                     assign-driver: มอบหมายคนขับ
                     based-on-provider-route-and-driver: อิงจากเส้นทางของผู้ให้บริการและสัญญาณของคนขับ
@@ -5201,6 +5241,7 @@ fleetops-ui:
             panel-header:
                 date-created: 'วันที่สร้าง: {createdAt}'
                 type: 'ประเภท: {type}'
+                dispatched-at: จ่ายงานเมื่อ {date}
             route-editor:
                 add-a-stop-to-build-a: เพิ่มจุดแวะเพื่อสร้างเส้นทางผสมระหว่างจุดรับและจุดส่ง
                 configured: ตั้งค่าแล้ว {length}
@@ -5537,6 +5578,11 @@ fleetops-ui:
                 provider-connections: การเชื่อมต่อผู้ให้บริการ
                 start-with-a-provider-connection-then: เริ่มจากเชื่อมต่อผู้ให้บริการ แล้วซิงก์อุปกรณ์และติดตั้งกับรถ
                 warnings: คำเตือน {healthWarningCount}
+                hp:
+                    no-provider-connections: ยังไม่มีการเชื่อมต่อผู้ให้บริการ
+                    connect-a-telematics-provider-to-sync: เชื่อมต่อผู้ให้บริการ Telematics เพื่อซิงก์อุปกรณ์ เหตุการณ์ และการผูกกับรถ
+                    connect-provider: เชื่อมต่อผู้ให้บริการ
+                    telematics-guide: คู่มือ Telematics
             settings:
                 advanced-connection-settings: ตั้งค่าการเชื่อมต่อขั้นสูง
                 cancel: ยกเลิก
@@ -6035,11 +6081,23 @@ fleetops-ui:
                             refresh: รีเฟรช
                             telemetry-events: เหตุการณ์ Telemetry
                             warning-signals-diagnostics-and-unprocessed-telemetry: สัญญาณเตือน ข้อมูลวินิจฉัย และ Telemetry ที่ยังไม่ประมวลผล
+                            hp:
+                                no-telemetry-events: ยังไม่มีเหตุการณ์ Telemetry
+                                events-appear-after-this-device-reports: เหตุการณ์จะแสดงเมื่ออุปกรณ์นี้ส่งข้อมูลจากผู้ให้บริการเข้ามา
+                                no-events-match-your-filters: ไม่พบเหตุการณ์ที่ตรงกับตัวกรอง
+                                adjust-the-search-severity-or-date: ปรับคำค้น ระดับความรุนแรง หรือช่วงวันที่ เพื่อดูเหตุการณ์อื่น
+                                refresh: รีเฟรช
                         sensors:
                             device-sensors: เซนเซอร์ของอุปกรณ์
                             filter-by-type-status-and-last: กรองตามประเภท สถานะ และค่าล่าสุด
                             readings-thresholds-and-reporting-health-for: ค่าที่อ่านได้ เกณฑ์ และสุขภาพการรายงานของอุปกรณ์นี้
                             sensor-inventory-health: รายการเซนเซอร์และสุขภาพ
+                            hp:
+                                no-sensors-connected: ยังไม่มีเซนเซอร์ที่เชื่อมต่อ
+                                sensors-appear-here-after-provider-telemetry: เซนเซอร์จะแสดงที่นี่เมื่อข้อมูล Telemetry จากผู้ให้บริการผูกเข้ากับอุปกรณ์นี้
+                                no-sensors-match-your-filters: ไม่พบเซนเซอร์ที่ตรงกับตัวกรอง
+                                adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อหาเซนเซอร์อื่น
+                                refresh: รีเฟรช
                         vehicle:
                             altitude: ความสูง
                             call-sign: รหัสเรียกขาน
@@ -6050,6 +6108,15 @@ fleetops-ui:
                             vehicle: รถ
                     new:
                         create-a-new-device: สร้างอุปกรณ์ใหม่
+                    hp:
+                        add-your-first-device: เพิ่มอุปกรณ์แรก
+                        devices-connect-vehicles-and-assets-to: อุปกรณ์เชื่อมรถและทรัพย์สินเข้ากับ Telemetry เหตุการณ์ การติดตาม และการซิงก์กับผู้ให้บริการ
+                        no-devices-match-your-filters: ไม่พบอุปกรณ์ที่ตรงกับตัวกรอง
+                        adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อหาอุปกรณ์อื่น
+                        new-device: อุปกรณ์ใหม่
+                        import: นำเข้า
+                        devices-guide: คู่มืออุปกรณ์
+                        device-guide: คู่มืออุปกรณ์
             events:
                 details:
                     back: ย้อนกลับ
@@ -6060,6 +6127,13 @@ fleetops-ui:
                     refresh: รีเฟรช
                 index:
                     connectivity-events: เหตุการณ์การเชื่อมต่อ
+                    hp:
+                        no-connectivity-events-yet: ยังไม่มีเหตุการณ์การเชื่อมต่อ
+                        events-appear-here-after-connected-devices: เหตุการณ์จะแสดงที่นี่เมื่ออุปกรณ์หรือผู้ให้บริการเริ่มส่งสัญญาณ Telemetry
+                        no-events-match-your-filters: ไม่พบเหตุการณ์ที่ตรงกับตัวกรอง
+                        adjust-the-search-provider-device-or: ปรับคำค้น ผู้ให้บริการ อุปกรณ์ หรือช่วงวันที่ เพื่อดูเหตุการณ์อื่น
+                        refresh: รีเฟรช
+                        events-guide: คู่มือเหตุการณ์
             fuel-providers:
                 details:
                     back: ย้อนกลับ
@@ -6113,6 +6187,13 @@ fleetops-ui:
                     transactions-label: 'ธุรกรรม: {transactions}'
                     transactions:
                         imported-transactions: ธุรกรรมที่นำเข้า
+                        hp:
+                            no-transactions-match-your-filters: ไม่พบธุรกรรมที่ตรงกับตัวกรอง
+                            no-imported-transactions: ยังไม่มีธุรกรรมที่นำเข้า
+                            adjust-or-clear-the-filters-to: ปรับหรือล้างตัวกรองเพื่อดูธุรกรรมอื่น
+                            fuel-transactions-appear-here-after-this: ธุรกรรมน้ำมันจะแสดงที่นี่หลังผู้ให้บริการนี้ซิงก์บิลเข้ามา
+                            adjust-filters-or-sync-the-provider: ปรับตัวกรอง หรือซิงก์ผู้ให้บริการอีกครั้งเพื่อดูธุรกรรมที่นำเข้า
+                            refresh: รีเฟรช
                 edit:
                     cancel: ยกเลิก
                     changes-affect-credential-tests-transaction-sync: การเปลี่ยนแปลงมีผลกับการทดสอบข้อมูลเข้าระบบ การซิงก์ธุรกรรม การจับคู่ และการสร้างรายงานน้ำมัน
@@ -6132,6 +6213,14 @@ fleetops-ui:
                 index:
                     new:
                         create-a-new-sensor: สร้างเซนเซอร์ใหม่
+                    hp:
+                        add-your-first-sensor: เพิ่มเซนเซอร์แรก
+                        sensors-capture-telemetry-signals-that-can: เซนเซอร์เก็บสัญญาณ Telemetry เพื่อใช้สร้างเหตุการณ์ เงื่อนไข และติดตามการปฏิบัติงาน
+                        no-sensors-match-your-filters: ไม่พบเซนเซอร์ที่ตรงกับตัวกรอง
+                        adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อหาเซนเซอร์อื่น
+                        new-sensor: เซนเซอร์ใหม่
+                        import: นำเข้า
+                        sensors-guide: คู่มือเซนเซอร์
             telematics:
                 details:
                     attachments:
@@ -6168,6 +6257,12 @@ fleetops-ui:
                         review-synced-provider-devices-connection-state: ดูอุปกรณ์ที่ซิงก์จากผู้ให้บริการ สถานะการเชื่อมต่อ และการจับคู่รถของการเชื่อมต่อนี้
                         search-provider-identifiers-filter-attachment-state: ค้นหาตัวระบุของผู้ให้บริการ กรองสถานะการติดตั้ง และเปิดอุปกรณ์เพื่อแก้ปัญหา
                         synced-devices: อุปกรณ์ที่ซิงก์
+                        hp:
+                            no-synced-devices: ยังไม่มีอุปกรณ์ที่ซิงก์
+                            run-a-provider-sync-or-adjust: สั่งซิงก์ผู้ให้บริการ หรือปรับตัวกรอง เพื่อดูอุปกรณ์จากการเชื่อมต่อนี้
+                            no-devices-match-your-filters: ไม่พบอุปกรณ์ที่ตรงกับตัวกรอง
+                            adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อหาอุปกรณ์ที่ซิงก์อื่น
+                            refresh: รีเฟรช
                     events:
                         event-review-triage: ตรวจทานและคัดกรองเหตุการณ์
                         filter-events-by-severity-device-type: กรองเหตุการณ์ตามความรุนแรง อุปกรณ์ ประเภท และสถานะการประมวลผลก่อนเปิดรายละเอียด
@@ -6176,6 +6271,12 @@ fleetops-ui:
                         refresh: รีเฟรช
                         review-provider-events-warning-signals-and: ตรวจเหตุการณ์ของผู้ให้บริการ สัญญาณเตือน และ Telemetry ที่ยังไม่ประมวลผลของการเชื่อมต่อนี้
                         telemetry-events: เหตุการณ์ Telemetry
+                        hp:
+                            no-telemetry-events: ยังไม่มีเหตุการณ์ Telemetry
+                            events-appear-after-synced-devices-report: เหตุการณ์จะแสดงเมื่ออุปกรณ์ที่ซิงก์ส่งข้อมูลจากผู้ให้บริการเข้ามา
+                            no-events-match-your-filters: ไม่พบเหตุการณ์ที่ตรงกับตัวกรอง
+                            adjust-the-search-severity-or-date: ปรับคำค้น ระดับความรุนแรง หรือช่วงวันที่ เพื่อดูเหตุการณ์อื่น
+                            refresh: รีเฟรช
                     last-sync: 'ซิงก์ล่าสุด: {na}'
                     last-test: 'ทดสอบล่าสุด: {na}'
                     logs:
@@ -6192,6 +6293,12 @@ fleetops-ui:
                         review-sensor-readings-discovered-from-synced: ดูค่าที่อ่านได้จากเซนเซอร์ของอุปกรณ์ที่ซิงก์ และหาเซนเซอร์ที่ไม่รายงาน
                         sensor-inventory-health: รายการเซนเซอร์และสุขภาพ
                         sensor-readings: ค่าที่อ่านจากเซนเซอร์
+                        hp:
+                            no-sensor-readings: ยังไม่มีค่าจากเซนเซอร์
+                            sensor-readings-appear-after-devices-sync: ค่าจากเซนเซอร์จะแสดงเมื่ออุปกรณ์ซิงก์ Telemetry จากผู้ให้บริการนี้
+                            no-readings-match-your-filters: ไม่พบค่าที่ตรงกับตัวกรอง
+                            adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อดูค่าเซนเซอร์อื่น
+                            refresh: รีเฟรช
                     settings: ตั้งค่า
                     sync-devices: ซิงก์อุปกรณ์
                     telematic-connection-sections: ส่วนของการเชื่อมต่อ Telematics
@@ -6228,9 +6335,23 @@ fleetops-ui:
             inspection-forms:
                 index:
                     inspection-forms: แบบฟอร์มตรวจสภาพ
+                    hp:
+                        create-your-first-inspection-form: สร้างแบบฟอร์มตรวจสภาพแรก
+                        build-dvir-and-safety-checklists-drivers: สร้าง DVIR และเช็กลิสต์ความปลอดภัยให้คนขับส่ง ก่อนข้อบกพร่องจะทำให้รถต้องหยุดวิ่ง
+                        no-inspection-forms-match-your-filters: ไม่พบแบบฟอร์มตรวจสภาพที่ตรงกับตัวกรอง
+                        adjust-search-or-filters-to-find: ปรับคำค้นหรือตัวกรองเพื่อหาแบบฟอร์มอื่น
+                        new-form: แบบฟอร์มใหม่
+                        inspections-guide: คู่มือการตรวจสภาพ
             inspection-submissions:
                 index:
                     inspections: การตรวจสภาพ
+                    hp:
+                        no-inspections-yet: ยังไม่มีการตรวจสภาพ
+                        capture-dvir-submissions-and-turn-failed: เก็บผล DVIR และเปลี่ยนข้อที่ไม่ผ่านเป็นปัญหาหรือใบสั่งงาน
+                        no-inspections-match-your-filters: ไม่พบการตรวจสภาพที่ตรงกับตัวกรอง
+                        adjust-search-or-filters-to-find: ปรับคำค้นหรือตัวกรองเพื่อหาการตรวจสภาพอื่น
+                        new-inspection: ตรวจสภาพใหม่
+                        inspections-guide: คู่มือการตรวจสภาพ
             schedules:
                 index:
                     details:
@@ -6238,26 +6359,114 @@ fleetops-ui:
                             bull-opened: • เปิดเมื่อ {formatdate}
                             no-work-orders-yet: ยังไม่มีใบสั่งงาน
                             work-orders-will-appear-here-when: ใบสั่งงานจะแสดงที่นี่เมื่อกำหนดการนี้ทำงาน
+                    hp:
+                        create-your-first-maintenance-schedule: สร้างตารางซ่อมบำรุงแรก
+                        schedules-help-automate-preventive-work-and: ตารางซ่อมบำรุงช่วยตั้งงานซ่อมเชิงป้องกันอัตโนมัติ และเห็นรอบเข้าศูนย์ก่อนเลยกำหนด
+                        no-maintenance-schedules-match-your-filters: ไม่พบตารางซ่อมบำรุงที่ตรงกับตัวกรอง
+                        adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อหาตารางอื่น
+                        new-schedule: ตารางใหม่
+                        import: นำเข้า
+                        schedules-guide: คู่มือตารางซ่อมบำรุง
+            equipment:
+                index:
+                    hp:
+                        add-your-first-equipment-item: เพิ่มอุปกรณ์รายการแรก
+                        equipment-records-help-track-assigned-assets: ข้อมูลอุปกรณ์ช่วยติดตามทรัพย์สินที่มอบหมาย สภาพ ประวัติการซ่อม และความพร้อมใช้งาน
+                        no-equipment-matches-your-filters: ไม่พบอุปกรณ์ที่ตรงกับตัวกรอง
+                        adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อหาอุปกรณ์รายการอื่น
+                        new-equipment: อุปกรณ์ใหม่
+                        import: นำเข้า
+                        equipment-guide: คู่มืออุปกรณ์
+            maintenances:
+                index:
+                    hp:
+                        no-maintenance-records-yet: ยังไม่มีประวัติซ่อมบำรุง
+                        log-maintenance-events-to-keep-service: บันทึกการซ่อมบำรุงเพื่อเห็นประวัติการซ่อม ค่าใช้จ่าย และความพร้อมของทรัพย์สิน
+                        no-maintenance-records-match-your-filters: ไม่พบประวัติซ่อมบำรุงที่ตรงกับตัวกรอง
+                        adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อหาประวัติซ่อมบำรุงอื่น
+                        new-maintenance: ซ่อมบำรุงใหม่
+                        import: นำเข้า
+            parts:
+                index:
+                    hp:
+                        add-your-first-part: เพิ่มอะไหล่ชิ้นแรก
+                        parts-keep-replacement-inventory-and-compatibility: ข้อมูลอะไหล่เก็บสต็อกและรุ่นที่ใช้ได้ไว้พร้อมสำหรับงานซ่อม
+                        no-parts-match-your-filters: ไม่พบอะไหล่ที่ตรงกับตัวกรอง
+                        adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อหาอะไหล่อื่น
+                        new-part: อะไหล่ใหม่
+                        import: นำเข้า
+                        parts-guide: คู่มืออะไหล่
+            work-orders:
+                index:
+                    hp:
+                        no-work-orders-yet: ยังไม่มีใบสั่งงาน
+                        create-work-orders-to-assign-maintenance: สร้างใบสั่งงานเพื่อมอบหมายงานซ่อม ติดตามความคืบหน้า และปิดงานซ่อม
+                        no-work-orders-match-your-filters: ไม่พบใบสั่งงานที่ตรงกับตัวกรอง
+                        adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อหาใบสั่งงานอื่น
+                        new-work-order: ใบสั่งงานใหม่
+                        import: นำเข้า
+                        work-orders-guide: คู่มือใบสั่งงาน
         management:
             contacts:
                 customers:
                     new:
                         create-a-new-customer: สร้างลูกค้าใหม่
+                    hp:
+                        add-your-first-customer: เพิ่มลูกค้ารายแรก
+                        customers-give-orders-an-owner-contact: ลูกค้าคือเจ้าของออเดอร์ พร้อมข้อมูลติดต่อและบัญชีสำหรับดูประวัติการใช้บริการ
+                        no-customers-match-your-filters: ไม่พบลูกค้าที่ตรงกับตัวกรอง
+                        adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อหาลูกค้าอื่น
+                        new-customer: ลูกค้าใหม่
+                        import: นำเข้า
                 index:
                     new:
                         create-a-new-contact: สร้างผู้ติดต่อใหม่
+                    hp:
+                        add-your-first-contact: เพิ่มผู้ติดต่อคนแรก
+                        contacts-keep-customer-vendor-and-internal: เก็บข้อมูลลูกค้า ผู้ให้บริการ และผู้เกี่ยวข้องภายในไว้พร้อมใช้กับออเดอร์และการติดต่อ
+                        no-contacts-match-your-filters: ไม่พบผู้ติดต่อที่ตรงกับตัวกรอง
+                        adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อหาผู้ติดต่ออื่น
+                        new-contact: ผู้ติดต่อใหม่
+                        import: นำเข้า
+                        contacts-guide: คู่มือผู้ติดต่อ
             drivers:
                 index:
                     new:
                         create-a-new-driver: สร้างคนขับใหม่
+                    hp:
+                        add-your-first-driver: เพิ่มคนขับคนแรก
+                        drivers-power-dispatching-live-fleet-visibility: คนขับใช้สำหรับจ่ายงาน ดูรถบนแผนที่สด มอบหมายงาน และติดตามการส่งของ
+                        no-drivers-match-your-search: ไม่พบคนขับที่ตรงกับคำค้น
+                        adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อหาคนขับคนอื่น
+                        new-driver: คนขับใหม่
+                        import: นำเข้า
+                        drivers-guide: คู่มือคนขับ
+                        driver-guide: คู่มือคนขับ
             fleets:
                 index:
                     new:
                         create-a-new-fleet: สร้าง Fleet ใหม่
+                    hp:
+                        create-your-first-fleet: สร้าง Fleet แรก
+                        fleets-help-group-vehicles-and-drivers: Fleet ช่วยจัดกลุ่มรถและคนขับ สำหรับจ่ายงาน ทำรายงาน และดูแลพื้นที่ให้บริการ
+                        no-fleets-match-your-filters: ไม่พบ Fleet ที่ตรงกับตัวกรอง
+                        adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อหา Fleet อื่น
+                        new-fleet: Fleet ใหม่
+                        import: นำเข้า
+                        fleets-guide: คู่มือ Fleet
+                        fleet-guide: คู่มือ Fleet
             fuel-reports:
                 index:
                     new:
                         create-a-new-fuel-report: สร้างรายงานน้ำมันใหม่
+                    hp:
+                        no-fuel-reports-yet: ยังไม่มีรายงานน้ำมัน
+                        create-fuel-reports-to-track-vehicle: สร้างรายงานน้ำมันเพื่อติดตามการใช้น้ำมัน ค่าใช้จ่าย และเอกสารธุรกรรมประกอบ
+                        no-fuel-reports-match-your-filters: ไม่พบรายงานน้ำมันที่ตรงกับตัวกรอง
+                        adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อหารายงานน้ำมันอื่น
+                        new-fuel-report: รายงานน้ำมันใหม่
+                        import: นำเข้า
+                        fuel-reports-guide: คู่มือรายงานน้ำมัน
             fuel-transactions:
                 index:
                     details:
@@ -6276,18 +6485,68 @@ fleetops-ui:
                         reprocess: ประมวลผลใหม่
                         review-this-purchase-or-exclude-it: ตรวจทานการซื้อนี้หรือไม่นำไปจับคู่อัตโนมัติ
                         vehicle: รถ
+                    hp:
+                        no-transactions-match-your-filters: ไม่พบธุรกรรมที่ตรงกับตัวกรอง
+                        no-fuel-transactions: ยังไม่มีธุรกรรมน้ำมัน
+                        imported-fuel-card-bills-and-provider: บิลบัตรเติมน้ำมันและรายการซื้อจากผู้ให้บริการจะแสดงที่นี่หลังซิงก์เสร็จ
+                        adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อดูธุรกรรมที่นำเข้าอื่น
+                        refresh: รีเฟรช
+                        fuel-reports-guide: คู่มือรายงานน้ำมัน
             issues:
                 index:
                     new:
                         create-a-new-issue: สร้างปัญหาใหม่
+                    hp:
+                        no-issues-reported: ยังไม่มีการแจ้งปัญหา
+                        track-vehicle-driver-facility-and-service: ติดตามปัญหาของรถ คนขับ สถานที่ และบริการที่นี่ เพื่อให้เห็นงานที่ต้องตามต่อ
+                        no-issues-match-your-filters: ไม่พบปัญหาที่ตรงกับตัวกรอง
+                        clear-the-search-or-filters-to: ล้างคำค้นหรือตัวกรองเพื่อดูปัญหาอื่นที่แจ้งไว้
+                        new-issue: แจ้งปัญหาใหม่
+                        import: นำเข้า
+                        issues-guide: คู่มือปัญหา
             vehicles:
                 index:
                     new:
                         create-a-new-vehicle: สร้างรถใหม่
+                    hp:
+                        add-your-first-vehicle: เพิ่มรถคันแรก
+                        vehicles-connect-assignments-live-tracking-fleet: รถเชื่อมกับการมอบหมายงาน การติดตามสด ความจุของ Fleet การซ่อมบำรุง และประวัติการตรวจ
+                        no-vehicles-match-your-filters: ไม่พบรถที่ตรงกับตัวกรอง
+                        adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อหารถคันอื่น
+                        new-vehicle: รถใหม่
+                        import: นำเข้า
+                        vehicles-guide: คู่มือรถ
+                        vehicle-guide: คู่มือรถ
             vendors:
                 index:
                     new:
                         create-a-new-vendor: สร้าง Vendor ใหม่
+                    hp:
+                        add-your-first-vendor: เพิ่มผู้ให้บริการรายแรก
+                        vendors-let-your-team-manage-external: ใช้จัดการผู้ขนส่งภายนอก ผู้ให้บริการ และพาร์ทเนอร์ที่ทำงานร่วมกัน
+                        no-vendors-match-your-filters: ไม่พบผู้ให้บริการที่ตรงกับตัวกรอง
+                        adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อหาผู้ให้บริการอื่น
+                        new-vendor: ผู้ให้บริการใหม่
+                        import: นำเข้า
+                        vendors-guide: คู่มือผู้ให้บริการ
+                        vendor-guide: คู่มือผู้ให้บริการ
+                integrated:
+                    hp:
+                        no-integrated-vendors-yet: ยังไม่มีผู้ให้บริการที่เชื่อมระบบ
+                        integrated-vendor-records-appear-here-after: ผู้ให้บริการที่เชื่อมระบบจะแสดงที่นี่หลังเชื่อมต่อและซิงก์แล้ว
+                        no-integrated-vendors-match-your-filters: ไม่พบผู้ให้บริการที่เชื่อมระบบที่ตรงกับตัวกรอง
+                        adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อหาผู้ให้บริการที่เชื่อมระบบอื่น
+                        integrated-vendors-guide: คู่มือผู้ให้บริการที่เชื่อมระบบ
+            places:
+                index:
+                    hp:
+                        add-your-first-place: เพิ่มสถานที่แรก
+                        places-keep-frequent-pickup-dropoff-facility: เก็บจุดรับ จุดส่ง คลัง และสถานที่ให้บริการที่ใช้บ่อยไว้พร้อมสำหรับออเดอร์และการวางเส้นทาง
+                        no-places-match-your-filters: ไม่พบสถานที่ที่ตรงกับตัวกรอง
+                        adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อหาสถานที่ที่บันทึกไว้อื่น
+                        new-place: สถานที่ใหม่
+                        import: นำเข้า
+                        places-guide: คู่มือสถานที่
         settings:
             index:
                 compact-next-steps-for-operators: ขั้นตอนถัดไปแบบย่อสำหรับผู้ปฏิบัติงาน
@@ -6302,6 +6561,13 @@ fleetops-ui:
                 index:
                     start-payments-onboard: เริ่มตั้งค่าการรับชำระ
                     total: 'รวม {currency}:'
+                    hp:
+                        no-payment-transactions-yet: ยังไม่มีธุรกรรมการชำระเงิน
+                        completed-customer-payments-will-appear-here: การชำระเงินของลูกค้าจะแสดงที่นี่เมื่อ Stripe เริ่มส่งข้อมูลธุรกรรมเข้ามา
+                        no-payments-match-your-filters: ไม่พบการชำระเงินที่ตรงกับตัวกรอง
+                        adjust-filters-or-refresh-the-page: ปรับตัวกรอง หรือรีเฟรชหน้าเพื่อดูธุรกรรมการชำระเงินอื่น
+                        refresh: รีเฟรช
+                        payments-guide: คู่มือการชำระเงิน
             routing:
                 a-public-osrm-server-this-organization: เซิร์ฟเวอร์ OSRM สาธารณะที่ใช้คำนวณเส้นทาง ระยะทาง และ ETA ขององค์กรนี้ ไม่รับที่อยู่เครือข่ายภายใน
                 advanced-settings: ตั้งค่าขั้นสูง
@@ -6337,6 +6603,39 @@ fleetops-ui:
                 traffic-aware-eta: ETA ตามสภาพจราจร
                 use-my-own-osrm-server: ใช้เซิร์ฟเวอร์ OSRM ของฉันเอง
                 use-provider-traffic-data-when-supported: ใช้ข้อมูลจราจรของผู้ให้บริการถ้ารองรับ
+        analytics:
+            reports:
+                index:
+                    hp:
+                        no-reports-yet: ยังไม่มีรายงาน
+                        create-a-fleet-ops-report-to: สร้างรายงาน Fleet-Ops เพื่อติดตามแนวโน้มการปฏิบัติงาน การใช้งานรถ และประสิทธิภาพ
+                        no-reports-match-your-search: ไม่พบรายงานที่ตรงกับคำค้น
+                        adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อหารายงานที่มีอยู่
+                        new-report: รายงานใหม่
+                        refresh: รีเฟรช
+                        reports-guide: คู่มือรายงาน
+        operations:
+            orders:
+                index:
+                    hp:
+                        create-your-first-order: สร้างออเดอร์แรก
+                        orders-are-the-center-of-fleet: 'ออเดอร์คือหัวใจของ Fleet-Ops: วางเส้นทาง มอบหมายคนขับและรถ ติดตามความคืบหน้า และเก็บหลักฐานการส่งมอบ'
+                        no-orders-match-your-filters: ไม่พบออเดอร์ที่ตรงกับตัวกรอง
+                        adjust-the-search-bulk-search-or: ปรับคำค้น ค้นหาหลายรายการ หรือตัวกรอง เพื่อหาออเดอร์อื่น
+                        new-order: ออเดอร์ใหม่
+                        import: นำเข้า
+                        orders-guide: คู่มือออเดอร์
+                        order-guide: คู่มือออเดอร์
+            service-rates:
+                index:
+                    hp:
+                        set-up-your-first-service-rate: ตั้งอัตราค่าบริการแรก
+                        service-rates-define-how-fleet-ops: อัตราค่าบริการกำหนดวิธีคิดราคาตามเส้นทาง โซน ระยะทาง และกฎบริการอื่นๆ
+                        no-service-rates-match-your-filters: ไม่พบอัตราค่าบริการที่ตรงกับตัวกรอง
+                        adjust-the-search-or-filters-to: ปรับคำค้นหรือตัวกรองเพื่อหาอัตราค่าบริการอื่น
+                        new-service-rate: อัตราค่าบริการใหม่
+                        refresh: รีเฟรช
+                        service-rates-guide: คู่มืออัตราค่าบริการ
     js:
         components:
             admin:
@@ -6626,6 +6925,26 @@ fleetops-ui:
                         stale-driver-location: ตำแหน่งคนขับไม่อัปเดต
                         tracking-estimate-warning: คำเตือนค่าประมาณการติดตาม
                         1-warning: คำเตือน 1 รายการ
+                        provider-route: เส้นทางจาก {provider}
+                        confidence-level: ความแม่นยำ{confidence}
+                        fallback-provider: 'สำรอง: {provider}'
+                        confidence-levels:
+                            high: สูง
+                            medium: ปานกลาง
+                            low: ต่ำ
+                            unknown: ไม่ทราบ
+                        reported-from-existing-route-data: คำนวณจากข้อมูลเส้นทางที่มีอยู่
+                        reported-eta-may-not-reflect-latest: ETA ที่รายงานอาจยังไม่ตรงกับสัญญาณติดตามล่าสุด
+                        n-warnings: คำเตือน {count} รายการ
+                        'yes': ใช่
+                        'no': ไม่
+                        warning-assign-driver: มอบหมายคนขับเพื่อเริ่มติดตามสดและให้ ETA แม่นยำขึ้น
+                        warning-location-missing: ยังไม่มีตำแหน่งคนขับ ETA อาจไม่แม่นยำ
+                        warning-location-stale: ตำแหน่งคนขับไม่อัปเดต ETA อาจไม่ตรงกับการเคลื่อนที่ล่าสุด
+                        warning-fallback: ใช้ {provider} สำรอง เพราะผู้ให้บริการติดตามหลักใช้งานไม่ได้
+                        warning-low-confidence: ETA ความแม่นยำ{confidence} ใช้เป็นค่าประมาณเท่านั้น
+                        warning-provider-error: ผู้ให้บริการติดตามแจ้งข้อผิดพลาด แสดงค่าประมาณที่ดีที่สุดที่มี
+                        unable-to-ping-driver-app: ส่งสัญญาณไปที่แอปคนขับไม่สำเร็จ
                 route-editor:
                     return: จุดส่งคืน
             part:
@@ -7134,6 +7453,8 @@ fleetops-ui:
                             update-activity: อัปเดตกิจกรรม
                             view-metadata: ดู Metadata
                             view-order-label: ดูฉลากออเดอร์
+                            unassign-driver: ยกเลิกการมอบหมายคนขับ
+                            assign-driver: มอบหมายคนขับ
                 service-rates:
                     index:
                         delete-selected: ลบที่เลือก...
@@ -9676,3 +9997,7 @@ fleetops-ui:
             scheduled:
                 description: วางแผนงานในช่วงเวลาบริการแล้ว
                 label: กำหนดเวลาแล้ว
+    common:
+        item-n: รายการที่ {n}
+        current-odometer-unit: เลขไมล์ปัจจุบัน ({unit})
+        fuel-reported-on: รายงานน้ำมันวันที่ {date}

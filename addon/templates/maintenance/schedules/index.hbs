@@ -40,19 +40,19 @@
         @emptyStateComponent={{component
             "table/empty-state"
             icon="calendar-check"
-            title="Create your first maintenance schedule"
-            description="Schedules help automate preventive work and keep service intervals visible before assets fall behind."
-            filteredTitle="No maintenance schedules match your filters"
-            filteredDescription="Adjust the search or filters to find another schedule."
-            primaryText="New schedule"
+            title=(t "fleetops-ui.templates.maintenance.schedules.index.hp.create-your-first-maintenance-schedule")
+            description=(t "fleetops-ui.templates.maintenance.schedules.index.hp.schedules-help-automate-preventive-work-and")
+            filteredTitle=(t "fleetops-ui.templates.maintenance.schedules.index.hp.no-maintenance-schedules-match-your-filters")
+            filteredDescription=(t "fleetops-ui.templates.maintenance.schedules.index.hp.adjust-the-search-or-filters-to")
+            primaryText=(t "fleetops-ui.templates.maintenance.schedules.index.hp.new-schedule")
             primaryIcon="plus"
             primaryAction=this.maintenanceScheduleActions.transition.create
-            secondaryText="Import"
+            secondaryText=(t "fleetops-ui.templates.maintenance.schedules.index.hp.import")
             secondaryIcon="upload"
             secondaryAction=this.maintenanceScheduleActions.import
             docsSlug="fleet-ops/maintenance/schedules/overview"
-            docsTitle="Schedules guide"
-            docsText="Schedules guide"
+            docsTitle=(t "fleetops-ui.templates.maintenance.schedules.index.hp.schedules-guide")
+            docsText=(t "fleetops-ui.templates.maintenance.schedules.index.hp.schedules-guide")
             docsSource="fleet-ops-empty-maintenance-schedules"
         }}
     />

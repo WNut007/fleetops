@@ -14,16 +14,16 @@
     @emptyStateComponent={{component
         "table/empty-state"
         icon="clipboard-check"
-        title="Create your first inspection form"
-        description="Build DVIR and safety checklists drivers can submit before defects become downtime."
-        filteredTitle="No inspection forms match your filters"
-        filteredDescription="Adjust search or filters to find another form."
-        primaryText="New form"
+        title=(t "fleetops-ui.templates.maintenance.inspection-forms.index.hp.create-your-first-inspection-form")
+        description=(t "fleetops-ui.templates.maintenance.inspection-forms.index.hp.build-dvir-and-safety-checklists-drivers")
+        filteredTitle=(t "fleetops-ui.templates.maintenance.inspection-forms.index.hp.no-inspection-forms-match-your-filters")
+        filteredDescription=(t "fleetops-ui.templates.maintenance.inspection-forms.index.hp.adjust-search-or-filters-to-find")
+        primaryText=(t "fleetops-ui.templates.maintenance.inspection-forms.index.hp.new-form")
         primaryIcon="plus"
         primaryAction=this.inspectionFormActions.transition.create
         docsSlug="fleet-ops/maintenance/inspections/overview"
-        docsTitle="Inspections guide"
-        docsText="Inspections guide"
+        docsTitle=(t "fleetops-ui.templates.maintenance.inspection-forms.index.hp.inspections-guide")
+        docsText=(t "fleetops-ui.templates.maintenance.inspection-forms.index.hp.inspections-guide")
     }}
 />
 {{outlet}}

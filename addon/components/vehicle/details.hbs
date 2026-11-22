@@ -149,7 +149,7 @@
 
             <div class="field-info-container">
                 <div class="field-name">
-                    {{concat "Current Odometer (" @resource.odometer_unit ")"}}
+                    {{t "fleetops-ui.common.current-odometer-unit" unit=@resource.odometer_unit}}
                 </div>
                 <div class="field-value">
                     {{n-a @resource.odometer}}

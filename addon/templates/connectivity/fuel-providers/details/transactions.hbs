@@ -14,11 +14,11 @@
         @emptyStateComponent={{component
             "table/empty-state"
             icon="receipt"
-            title=(if this.hasFilters "No transactions match your filters" "No imported transactions")
-            description=(if this.hasFilters "Adjust or clear the filters to see other transactions." "Fuel transactions appear here after this provider syncs bills.")
-            filteredTitle="No transactions match your filters"
-            filteredDescription="Adjust filters or sync the provider again to review imported transactions."
-            primaryText="Refresh"
+            title=(if this.hasFilters (t "fleetops-ui.templates.connectivity.fuel-providers.details.transactions.hp.no-transactions-match-your-filters") (t "fleetops-ui.templates.connectivity.fuel-providers.details.transactions.hp.no-imported-transactions"))
+            description=(if this.hasFilters (t "fleetops-ui.templates.connectivity.fuel-providers.details.transactions.hp.adjust-or-clear-the-filters-to") (t "fleetops-ui.templates.connectivity.fuel-providers.details.transactions.hp.fuel-transactions-appear-here-after-this"))
+            filteredTitle=(t "fleetops-ui.templates.connectivity.fuel-providers.details.transactions.hp.no-transactions-match-your-filters")
+            filteredDescription=(t "fleetops-ui.templates.connectivity.fuel-providers.details.transactions.hp.adjust-filters-or-sync-the-provider")
+            primaryText=(t "fleetops-ui.templates.connectivity.fuel-providers.details.transactions.hp.refresh")
             primaryIcon="refresh"
             primaryAction=this.refresh
         }}

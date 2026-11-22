@@ -34,7 +34,7 @@
                 @eta={{if this.showRouteEtaData @resource.eta}}
                 @showEta={{this.showRouteEtaData}}
                 @waypointActions={{hash
-                    viewStopActivity=(hash label="View activity" fn=this.viewStopActivity)
+                    viewStopActivity=(hash label=(t "fleetops-ui.components.order.details.route.hp.view-activity") fn=this.viewStopActivity)
                     viewWaypointLabel=(hash label=(t "order.fields.get-label") fn=this.viewWaypointLabel)
                 }}
             />

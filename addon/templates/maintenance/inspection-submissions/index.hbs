@@ -14,16 +14,16 @@
     @emptyStateComponent={{component
         "table/empty-state"
         icon="list-check"
-        title="No inspections yet"
-        description="Capture DVIR submissions and turn failed items into issues or work orders."
-        filteredTitle="No inspections match your filters"
-        filteredDescription="Adjust search or filters to find another inspection."
-        primaryText="New inspection"
+        title=(t "fleetops-ui.templates.maintenance.inspection-submissions.index.hp.no-inspections-yet")
+        description=(t "fleetops-ui.templates.maintenance.inspection-submissions.index.hp.capture-dvir-submissions-and-turn-failed")
+        filteredTitle=(t "fleetops-ui.templates.maintenance.inspection-submissions.index.hp.no-inspections-match-your-filters")
+        filteredDescription=(t "fleetops-ui.templates.maintenance.inspection-submissions.index.hp.adjust-search-or-filters-to-find")
+        primaryText=(t "fleetops-ui.templates.maintenance.inspection-submissions.index.hp.new-inspection")
         primaryIcon="plus"
         primaryAction=this.inspectionSubmissionActions.transition.create
         docsSlug="fleet-ops/maintenance/inspections/overview"
-        docsTitle="Inspections guide"
-        docsText="Inspections guide"
+        docsTitle=(t "fleetops-ui.templates.maintenance.inspection-submissions.index.hp.inspections-guide")
+        docsText=(t "fleetops-ui.templates.maintenance.inspection-submissions.index.hp.inspections-guide")
     }}
 />
 {{outlet}}

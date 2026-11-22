@@ -14,14 +14,14 @@
     @emptyStateComponent={{component
         "table/empty-state"
         icon="screwdriver-wrench"
-        title="No maintenance records yet"
-        description="Log maintenance events to keep service history, costs, and asset readiness visible."
-        filteredTitle="No maintenance records match your filters"
-        filteredDescription="Adjust the search or filters to find another maintenance record."
-        primaryText="New maintenance"
+        title=(t "fleetops-ui.templates.maintenance.maintenances.index.hp.no-maintenance-records-yet")
+        description=(t "fleetops-ui.templates.maintenance.maintenances.index.hp.log-maintenance-events-to-keep-service")
+        filteredTitle=(t "fleetops-ui.templates.maintenance.maintenances.index.hp.no-maintenance-records-match-your-filters")
+        filteredDescription=(t "fleetops-ui.templates.maintenance.maintenances.index.hp.adjust-the-search-or-filters-to")
+        primaryText=(t "fleetops-ui.templates.maintenance.maintenances.index.hp.new-maintenance")
         primaryIcon="plus"
         primaryAction=this.maintenanceActions.transition.create
-        secondaryText="Import"
+        secondaryText=(t "fleetops-ui.templates.maintenance.maintenances.index.hp.import")
         secondaryIcon="upload"
         secondaryAction=this.maintenanceActions.import
     }}

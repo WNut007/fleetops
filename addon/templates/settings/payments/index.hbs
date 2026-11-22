@@ -31,16 +31,16 @@
                 @emptyStateComponent={{component
                     "table/empty-state"
                     icon="credit-card"
-                    title="No payment transactions yet"
-                    description="Completed customer payments will appear here once Stripe starts sending transaction records."
-                    filteredTitle="No payments match your filters"
-                    filteredDescription="Adjust filters or refresh the page to review other payment transactions."
-                    primaryText="Refresh"
+                    title=(t "fleetops-ui.templates.settings.payments.index.hp.no-payment-transactions-yet")
+                    description=(t "fleetops-ui.templates.settings.payments.index.hp.completed-customer-payments-will-appear-here")
+                    filteredTitle=(t "fleetops-ui.templates.settings.payments.index.hp.no-payments-match-your-filters")
+                    filteredDescription=(t "fleetops-ui.templates.settings.payments.index.hp.adjust-filters-or-refresh-the-page")
+                    primaryText=(t "fleetops-ui.templates.settings.payments.index.hp.refresh")
                     primaryIcon="refresh"
                     primaryAction=this.refreshPayments
                     docsSlug="fleet-ops/settings/payments"
-                    docsTitle="Payments guide"
-                    docsText="Payments guide"
+                    docsTitle=(t "fleetops-ui.templates.settings.payments.index.hp.payments-guide")
+                    docsText=(t "fleetops-ui.templates.settings.payments.index.hp.payments-guide")
                 }}
             />
         {{else}}

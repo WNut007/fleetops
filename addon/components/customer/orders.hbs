@@ -279,7 +279,7 @@
                                                                                 <Image src={{entity.photo_url}} class="w-14 h-14 rounded-md shadow-sm" alt={{entity.name}} />
                                                                             </div>
                                                                             <div class="flex-1">
-                                                                                <div class="text-sm font-bold">{{n-a entity.name (concat "Item " (add index 1))}}</div>
+                                                                                <div class="text-sm font-bold">{{n-a entity.name (t "fleetops-ui.common.item-n" n=(add index 1))}}</div>
                                                                                 <div class="text-xs">
                                                                                     <span class="font-semibold">{{t "fleetops-ui.components.customer.orders.description"}}</span>
                                                                                     <span>{{n-a entity.description "No description provided."}}</span>
@@ -322,7 +322,7 @@
                                                                         <Image src={{entity.photo_url}} class="w-14 h-14 rounded-md shadow-sm" alt={{entity.name}} />
                                                                     </div>
                                                                     <div class="flex-1">
-                                                                        <div class="text-sm font-bold">{{n-a entity.name (concat "Item " (add index 1))}}</div>
+                                                                        <div class="text-sm font-bold">{{n-a entity.name (t "fleetops-ui.common.item-n" n=(add index 1))}}</div>
                                                                         <div class="text-xs">
                                                                             <span class="font-semibold">{{t "fleetops-ui.components.customer.orders.description"}}</span>
                                                                             <span>{{n-a entity.description "No description provided."}}</span>

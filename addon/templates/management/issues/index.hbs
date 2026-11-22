@@ -15,19 +15,19 @@
     @emptyStateComponent={{component
         "table/empty-state"
         icon="triangle-exclamation"
-        title="No issues reported"
-        description="Track vehicle, driver, facility, and service issues here so follow-up work stays visible."
-        filteredTitle="No issues match your filters"
-        filteredDescription="Clear the search or filters to review other reported issues."
-        primaryText="New issue"
+        title=(t "fleetops-ui.templates.management.issues.index.hp.no-issues-reported")
+        description=(t "fleetops-ui.templates.management.issues.index.hp.track-vehicle-driver-facility-and-service")
+        filteredTitle=(t "fleetops-ui.templates.management.issues.index.hp.no-issues-match-your-filters")
+        filteredDescription=(t "fleetops-ui.templates.management.issues.index.hp.clear-the-search-or-filters-to")
+        primaryText=(t "fleetops-ui.templates.management.issues.index.hp.new-issue")
         primaryIcon="plus"
         primaryAction=this.issueActions.transition.create
-        secondaryText="Import"
+        secondaryText=(t "fleetops-ui.templates.management.issues.index.hp.import")
         secondaryIcon="upload"
         secondaryAction=this.issueActions.import
         docsSlug="fleet-ops/resources/issues/overview"
-        docsTitle="Issues guide"
-        docsText="Issues guide"
+        docsTitle=(t "fleetops-ui.templates.management.issues.index.hp.issues-guide")
+        docsText=(t "fleetops-ui.templates.management.issues.index.hp.issues-guide")
         docsSource="fleet-ops-empty-issues"
     }}
 />

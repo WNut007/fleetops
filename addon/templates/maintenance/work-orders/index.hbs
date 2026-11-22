@@ -14,19 +14,19 @@
     @emptyStateComponent={{component
         "table/empty-state"
         icon="clipboard-list"
-        title="No work orders yet"
-        description="Create work orders to assign maintenance tasks, track progress, and close out repairs."
-        filteredTitle="No work orders match your filters"
-        filteredDescription="Adjust the search or filters to find another work order."
-        primaryText="New work order"
+        title=(t "fleetops-ui.templates.maintenance.work-orders.index.hp.no-work-orders-yet")
+        description=(t "fleetops-ui.templates.maintenance.work-orders.index.hp.create-work-orders-to-assign-maintenance")
+        filteredTitle=(t "fleetops-ui.templates.maintenance.work-orders.index.hp.no-work-orders-match-your-filters")
+        filteredDescription=(t "fleetops-ui.templates.maintenance.work-orders.index.hp.adjust-the-search-or-filters-to")
+        primaryText=(t "fleetops-ui.templates.maintenance.work-orders.index.hp.new-work-order")
         primaryIcon="plus"
         primaryAction=this.workOrderActions.transition.create
-        secondaryText="Import"
+        secondaryText=(t "fleetops-ui.templates.maintenance.work-orders.index.hp.import")
         secondaryIcon="upload"
         secondaryAction=this.workOrderActions.import
         docsSlug="fleet-ops/maintenance/work-orders/overview"
-        docsTitle="Work orders guide"
-        docsText="Work orders guide"
+        docsTitle=(t "fleetops-ui.templates.maintenance.work-orders.index.hp.work-orders-guide")
+        docsText=(t "fleetops-ui.templates.maintenance.work-orders.index.hp.work-orders-guide")
         docsSource="fleet-ops-empty-work-orders"
     }}
 />

@@ -16,19 +16,19 @@
         @emptyStateComponent={{component
             "table/empty-state"
             icon="address-book"
-            title="Add your first contact"
-            description="Contacts keep customer, vendor, and internal stakeholder details ready for orders and communication."
-            filteredTitle="No contacts match your filters"
-            filteredDescription="Adjust the search or filters to find another contact."
-            primaryText="New contact"
+            title=(t "fleetops-ui.templates.management.contacts.index.hp.add-your-first-contact")
+            description=(t "fleetops-ui.templates.management.contacts.index.hp.contacts-keep-customer-vendor-and-internal")
+            filteredTitle=(t "fleetops-ui.templates.management.contacts.index.hp.no-contacts-match-your-filters")
+            filteredDescription=(t "fleetops-ui.templates.management.contacts.index.hp.adjust-the-search-or-filters-to")
+            primaryText=(t "fleetops-ui.templates.management.contacts.index.hp.new-contact")
             primaryIcon="plus"
             primaryAction=this.contactActions.transition.create
-            secondaryText="Import"
+            secondaryText=(t "fleetops-ui.templates.management.contacts.index.hp.import")
             secondaryIcon="upload"
             secondaryAction=this.contactActions.import
             docsSlug="fleet-ops/resources/contacts/overview"
-            docsTitle="Contacts guide"
-            docsText="Contacts guide"
+            docsTitle=(t "fleetops-ui.templates.management.contacts.index.hp.contacts-guide")
+            docsText=(t "fleetops-ui.templates.management.contacts.index.hp.contacts-guide")
             docsSource="fleet-ops-empty-contacts"
         }}
         @withoutHeader={{true}}

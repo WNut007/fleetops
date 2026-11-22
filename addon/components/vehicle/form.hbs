@@ -196,7 +196,7 @@
 
             <InputGroup
                 @value={{@resource.odometer}}
-                @name={{concat "Current Odometer (" @resource.odometer_unit ")"}}
+                @name={{t "fleetops-ui.common.current-odometer-unit" unit=@resource.odometer_unit}}
                 @type="number"
                 @placeholder={{t "fleetops-ui.components.vehicle.form.current-odometer-reading"}}
             />

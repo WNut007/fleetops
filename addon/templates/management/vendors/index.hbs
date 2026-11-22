@@ -16,19 +16,19 @@
         @emptyStateComponent={{component
             "table/empty-state"
             icon="building"
-            title="Add your first vendor"
-            description="Vendors let your team manage external carriers, service providers, and operational partners."
-            filteredTitle="No vendors match your filters"
-            filteredDescription="Adjust the search or filters to find another vendor."
-            primaryText="New vendor"
+            title=(t "fleetops-ui.templates.management.vendors.index.hp.add-your-first-vendor")
+            description=(t "fleetops-ui.templates.management.vendors.index.hp.vendors-let-your-team-manage-external")
+            filteredTitle=(t "fleetops-ui.templates.management.vendors.index.hp.no-vendors-match-your-filters")
+            filteredDescription=(t "fleetops-ui.templates.management.vendors.index.hp.adjust-the-search-or-filters-to")
+            primaryText=(t "fleetops-ui.templates.management.vendors.index.hp.new-vendor")
             primaryIcon="plus"
             primaryAction=this.vendorActions.transition.create
-            secondaryText="Import"
+            secondaryText=(t "fleetops-ui.templates.management.vendors.index.hp.import")
             secondaryIcon="upload"
             secondaryAction=this.vendorActions.import
             docsSlug="fleet-ops/resources/vendors/overview"
-            docsTitle="Vendors guide"
-            docsText="Vendor guide"
+            docsTitle=(t "fleetops-ui.templates.management.vendors.index.hp.vendors-guide")
+            docsText=(t "fleetops-ui.templates.management.vendors.index.hp.vendor-guide")
             docsSource="fleet-ops-empty-vendors"
         }}
     />

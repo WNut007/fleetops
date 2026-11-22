@@ -16,19 +16,19 @@
         @emptyStateComponent={{component
             "table/empty-state"
             icon="truck"
-            title="Add your first vehicle"
-            description="Vehicles connect assignments, live tracking, fleet capacity, maintenance, and compliance history."
-            filteredTitle="No vehicles match your filters"
-            filteredDescription="Adjust the search or filters to find another vehicle."
-            primaryText="New vehicle"
+            title=(t "fleetops-ui.templates.management.vehicles.index.hp.add-your-first-vehicle")
+            description=(t "fleetops-ui.templates.management.vehicles.index.hp.vehicles-connect-assignments-live-tracking-fleet")
+            filteredTitle=(t "fleetops-ui.templates.management.vehicles.index.hp.no-vehicles-match-your-filters")
+            filteredDescription=(t "fleetops-ui.templates.management.vehicles.index.hp.adjust-the-search-or-filters-to")
+            primaryText=(t "fleetops-ui.templates.management.vehicles.index.hp.new-vehicle")
             primaryIcon="plus"
             primaryAction=this.vehicleActions.transition.create
-            secondaryText="Import"
+            secondaryText=(t "fleetops-ui.templates.management.vehicles.index.hp.import")
             secondaryIcon="upload"
             secondaryAction=this.vehicleActions.import
             docsSlug="fleet-ops/resources/vehicles/overview"
-            docsTitle="Vehicles guide"
-            docsText="Vehicle guide"
+            docsTitle=(t "fleetops-ui.templates.management.vehicles.index.hp.vehicles-guide")
+            docsText=(t "fleetops-ui.templates.management.vehicles.index.hp.vehicle-guide")
             docsSource="fleet-ops-empty-vehicles"
         }}
     />

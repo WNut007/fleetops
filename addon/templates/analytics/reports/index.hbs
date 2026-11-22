@@ -15,19 +15,19 @@
     @emptyStateComponent={{component
         "table/empty-state"
         icon="chart-line"
-        title="No reports yet"
-        description="Create a Fleet-Ops report to start tracking operational trends, utilization, and performance over time."
-        filteredTitle="No reports match your search"
-        filteredDescription="Adjust the search or filters to find an existing report."
-        primaryText="New report"
+        title=(t "fleetops-ui.templates.analytics.reports.index.hp.no-reports-yet")
+        description=(t "fleetops-ui.templates.analytics.reports.index.hp.create-a-fleet-ops-report-to")
+        filteredTitle=(t "fleetops-ui.templates.analytics.reports.index.hp.no-reports-match-your-search")
+        filteredDescription=(t "fleetops-ui.templates.analytics.reports.index.hp.adjust-the-search-or-filters-to")
+        primaryText=(t "fleetops-ui.templates.analytics.reports.index.hp.new-report")
         primaryIcon="plus"
         primaryAction=this.reportActions.transition.create
-        secondaryText="Refresh"
+        secondaryText=(t "fleetops-ui.templates.analytics.reports.index.hp.refresh")
         secondaryIcon="refresh"
         secondaryAction=this.reportActions.refresh
         docsSlug="fleet-ops/analytics/reports/overview"
-        docsTitle="Reports guide"
-        docsText="Reports guide"
+        docsTitle=(t "fleetops-ui.templates.analytics.reports.index.hp.reports-guide")
+        docsText=(t "fleetops-ui.templates.analytics.reports.index.hp.reports-guide")
         docsSource="fleet-ops-empty-reports"
     }}
 />

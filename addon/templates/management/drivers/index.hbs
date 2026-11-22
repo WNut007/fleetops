@@ -16,19 +16,19 @@
         @emptyStateComponent={{component
             "table/empty-state"
             icon="id-card"
-            title="Add your first driver"
-            description="Drivers power dispatching, live fleet visibility, assignments, and delivery activity."
-            filteredTitle="No drivers match your search"
-            filteredDescription="Adjust the search or filters to find another driver."
-            primaryText="New driver"
+            title=(t "fleetops-ui.templates.management.drivers.index.hp.add-your-first-driver")
+            description=(t "fleetops-ui.templates.management.drivers.index.hp.drivers-power-dispatching-live-fleet-visibility")
+            filteredTitle=(t "fleetops-ui.templates.management.drivers.index.hp.no-drivers-match-your-search")
+            filteredDescription=(t "fleetops-ui.templates.management.drivers.index.hp.adjust-the-search-or-filters-to")
+            primaryText=(t "fleetops-ui.templates.management.drivers.index.hp.new-driver")
             primaryIcon="plus"
             primaryAction=this.driverActions.transition.create
-            secondaryText="Import"
+            secondaryText=(t "fleetops-ui.templates.management.drivers.index.hp.import")
             secondaryIcon="upload"
             secondaryAction=this.driverActions.import
             docsSlug="fleet-ops/resources/drivers/overview"
-            docsTitle="Drivers guide"
-            docsText="Driver guide"
+            docsTitle=(t "fleetops-ui.templates.management.drivers.index.hp.drivers-guide")
+            docsText=(t "fleetops-ui.templates.management.drivers.index.hp.driver-guide")
             docsSource="fleet-ops-empty-drivers"
         }}
     />

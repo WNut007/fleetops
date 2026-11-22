@@ -14,16 +14,16 @@
     @emptyStateComponent={{component
         "table/empty-state"
         icon="bolt"
-        title="No connectivity events yet"
-        description="Events appear here after connected devices or providers begin sending telemetry signals."
-        filteredTitle="No events match your filters"
-        filteredDescription="Adjust the search, provider, device, or date filters to review other events."
-        primaryText="Refresh"
+        title=(t "fleetops-ui.templates.connectivity.events.index.hp.no-connectivity-events-yet")
+        description=(t "fleetops-ui.templates.connectivity.events.index.hp.events-appear-here-after-connected-devices")
+        filteredTitle=(t "fleetops-ui.templates.connectivity.events.index.hp.no-events-match-your-filters")
+        filteredDescription=(t "fleetops-ui.templates.connectivity.events.index.hp.adjust-the-search-provider-device-or")
+        primaryText=(t "fleetops-ui.templates.connectivity.events.index.hp.refresh")
         primaryIcon="refresh"
         primaryAction=this.deviceEventActions.refresh
         docsSlug="fleet-ops/connectivity/events/overview"
-        docsTitle="Events guide"
-        docsText="Events guide"
+        docsTitle=(t "fleetops-ui.templates.connectivity.events.index.hp.events-guide")
+        docsText=(t "fleetops-ui.templates.connectivity.events.index.hp.events-guide")
         docsSource="fleet-ops-empty-events"
     }}
 />

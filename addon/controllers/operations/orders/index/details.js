@@ -130,7 +130,7 @@ export default class OperationsOrdersIndexDetailsController extends Controller {
                     },
                     {
                         id: this.model.has_driver_assigned ? 'unassign-driver' : 'assign-driver',
-                        text: this.model.has_driver_assigned ? 'Unassign driver' : 'Assign driver',
+                        text: this.model.has_driver_assigned ? this.intl.t('fleetops-ui.js.controllers.operations.orders.index.details.unassign-driver') : this.intl.t('fleetops-ui.js.controllers.operations.orders.index.details.assign-driver'),
                         icon: this.model.has_driver_assigned ? 'user-xmark' : 'edit',
                         permission: 'fleet-ops assign-driver-for order',
                         disabled: this.model.has_driver_assigned ? !this.model.hasActiveStatus || !this.model.driver_assigned : !this.model.hasActiveStatus,

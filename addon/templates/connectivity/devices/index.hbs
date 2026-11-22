@@ -14,19 +14,19 @@
     @emptyStateComponent={{component
         "table/empty-state"
         icon="tablet-screen-button"
-        title="Add your first device"
-        description="Devices connect vehicles and assets to telemetry, events, tracking, and provider syncs."
-        filteredTitle="No devices match your filters"
-        filteredDescription="Adjust the search or filters to find another device."
-        primaryText="New device"
+        title=(t "fleetops-ui.templates.connectivity.devices.index.hp.add-your-first-device")
+        description=(t "fleetops-ui.templates.connectivity.devices.index.hp.devices-connect-vehicles-and-assets-to")
+        filteredTitle=(t "fleetops-ui.templates.connectivity.devices.index.hp.no-devices-match-your-filters")
+        filteredDescription=(t "fleetops-ui.templates.connectivity.devices.index.hp.adjust-the-search-or-filters-to")
+        primaryText=(t "fleetops-ui.templates.connectivity.devices.index.hp.new-device")
         primaryIcon="plus"
         primaryAction=this.deviceActions.transition.create
-        secondaryText="Import"
+        secondaryText=(t "fleetops-ui.templates.connectivity.devices.index.hp.import")
         secondaryIcon="upload"
         secondaryAction=this.deviceActions.import
         docsSlug="fleet-ops/connectivity/devices/overview"
-        docsTitle="Devices guide"
-        docsText="Device guide"
+        docsTitle=(t "fleetops-ui.templates.connectivity.devices.index.hp.devices-guide")
+        docsText=(t "fleetops-ui.templates.connectivity.devices.index.hp.device-guide")
         docsSource="fleet-ops-empty-devices"
     }}
 />

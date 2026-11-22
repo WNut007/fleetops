@@ -16,14 +16,14 @@
         @emptyStateComponent={{component
             "table/empty-state"
             icon="user-group"
-            title="Add your first customer"
-            description="Customers give orders an owner, contact details, and account context for service history."
-            filteredTitle="No customers match your filters"
-            filteredDescription="Adjust the search or filters to find another customer."
-            primaryText="New customer"
+            title=(t "fleetops-ui.templates.management.contacts.customers.hp.add-your-first-customer")
+            description=(t "fleetops-ui.templates.management.contacts.customers.hp.customers-give-orders-an-owner-contact")
+            filteredTitle=(t "fleetops-ui.templates.management.contacts.customers.hp.no-customers-match-your-filters")
+            filteredDescription=(t "fleetops-ui.templates.management.contacts.customers.hp.adjust-the-search-or-filters-to")
+            primaryText=(t "fleetops-ui.templates.management.contacts.customers.hp.new-customer")
             primaryIcon="plus"
             primaryAction=this.customerActions.transition.create
-            secondaryText="Import"
+            secondaryText=(t "fleetops-ui.templates.management.contacts.customers.hp.import")
             secondaryIcon="upload"
             secondaryAction=this.customerActions.import
         }}

@@ -15,19 +15,19 @@
     @emptyStateComponent={{component
         "table/empty-state"
         icon="layer-group"
-        title="Create your first fleet"
-        description="Fleets help group vehicles and drivers for dispatching, reporting, and operational coverage."
-        filteredTitle="No fleets match your filters"
-        filteredDescription="Adjust the search or filters to find another fleet."
-        primaryText="New fleet"
+        title=(t "fleetops-ui.templates.management.fleets.index.hp.create-your-first-fleet")
+        description=(t "fleetops-ui.templates.management.fleets.index.hp.fleets-help-group-vehicles-and-drivers")
+        filteredTitle=(t "fleetops-ui.templates.management.fleets.index.hp.no-fleets-match-your-filters")
+        filteredDescription=(t "fleetops-ui.templates.management.fleets.index.hp.adjust-the-search-or-filters-to")
+        primaryText=(t "fleetops-ui.templates.management.fleets.index.hp.new-fleet")
         primaryIcon="plus"
         primaryAction=this.fleetActions.transition.create
-        secondaryText="Import"
+        secondaryText=(t "fleetops-ui.templates.management.fleets.index.hp.import")
         secondaryIcon="upload"
         secondaryAction=this.fleetActions.import
         docsSlug="fleet-ops/resources/fleets/overview"
-        docsTitle="Fleets guide"
-        docsText="Fleet guide"
+        docsTitle=(t "fleetops-ui.templates.management.fleets.index.hp.fleets-guide")
+        docsText=(t "fleetops-ui.templates.management.fleets.index.hp.fleet-guide")
         docsSource="fleet-ops-empty-fleets"
     }}
 />

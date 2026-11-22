@@ -1,6 +1,7 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
+import { dasherize } from '@ember/string';
 import getResourceNameFromTransition from '@fleetbase/ember-core/utils/get-resource-name-from-transition';
 
 export default class ApplicationRoute extends Route {
@@ -17,8 +18,17 @@ export default class ApplicationRoute extends Route {
     @action loading(transition) {
         const resource = getResourceNameFromTransition(transition, { humanize: true });
         this.loader.showOnInitialTransition(transition, 'section.next-view-section', {
-            loadingMessage: (resource ? this.intl.t('common.loading-resource', { resource }) : this.intl.t('common.loading')) + '...',
+            loadingMessage: (resource ? this.intl.t('common.loading-resource', { resource: this.translateResource(resource) }) : this.intl.t('common.loading')) + '...',
         });
+    }
+
+    /**
+     * The resource name in the user's language when a resource key exists for it ("Orders" -> resource.orders).
+     */
+    translateResource(resource) {
+        const key = `resource.${dasherize(String(resource).toLowerCase())}`;
+
+        return this.intl.exists(key) ? this.intl.t(key) : resource;
     }
 
     async beforeModel() {

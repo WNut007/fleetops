@@ -14,19 +14,19 @@
     @emptyStateComponent={{component
         "table/empty-state"
         icon="location-dot"
-        title="Add your first place"
-        description="Places keep frequent pickup, dropoff, facility, and service locations ready for orders and routing."
-        filteredTitle="No places match your filters"
-        filteredDescription="Adjust the search or filters to find another saved location."
-        primaryText="New place"
+        title=(t "fleetops-ui.templates.management.places.index.hp.add-your-first-place")
+        description=(t "fleetops-ui.templates.management.places.index.hp.places-keep-frequent-pickup-dropoff-facility")
+        filteredTitle=(t "fleetops-ui.templates.management.places.index.hp.no-places-match-your-filters")
+        filteredDescription=(t "fleetops-ui.templates.management.places.index.hp.adjust-the-search-or-filters-to")
+        primaryText=(t "fleetops-ui.templates.management.places.index.hp.new-place")
         primaryIcon="plus"
         primaryAction=this.placeActions.transition.create
-        secondaryText="Import"
+        secondaryText=(t "fleetops-ui.templates.management.places.index.hp.import")
         secondaryIcon="upload"
         secondaryAction=this.placeActions.import
         docsSlug="fleet-ops/resources/places/overview"
-        docsTitle="Places guide"
-        docsText="Places guide"
+        docsTitle=(t "fleetops-ui.templates.management.places.index.hp.places-guide")
+        docsText=(t "fleetops-ui.templates.management.places.index.hp.places-guide")
         docsSource="fleet-ops-empty-places"
     }}
 />

@@ -25,7 +25,7 @@ export default class ManagementContactsCustomersRoute extends Route {
 
     @action loading(transition) {
         this.loader.showOnInitialTransition(transition, 'section.next-view-section', {
-            loadingMessage: this.intl.t('common.loading-resource', { resource: 'Customers' }),
+            loadingMessage: this.intl.t('common.loading-resource', { resource: this.intl.t('resource.customers') }),
         });
     }
 

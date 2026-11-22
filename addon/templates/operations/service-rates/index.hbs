@@ -14,19 +14,19 @@
     @emptyStateComponent={{component
         "table/empty-state"
         icon="route"
-        title="Set up your first service rate"
-        description="Service rates define how Fleet-Ops prices routes, zones, distance, and other service rules."
-        filteredTitle="No service rates match your filters"
-        filteredDescription="Adjust the search or filters to find another service rate."
-        primaryText="New service rate"
+        title=(t "fleetops-ui.templates.operations.service-rates.index.hp.set-up-your-first-service-rate")
+        description=(t "fleetops-ui.templates.operations.service-rates.index.hp.service-rates-define-how-fleet-ops")
+        filteredTitle=(t "fleetops-ui.templates.operations.service-rates.index.hp.no-service-rates-match-your-filters")
+        filteredDescription=(t "fleetops-ui.templates.operations.service-rates.index.hp.adjust-the-search-or-filters-to")
+        primaryText=(t "fleetops-ui.templates.operations.service-rates.index.hp.new-service-rate")
         primaryIcon="plus"
         primaryAction=this.serviceRateActions.transition.create
-        secondaryText="Refresh"
+        secondaryText=(t "fleetops-ui.templates.operations.service-rates.index.hp.refresh")
         secondaryIcon="refresh"
         secondaryAction=this.serviceRateActions.refresh
         docsSlug="fleet-ops/operations/service-rates/overview"
-        docsTitle="Service rates guide"
-        docsText="Service rates guide"
+        docsTitle=(t "fleetops-ui.templates.operations.service-rates.index.hp.service-rates-guide")
+        docsText=(t "fleetops-ui.templates.operations.service-rates.index.hp.service-rates-guide")
         docsSource="fleet-ops-empty-service-rates"
     }}
 />

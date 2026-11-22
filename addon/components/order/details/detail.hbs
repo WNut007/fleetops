@@ -47,7 +47,7 @@
                     <div class="field-value">
                         <Customer::Pill
                             @customer={{@resource.customer}}
-                            @titleFallback={{n-a @resource.customer_name "No customer"}}
+                            @titleFallback={{n-a @resource.customer_name (t "fleetops-ui.components.order.details.detail.no-customer")}}
                             @titleClass={{unless @resource.customer "text-gray-300"}}
                         />
                     </div>
@@ -58,7 +58,7 @@
                 <div class="field-value">
                     <Facilitator::Pill
                         @facilitator={{@resource.facilitator}}
-                        @titleFallback={{n-a @resource.facilitator_name "No facilitator"}}
+                        @titleFallback={{n-a @resource.facilitator_name (t "fleetops-ui.components.order.details.detail.no-facilitator")}}
                         @titleClass={{unless @resource.facilitator "text-gray-300"}}
                     />
                 </div>

@@ -14,19 +14,19 @@
     @emptyStateComponent={{component
         "table/empty-state"
         icon="satellite-dish"
-        title="Add your first sensor"
-        description="Sensors capture telemetry signals that can power events, conditions, and operational visibility."
-        filteredTitle="No sensors match your filters"
-        filteredDescription="Adjust the search or filters to find another sensor."
-        primaryText="New sensor"
+        title=(t "fleetops-ui.templates.connectivity.sensors.index.hp.add-your-first-sensor")
+        description=(t "fleetops-ui.templates.connectivity.sensors.index.hp.sensors-capture-telemetry-signals-that-can")
+        filteredTitle=(t "fleetops-ui.templates.connectivity.sensors.index.hp.no-sensors-match-your-filters")
+        filteredDescription=(t "fleetops-ui.templates.connectivity.sensors.index.hp.adjust-the-search-or-filters-to")
+        primaryText=(t "fleetops-ui.templates.connectivity.sensors.index.hp.new-sensor")
         primaryIcon="plus"
         primaryAction=this.sensorActions.transition.create
-        secondaryText="Import"
+        secondaryText=(t "fleetops-ui.templates.connectivity.sensors.index.hp.import")
         secondaryIcon="upload"
         secondaryAction=this.sensorActions.import
         docsSlug="fleet-ops/connectivity/sensors/overview"
-        docsTitle="Sensors guide"
-        docsText="Sensors guide"
+        docsTitle=(t "fleetops-ui.templates.connectivity.sensors.index.hp.sensors-guide")
+        docsText=(t "fleetops-ui.templates.connectivity.sensors.index.hp.sensors-guide")
         docsSource="fleet-ops-empty-sensors"
     }}
 />

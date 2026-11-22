@@ -15,19 +15,19 @@
     @emptyStateComponent={{component
         "table/empty-state"
         icon="gas-pump"
-        title="No fuel reports yet"
-        description="Create fuel reports to track vehicle fuel usage, cost, and supporting transaction records."
-        filteredTitle="No fuel reports match your filters"
-        filteredDescription="Adjust the search or filters to find another fuel report."
-        primaryText="New fuel report"
+        title=(t "fleetops-ui.templates.management.fuel-reports.index.hp.no-fuel-reports-yet")
+        description=(t "fleetops-ui.templates.management.fuel-reports.index.hp.create-fuel-reports-to-track-vehicle")
+        filteredTitle=(t "fleetops-ui.templates.management.fuel-reports.index.hp.no-fuel-reports-match-your-filters")
+        filteredDescription=(t "fleetops-ui.templates.management.fuel-reports.index.hp.adjust-the-search-or-filters-to")
+        primaryText=(t "fleetops-ui.templates.management.fuel-reports.index.hp.new-fuel-report")
         primaryIcon="plus"
         primaryAction=this.fuelReportActions.transition.create
-        secondaryText="Import"
+        secondaryText=(t "fleetops-ui.templates.management.fuel-reports.index.hp.import")
         secondaryIcon="upload"
         secondaryAction=this.fuelReportActions.import
         docsSlug="fleet-ops/resources/fuel-reports/overview"
-        docsTitle="Fuel reports guide"
-        docsText="Fuel reports guide"
+        docsTitle=(t "fleetops-ui.templates.management.fuel-reports.index.hp.fuel-reports-guide")
+        docsText=(t "fleetops-ui.templates.management.fuel-reports.index.hp.fuel-reports-guide")
         docsSource="fleet-ops-empty-fuel-reports"
     }}
 />

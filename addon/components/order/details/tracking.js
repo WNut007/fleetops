@@ -106,7 +106,7 @@ export default class OrderDetailsTrackingComponent extends Component {
             return null;
         }
 
-        return this.lifecycle.message ?? this.defaultLifecycleMessage;
+        return this.defaultLifecycleMessage ?? this.lifecycle.message ?? null;
     }
 
     get defaultLifecycleMessage() {
@@ -277,21 +277,24 @@ export default class OrderDetailsTrackingComponent extends Component {
             return [];
         }
 
-        const items = [`${this.humanize(trackerData.provider)} route`];
+        const items = [this.intl.t('fleetops-ui.js.components.order.details.tracking.provider-route', { provider: this.humanize(trackerData.provider) })];
 
         if (trackerData.confidence) {
-            items.push(`${this.humanize(trackerData.confidence)} confidence`);
+            items.push(this.intl.t('fleetops-ui.js.components.order.details.tracking.confidence-level', { confidence: this.confidenceLabel }));
         }
 
         if (trackerData.fallback_provider) {
-            items.push(`Fallback: ${this.humanize(trackerData.fallback_provider)}`);
+            items.push(this.intl.t('fleetops-ui.js.components.order.details.tracking.fallback-provider', { provider: this.humanize(trackerData.fallback_provider) }));
         }
 
         return items;
     }
 
     get confidenceLabel() {
-        return this.humanize(this.trackerData?.confidence || 'unknown');
+        const level = String(this.trackerData?.confidence || 'unknown').toLowerCase();
+        const key = `fleetops-ui.js.components.order.details.tracking.confidence-levels.${level}`;
+
+        return this.intl.exists(key) ? this.intl.t(key) : this.humanize(level);
     }
 
     get confidencePercent() {
@@ -418,10 +421,10 @@ export default class OrderDetailsTrackingComponent extends Component {
 
     get reportedEtaWarning() {
         if (!this.isReportedEtaUntrusted) {
-            return 'Reported from existing route data';
+            return this.intl.t('fleetops-ui.js.components.order.details.tracking.reported-from-existing-route-data');
         }
 
-        return this.operatorWarning ?? 'Reported ETA may not reflect the latest tracking signal.';
+        return this.operatorWarning ?? this.intl.t('fleetops-ui.js.components.order.details.tracking.reported-eta-may-not-reflect-latest');
     }
 
     get etaUnavailableLabel() {
@@ -462,7 +465,7 @@ export default class OrderDetailsTrackingComponent extends Component {
     }
 
     get diagnosticsSummaryLabel() {
-        return this.warningsCount === 1 ? this.intl.t('fleetops-ui.js.components.order.details.tracking.1-warning') : `${this.warningsCount} warnings`;
+        return this.warningsCount === 1 ? this.intl.t('fleetops-ui.js.components.order.details.tracking.1-warning') : this.intl.t('fleetops-ui.js.components.order.details.tracking.n-warnings', { count: this.warningsCount });
     }
 
     get totalProgressPercentage() {
@@ -531,10 +534,10 @@ export default class OrderDetailsTrackingComponent extends Component {
 
         return [
             { label: this.intl.t('fleetops-ui.js.components.order.details.tracking.provider'), value: this.humanize(trackerData.provider) },
-            { label: this.intl.t('fleetops-ui.js.components.order.details.tracking.fallback'), value: trackerData.fallback_provider ? this.humanize(trackerData.fallback_provider) : 'No' },
-            { label: this.intl.t('fleetops-ui.js.components.order.details.tracking.traffic-aware'), value: trackerData.options?.traffic_enabled ? 'Yes' : 'No' },
+            { label: this.intl.t('fleetops-ui.js.components.order.details.tracking.fallback'), value: trackerData.fallback_provider ? this.humanize(trackerData.fallback_provider) : this.intl.t('fleetops-ui.js.components.order.details.tracking.no') },
+            { label: this.intl.t('fleetops-ui.js.components.order.details.tracking.traffic-aware'), value: trackerData.options?.traffic_enabled ? this.intl.t('fleetops-ui.js.components.order.details.tracking.yes') : this.intl.t('fleetops-ui.js.components.order.details.tracking.no') },
             { label: this.intl.t('fleetops-ui.js.components.order.details.tracking.confidence'), value: this.confidenceLabel },
-            { label: this.intl.t('fleetops-ui.js.components.order.details.tracking.driver-signal'), value: this.driverSignal },
+            { label: this.intl.t('fleetops-ui.js.components.order.details.tracking.driver-signal'), value: this.driverStatusLabel },
             { label: this.intl.t('fleetops-ui.js.components.order.details.tracking.warnings'), value: String((trackerData.warnings ?? []).length) },
         ];
     }
@@ -551,27 +554,27 @@ export default class OrderDetailsTrackingComponent extends Component {
         }
 
         if (!this.hasAssignedDriver) {
-            return 'Assign a driver to start live tracking and improve ETA accuracy.';
+            return this.intl.t('fleetops-ui.js.components.order.details.tracking.warning-assign-driver');
         }
 
         if (!trackerData?.driver?.location) {
-            return 'Driver location is missing, so ETA accuracy may be limited.';
+            return this.intl.t('fleetops-ui.js.components.order.details.tracking.warning-location-missing');
         }
 
         if (trackerData?.insights?.is_location_stale) {
-            return 'Driver location is stale. ETA may not reflect the latest movement.';
+            return this.intl.t('fleetops-ui.js.components.order.details.tracking.warning-location-stale');
         }
 
         if (trackerData.fallback_provider) {
-            return `Using ${this.humanize(trackerData.fallback_provider)} fallback because the preferred tracking provider was unavailable.`;
+            return this.intl.t('fleetops-ui.js.components.order.details.tracking.warning-fallback', { provider: this.humanize(trackerData.fallback_provider) });
         }
 
         if (trackerData.confidence && trackerData.confidence !== 'high') {
-            return `${this.humanize(trackerData.confidence)} confidence ETA. Treat the estimate as directional.`;
+            return this.intl.t('fleetops-ui.js.components.order.details.tracking.warning-low-confidence', { confidence: this.confidenceLabel });
         }
 
         if ((trackerData.warnings ?? []).some((warning) => String(warning).startsWith('provider_failed'))) {
-            return 'Tracking provider returned an error. Showing the best available estimate.';
+            return this.intl.t('fleetops-ui.js.components.order.details.tracking.warning-provider-error');
         }
 
         return null;
@@ -620,7 +623,7 @@ export default class OrderDetailsTrackingComponent extends Component {
             yield this.fetch.post(`orders/${order.id}/ping-driver`);
             this.notifications.success(this.intl.t('fleetops-ui.js.components.order.details.tracking.driver-app-ping-sent'));
         } catch (err) {
-            this.notifications.error(err.message ?? 'Unable to ping driver app.');
+            this.notifications.error(err.message ?? this.intl.t('fleetops-ui.js.components.order.details.tracking.unable-to-ping-driver-app'));
         }
     }
 }
