@@ -184,12 +184,7 @@ export default class MapLeafletLiveMapComponent extends Component {
     }
 
     @action onDriverClicked(driver) {
-        this.driverActions.panel.view(driver, {
-            size: 'xs',
-            onOpen: () => {
-                this.mapManager.once?.('moveend', () => this.mapManager.panBy?.(200, 0)) ?? this.map?.once?.('moveend', () => this.map?.panBy?.([200, 0]));
-            },
-        });
+        return this.openMapPanel(this.driverActions, driver);
     }
 
     @action onVehicleAdded(vehicle, { target: layer }) {
@@ -199,12 +194,7 @@ export default class MapLeafletLiveMapComponent extends Component {
     }
 
     @action onVehicleClicked(vehicle) {
-        this.vehicleActions.panel.view(vehicle, {
-            size: 'xs',
-            onOpen: () => {
-                this.mapManager.once?.('moveend', () => this.mapManager.panBy?.(200, 0)) ?? this.map?.once?.('moveend', () => this.map?.panBy?.([200, 0]));
-            },
-        });
+        return this.openMapPanel(this.vehicleActions, vehicle);
     }
 
     @action onPlaceAdded(place, { target: layer }) {
@@ -212,12 +202,33 @@ export default class MapLeafletLiveMapComponent extends Component {
     }
 
     @action onPlaceClicked(place) {
-        this.placeActions.panel.view(place, {
+        return this.openMapPanel(this.placeActions, place);
+    }
+
+    /** The details panel the last marker click opened, replaced by the next click. */
+    mapPanelId = null;
+
+    /**
+     * Open a marker's details panel in place of the one the previous marker click opened.
+     * Each click used to stack another panel, so clicking a few markers left as many panels to
+     * close one by one.
+     */
+    @action async openMapPanel(actions, resource) {
+        const previous = this.mapPanelId;
+        this.mapPanelId = null;
+        if (previous) {
+            await this.resourceContextPanel.close(previous);
+        }
+
+        const id = await actions.panel.view(resource, {
             size: 'xs',
             onOpen: () => {
                 this.mapManager.once?.('moveend', () => this.mapManager.panBy?.(200, 0)) ?? this.map?.once?.('moveend', () => this.map?.panBy?.([200, 0]));
             },
         });
+        this.mapPanelId = id ?? null;
+
+        return id;
     }
 
     @action onServiceAreaLayerAdded(serviceArea, { target: layer }) {
