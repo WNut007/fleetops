@@ -56,6 +56,19 @@ class DriverController extends FleetOpsController
     public $resource = 'driver';
 
     /**
+     * The console's driver lists serialize each driver's user, vehicle, vendor, current order
+     * and order count: load them in a few queries for the whole page instead of several per
+     * driver (30 drivers took ~2 s).
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Request                               $request
+     */
+    public static function onQueryRecord($query, $request): void
+    {
+        $query->with(['user', 'vehicle', 'vendor', 'currentOrder'])->withCount('orders');
+    }
+
+    /**
      * Creates a record with request payload.
      *
      * @return \Illuminate\Http\Response

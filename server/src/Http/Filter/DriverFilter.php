@@ -19,27 +19,17 @@ class DriverFilter extends Filter
 
     public function queryForInternal()
     {
-        // The console's driver lists serialize each driver's user, vehicle, vendor, current
-        // order and order count: load them in a few queries for the whole page instead of
-        // several per driver.
-        $this->builder->with(['user', 'vehicle', 'vendor', 'currentOrder'])->withCount('orders');
-
-        $this->scopeToCompany();
-    }
-
-    public function queryForPublic()
-    {
-        $this->scopeToCompany();
-    }
-
-    protected function scopeToCompany(): void
-    {
         $this->builder->where(
             function ($query) {
                 $query->where('company_uuid', $this->session->get('company'));
                 $query->whereHas('user');
             }
         );
+    }
+
+    public function queryForPublic()
+    {
+        $this->queryForInternal();
     }
 
     public function query(?string $searchQuery)
