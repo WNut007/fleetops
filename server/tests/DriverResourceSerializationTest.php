@@ -1,6 +1,10 @@
 <?php
 
 use Fleetbase\FleetOps\Http\Resources\v1\Driver as DriverResource;
+use Fleetbase\FleetOps\Models\Driver as DriverModel;
+use Fleetbase\FleetOps\Models\Vehicle as VehicleModel;
+use Fleetbase\FleetOps\Models\Vendor as VendorModel;
+use Fleetbase\Http\Resources\User as UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -243,3 +247,66 @@ test('driver resource webhook payload serializes driver assignment details', fun
         'meta'                   => ['shift' => 'morning'],
     ]);
 });
+
+function fleetopsDriverListRequest(string $path): Request
+{
+    $request = Request::create('/' . $path, 'GET');
+    $request->setRouteResolver(fn () => new FleetOpsDriverResourceRouteFixture($path));
+    app()->instance('request', $request);
+
+    return $request;
+}
+
+test('a list of drivers sends each login account without role, policies or permissions', function () {
+    $request = fleetopsDriverListRequest('int/v1/drivers');
+    $user    = (object) ['uuid' => 'user-uuid', 'public_id' => 'user_public', 'name' => 'Jane', 'email' => 'jane@example.test', 'role' => 'expensive', 'type' => 'driver'];
+    $payload = (fn () => $this->userPayload($request))->call(new DriverResource(fleetopsDriverResourceFixture(['user' => $user])));
+
+    expect($payload)->toBeArray()
+        ->and($payload)->toMatchArray(['id' => 'user-uuid', 'uuid' => 'user-uuid', 'public_id' => 'user_public', 'name' => 'Jane', 'type' => 'driver'])
+        ->and($payload)->not->toHaveKeys(['role', 'policies', 'permissions'])
+        ->and(array_keys($payload))->toEqualCanonicalizing([...DriverResource::LISTED_USER_FIELDS, 'id', 'meta']);
+});
+
+test('a request for one driver keeps the full user resource', function () {
+    $user = (object) ['uuid' => 'user-uuid'];
+
+    foreach (['int/v1/drivers/driver_public', 'int/v1/drivers/driver-uuid'] as $path) {
+        $request = fleetopsDriverListRequest($path);
+        $payload = (fn () => $this->userPayload($request))->call(new DriverResource(fleetopsDriverResourceFixture(['user' => $user])));
+        expect($payload)->toBeInstanceOf(UserResource::class);
+    }
+
+    $noUser = (fn () => $this->userPayload(fleetopsDriverListRequest('int/v1/drivers')))->call(new DriverResource(fleetopsDriverResourceFixture(['user' => null])));
+    expect($noUser)->toBeInstanceOf(UserResource::class)
+        ->and((fn () => $this->isRequestForThisDriver(null))->call(new DriverResource(fleetopsDriverResourceFixture())))->toBeFalse();
+});
+
+test('listed drivers use the eager-loaded order count', function () {
+    $resource = new DriverResource(fleetopsDriverResourceFixture(['orders_count' => '9']));
+
+    expect((fn () => $this->assignedOrdersCount())->call($resource))->toBe(9);
+});
+
+test('vendor name and vehicle avatar read loaded relations without querying', function () {
+    $driver = new DriverModel();
+    $driver->setRawAttributes(['vehicle_uuid' => 'vehicle-uuid', 'vendor_uuid' => 'vendor-uuid'], true);
+
+    $vehicle = new VehicleModel();
+    $vehicle->setRawAttributes(['avatar_url' => 'https://cdn.test/truck.png'], true);
+    $vendor = new VendorModel();
+    $vendor->setRawAttributes(['name' => 'Vendor One'], true);
+
+    $driver->setRelation('vehicle', $vehicle);
+    $driver->setRelation('vendor', $vendor);
+
+    expect($driver->getVehicleAvatarAttribute())->toBe('https://cdn.test/truck.png')
+        ->and($driver->getVendorNameAttribute())->toBe('Vendor One');
+
+    $driver->setRelation('vehicle', null);
+    $driver->setRelation('vendor', null);
+
+    expect($driver->getVehicleAvatarAttribute())->toBeNull()
+        ->and($driver->getVendorNameAttribute())->toBeNull();
+});
+

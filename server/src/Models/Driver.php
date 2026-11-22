@@ -578,6 +578,10 @@ class Driver extends Model
             return Vehicle::getAvatar();
         }
 
+        if ($this->relationLoaded('vehicle')) {
+            return $this->vehicle?->getRawOriginal('avatar_url');
+        }
+
         return $this->vehicle()->value('avatar_url');
     }
 
@@ -594,6 +598,10 @@ class Driver extends Model
      */
     public function getVendorNameAttribute()
     {
+        if ($this->relationLoaded('vendor')) {
+            return $this->vendor?->name;
+        }
+
         return $this->vendor()->select(['uuid', 'public_id', 'name'])->value('name');
     }
 

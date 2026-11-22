@@ -19,6 +19,10 @@ class DriverFilter extends Filter
 
     public function queryForInternal()
     {
+        // Load what each serialized driver reads in a few queries for the whole page
+        // instead of several per driver (user, vehicle, vendor, current order, order count).
+        $this->builder->with(['user', 'vehicle', 'vendor', 'currentOrder'])->withCount('orders');
+
         $this->builder->where(
             function ($query) {
                 $query->where('company_uuid', $this->session->get('company'));

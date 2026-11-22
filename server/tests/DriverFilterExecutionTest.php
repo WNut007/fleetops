@@ -214,7 +214,9 @@ test('driver filter applies internal public and text search scopes', function ()
     $filter->name('Jane Driver');
     $filter->publicId('driver_public');
 
-    expect($builder->called('where'))->toBeTrue()
+    expect($builder->methodCalls('with')[0][1])->toBe(['user', 'vehicle', 'vendor', 'currentOrder'])
+        ->and($builder->methodCalls('withCount')[0][1])->toBe('orders')
+        ->and($builder->called('where'))->toBeTrue()
         ->and($builder->called('whereHas'))->toBeTrue()
         ->and($builder->called('orWhereHas'))->toBeTrue()
         ->and($builder->called('searchWhere'))->toBeTrue();

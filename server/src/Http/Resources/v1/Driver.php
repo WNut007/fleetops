@@ -31,7 +31,7 @@ class Driver extends FleetbaseResource
             'vendor_uuid'                   => $this->when(Http::isInternalRequest(), $this->vendor_uuid),
             'current_job_uuid'              => $this->when(Http::isInternalRequest(), $this->current_job_uuid),
             'public_id'                     => $this->when(Http::isInternalRequest(), $this->public_id),
-            'user'                          => $this->when(Http::isPublicRequest(), fn () => $this->user ? $this->user->public_id : null, new User($this->user)),
+            'user'                          => $this->when(Http::isPublicRequest(), fn () => $this->user ? $this->user->public_id : null, fn () => $this->userPayload($request)),
             'internal_id'                   => $this->internal_id,
             'is_staff_linked'               => $this->when(Http::isInternalRequest(), fn () => ProfileAccountManager::isStaffAccount($this->user)),
             'login_status'                  => $this->when(Http::isInternalRequest(), fn () => data_get($this, 'user.status')),
@@ -89,7 +89,52 @@ class Driver extends FleetbaseResource
 
     protected function assignedOrdersCount(): int
     {
+        // DriverFilter adds orders_count to listed drivers; a single record counts on demand.
+        if (isset($this->resource->orders_count)) {
+            return (int) $this->resource->orders_count;
+        }
+
         return $this->orders()->count();
+    }
+
+    /**
+     * The driver's login account. A request for this one driver gets the full user; anything
+     * else (a list of drivers) gets the account without its role, policies and permissions,
+     * which cost several queries per driver and which no listing shows (about 7 KB each).
+     */
+    protected function userPayload($request)
+    {
+        $user = $this->user;
+        if (!$user || $this->isRequestForThisDriver($request)) {
+            return new User($user);
+        }
+
+        $payload = [];
+        foreach (static::LISTED_USER_FIELDS as $field) {
+            $payload[$field] = data_get($user, $field);
+        }
+        $payload['id']   = data_get($user, 'uuid');
+        $payload['meta'] = data_get($user, 'meta') ?? Utils::createObject();
+
+        return $payload;
+    }
+
+    /**
+     * User fields sent with each driver in a list: plain columns only, nothing that queries.
+     */
+    public const LISTED_USER_FIELDS = [
+        'uuid', 'company_uuid', 'public_id', 'name', 'username', 'email', 'phone', 'country', 'timezone', 'avatar_url', 'type',
+        'is_online', 'email_verified_at', 'phone_verified_at', 'last_seen_at', 'last_login', 'status', 'slug', 'updated_at', 'created_at',
+    ];
+
+    /**
+     * Whether the request addresses this driver by id (/drivers/{id}), not a list of drivers.
+     */
+    protected function isRequestForThisDriver($request): bool
+    {
+        $last = $request ? basename((string) $request->path()) : '';
+
+        return $last !== '' && in_array($last, array_filter([data_get($this->resource, 'public_id'), data_get($this->resource, 'uuid')]), true);
     }
 
     protected function currentOrderReference(): ?string
