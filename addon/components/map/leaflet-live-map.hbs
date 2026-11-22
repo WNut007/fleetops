@@ -82,9 +82,6 @@
                         @draggable={{false}}
                         as |marker|
                     >
-                        <marker.popup @maxWidth="500" @minWidth="225">
-                            <Map::MarkerCard::Driver @driver={{driver}} />
-                        </marker.popup>
                         <marker.tooltip @permanent={{false}} @sticky={{true}}>
                             <Map::MarkerCard::Driver @driver={{driver}} @variant="tooltip" />
                         </marker.tooltip>
@@ -103,9 +100,6 @@
                         @draggable={{false}}
                         as |marker|
                     >
-                        <marker.popup @permanent={{false}} @sticky={{true}}>
-                            <Map::MarkerCard::Vehicle @vehicle={{vehicle}} />
-                        </marker.popup>
                         <marker.tooltip @permanent={{false}} @sticky={{true}}>
                             <Map::MarkerCard::Vehicle @vehicle={{vehicle}} @variant="tooltip" />
                         </marker.tooltip>
