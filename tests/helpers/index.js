@@ -1,3 +1,4 @@
+import { setupIntl } from 'ember-intl/test-support';
 import { setupApplicationTest as upstreamSetupApplicationTest, setupRenderingTest as upstreamSetupRenderingTest, setupTest as upstreamSetupTest } from 'ember-qunit';
 
 // This file exists to provide wrappers around ember-qunit's
@@ -26,7 +27,9 @@ function setupApplicationTest(hooks, options) {
 function setupRenderingTest(hooks, options) {
     upstreamSetupRenderingTest(hooks, options);
 
-    // Additional setup for rendering tests can be done here.
+    // Templates render {{t}}, which reads the locale; without a locale set before rendering,
+    // ember-intl sets it mid-render and Ember's "updated after used" assertion fails.
+    setupIntl(hooks, 'en-us');
 }
 
 function setupTest(hooks, options) {

@@ -6,7 +6,13 @@
     @notchEnabled={{true}}
     @onLoad={{this.setDrawerContext}}
 >
-    <TabNavigation @tabs={{this.tabs}} @activeTabId={{this.mapDrawer.activeTabId}} @onTabChange={{this.mapDrawer.setActiveTab}} as |activeTab|>
-        {{component (lazy-engine-component activeTab.component)}}
+    <TabNavigation @tabs={{this.tabs}} @activeTabId={{this.mapDrawer.activeTabId}} @onTabChange={{this.changeTab}} as |activeTab|>
+        {{#if this.isSwitchingTab}}
+            <div class="flex items-center justify-center py-10" data-test-map-drawer-tab-loading>
+                <Spinner @loadingMessage={{t "common.loading"}} />
+            </div>
+        {{else}}
+            {{component (lazy-engine-component activeTab.component)}}
+        {{/if}}
     </TabNavigation>
 </Drawer>
