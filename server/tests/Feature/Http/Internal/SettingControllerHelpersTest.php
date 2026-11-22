@@ -114,6 +114,19 @@ test('setting helpers configure and look up global and company settings', functi
     // Google maps api key falls back through config and env
     config()->set('services.google_maps.api_key', 'maps-key-1');
     expect($helper('googleMapsApiKey'))->toBe('maps-key-1');
+
+    // No key configured: the config entry is null and the env var is unset - an empty string, not a TypeError
+    config()->set('services.google_maps.api_key', null);
+    putenv('GOOGLE_MAPS_API_KEY');
+    unset($_ENV['GOOGLE_MAPS_API_KEY'], $_SERVER['GOOGLE_MAPS_API_KEY']);
+    expect($helper('googleMapsApiKey'))->toBe('');
+
+    // Null config entry falls back to the env var
+    $_ENV['GOOGLE_MAPS_API_KEY'] = $_SERVER['GOOGLE_MAPS_API_KEY'] = 'maps-key-env';
+    putenv('GOOGLE_MAPS_API_KEY=maps-key-env');
+    expect($helper('googleMapsApiKey'))->toBe('maps-key-env');
+    putenv('GOOGLE_MAPS_API_KEY');
+    unset($_ENV['GOOGLE_MAPS_API_KEY'], $_SERVER['GOOGLE_MAPS_API_KEY']);
 });
 
 test('setting helpers read the notification registries', function () {

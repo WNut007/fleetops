@@ -1600,6 +1600,8 @@ class SettingController extends Controller
 
     protected function googleMapsApiKey(): string
     {
-        return config('services.google_maps.api_key', env('GOOGLE_MAPS_API_KEY', ''));
+        // The services config entry exists but is null when no key is set, so the
+        // config default never applies; fall back explicitly and always return a string.
+        return (string) (config('services.google_maps.api_key') ?: env('GOOGLE_MAPS_API_KEY', ''));
     }
 }
