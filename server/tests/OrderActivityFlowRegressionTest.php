@@ -460,5 +460,7 @@ test('pod bypass is internal console only', function () {
         ->and($publicController)
         ->not->toContain('bypass_proof')
         ->and($consoleModal)
-        ->toContain('Bypass proof of delivery');
+        ->toContain('fleetops-ui.components.modals.update-order-activity.bypass-proof-of-delivery')
+        ->and(file_get_contents(dirname(__DIR__, 2) . '/translations/en-us.yaml'))
+        ->toContain('bypass-proof-of-delivery: Bypass proof of delivery');
 });
