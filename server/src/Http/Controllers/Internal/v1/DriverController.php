@@ -120,7 +120,7 @@ class DriverController extends FleetOpsController
 
                     // Prepare input
                     $input = $input
-                            ->except(['name', 'password', 'email', 'phone', 'meta', 'avatar_uuid', 'photo_uuid', 'status', 'user_uuid', 'user'])
+                            ->except(['name', 'password', 'email', 'phone', 'meta', 'avatar_uuid', 'photo_uuid', 'status', 'user_uuid', 'user', 'rating_average', 'rating_count'])
                             ->filter()
                             ->toArray();
 
@@ -189,7 +189,9 @@ class DriverController extends FleetOpsController
                     if (isset($input['photo_uuid']) && Str::isUuid($input['photo_uuid'])) {
                         $userInput['avatar_uuid'] = $input['photo_uuid'];
                     }
-                    $input     = $input->except(['name', 'password', 'email', 'phone', 'meta', 'avatar_uuid', 'photo_uuid', 'user_uuid', 'user'])->toArray();
+                    // rating_* are worked out from order ratings; forms send them back as null, which the
+                    // NOT NULL rating_count column rejected, so every driver edit failed with a 400.
+                    $input     = $input->except(['name', 'password', 'email', 'phone', 'meta', 'avatar_uuid', 'photo_uuid', 'user_uuid', 'user', 'rating_average', 'rating_count'])->toArray();
 
                     // Update the driver's login account through its proxy fields
                     ProfileAccountManager::syncProxyFields($driver->getUser(), $userInput, $driver->company_uuid);
