@@ -953,6 +953,20 @@ class Place extends Model
      *
      * @return Place|null the newly created Place instance, or null if no valid address could be found
      */
+    /**
+     * Whether an imported latitude or longitude is a usable number within +/- $limit degrees.
+     */
+    protected static function isImportCoordinate($value, float $limit): bool
+    {
+        if (!is_numeric($value)) {
+            return false;
+        }
+
+        $value = (float) $value;
+
+        return abs($value) <= $limit && $value !== 0.0;
+    }
+
     public static function createFromImportRow(array $row, ?string $importId = null, $country = null): ?Place
     {
         $addressFields = [
@@ -996,18 +1010,21 @@ class Place extends Model
 
         $address = rtrim($address);
 
-        // if latitude and longitude provided
-        if ($latitude && $longitude) {
-            $address = $latitude . ', ' . $longitude;
-        }
+        // Rows that carry their own coordinates are placed exactly there: geocoding "lat, lng"
+        // used to replace the street with the coordinate text and leave the pin at 0,0.
+        $hasCoordinates = static::isImportCoordinate($latitude, 90) && static::isImportCoordinate($longitude, 180);
 
         // if no address
-        if (!$address) {
+        if (!$address && !$hasCoordinates) {
             return null;
         }
 
-        $place = static::createFromGeocodingLookup($address, false);
+        $place = $hasCoordinates ? (new static())->newInstance([]) : static::createFromGeocodingLookup($address, false);
         foreach ($addressFields as $field => $options) {
+            if (in_array($field, ['location', 'latitude', 'longitude'], true)) {
+                continue;
+            }
+
             if ($place->isFillable($field) && empty($place->{$field})) {
                 $value = Utils::or($row, array_merge([$field], $options['alias']));
 
@@ -1015,6 +1032,12 @@ class Place extends Model
                     $place->{$field} = $value;
                 }
             }
+        }
+
+        // the place name from the row
+        $name = Utils::or($row, ['name', 'place_name', 'title']);
+        if ($name) {
+            $place->name = $name;
         }
 
         if ($country && !Str::contains($address, $country)) {
@@ -1025,16 +1048,19 @@ class Place extends Model
         $place->phone = Utils::or($row, $addressFields['phone']['alias']);
 
         // set meta data
-        $meta = collect($row)->except(['name', ...$addressFields['street_number']['alias'], ...$addressFields['street1']['alias'], ...$addressFields['street2']['alias'], ...$addressFields['city']['alias'], ...$addressFields['neighborhood']['alias'], ...$addressFields['province']['alias'], ...$addressFields['postal_code']['alias'], ...$addressFields['phone']['alias']])->toArray();
+        // everything that is not a place field becomes meta data
+        $placeColumns = ['name', 'place_name', 'title'];
+        foreach ($addressFields as $field => $options) {
+            array_push($placeColumns, $field, ...$options['alias']);
+        }
+        $meta = collect($row)->except($placeColumns)->toArray();
         $place->setMeta($meta);
 
         // Handle location
-        if (empty($place->location)) {
-            if ($latitude && $longitude) {
-                $place->location = new SpatialPoint($latitude, $longitude);
-            } else {
-                $place->location = new SpatialPoint(0, 0);
-            }
+        if ($hasCoordinates) {
+            $place->location = new SpatialPoint((float) $latitude, (float) $longitude);
+        } elseif (empty($place->location)) {
+            $place->location = new SpatialPoint(0, 0);
         }
 
         // set the import id

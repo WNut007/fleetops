@@ -345,6 +345,38 @@ test('import rows create places for address only and multi column rows', functio
         ->and($multi->location)->not->toBeNull();
 });
 
+test('import rows with coordinates keep their street, name and pin', function () {
+    fleetopsPlaceCreationBoot();
+
+    $place = Place::createFromImportRow([
+        'name'        => 'QA Warehouse A',
+        'street1'     => '99 Phahonyothin Road',
+        'city'        => 'Khlong Luang',
+        'province'    => 'Pathum Thani',
+        'postal_code' => '12120',
+        'latitude'    => '14.0650',
+        'longitude'   => '100.6100',
+        'dock'        => 'B2',
+    ]);
+
+    expect($place->name)->toBe('QA Warehouse A')
+        ->and($place->street1)->toBe('99 Phahonyothin Road')
+        ->and($place->city)->toBe('Khlong Luang')
+        ->and($place->location->getLat())->toBe(14.065)
+        ->and($place->location->getLng())->toBe(100.61)
+        ->and($place->getMeta('dock'))->toBe('B2')
+        ->and($place->getMeta('street1'))->toBeNull()
+        ->and($place->getMeta('latitude'))->toBeNull();
+});
+
+test('import rows with out of range coordinates fall back to the address', function () {
+    fleetopsPlaceCreationBoot();
+
+    $place = Place::createFromImportRow(['street1' => '12 Unknown Lane', 'latitude' => '123', 'longitude' => '500']);
+
+    expect($place->street1)->toBe('12 Unknown Lane');
+});
+
 test('mixed insertion routes an address key through the geocoding lookup', function () {
     $connection = fleetopsPlaceCreationBoot();
 
