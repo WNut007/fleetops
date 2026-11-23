@@ -341,4 +341,14 @@ return [
     */
     'versions' => ['2020-09-30', '2024-03-12'],
     'version'  => '2024-03-12',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Phone Region
+    |--------------------------------------------------------------------------
+    |
+    | Two-letter country used to read local phone numbers ("081 234 5678") in
+    | imports when the row does not name a country.
+    */
+    'default_phone_region' => env('FLEETOPS_DEFAULT_PHONE_REGION', 'TH'),
 ];

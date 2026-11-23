@@ -1676,17 +1676,49 @@ class Utils extends FleetbaseUtils
      * Import rows frequently omit a phone column entirely, so a missing
      * number is passed through untouched rather than becoming a bare `+`.
      */
-    public static function fixPhone(?string $phone): ?string
+    public static function fixPhone(?string $phone, ?string $country = null): ?string
     {
         if ($phone === null || $phone === '') {
             return $phone;
         }
 
+        $phone = trim($phone);
+
+        // A local number with a trunk prefix ("081 234 5678") gets the country's calling code
+        // instead of a bare "+" in front of the leading zero.
+        if (Str::startsWith($phone, '0') && class_exists(\libphonenumber\PhoneNumberUtil::class)) {
+            $region = static::phoneRegion($country);
+
+            try {
+                $util   = \libphonenumber\PhoneNumberUtil::getInstance();
+                $number = $util->parse($phone, $region);
+                if ($util->isValidNumber($number)) {
+                    return $util->format($number, \libphonenumber\PhoneNumberFormat::E164);
+                }
+            } catch (\Throwable $e) {
+                // fall through to the plain "+" prefix
+            }
+        }
+
         if (!Str::startsWith($phone, '+')) {
-            $phone = '+' . $phone;
+            $phone = '+' . preg_replace('/[\s\-().]/', '', $phone);
         }
 
         return $phone;
+    }
+
+    /**
+     * The region used to read local phone numbers: the row's two-letter country, else the
+     * configured default (Thailand unless FLEETOPS_DEFAULT_PHONE_REGION says otherwise).
+     */
+    public static function phoneRegion(?string $country = null): string
+    {
+        $country = strtoupper(trim((string) $country));
+        if (strlen($country) === 2) {
+            return $country;
+        }
+
+        return strtoupper((string) config('fleetops.default_phone_region', 'TH'));
     }
 
     /**

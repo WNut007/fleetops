@@ -289,7 +289,7 @@ class Vendor extends Model
         $vendor = new static([
             'company_uuid' => session('company'),
             'name'         => $name,
-            'phone'        => Utils::fixPhone($phone),
+            'phone'        => Utils::fixPhone($phone, $country),
             'address'      => $place,
             'email'        => $email,
             'type'         => 'vendor',

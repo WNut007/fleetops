@@ -1045,7 +1045,7 @@ class Place extends Model
         }
 
         // set the phone number if found
-        $place->phone = Utils::or($row, $addressFields['phone']['alias']);
+        $place->phone = Utils::fixPhone(Utils::or($row, $addressFields['phone']['alias']), Utils::or($row, ['country']));
 
         // set meta data
         // everything that is not a place field becomes meta data

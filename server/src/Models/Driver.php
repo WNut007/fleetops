@@ -864,7 +864,7 @@ class Driver extends Model
         $password             = Utils::get($row, 'password');
 
         // Fix phone number format
-        $phone = Utils::fixPhone($phone);
+        $phone = Utils::fixPhone($phone, $country);
 
         // Try to find existing user
         $user = User::where(function ($query) use ($email, $phone) {

@@ -167,6 +167,14 @@ test('utility geometry summaries and formatters return stable values', function 
         ->and(Utils::fixPhone('+97612345678'))->toBe('+97612345678');
 });
 
+test('fixPhone gives local numbers their country calling code', function () {
+    expect(Utils::fixPhone('0811110011', 'TH'))->toBe('+66811110011')
+        ->and(Utils::fixPhone('081-111-0012', 'TH'))->toBe('+66811110012')
+        ->and(Utils::fixPhone('0412345678', 'AU'))->toBe('+61412345678')
+        ->and(Utils::fixPhone('66811110001', 'TH'))->toBe('+66811110001')
+        ->and(Utils::fixPhone(null))->toBeNull();
+});
+
 test('utility geojson helpers create spatial and geometry objects only from valid geojson', function () {
     $geoJson = [
         'type'        => 'Point',
