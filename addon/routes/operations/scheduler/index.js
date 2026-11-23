@@ -12,6 +12,38 @@ import { inject as service } from '@ember/service';
  * All post-load logic (filtering, event mapping, conflict detection) lives
  * in the controller and the SchedulingService.
  */
+/** The API returns at most this many records per page, whatever `limit` asks for. */
+export const ORDERS_PER_PAGE = 100;
+export const MAX_ORDER_PAGES = 5;
+
+/**
+ * Active orders, newest first, across pages. One request with `limit: 500` came back with the
+ * API's 100-record cap in its default order, so once a company had 100 active orders the
+ * newest ones (the ones still to be scheduled) never reached the scheduler.
+ */
+export async function loadActiveOrders(store, { perPage = ORDERS_PER_PAGE, maxPages = MAX_ORDER_PAGES } = {}) {
+    const orders = [];
+
+    for (let page = 1; page <= maxPages; page++) {
+        const batch = await store.query('order', {
+            status: ['created', 'dispatched', 'active'],
+            with: ['payload', 'driverAssigned.vehicle'],
+            sort: '-created_at',
+            limit: perPage,
+            page,
+        });
+        const records = batch?.toArray ? batch.toArray() : Array.from(batch ?? []);
+        orders.push(...records);
+
+        const lastPage = batch?.meta?.last_page;
+        if (records.length < perPage || (lastPage && page >= lastPage)) {
+            break;
+        }
+    }
+
+    return orders;
+}
+
 export default class OperationsSchedulerIndexRoute extends Route {
     @service store;
     @service abilities;
@@ -29,11 +61,7 @@ export default class OperationsSchedulerIndexRoute extends Route {
         // day — not just pre-dispatch orders — enabling accurate conflict
         // detection and capacity visualisation.
         const [orders, drivers] = await Promise.all([
-            this.store.query('order', {
-                status: ['created', 'dispatched', 'active'],
-                with: ['payload', 'driverAssigned.vehicle'],
-                limit: 500,
-            }),
+            loadActiveOrders(this.store),
             this.store.query('driver', {
                 with: ['currentShift'],
                 limit: 200,
