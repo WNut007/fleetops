@@ -5159,6 +5159,7 @@ fleetops-ui:
                 no-order-activity: ยังไม่มีกิจกรรมของออเดอร์
             customer-avatar-stack:
                 unknown-customer: ไม่ทราบลูกค้า
+                no-phone: ไม่มีเบอร์โทร
             details:
                 detail:
                     details: รายละเอียด

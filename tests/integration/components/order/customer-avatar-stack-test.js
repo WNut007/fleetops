@@ -6,21 +6,21 @@ import { hbs } from 'ember-cli-htmlbars';
 module('Integration | Component | order/customer-avatar-stack', function (hooks) {
     setupRenderingTest(hooks);
 
-    test('it renders', async function (assert) {
-        // Set any properties with this.set('myProperty', 'value');
-        // Handle any actions with this.set('myAction', function(val) { ... });
+    test('stops without a customer show the no-customer text, not blank avatars', async function (assert) {
+        this.set('waypoints', [{ address: 'A' }, { address: 'B' }]);
 
-        await render(hbs`<Order::CustomerAvatarStack />`);
+        await render(hbs`<Order::CustomerAvatarStack @waypoints={{this.waypoints}} />`);
 
-        assert.dom().hasText('');
+        assert.dom('[role="img"]').doesNotExist();
+        assert.dom('[data-test-customer-avatar-stack-empty]').exists();
+    });
 
-        // Template block usage:
-        await render(hbs`
-      <Order::CustomerAvatarStack>
-        template block text
-      </Order::CustomerAvatarStack>
-    `);
+    test('only stops with a customer get an avatar', async function (assert) {
+        this.set('waypoints', [{ address: 'A', customer: { public_id: 'customer_1', name: 'Somchai' } }, { address: 'B' }]);
 
-        assert.dom().hasText('template block text');
+        await render(hbs`<Order::CustomerAvatarStack @waypoints={{this.waypoints}} />`);
+
+        assert.dom('[role="img"]').exists({ count: 1 });
+        assert.dom('[data-test-customer-avatar-stack-empty]').doesNotExist();
     });
 });

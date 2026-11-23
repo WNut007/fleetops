@@ -17,16 +17,19 @@ const OVERLAP_TO_CLASS = {
 export default class OrderCustomerAvatarStackComponent extends Component {
     get entries() {
         const list = this.args.waypoints ?? [];
-        return list.filter(Boolean).map((wp, idx) => {
-            const c = wp.customer ?? {};
-            return {
-                key: c.public_id ?? c.id ?? `wp-${idx}`,
-                name: c.name,
-                phone: c.phone,
-                address: wp.address,
-                photoUrl: c.photo_url,
-            };
-        });
+        // Only stops that have a customer: stops without one used to render as blank avatars.
+        return list
+            .filter((wp) => wp?.customer)
+            .map((wp, idx) => {
+                const c = wp.customer;
+                return {
+                    key: c.public_id ?? c.id ?? `wp-${idx}`,
+                    name: c.name,
+                    phone: c.phone,
+                    address: wp.address,
+                    photoUrl: c.photo_url,
+                };
+            });
     }
 
     get sizeClass() {

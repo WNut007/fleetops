@@ -11,11 +11,13 @@
             />
             <Attach::Tooltip @class="clean" @animation="scale" @placement="right">
                 <InputInfo>
-                    <div class="text-xs font-semibold">{{n-a entry.name "No Customer"}}</div>
-                    <div class="text-xs">{{n-a entry.phone "No Phone"}}</div>
+                    <div class="text-xs font-semibold">{{n-a entry.name (t "fleetops-ui.components.order.details.detail.no-customer")}}</div>
+                    <div class="text-xs">{{n-a entry.phone (t "fleetops-ui.components.order.customer-avatar-stack.no-phone")}}</div>
                     <div class="text-xs max-w-xs truncate">{{n-a entry.address}}</div>
                 </InputInfo>
             </Attach::Tooltip>
         </div>
+    {{else}}
+        <span class="text-gray-300" data-test-customer-avatar-stack-empty>{{t "fleetops-ui.components.order.details.detail.no-customer"}}</span>
     {{/each}}
 </div>

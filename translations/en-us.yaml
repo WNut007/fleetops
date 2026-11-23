@@ -5287,6 +5287,7 @@ fleetops-ui:
                 no-order-activity: No order activity
             customer-avatar-stack:
                 unknown-customer: Unknown customer
+                no-phone: No phone
             details:
                 detail:
                     details: Details
