@@ -5189,7 +5189,7 @@ fleetops-ui:
                     based-on-provider-route-and-driver: อิงจากเส้นทางของผู้ให้บริการและสัญญาณของคนขับ
                     based-on-the-assigned-driver-route: อิงจากเส้นทางของคนขับที่มอบหมายไปยังจุดแรก
                     between-stops: ระหว่างจุด
-                    confidence: ความแม่นยำ{confidenceLabel} · {confidencePercent}%
+                    confidence: ความแม่นยำ {confidenceLabel} · {confidencePercent}%
                     diagnostics: ข้อมูลวินิจฉัย
                     estimated-start: เริ่มโดยประมาณ
                     eta-confidence: ความแม่นยำของ ETA
@@ -6936,6 +6936,7 @@ fleetops-ui:
                             medium: ปานกลาง
                             low: ต่ำ
                             unknown: ไม่ทราบ
+                            none: ยังไม่มีข้อมูล
                         reported-from-existing-route-data: คำนวณจากข้อมูลเส้นทางที่มีอยู่
                         reported-eta-may-not-reflect-latest: ETA ที่รายงานอาจยังไม่ตรงกับสัญญาณติดตามล่าสุด
                         n-warnings: คำเตือน {count} รายการ
