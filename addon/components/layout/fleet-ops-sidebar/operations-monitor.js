@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
+import { tracked, cached } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { registerDestructor } from '@ember/destroyable';
@@ -56,6 +56,9 @@ export default class LayoutFleetOpsSidebarOperationsMonitorComponent extends Com
         return this.fallbackFleets;
     }
 
+    // Rebuilt only when a fleet, driver, vehicle, the query or the expanded fleets change, not on
+    // every render of the sidebar.
+    @cached
     get fleetRows() {
         if (this.hasQuery) {
             return this.buildFilteredFleetRows(this.fleets);
@@ -344,10 +347,14 @@ export default class LayoutFleetOpsSidebarOperationsMonitorComponent extends Com
         });
     }
 
+    // Each fleet row looks its drivers and vehicles up here several times per render; build the
+    // id map once per resource list instead of on every lookup.
+    @cached
     get driverById() {
         return this.resourcesById(this.fallbackDrivers);
     }
 
+    @cached
     get vehicleById() {
         return this.resourcesById(this.fallbackVehicles);
     }
