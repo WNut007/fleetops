@@ -43,9 +43,11 @@
         />
     </div>
 
-    <div class="fleet-ops-operations-monitor-list space-y-1" data-test-operations-monitor-list {{did-insert this.registerList}}>
-        {{#if (eq this.activeTab "drivers")}}
-            {{#each this.drivers as |driver|}}
+    <div class="fleet-ops-operations-monitor-list space-y-1" data-test-operations-monitor-list {{did-insert this.registerList}} {{on "scroll" this.handleListScroll}}>
+        {{#if this.sidebar.isHidden}}
+            {{! Nothing to see while the sidebar is hidden, so the rows are not rendered at all. }}
+        {{else if (eq this.activeTab "drivers")}}
+            {{#each this.visibleDrivers as |driver|}}
                 <div
                     class="fleet-ops-operations-monitor-row group flex items-start gap-2 rounded-md px-2 py-1.5 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800"
                     data-test-operations-monitor-row
@@ -110,7 +112,7 @@
                 {{/let}}
             {{/each}}
         {{else if (eq this.activeTab "vehicles")}}
-            {{#each this.vehicles as |vehicle|}}
+            {{#each this.visibleVehicles as |vehicle|}}
                 <div
                     class="fleet-ops-operations-monitor-row group flex items-start gap-2 rounded-md px-2 py-1.5 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800"
                     data-test-operations-monitor-row
@@ -168,7 +170,7 @@
                 {{/let}}
             {{/each}}
         {{else}}
-            {{#each this.fleetRows as |row|}}
+            {{#each this.visibleFleetRows as |row|}}
                 {{#if (eq row.type "fleet")}}
                     <div
                         class="fleet-ops-operations-monitor-row fleet-ops-operations-monitor-row-depth-{{row.depth}}

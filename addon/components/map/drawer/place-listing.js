@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
+import { DRAWER_RENDER_STEP, renderWindow, hiddenRowCount } from '../../../utils/render-window';
 import calculateMapDrawerDropdownPosition from '../../../utils/map-drawer-dropdown-position';
 
 export default class MapDrawerPlaceListingComponent extends Component {
@@ -10,6 +11,20 @@ export default class MapDrawerPlaceListingComponent extends Component {
     @service hostRouter;
     @service intl;
     @tracked query = '';
+    /** Rows rendered in the drawer table; "show more" adds another step. */
+    @tracked renderLimit = DRAWER_RENDER_STEP;
+
+    get visiblePlaces() {
+        return renderWindow(this.filteredPlaces, this.renderLimit);
+    }
+
+    get hiddenCount() {
+        return hiddenRowCount(this.filteredPlaces, this.renderLimit);
+    }
+
+    @action showMore() {
+        this.renderLimit += DRAWER_RENDER_STEP;
+    }
 
     get filteredPlaces() {
         const places = this.mapManager.livemap?.places ?? [];

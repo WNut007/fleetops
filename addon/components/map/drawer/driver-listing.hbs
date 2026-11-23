@@ -4,7 +4,7 @@
     </div>
 </div>
 <Table
-    @rows={{this.filteredDrivers}}
+    @rows={{this.visibleDrivers}}
     @columns={{this.columns}}
     @searchQuery={{this.query}}
     @emptyStateComponent={{component
@@ -17,3 +17,8 @@
         filteredDescription=(t "fleetops-ui.components.map.drawer.driver-listing.hp.adjust-the-search-to-find-another")
     }}
 />
+{{#if this.hiddenCount}}
+    <div class="flex items-center justify-center border-t border-gray-200 px-5 py-2 dark:border-gray-700" data-test-map-drawer-show-more>
+        <Button @size="xs" @text={{t "fleetops-ui.components.map.drawer.show-more" count=this.hiddenCount}} @onClick={{this.showMore}} />
+    </div>
+{{/if}}

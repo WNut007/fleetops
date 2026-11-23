@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { registerDestructor } from '@ember/destroyable';
 import { task } from 'ember-concurrency';
+import { SIDEBAR_RENDER_STEP, renderWindow, isNearScrollEnd } from '../../../utils/render-window';
 
 export default class LayoutFleetOpsSidebarOperationsMonitorComponent extends Component {
     @service intl;
@@ -16,6 +17,7 @@ export default class LayoutFleetOpsSidebarOperationsMonitorComponent extends Com
     @service vehicleActions;
     @service fleetActions;
     @service notifications;
+    @service sidebar;
 
     @tracked activeTab = 'fleets';
     @tracked query = '';
@@ -23,6 +25,8 @@ export default class LayoutFleetOpsSidebarOperationsMonitorComponent extends Com
     @tracked fallbackVehicles = [];
     @tracked fallbackFleets = [];
     @tracked expandedFleetIds = new Set();
+    /** How many rows of the active tab are rendered; grows as the list is scrolled. */
+    @tracked renderLimit = SIDEBAR_RENDER_STEP;
 
     monitorElement;
     listElement;
@@ -65,6 +69,36 @@ export default class LayoutFleetOpsSidebarOperationsMonitorComponent extends Com
         }
 
         return this.buildFleetRows(this.fleets);
+    }
+
+    get visibleDrivers() {
+        return renderWindow(this.drivers, this.renderLimit);
+    }
+
+    get visibleVehicles() {
+        return renderWindow(this.vehicles, this.renderLimit);
+    }
+
+    get visibleFleetRows() {
+        return renderWindow(this.fleetRows, this.renderLimit);
+    }
+
+    get activeRowCount() {
+        const rows = this.activeTab === 'fleets' ? this.fleetRows : this.activeResources;
+        return rows?.length ?? 0;
+    }
+
+    @action handleListScroll(event) {
+        if (this.renderLimit < this.activeRowCount && isNearScrollEnd(event.target)) {
+            this.renderLimit += SIDEBAR_RENDER_STEP;
+        }
+    }
+
+    resetRenderWindow() {
+        this.renderLimit = SIDEBAR_RENDER_STEP;
+        if (this.listElement) {
+            this.listElement.scrollTop = 0;
+        }
     }
 
     get hasQuery() {
@@ -409,16 +443,19 @@ export default class LayoutFleetOpsSidebarOperationsMonitorComponent extends Com
 
     @action setActiveTab(tab) {
         this.activeTab = tab;
+        this.resetRenderWindow();
         this.scheduleListHeightUpdate();
     }
 
     @action updateQuery(event) {
         this.query = event.target.value;
+        this.resetRenderWindow();
         this.scheduleListHeightUpdate();
     }
 
     @action clearFilter() {
         this.query = '';
+        this.resetRenderWindow();
         this.scheduleListHeightUpdate();
     }
 

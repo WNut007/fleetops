@@ -5040,6 +5040,7 @@ fleetops-ui:
                 work-order: Work Order
         map:
             drawer:
+                show-more: Show more ({count} remaining)
                 device-event-listing:
                     filter-by-device: Filter by Device
                     filter-by-telematic: Filter by Telematic

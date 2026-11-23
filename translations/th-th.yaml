@@ -4912,6 +4912,7 @@ fleetops-ui:
                 work-order: ใบสั่งงาน
         map:
             drawer:
+                show-more: แสดงเพิ่ม (เหลืออีก {count} รายการ)
                 device-event-listing:
                     filter-by-device: กรองตามอุปกรณ์
                     filter-by-telematic: กรองตาม Telematics

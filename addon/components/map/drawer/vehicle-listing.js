@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
+import { DRAWER_RENDER_STEP, renderWindow, hiddenRowCount } from '../../../utils/render-window';
 import calculateMapDrawerDropdownPosition from '../../../utils/map-drawer-dropdown-position';
 
 export default class MapDrawerVehicleListingComponent extends Component {
@@ -10,6 +11,20 @@ export default class MapDrawerVehicleListingComponent extends Component {
     @service hostRouter;
     @service intl;
     @tracked query = '';
+    /** Rows rendered in the drawer table; "show more" adds another step. */
+    @tracked renderLimit = DRAWER_RENDER_STEP;
+
+    get visibleVehicles() {
+        return renderWindow(this.filteredVehicles, this.renderLimit);
+    }
+
+    get hiddenCount() {
+        return hiddenRowCount(this.filteredVehicles, this.renderLimit);
+    }
+
+    @action showMore() {
+        this.renderLimit += DRAWER_RENDER_STEP;
+    }
 
     get filteredVehicles() {
         const vehicles = this.mapManager.livemap?.vehicles ?? [];

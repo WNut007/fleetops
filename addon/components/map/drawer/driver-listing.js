@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
+import { DRAWER_RENDER_STEP, renderWindow, hiddenRowCount } from '../../../utils/render-window';
 import { buildIdentityStub } from '../../../utils/identity-cell-resource';
 import relationValue from '../../../utils/relation-value';
 import calculateMapDrawerDropdownPosition from '../../../utils/map-drawer-dropdown-position';
@@ -12,6 +13,20 @@ export default class MapDrawerDriverListingComponent extends Component {
     @service hostRouter;
     @service intl;
     @tracked query = '';
+    /** Rows rendered in the drawer table; "show more" adds another step. */
+    @tracked renderLimit = DRAWER_RENDER_STEP;
+
+    get visibleDrivers() {
+        return renderWindow(this.filteredDrivers, this.renderLimit);
+    }
+
+    get hiddenCount() {
+        return hiddenRowCount(this.filteredDrivers, this.renderLimit);
+    }
+
+    @action showMore() {
+        this.renderLimit += DRAWER_RENDER_STEP;
+    }
 
     get filteredDrivers() {
         const drivers = this.mapManager.livemap?.drivers ?? [];
