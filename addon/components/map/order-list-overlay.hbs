@@ -83,7 +83,7 @@
     </Overlay::Header>
     <Overlay::Body class="fleetops-order-list-overlay" @wrapperClass="fleetops-order-list-overlay-inner-wrapper">
         <div class="fleetops-order-list-overlay-list">
-            {{#if this.overlay.loaded}}
+            {{#if (and this.overlay.loaded this.isListVisible)}}
                 <div class="next-content-panel-wrapper">
                     {{#each-in this.overlay.orderGroups as |key orders|}}
                         <ContentPanel
@@ -125,7 +125,7 @@
                     {{#each this.overlay.fleets as |fleet|}}
                         <ContentPanel
                             @title={{fleet.name}}
-                            @subtitle={{concat fleet.drivers_online_count " of " fleet.drivers_count " Online"}}
+                            @subtitle={{t "fleetops-ui.components.map.order-list-overlay.drivers-online" online=fleet.drivers_online_count total=fleet.drivers_count}}
                             @open={{fleet.drivers.length}}
                             @actionButtons={{array (hash type="default" icon="cog" size="xs" onClick=(fn this.fleetActions.panel.view fleet))}}
                             @panelTitleInlineClass="fleetops-order-list-title-text"

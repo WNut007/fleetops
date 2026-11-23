@@ -5110,6 +5110,7 @@ fleetops-ui:
                     low-eta-confidence: Low ETA Confidence
                     pickup: Pickup
                     stale-gps: Stale GPS
+                drivers-online: '{online} of {total} Online'
         modals:
             bulk-assign-driver:
                 notify-driver: Notify driver

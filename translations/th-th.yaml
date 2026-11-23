@@ -4982,6 +4982,7 @@ fleetops-ui:
                     low-eta-confidence: ETA ความแม่นยำต่ำ
                     pickup: จุดรับ
                     stale-gps: GPS เก่า
+                drivers-online: ออนไลน์ {online} จาก {total} คน
         modals:
             bulk-assign-driver:
                 notify-driver: แจ้งคนขับ
