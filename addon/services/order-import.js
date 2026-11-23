@@ -62,7 +62,8 @@ export default class OrderImportService extends Service {
                         'waypoints',
                         places.map((p) => {
                             const place = this.store.createRecord('place', p);
-                            return this.store.createRecord('waypoint', { place });
+                            // _import_id ties each stop to its rows' items when the order is saved
+                            return this.store.createRecord('waypoint', { place, _import_id: p._import_id });
                         })
                     );
                 }
