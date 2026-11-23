@@ -200,10 +200,10 @@
                 <div class="field-info-container col-span-2">
                     <div class="field-name">{{t "fleetops-ui.components.service-rate.details.calculation-formula"}}</div>
                     <div class="field-value">
-                        <code class="dark:text-gray-100">({{@resource.per_meter_flat_rate_fee}}
+                        <code class="dark:text-gray-100">({{format-currency @resource.per_meter_flat_rate_fee @resource.currency}}
                             * {distance}
                             {{@resource.per_meter_unit}}) +
-                            {{or @resource.base_fee (format-currency 0 @resource.currency)}}</code>
+                            {{format-currency (or @resource.base_fee 0) @resource.currency}}</code>
                     </div>
                 </div>
             </div>
