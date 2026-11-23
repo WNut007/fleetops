@@ -7,6 +7,7 @@ import { task } from 'ember-concurrency';
 
 export default class OrderImportService extends Service {
     @service intl;
+    @service store;
     @service fetch;
     @service modalsManager;
     @service notifications;
@@ -15,6 +16,8 @@ export default class OrderImportService extends Service {
     @tracked uploadedFiles = [];
 
     @action promptImport(order, options = {}) {
+        this.#reset();
+
         return this.modalsManager.show('modals/order-import', {
             title: this.intl.t('fleetops-ui.js.services.order-import.import-order-s-with-spreadsheets'),
             acceptButtonText: this.intl.t('fleetops-ui.js.services.order-import.start-upload'),
@@ -23,31 +26,38 @@ export default class OrderImportService extends Service {
             acceptButtonDisabled: true,
             isProcessing: false,
             fileQueueColumns: [
-                { name: 'Type', valuePath: 'extension', key: 'type' },
-                { name: 'File Name', valuePath: 'name', key: 'fileName' },
-                { name: 'File Size', valuePath: 'size', key: 'fileSize' },
-                { name: 'Upload Date', valuePath: 'file.lastModifiedDate', key: 'uploadDate' },
+                { name: this.text('crud.column-type', 'Type'), valuePath: 'extension', key: 'type' },
+                { name: this.text('crud.column-file-name', 'File Name'), valuePath: 'name', key: 'fileName' },
+                { name: this.text('crud.column-file-size', 'File Size'), valuePath: 'size', key: 'fileSize' },
+                { name: this.text('crud.column-upload-date', 'Upload Date'), valuePath: 'file.lastModifiedDate', key: 'uploadDate' },
                 { name: '', valuePath: '', key: 'delete' },
             ],
             acceptedFileTypes: ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'text/csv'],
             uploadQueue: this.queuedFiles,
-            queueFile: this.#addFileToQueue,
-            removeFile: this.#removeFileFromQueue,
+            queueFile: (file) => this.#addFileToQueue(file),
+            removeFile: (file) => this.#removeFileFromQueue(file),
             confirm: async (modal) => {
                 if (!this.#importValid()) return this.notifications.warning(this.intl.t('fleet-ops.operations.orders.index.new.warning-message'));
 
                 modal.startLoading();
-                modal.setOption('acceptButtonText', 'Uploading...');
+                modal.setOption('acceptButtonText', this.text('crud.uploading', 'Uploading...'));
 
-                const uploadedFiles = await this.queuedFiles.perform();
+                const uploadedFiles = (await this.uploadQueue.perform()) ?? [];
 
-                this.modalsManager.setOption('acceptButtonText', 'Processing...');
+                this.modalsManager.setOption('acceptButtonText', this.text('crud.processing', 'Processing...'));
                 this.modalsManager.setOption('isProcessing', true);
 
-                const results = await this.importFiles.perform(uploadedFiles);
+                const results = await this.importFiles.perform(uploadedFiles.filter(Boolean));
+                if (!results) {
+                    this.modalsManager.setOption('isProcessing', false);
+                    return modal.stopLoading();
+                }
+
                 const { places, entities } = results;
 
                 if (isArray(places)) {
+                    // imported stops replace the single pickup/dropoff
+                    order.payload.setProperties({ pickup: null, dropoff: null });
                     order.payload.set(
                         'waypoints',
                         places.map((p) => {
@@ -66,6 +76,7 @@ export default class OrderImportService extends Service {
 
                 this.notifications.success(this.intl.t('fleet-ops.operations.orders.index.new.import-success'));
 
+                this.#reset();
                 modal.done();
             },
             decline: (modal) => {
@@ -96,7 +107,7 @@ export default class OrderImportService extends Service {
                 const file = this.queuedFiles[i];
                 if (!file) continue;
 
-                const uploadedFile = yield this.uploadFile(file);
+                const uploadedFile = yield this.uploadFile.perform(file);
                 uploaded.push(uploadedFile);
             }
 
@@ -118,6 +129,11 @@ export default class OrderImportService extends Service {
         } catch (err) {
             debug('Error uploading order import source: ' + err.message);
         }
+    }
+
+    /** A translation with an English fallback for keys that live outside this engine. */
+    text(key, fallback) {
+        return this.intl.exists(key) ? this.intl.t(key) : fallback;
     }
 
     #reset() {

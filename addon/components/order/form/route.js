@@ -23,7 +23,20 @@ export default class OrderFormRouteComponent extends Component {
     @service placeActions;
     @service orderCreation;
     @service orderPresentation;
-    @tracked multipleWaypoints = false;
+    /** Set by the multi-drop toggle. */
+    @tracked multipleWaypointsToggled = false;
+
+    /**
+     * Multi-drop is on when toggled, or when the payload already has stops (an imported
+     * spreadsheet fills the waypoints without touching the toggle, which hid every stop).
+     */
+    get multipleWaypoints() {
+        return this.multipleWaypointsToggled || (this.args.resource?.payload?.waypoints?.length ?? 0) > 0;
+    }
+
+    set multipleWaypoints(value) {
+        this.multipleWaypointsToggled = Boolean(value);
+    }
     @tracked routingControl;
     @tracked route;
 
