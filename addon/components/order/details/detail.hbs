@@ -40,7 +40,7 @@
                 {{#if @resource.isMultiDrop}}
                     <div class="field-name">{{pluralize (t "order.fields.customer")}}</div>
                     <div class="field-value">
-                        <Order::CustomerAvatarStack @waypoints={{@resource.orderWaypoints}} @size="sm" @overlap="tight" />
+                        <Order::CustomerAvatarStack @waypoints={{@resource.orderWaypoints}} @fallbackCustomer={{@resource.customer}} @size="sm" @overlap="tight" />
                     </div>
                 {{else}}
                     <div class="field-name">{{t "order.fields.customer"}}</div>

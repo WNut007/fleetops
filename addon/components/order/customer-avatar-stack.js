@@ -18,7 +18,7 @@ export default class OrderCustomerAvatarStackComponent extends Component {
     get entries() {
         const list = this.args.waypoints ?? [];
         // Only stops that have a customer: stops without one used to render as blank avatars.
-        return list
+        const entries = list
             .filter((wp) => wp?.customer)
             .map((wp, idx) => {
                 const c = wp.customer;
@@ -30,6 +30,14 @@ export default class OrderCustomerAvatarStackComponent extends Component {
                     photoUrl: c.photo_url,
                 };
             });
+
+        // No stop has its own customer: show the order's customer, if it has one.
+        const fallback = this.args.fallbackCustomer;
+        if (entries.length === 0 && fallback?.name) {
+            return [{ key: fallback.public_id ?? fallback.id ?? 'order-customer', name: fallback.name, phone: fallback.phone, address: null, photoUrl: fallback.photo_url }];
+        }
+
+        return entries;
     }
 
     get sizeClass() {

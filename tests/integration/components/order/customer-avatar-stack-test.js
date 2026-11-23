@@ -23,4 +23,14 @@ module('Integration | Component | order/customer-avatar-stack', function (hooks)
         assert.dom('[role="img"]').exists({ count: 1 });
         assert.dom('[data-test-customer-avatar-stack-empty]').doesNotExist();
     });
+
+    test('falls back to the order customer when no stop has one', async function (assert) {
+        this.set('waypoints', [{ address: 'A' }, { address: 'B' }]);
+        this.set('customer', { public_id: 'contact_1', name: 'Kanchana' });
+
+        await render(hbs`<Order::CustomerAvatarStack @waypoints={{this.waypoints}} @fallbackCustomer={{this.customer}} />`);
+
+        assert.dom('[role="img"]').exists({ count: 1 });
+        assert.dom('[data-test-customer-avatar-stack-empty]').doesNotExist();
+    });
 });
