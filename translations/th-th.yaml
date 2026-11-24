@@ -417,6 +417,7 @@ trailer:
     towed-by: ลากโดย
     position: ตำแหน่ง {position}
   connectivity:
+    long_offline: ออฟไลน์นาน
     online: ออนไลน์
     recently_offline: เพิ่งออฟไลน์
     offline: ออฟไลน์
@@ -3845,7 +3846,7 @@ resource-summary:
     fallback: สำรอง
     fee: ค่าธรรมเนียม
     fees: ค่าธรรมเนียม
-    firmware: Firmware
+    firmware: เฟิร์มแวร์
     fitted-to: ติดตั้งอยู่ที่
     fleet: Fleet
     form: แบบฟอร์ม
@@ -4440,7 +4441,7 @@ fleetops-ui:
             details:
                 critical-details: รายละเอียดสำคัญ
                 device-id: 'Device ID: {device_id}'
-                firmware: Firmware
+                firmware: เฟิร์มแวร์
                 internal-id: รหัสภายใน
                 last-seen: 'พบล่าสุด: {na}'
                 location: ตำแหน่ง
@@ -6691,6 +6692,8 @@ fleetops-ui:
                     unprocessed: ยังไม่ประมวลผล
             device:
                 details:
+                    active-count: 'ใช้งาน {count}'
+                    review-count: 'รอตรวจ {count}'
                     connection: การเชื่อมต่อ
                     events: เหตุการณ์
                     sensors: เซนเซอร์

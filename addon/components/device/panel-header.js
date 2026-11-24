@@ -1,7 +1,16 @@
 import Component from '@glimmer/component';
 import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default class DevicePanelHeaderComponent extends Component {
+    @service intl;
+
+    get connectionLabel() {
+        const status = this.connectionStatus;
+        const key = `trailer.connectivity.${status}`;
+        return this.intl.exists(key) ? this.intl.t(key) : String(status ?? '').replaceAll('_', ' ');
+    }
+
     get resource() {
         return this.args.resource ?? {};
     }

@@ -422,6 +422,7 @@ trailer:
         towed-by: Towed by
         position: Position {position}
     connectivity:
+        long_offline: Long offline
         online: Online
         recently_offline: Recently offline
         offline: Offline
@@ -6819,6 +6820,8 @@ fleetops-ui:
                     unprocessed: Unprocessed
             device:
                 details:
+                    active-count: '{count} active'
+                    review-count: '{count} need review'
                     connection: Connection
                     events: Events
                     sensors: Sensors

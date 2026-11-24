@@ -46,7 +46,9 @@ export default function buildDeviceTableColumns(controller, options = {}) {
         {
             label: controller.intl.t('fleetops-ui.js.utils.device-table-columns.connection'),
             valuePath: 'connection_status',
-            cellComponent: 'table/cell/status',
+            cellComponent: 'cell/translated-value',
+            translationPrefix: 'trailer.connectivity',
+            badge: true,
             resizable: true,
             sortable: false,
             filterable: true,

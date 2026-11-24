@@ -7,6 +7,7 @@ use Fleetbase\FleetOps\Exceptions\DeviceAlreadyAttachedException;
 use Fleetbase\FleetOps\Exports\DeviceExport;
 use Fleetbase\FleetOps\Http\Controllers\FleetOpsController;
 use Fleetbase\FleetOps\Models\Device;
+use Fleetbase\FleetOps\Models\Trailer;
 use Fleetbase\FleetOps\Models\Vehicle;
 use Fleetbase\FleetOps\Support\Utils;
 use Fleetbase\Http\Requests\ExportRequest;
@@ -124,13 +125,22 @@ class DeviceController extends FleetOpsController
     #[SkipAuthorizationCheck]
     public function attach(Request $request, string $id): JsonResponse
     {
+        // The vehicle page sends `vehicle`; the device page's attach dialog sends
+        // `attachable` + `attachable_type` (vehicle or trailer). Accept both.
         $request->validate([
-            'vehicle' => 'required_without:attachable_uuid|nullable|string',
+            'vehicle'         => 'nullable|string',
+            'attachable'      => 'nullable|string',
+            'attachable_uuid' => 'nullable|string',
+            'attachable_type' => 'nullable|string',
         ]);
 
-        $vehicleId = $request->input('vehicle') ?? $request->input('attachable_uuid');
+        $vehicleId = $request->input('vehicle') ?? $request->input('attachable') ?? $request->input('attachable_uuid');
+        if (!$vehicleId) {
+            return response()->error('Select a vehicle or trailer to attach the device to.', 422);
+        }
+
         $device    = $this->resolveDevice($id);
-        $vehicle   = $this->resolveVehicle($vehicleId);
+        $vehicle   = Str::contains((string) $request->input('attachable_type'), 'trailer') ? $this->resolveTrailer($vehicleId) : $this->resolveVehicle($vehicleId);
 
         if (!$device) {
             $this->logDeviceAttachmentLookupFailure('attach', 'device', $id, $vehicleId);
@@ -193,6 +203,19 @@ class DeviceController extends FleetOpsController
     protected function resolveDevice(string $id): ?Device
     {
         return Device::where(function ($query) use ($id) {
+            $query->where('uuid', $id)->orWhere('public_id', $id);
+        })
+            ->where('company_uuid', session('company'))
+            ->first();
+    }
+
+    protected function resolveTrailer(?string $id): ?Trailer
+    {
+        if (!$id) {
+            return null;
+        }
+
+        return Trailer::where(function ($query) use ($id) {
             $query->where('uuid', $id)->orWhere('public_id', $id);
         })
             ->where('company_uuid', session('company'))

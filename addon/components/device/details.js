@@ -58,7 +58,9 @@ export default class DeviceDetailsComponent extends Component {
     }
 
     get connectionLabel() {
-        return this.connectionStatus ? this.connectionStatus.replaceAll('_', ' ') : this.intl.t('fleetops-ui.js.components.device.details.unknown');
+        if (!this.connectionStatus) return this.intl.t('fleetops-ui.js.components.device.details.unknown');
+        const key = `trailer.connectivity.${this.connectionStatus}`;
+        return this.intl.exists(key) ? this.intl.t(key) : this.connectionStatus.replaceAll('_', ' ');
     }
 
     get attachedVehicleName() {
@@ -133,14 +135,14 @@ export default class DeviceDetailsComponent extends Component {
             {
                 label: this.intl.t('fleetops-ui.js.components.device.details.sensors'),
                 value: this.sensorTotal ?? this.sensors.length,
-                meta: `${this.activeSensorsCount} active`,
+                meta: this.intl.t('fleetops-ui.js.components.device.details.active-count', { count: this.activeSensorsCount }),
                 icon: 'gauge-high',
                 accentClass: 'fleetops-connectivity-kpi-accent-blue',
             },
             {
                 label: this.intl.t('fleetops-ui.js.components.device.details.events'),
                 value: this.eventTotal ?? this.events.length,
-                meta: `${this.warningEventsCount + this.unprocessedEventsCount} need review`,
+                meta: this.intl.t('fleetops-ui.js.components.device.details.review-count', { count: this.warningEventsCount + this.unprocessedEventsCount }),
                 icon: 'bolt',
                 accentClass: this.warningEventsCount || this.unprocessedEventsCount ? 'fleetops-connectivity-kpi-accent-amber' : 'fleetops-connectivity-kpi-accent-green',
             },

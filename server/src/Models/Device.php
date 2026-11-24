@@ -230,6 +230,16 @@ class Device extends Model
     /**
      * Get the options for generating the slug.
      */
+    /**
+     * `location` on a device is free text (where the unit is mounted), not coordinates.
+     * TransformLocationMiddleware turns any null `location` in a request into [0, 0], which
+     * was saved here as "Array" or "[0,0]"; anything that is not text is stored as null.
+     */
+    public function setLocationAttribute($value): void
+    {
+        $this->attributes['location'] = is_string($value) && trim($value) !== '' && trim($value) !== '[0,0]' ? $value : null;
+    }
+
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
