@@ -49,7 +49,7 @@
             </div>
             <div class="field-info-container">
                 <div class="field-name">{{t "fuel-report.fields.fuel-volume"}}</div>
-                <div class="field-value">{{pluralize (or @resource.volume 0) (n-a @resource.metric_unit)}}</div>
+                <div class="field-value">{{or @resource.volume 0}} {{n-a @resource.metric_unit}}</div>
             </div>
             <div class="field-info-container">
                 <div class="field-name">{{t "common.date-created"}}</div>
