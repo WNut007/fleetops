@@ -684,10 +684,12 @@ class Payload extends Model
             ];
 
             // Only mutable/updatable fields go here.
+            // _import_id lets imported items find their stop (see insertEntities)
             $values = array_filter([
                 'type'           => $type,
                 'customer_uuid'  => $customerUuid,
                 'customer_type'  => $customerTypeNamespace,
+                '_import_id'     => $attributes['_import_id'] ?? null,
             ], fn ($v) => !is_null($v));
 
             $waypointRecord = Waypoint::updateOrCreate($unique, $values);

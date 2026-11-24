@@ -443,6 +443,14 @@ class OrderController extends FleetOpsController
                     continue;
                 }
 
+                // Save the stop so the new order can reference it by uuid. Sent unsaved, the
+                // order form posted it back as bare text: the place lost its name, city and
+                // coordinates, and the row's items could not find their stop.
+                if (!$place->exists) {
+                    $place->setAttribute('company_uuid', session('company'));
+                    $place->save();
+                }
+
                 $places[] = $place;
 
                 $items          = Utils::or($row, ['items', 'entities', 'packages', 'passengers', 'products', 'services']);
