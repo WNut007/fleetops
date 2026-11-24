@@ -65,6 +65,14 @@ export default class SettingsTrackingPageController extends Controller {
         this.loadFailed = false;
     }
 
+    /** Server answers in English; show our translation for its result code when there is one. */
+    get slugValidationMessage() {
+        const result = this.slugValidation;
+        if (!result) return null;
+        const key = `tracking-page.settings.slug-${result.code}`;
+        return result.code && this.intl.exists(key) ? this.intl.t(key) : result.message;
+    }
+
     get accent() {
         return normalizeHex(this.config?.branding?.accent) ?? DEFAULT_ACCENT;
     }

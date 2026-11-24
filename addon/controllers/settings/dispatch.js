@@ -72,7 +72,15 @@ export default class SettingsDispatchController extends Controller {
             this.adhocDistance = settings.adhoc_distance;
             this.adhocStrategy = settings.adhoc_strategy;
             this.adhocOfferTimeout = settings.adhoc_offer_timeout;
-            this.strategies = settings.strategies ?? [];
+            // Strategy names/descriptions come from the server in English; use our translation when there is one.
+            this.strategies = (settings.strategies ?? []).map((strategy) => {
+                const base = `settings.dispatch.strategies.${strategy.name}`;
+                return {
+                    ...strategy,
+                    label: this.intl.exists(`${base}.label`) ? this.intl.t(`${base}.label`) : strategy.label,
+                    description: this.intl.exists(`${base}.description`) ? this.intl.t(`${base}.description`) : strategy.description,
+                };
+            });
         } catch (error) {
             this.notifications.serverError(error);
         }

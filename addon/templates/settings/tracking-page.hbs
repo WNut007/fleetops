@@ -52,7 +52,7 @@
                                     {{#if this.validateSlug.isRunning}}
                                         <span class="text-gray-600 dark:text-gray-300">{{t "tracking-page.settings.slug-checking"}}</span>
                                     {{else if this.slugValidation}}
-                                        {{this.slugValidation.message}}
+                                        {{this.slugValidationMessage}}
                                     {{/if}}
                                 </div>
                                 <div class="mt-2 flex flex-wrap items-center gap-2">

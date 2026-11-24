@@ -3209,6 +3209,13 @@ route-list:
 
 settings:
     dispatch:
+        strategies:
+            broadcast:
+                label: 'Everyone nearby at once'
+                description: 'Every nearby driver is offered the order at the same time, and the first to accept gets it.'
+            sequential:
+                label: 'One driver at a time'
+                description: 'The nearest driver is offered the order for a set time, then the next, until one accepts.'
         title: Fleet-Ops Dispatch
         adhoc-orders: Adhoc dispatch defaults
         intro: Company-wide defaults for offering orders to nearby drivers.
@@ -4072,6 +4079,10 @@ resource-summary:
         zones: Zones
 tracking-page:
   settings:
+    slug-invalid: 'Use 3 to 40 lowercase letters, numbers and single hyphens, starting and ending with a letter or number.'
+    slug-reserved: 'This address is reserved. Please choose another.'
+    slug-taken: 'Another organization already uses this address.'
+    slug-available: 'This address is available.'
     title: "Tracking Page"
     menu: "Tracking Page"
     saved: "Tracking page settings saved."
