@@ -10,7 +10,7 @@ export default class FuelReportActionsService extends ResourceActionService {
     constructor() {
         super(...arguments);
         this.initialize('fuel-report', {
-            defaultAttributes: {},
+            defaultAttributes: { status: 'recorded' },
         });
     }
 

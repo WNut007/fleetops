@@ -4791,6 +4791,9 @@ fleetops-ui:
                 'yes': 'Yes'
         issue:
             details:
+                no-report: No report was provided.
+                no-vehicle-linked: No vehicle linked
+                no-driver-linked: No driver linked
                 unknown-reporter: Unknown reporter
                 unassigned: Unassigned
                 assignee: Assignee

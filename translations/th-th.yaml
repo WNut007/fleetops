@@ -4663,6 +4663,9 @@ fleetops-ui:
                 'yes': ใช่
         issue:
             details:
+                no-report: ไม่มีรายละเอียดการแจ้ง
+                no-vehicle-linked: ไม่ได้ระบุรถ
+                no-driver-linked: ไม่ได้ระบุคนขับ
                 unknown-reporter: ไม่ทราบผู้แจ้ง
                 unassigned: ยังไม่มอบหมาย
                 assignee: ผู้รับผิดชอบ

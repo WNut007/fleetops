@@ -42,7 +42,7 @@
                         </div>
                         <time>{{n-a @resource.createdAt}}</time>
                     </div>
-                    <div class="issue-detail-report">{{n-a @resource.report "No report was provided."}}</div>
+                    <div class="issue-detail-report">{{n-a @resource.report (t "fleetops-ui.components.issue.details.no-report")}}</div>
 
                     <Issue::Details::Documents @resource={{@resource}} />
                 </div>
@@ -129,11 +129,11 @@
                 <div class="issue-detail-resource-stack">
                     <div class="issue-detail-resource-row">
                         <div class="issue-detail-resource-label">{{t "fleetops-ui.components.issue.details.vehicle"}}</div>
-                        <Vehicle::Pill @vehicle={{@resource.vehicle}} @titleFallback={{n-a @resource.vehicle_name "No vehicle linked"}} @onClick={{this.viewVehicle}} />
+                        <Vehicle::Pill @vehicle={{@resource.vehicle}} @titleFallback={{n-a @resource.vehicle_name (t "fleetops-ui.components.issue.details.no-vehicle-linked")}} @onClick={{this.viewVehicle}} />
                     </div>
                     <div class="issue-detail-resource-row">
                         <div class="issue-detail-resource-label">{{t "fleetops-ui.components.issue.details.driver"}}</div>
-                        <Driver::Pill @driver={{@resource.driver}} @titleFallback={{n-a @resource.driver_name "No driver linked"}} @onClick={{this.viewDriver}} />
+                        <Driver::Pill @driver={{@resource.driver}} @titleFallback={{n-a @resource.driver_name (t "fleetops-ui.components.issue.details.no-driver-linked")}} @onClick={{this.viewDriver}} />
                     </div>
                 </div>
             </section>
