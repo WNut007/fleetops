@@ -46,6 +46,17 @@ class FleetController extends FleetOpsController
      */
     public static function onQueryRecord($query, $request): void
     {
+        // Panels ask for drivers.jobs to show what each driver is busy with, but the relation
+        // is every order a driver ever had, each serialized with its payload, config and
+        // tracking (~16 KB): the fleet list took 4+ s with a handful of orders per driver and
+        // grows without bound. Only unfinished jobs are used (Driver.activeJobs).
+        $with = array_map('strval', (array) $request->input('with', []));
+        if (in_array('drivers.jobs', $with, true)) {
+            $query->with(['drivers.jobs' => function ($jobs) {
+                $jobs->whereNotIn('status', ['completed', 'canceled']);
+            }]);
+        }
+
         if ($request->has('excludeDriverJobs')) {
             $excludeJobs = $request->inputArray('excludeDriverJobs');
             $query->with('drivers', function ($query) use ($excludeJobs) {
