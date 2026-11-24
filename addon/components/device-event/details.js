@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { action, get } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { enumLabel } from '../../helpers/enum-label';
 
 const warningSeverities = ['warning', 'error', 'critical', 'high'];
 
@@ -114,7 +115,7 @@ export default class DeviceEventDetailsComponent extends Component {
 
     get metrics() {
         return [
-            { label: this.intl.t('fleetops-ui.js.components.device-event.details.severity'), value: this.severity, icon: 'triangle-exclamation', accentClass: this.severityAccentClass },
+            { label: this.intl.t('fleetops-ui.js.components.device-event.details.severity'), value: enumLabel(this.intl, 'severity', this.severity), icon: 'triangle-exclamation', accentClass: this.severityAccentClass },
             {
                 label: this.intl.t('fleetops-ui.js.components.device-event.details.processing'),
                 value: this.processedLabel,

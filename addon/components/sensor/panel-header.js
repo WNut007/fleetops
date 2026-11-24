@@ -1,5 +1,7 @@
 import Component from '@glimmer/component';
 import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
+import { dasherize } from '@ember/string';
 
 export default class SensorPanelHeaderComponent extends Component {
     get resource() {
@@ -22,8 +24,16 @@ export default class SensorPanelHeaderComponent extends Component {
         return get(this.resource, 'status') ?? (get(this.resource, 'is_active') ? 'active' : 'inactive');
     }
 
+    @service intl;
+
     get thresholdStatus() {
         return get(this.resource, 'threshold_status');
+    }
+
+    get thresholdLabel() {
+        const status = this.thresholdStatus;
+        const key = `fleetops-ui.components.sensor.details.${dasherize(String(status ?? ''))}`;
+        return status && this.intl.exists(key) ? this.intl.t(key) : String(status ?? '').replaceAll('_', ' ');
     }
 
     get type() {

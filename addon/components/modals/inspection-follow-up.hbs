@@ -12,7 +12,7 @@
                         <li class="inspection-follow-up__item">
                             <span class="inspection-follow-up__label">{{n-a item.label}}</span>
                             {{#if item.severity}}
-                                <Badge @status={{if (eq item.severity "critical") "critical" "info"}}>{{smart-humanize item.severity}}</Badge>
+                                <Badge @status={{if (eq item.severity "critical") "critical" "info"}}>{{enum-label "severity" item.severity}}</Badge>
                             {{/if}}
                         </li>
                     {{/each}}

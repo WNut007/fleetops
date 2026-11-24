@@ -10037,6 +10037,16 @@ maintenance-schedule-options:
     high: สูง
     critical: วิกฤต
 enum:
+  severity:
+    info: ข้อมูล
+    low: ต่ำ
+    medium: ปานกลาง
+    high: สูง
+    warning: เตือน
+    error: ผิดพลาด
+    critical: วิกฤต
+    debug: ดีบัก
+    notice: แจ้งให้ทราบ
   part-type:
     filter: ไส้กรอง
     tire: ยาง
@@ -10066,3 +10076,7 @@ enum:
     safety_equipment: อุปกรณ์ความปลอดภัย
     communication_device: อุปกรณ์สื่อสาร
     other: อื่นๆ
+sensor:
+  fields:
+    min-threshold-placeholder: ค่าต่ำสุด
+    max-threshold-placeholder: ค่าสูงสุด

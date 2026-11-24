@@ -10165,6 +10165,16 @@ maintenance-schedule-options:
     high: High
     critical: Critical
 enum:
+  severity:
+    info: Info
+    low: Low
+    medium: Medium
+    high: High
+    warning: Warning
+    error: Error
+    critical: Critical
+    debug: Debug
+    notice: Notice
   part-type:
     filter: Filter
     tire: Tire
@@ -10194,3 +10204,7 @@ enum:
     safety_equipment: Safety Equipment
     communication_device: Communication Device
     other: Other
+sensor:
+  fields:
+    min-threshold-placeholder: Minimum threshold
+    max-threshold-placeholder: Maximum threshold

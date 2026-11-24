@@ -85,7 +85,7 @@
                         <div class="flex items-center gap-2">
                             <Badge @status={{if item.passed "passed" "failed"}}>{{if item.passed (t "inspection.answer.pass") (t "inspection.answer.fail")}}</Badge>
                             {{#if item.severity}}
-                                <Badge @status={{if (eq item.severity "critical") "critical" "info"}}>{{smart-humanize item.severity}}</Badge>
+                                <Badge @status={{if (eq item.severity "critical") "critical" "info"}}>{{enum-label "severity" item.severity}}</Badge>
                             {{/if}}
                         </div>
                     </div>

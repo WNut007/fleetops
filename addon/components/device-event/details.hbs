@@ -4,7 +4,7 @@
             <div class="min-w-0">
                 <div class="flex flex-wrap items-center gap-2">
                     <h2 class="truncate text-base font-bold text-gray-900 dark:text-gray-100">{{smart-humanize this.eventType}}</h2>
-                    <Badge @status={{this.severity}} @hideStatusDot={{true}}>{{smart-humanize this.severity}}</Badge>
+                    <Badge @status={{this.severity}} @hideStatusDot={{true}}>{{enum-label "severity" this.severity}}</Badge>
                     <Badge @status={{this.processedStatus}} @hideStatusDot={{true}}>{{this.processedLabel}}</Badge>
                 </div>
 
@@ -55,7 +55,7 @@
                 </div>
                 <div class="field-info-container">
                     <div class="field-name">{{t "fleetops-ui.components.device-event.details.severity"}}</div>
-                    <div class="field-value"><Badge @status={{this.severity}}>{{smart-humanize this.severity}}</Badge></div>
+                    <div class="field-value"><Badge @status={{this.severity}}>{{enum-label "severity" this.severity}}</Badge></div>
                 </div>
                 <div class="field-info-container">
                     <div class="field-name">{{t "fleetops-ui.components.device-event.details.state"}}</div>
@@ -153,7 +153,7 @@
                     <div class="field-name">{{t "fleetops-ui.components.device-event.details.device-status"}}</div>
                     <div class="field-value" data-test-device-event-device-status>
                         {{#if this.deviceStatus}}
-                            <Badge @status={{this.deviceStatus}}>{{smart-humanize this.deviceStatus}}</Badge>
+                            <Badge @status={{this.deviceStatus}} />
                         {{else}}
                             {{n-a null}}
                         {{/if}}
