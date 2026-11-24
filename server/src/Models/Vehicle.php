@@ -243,6 +243,8 @@ class Vehicle extends Model
     protected $attributes = [
         'avatar_url' => 'https://flb-assets.s3-ap-southeast-1.amazonaws.com/static/vehicle-icons/mini_bus.svg',
         'status'     => 'available',
+        // NOT NULL without a database default; a vehicle created without it failed with a raw SQL error
+        'online'     => false,
     ];
 
     /**

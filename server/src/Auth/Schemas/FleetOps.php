@@ -250,6 +250,11 @@ class FleetOps
             'description' => 'Policy for dispatching and managing orders.',
             'permissions' => [
                 'see extension',
+                'see place',
+                'list place',
+                'view place',
+                'create place',
+                'update place',
                 '* order',
                 '* route',
                 'see analytics',
@@ -311,6 +316,16 @@ class FleetOps
             'description' => 'Policy for coordinating and managing orders without full dispatch capabilities.',
             'permissions' => [
                 'see extension',
+                // An order needs an order config and pickup/drop-off places; without these the
+                // role could open the order form but not fill it in.
+                'see order-config',
+                'list order-config',
+                'view order-config',
+                'see place',
+                'list place',
+                'view place',
+                'create place',
+                'update place',
                 'see order',
                 'list order',
                 'view order',
