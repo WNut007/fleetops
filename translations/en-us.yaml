@@ -10150,3 +10150,33 @@ maintenance-schedule-options:
     medium: Medium
     high: High
     critical: Critical
+enum:
+  part-type:
+    filter: Filter
+    tire: Tire
+    belt: Belt
+    brake_pad: Brake Pad
+    battery: Battery
+    oil: Oil
+    coolant: Coolant
+    spark_plug: Spark Plug
+    air_filter: Air Filter
+    fuel_filter: Fuel Filter
+    transmission_fluid: Transmission Fluid
+    wiper_blade: Wiper Blade
+    light_bulb: Light Bulb
+    fuse: Fuse
+    sensor: Sensor
+    other: Other
+  equipment-type:
+    ppe: PPE
+    refrigeration_unit: Refrigeration Unit
+    tool: Tool
+    liftgate: Liftgate
+    ramp: Ramp
+    container: Container
+    pallet_jack: Pallet Jack
+    forklift: Forklift
+    safety_equipment: Safety Equipment
+    communication_device: Communication Device
+    other: Other

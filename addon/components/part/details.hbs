@@ -40,7 +40,7 @@
             </div>
             <div class="field-info-container">
                 <div class="field-name">{{t "fleetops-ui.components.part.details.type"}}</div>
-                <div class="field-value">{{n-a (smart-humanize @resource.type)}}</div>
+                <div class="field-value">{{n-a (enum-label "part-type" @resource.type)}}</div>
             </div>
             <div class="field-info-container">
                 <div class="field-name">{{t "fleetops-ui.components.part.details.barcode"}}</div>

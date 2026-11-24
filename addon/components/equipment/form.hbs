@@ -99,7 +99,7 @@
                         @disabled={{cannot-write @resource}}
                         as |type|
                     >
-                        {{smart-humanize type}}
+                        {{enum-label "equipment-type" type}}
                     </PowerSelect>
                 </div>
             </InputGroup>
@@ -114,7 +114,7 @@
                         @disabled={{cannot-write @resource}}
                         as |status|
                     >
-                        {{smart-humanize status}}
+                        {{enum-label "status" status}}
                     </PowerSelect>
                 </div>
             </InputGroup>

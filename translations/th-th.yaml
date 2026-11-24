@@ -10022,3 +10022,33 @@ maintenance-schedule-options:
     medium: ปานกลาง
     high: สูง
     critical: วิกฤต
+enum:
+  part-type:
+    filter: ไส้กรอง
+    tire: ยาง
+    belt: สายพาน
+    brake_pad: ผ้าเบรก
+    battery: แบตเตอรี่
+    oil: น้ำมันเครื่อง
+    coolant: น้ำหล่อเย็น
+    spark_plug: หัวเทียน
+    air_filter: ไส้กรองอากาศ
+    fuel_filter: ไส้กรองเชื้อเพลิง
+    transmission_fluid: น้ำมันเกียร์
+    wiper_blade: ใบปัดน้ำฝน
+    light_bulb: หลอดไฟ
+    fuse: ฟิวส์
+    sensor: เซนเซอร์
+    other: อื่นๆ
+  equipment-type:
+    ppe: อุปกรณ์ป้องกันส่วนบุคคล (PPE)
+    refrigeration_unit: ชุดทำความเย็น
+    tool: เครื่องมือ
+    liftgate: ลิฟต์ท้ายรถ
+    ramp: ทางลาด
+    container: ตู้คอนเทนเนอร์
+    pallet_jack: แฮนด์ลิฟต์
+    forklift: รถโฟล์คลิฟท์
+    safety_equipment: อุปกรณ์ความปลอดภัย
+    communication_device: อุปกรณ์สื่อสาร
+    other: อื่นๆ

@@ -16,7 +16,7 @@
                     <h1 class="text-gray-900 dark:text-white font-semibold text-lg">{{@resource.name}}</h1>
                     <Badge @status={{@resource.status}} />
                 </div>
-                <div class="text-xs text-gray-400 dark:text-gray-500">{{smart-humanize @resource.type}}</div>
+                <div class="text-xs text-gray-400 dark:text-gray-500">{{enum-label "part-type" @resource.type}}</div>
                 <div class="text-xs text-gray-400 dark:text-gray-500">{{n-a @resource.part_number}}</div>
             </div>
         </div>
