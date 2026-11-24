@@ -176,6 +176,14 @@ class LiveController extends Controller
 
             $drivers = $query->get();
 
+            // The vehicle resource reads its driver's name: point it at the driver we already
+            // have instead of one query per vehicle.
+            foreach ($drivers as $driver) {
+                if ($driver->relationLoaded('vehicle') && $driver->vehicle) {
+                    $driver->vehicle->setRelation('driver', $driver);
+                }
+            }
+
             return DriverResource::collection($drivers);
         });
     }

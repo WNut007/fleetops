@@ -605,12 +605,16 @@ class Vehicle extends Model
             'taxi.svg',
         ];
 
-        // Query for custom avatars
-        $customAvatarsQuery = File::where('type', 'vehicle-avatar');
+        // Query for custom avatars. Every vehicle and driver resource resolves its avatar
+        // through here, so a list of 100 drivers ran this query 100+ times; without a custom
+        // query it is the same for the whole request (once() is flushed per Octane request).
         if (is_callable($customQueryCallback)) {
+            $customAvatarsQuery = File::where('type', 'vehicle-avatar');
             $customQueryCallback($customAvatarsQuery);
+            $customAvatars = $customAvatarsQuery->get();
+        } else {
+            $customAvatars = once(fn () => File::where('type', 'vehicle-avatar')->get());
         }
-        $customAvatars = $customAvatarsQuery->get();
 
         // Get custom avatars
         $customAvatars = collect($customAvatars->mapWithKeys(

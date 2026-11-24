@@ -64,7 +64,7 @@ class Fleet extends FleetbaseResource
             'parent_fleet'          => $this->publicRelationObject('parentFleet', $with, fn () => new ParentFleet($this->parentFleet)),
             'photo'                 => $this->publicRelationObject('photo', $with, fn () => Resolve::httpResourceForModel($this->photo)),
             'subfleets'             => $this->whenLoaded('subFleets', fn () => SubFleet::collection($this->subFleets)),
-            'drivers'               => $this->whenLoaded('drivers', fn () => Driver::collection($this->drivers()->with(Http::isInternalRequest() || $request->has('with.jobs') ? ['jobs'] : [])->get())),
+            'drivers'               => $this->whenLoaded('drivers', fn () => Driver::collection($this->loadedDrivers($request))),
             'vehicles'              => $this->whenLoaded('vehicles', fn () => Vehicle::collection($this->vehicles)),
             'updated_at'            => $this->updated_at,
             'created_at'            => $this->created_at,
@@ -91,5 +91,23 @@ class Fleet extends FleetbaseResource
             'updated_at'   => $this->updated_at,
             'created_at'   => $this->created_at,
         ];
+    }
+
+    /**
+     * The drivers that were eager-loaded with the fleet. This used to query them again for
+     * every fleet together with every job they ever had, discarding the request's eager
+     * loads and any constraint on them (the order panel's fleet list took 5-8 s). Console
+     * requests still get each driver's jobs, but only unfinished ones unless the request
+     * loaded jobs itself.
+     */
+    protected function loadedDrivers($request)
+    {
+        $drivers = $this->resource->getRelation('drivers');
+
+        if ((Http::isInternalRequest() || $request->has('with.jobs')) && $drivers->isNotEmpty() && !$drivers->first()->relationLoaded('jobs')) {
+            $drivers->load(['jobs' => fn ($jobs) => $jobs->whereNotIn('status', ['completed', 'canceled'])]);
+        }
+
+        return $drivers;
     }
 }
