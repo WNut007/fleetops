@@ -2,6 +2,7 @@
 
 namespace Fleetbase\FleetOps\Models;
 
+use Fleetbase\FleetOps\Support\ServerText;
 use Fleetbase\Casts\Json;
 use Fleetbase\FleetOps\Support\InspectionFileStore;
 use Fleetbase\Models\Category;
@@ -330,8 +331,8 @@ class InspectionSubmission extends Model
             'type'              => 'inspection',
             'category'          => 'inspection_failed',
             'location'          => $this->failureLocation(),
-            'title'             => 'Failed inspection: ' . ($this->vehicle_name ?? $this->public_id),
-            'report'            => empty($failedLabels) ? 'Inspection failed.' : 'Failed items: ' . implode(', ', $failedLabels),
+            'title'             => ServerText::get('inspection.failed_title', ['subject' => $this->vehicle_name ?? $this->public_id]),
+            'report'            => empty($failedLabels) ? ServerText::get('inspection.failed_empty') : ServerText::get('inspection.failed_report', ['items' => implode(', ', $failedLabels)]),
             'priority'          => $this->highestFailureSeverity(),
             'status'            => 'pending',
             'meta'              => [

@@ -351,4 +351,15 @@ return [
     | imports when the row does not name a country.
     */
     'default_phone_region' => env('FLEETOPS_DEFAULT_PHONE_REGION', 'TH'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Language of records the server writes itself
+    |--------------------------------------------------------------------------
+    |
+    | Some records are written by the server rather than a person, e.g. the issue
+    | raised by a failed inspection. Their text is stored, so it is written in this
+    | language (see Support\ServerText). 'th' or 'en'.
+    */
+    'server_text_locale' => env('FLEETOPS_SERVER_TEXT_LOCALE', 'th'),
 ];

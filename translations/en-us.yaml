@@ -10178,6 +10178,9 @@ maintenance-schedule-options:
     high: High
     critical: Critical
 enum:
+  inspection-result:
+    passed: Passed
+    failed: Failed
   severity:
     info: Info
     low: Low

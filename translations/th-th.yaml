@@ -10050,6 +10050,9 @@ maintenance-schedule-options:
     high: สูง
     critical: วิกฤต
 enum:
+  inspection-result:
+    passed: ผ่าน
+    failed: ไม่ผ่าน
   severity:
     info: ข้อมูล
     low: ต่ำ
