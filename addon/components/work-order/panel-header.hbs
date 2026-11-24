@@ -3,14 +3,14 @@
         <div class="flex min-w-0 flex-1 flex-col">
             <div class="flex min-w-0 flex-row items-center gap-2">
                 <h1 class="truncate text-lg font-semibold text-gray-900 dark:text-white" title={{or @resource.code @resource.subject}}>{{or @resource.code @resource.subject}}</h1>
-                <Badge @status={{@resource.status}} class="flex-shrink-0">{{smart-humanize @resource.status}}</Badge>
+                <Badge @status={{@resource.status}} class="flex-shrink-0" />
             </div>
             <div class="mt-1 flex min-w-0 flex-row flex-wrap items-center gap-x-3 gap-y-0.5 text-xs text-gray-400 dark:text-gray-500">
                 {{#if @resource.type}}
                     <span class="truncate">{{smart-humanize @resource.type}}</span>
                 {{/if}}
                 {{#if @resource.priority}}
-                    <span class="truncate">{{t "column.priority"}}: {{smart-humanize @resource.priority}}</span>
+                    <span class="truncate">{{t "column.priority"}}: {{t (concat "fleetops-ui.components.work-order.details." @resource.priority)}}</span>
                 {{/if}}
                 {{#if (or @resource.assignee_name @resource.assignee.name)}}
                     <span class="truncate">{{t "column.assignee"}}: {{or @resource.assignee_name @resource.assignee.name}}</span>

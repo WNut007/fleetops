@@ -77,7 +77,7 @@
                         @disabled={{cannot-write @resource}}
                         as |priority|
                     >
-                        {{smart-humanize priority}}
+                        {{t (concat "fleetops-ui.components.work-order.details." priority)}}
                     </PowerSelect>
                 </div>
             </InputGroup>
