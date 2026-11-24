@@ -220,6 +220,19 @@ class InspectionForm extends Model
         return count($this->items ?? []);
     }
 
+    /**
+     * Saving a form with status "published" (from the create/edit form, not the publish action)
+     * left published_at empty, so the form counted as unpublished and public links were refused.
+     */
+    protected static function booted(): void
+    {
+        static::saving(function (InspectionForm $form) {
+            if ($form->status === 'published' && $form->published_at === null) {
+                $form->published_at = now();
+            }
+        });
+    }
+
     public function getIsPublishedAttribute(): bool
     {
         return $this->status === 'published' && $this->published_at !== null;
