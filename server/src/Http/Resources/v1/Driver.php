@@ -61,7 +61,7 @@ class Driver extends FleetbaseResource
             'vehicle_id'                    => $this->when(Http::isPublicRequest(), fn () => $this->vehicle_id),
             'vendor_id'                     => $this->when(Http::isPublicRequest(), fn () => $this->vendor_id),
             'job_id'                        => $this->when(Http::isPublicRequest(), fn () => data_get($this, 'currentJob.public_id')),
-            'fleets'                        => $this->whenLoaded('fleets', fn () => Fleet::collection($this->fleets()->without('drivers')->get())),
+            'fleets'                        => $this->whenLoaded('fleets', fn () => Fleet::collection($this->resource->getRelation('fleets'))),
             'current_shift'                 => $this->whenLoaded('currentShift', fn () => $this->currentShift),
             'location'                      => $this->wasRecentlyCreated ? new Point(0, 0) : Utils::castPoint($this->location),
             'heading'                       => (int) data_get($this, 'heading', 0),
@@ -145,17 +145,15 @@ class Driver extends FleetbaseResource
         return data_get($order, 'tracking') ?? data_get($order, 'public_id');
     }
 
+    /**
+     * The jobs that were eager-loaded with the driver (only called when `jobs` is loaded).
+     * This used to re-query every job of the driver, once per driver and each with its
+     * assigned driver: it ignored any constraint the controller put on the eager load
+     * (e.g. unfinished jobs only) and made fleet/driver lists take several seconds.
+     */
     public function getJobs(): AnonymousResourceCollection|FleetbaseResourceCollection
     {
-        return Order::collection(
-            $this->jobs()->with(
-                [
-                    'driverAssigned' => function ($query) {
-                        $query->without('jobs');
-                    },
-                ]
-            )->get()
-        );
+        return Order::collection($this->resource->getRelation('jobs'));
     }
 
     protected function formatDateOnly($date): ?string

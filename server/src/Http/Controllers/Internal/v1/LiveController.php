@@ -163,8 +163,10 @@ class LiveController extends Controller
         $cacheParams = ['bounds' => $bounds, 'limit' => $limit];
 
         return LiveCacheService::remember('drivers', $cacheParams, function () use ($bounds, $limit) {
+            // currentOrder is read by the driver resource for every row; loading it here avoids
+            // one query per driver.
             $query = Driver::where(['company_uuid' => session('company')])
-                ->with(['user', 'vehicle.devices'])
+                ->with(['user', 'vehicle.devices', 'currentOrder'])
                 ->applyDirectivesForPermissions('fleet-ops list driver');
 
             $this->applyLiveLocationGuards($query);

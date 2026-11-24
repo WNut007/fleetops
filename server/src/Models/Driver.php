@@ -598,6 +598,11 @@ class Driver extends Model
      */
     public function getVendorNameAttribute()
     {
+        // Most drivers have no vendor: skip the per-row lookup for them.
+        if (!$this->vendor_uuid) {
+            return null;
+        }
+
         if ($this->relationLoaded('vendor')) {
             return $this->vendor?->name;
         }
