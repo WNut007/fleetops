@@ -265,15 +265,15 @@
                 </InputGroup>
 
                 <InputGroup @name={{t "fleetops-ui.components.work-order.form.labour-cost"}}>
-                    <MoneyInput @value={{readonly this.completionLaborCost}} @currency={{or @resource.currency (default-currency)}} @disabled={{false}} @onChange={{this.setCompletionLaborCost}} />
+                    <MoneyInput @currency={{or @resource.currency (default-currency)}} @disabled={{false}} @onChange={{this.setCompletionLaborCost}} />
                 </InputGroup>
 
                 <InputGroup @name={{t "fleetops-ui.components.work-order.form.parts-cost"}}>
-                    <MoneyInput @value={{readonly this.completionPartsCost}} @currency={{or @resource.currency (default-currency)}} @disabled={{false}} @onChange={{this.setCompletionPartsCost}} />
+                    <MoneyInput @currency={{or @resource.currency (default-currency)}} @disabled={{false}} @onChange={{this.setCompletionPartsCost}} />
                 </InputGroup>
 
                 <InputGroup @name={{t "fleetops-ui.components.work-order.form.tax"}}>
-                    <MoneyInput @value={{readonly this.completionTax}} @currency={{or @resource.currency (default-currency)}} @disabled={{false}} @onChange={{this.setCompletionTax}} />
+                    <MoneyInput @currency={{or @resource.currency (default-currency)}} @disabled={{false}} @onChange={{this.setCompletionTax}} />
                 </InputGroup>
 
                 <InputGroup @name={{t "fleetops-ui.components.work-order.form.completion-notes"}} @wrapperClass="col-span-2">
