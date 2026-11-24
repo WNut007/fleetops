@@ -2,6 +2,7 @@
 
 namespace Fleetbase\FleetOps\Http\Controllers\Internal\v1;
 
+use Fleetbase\FleetOps\Models\Order;
 use Fleetbase\FleetOps\Exports\FleetExport;
 use Fleetbase\FleetOps\Http\Controllers\FleetOpsController;
 use Fleetbase\FleetOps\Http\Requests\Internal\FleetActionRequest;
@@ -53,7 +54,7 @@ class FleetController extends FleetOpsController
         $with = array_map('strval', (array) $request->input('with', []));
         if (in_array('drivers.jobs', $with, true)) {
             $query->with(['drivers.jobs' => function ($jobs) {
-                $jobs->whereNotIn('status', ['completed', 'canceled']);
+                $jobs->whereNotIn('status', ['completed', 'canceled'])->with(Order::LIST_RELATIONS);
             }]);
         }
 

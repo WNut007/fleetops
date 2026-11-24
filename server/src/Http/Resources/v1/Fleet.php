@@ -105,7 +105,12 @@ class Fleet extends FleetbaseResource
         $drivers = $this->resource->getRelation('drivers');
 
         if ((Http::isInternalRequest() || $request->has('with.jobs')) && $drivers->isNotEmpty() && !$drivers->first()->relationLoaded('jobs')) {
-            $drivers->load(['jobs' => fn ($jobs) => $jobs->whereNotIn('status', ['completed', 'canceled'])]);
+            $drivers->load(['jobs' => fn ($jobs) => $jobs->whereNotIn('status', ['completed', 'canceled'])->with(\Fleetbase\FleetOps\Models\Order::LIST_RELATIONS)]);
+        }
+
+        // assigned_orders_count is read for every driver; count them in one query.
+        if (Http::isInternalRequest() && $drivers->isNotEmpty() && !isset($drivers->first()->orders_count)) {
+            $drivers->loadCount('orders');
         }
 
         return $drivers;

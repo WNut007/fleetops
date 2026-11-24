@@ -222,7 +222,8 @@ class Place extends Model
         ];
 
         // Get custom avatars
-        $customAvatars = collect(File::where('type', 'place-avatar')->get()->mapWithKeys(
+        // Read once per request: every place serialized resolves its avatar through here.
+        $customAvatars = collect(once(fn () => File::where('type', 'place-avatar')->get())->mapWithKeys(
             function ($file) {
                 $key = str_replace(['.svg', '.png'], '', 'Custom: ' . $file->original_filename);
 

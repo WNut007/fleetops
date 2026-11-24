@@ -167,6 +167,7 @@ class LiveController extends Controller
             // one query per driver.
             $query = Driver::where(['company_uuid' => session('company')])
                 ->with(['user', 'vehicle.devices', 'currentOrder'])
+                ->withCount('orders')
                 ->applyDirectivesForPermissions('fleet-ops list driver');
 
             $this->applyLiveLocationGuards($query);

@@ -196,6 +196,17 @@ class TrackingResolver
 
     protected function lookupSetting(string $key, mixed $default = null): mixed
     {
-        return Setting::lookup($key, $default);
+        // Every order's tracking link asks for the company's tracking-page settings: answer
+        // each key once per request instead of twice per order (120 queries on a fleet list).
+        $request  = app('request');
+        $cacheKey = 'shipcode.tracking_setting.' . $key;
+        if ($request->attributes->has($cacheKey)) {
+            return $request->attributes->get($cacheKey) ?? $default;
+        }
+
+        $value = Setting::lookup($key, null);
+        $request->attributes->set($cacheKey, $value);
+
+        return $value ?? $default;
     }
 }

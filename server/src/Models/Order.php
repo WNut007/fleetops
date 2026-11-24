@@ -404,6 +404,26 @@ class Order extends Model
         ])->render();
     }
 
+    /**
+     * Relations the order resource reads, to eager-load when orders are serialized in bulk
+     * (e.g. each driver's jobs in a fleet list); otherwise each is one query per order.
+     */
+    public const LIST_RELATIONS = [
+        'trackingNumber',
+        'trackingStatuses',
+        'payload.pickup',
+        'payload.dropoff',
+        'payload.return',
+        'payload.waypoints',
+        'payload.entities',
+        'orderConfig',
+        'transaction',
+        'createdBy',
+        'vehicleAssigned',
+        'customer',
+        'facilitator',
+    ];
+
     public function orderConfig(): BelongsTo
     {
         return $this->belongsTo(OrderConfig::class)->withTrashed();
