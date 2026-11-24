@@ -267,9 +267,11 @@ export default class OperationsSchedulerIndexController extends Controller {
         const { order, status } = event.extendedProps ?? {};
         const tracking = event.title ?? order?.tracking ?? order?.public_id ?? '';
         const driverName = order?.driver_assigned?.name ?? order?.get?.('driver_assigned.name') ?? '';
-        const destination = order?.pickupName ?? order?.get?.('pickupName') ?? '';
+        // where the order is going: the dropoff, falling back to the pickup for single-stop orders
+        const destination = order?.dropoffName || order?.get?.('dropoffName') || order?.pickupName || order?.get?.('pickupName') || '';
         const scheduledTime = order?.scheduledAtTime ?? order?.get?.('scheduledAtTime') ?? '';
-        const statusLabel = status ? status.charAt(0).toUpperCase() + status.slice(1) : '';
+        const statusKey = `order-status.${status}`;
+        const statusLabel = status ? (this.intl.exists(statusKey) ? this.intl.t(statusKey) : status.charAt(0).toUpperCase() + status.slice(1)) : '';
         const metaLine = [scheduledTime, driverName].filter(Boolean).join(' · ');
         return {
             html: `<div style="display:flex;flex-direction:column;gap:2px;padding:2px 0;overflow:hidden;height:100%;">

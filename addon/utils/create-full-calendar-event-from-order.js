@@ -19,7 +19,7 @@ export function createOrderEventDescription(order) {
     const scheduledAtTime = get(order, 'scheduledAtTime');
     const driverAssignedName = get(order, 'driver_assigned.name');
     const vehicleAssignedName = get(order, 'driver_assigned.vehicle_name');
-    const destination = get(order, 'pickupName');
+    const destination = get(order, 'dropoffName') || get(order, 'pickupName');
     const parts = [];
     if (driverAssignedName) {
         parts.push(driverAssignedName + ' @ ' + scheduledAtTime);

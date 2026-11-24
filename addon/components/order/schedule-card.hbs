@@ -118,7 +118,7 @@
                 {{t "order.schedule-card.destination"}}
             </dt>
             <dd class="truncate text-right">
-                {{n-a @order.pickupName}}
+                {{n-a (or @order.dropoffName @order.pickupName)}}
             </dd>
 
         </dl>
