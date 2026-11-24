@@ -10093,3 +10093,28 @@ sensor:
   fields:
     min-threshold-placeholder: ค่าต่ำสุด
     max-threshold-placeholder: ค่าสูงสุด
+activity-template:
+  created:
+    status: 'สร้างออเดอร์แล้ว'
+    details: 'สร้างออเดอร์ใหม่แล้ว'
+  dispatched:
+    status: 'ส่งงานให้คนขับแล้ว'
+    details: 'ส่งงานให้คนขับแล้ว'
+  started:
+    status: 'เริ่มงานแล้ว'
+    details: 'คนขับเริ่มงานแล้ว'
+  enroute:
+    status: 'คนขับกำลังเดินทาง'
+    details: 'คนขับกำลังเดินทาง'
+  arrived:
+    status: 'คนขับถึงแล้ว'
+    details: 'คนขับรออยู่ที่จุดรับ'
+  in_progress:
+    status: 'กำลังดำเนินการ'
+    details: 'ผู้โดยสารอยู่บนรถ'
+  completed:
+    status: 'ส่งงานเสร็จแล้ว'
+    details: 'ออเดอร์เสร็จสมบูรณ์แล้ว'
+  canceled:
+    status: 'ยกเลิกออเดอร์แล้ว'
+    details: 'ออเดอร์ถูกยกเลิก'

@@ -10221,3 +10221,28 @@ sensor:
   fields:
     min-threshold-placeholder: Minimum threshold
     max-threshold-placeholder: Maximum threshold
+activity-template:
+  created:
+    status: 'Order Created'
+    details: 'New order was created.'
+  dispatched:
+    status: 'Order Dispatched'
+    details: 'Order has been dispatched.'
+  started:
+    status: 'Order Started'
+    details: 'Order has been started'
+  enroute:
+    status: 'Driver Enroute'
+    details: 'Driver is en-route.'
+  arrived:
+    status: 'Driver has arrived'
+    details: 'The driver is waiting at the pickup.'
+  in_progress:
+    status: 'Trip in progress'
+    details: 'The passenger is on board.'
+  completed:
+    status: 'Order Completed'
+    details: 'Order has been completed.'
+  canceled:
+    status: 'Order Canceled'
+    details: 'Order was canceled'
