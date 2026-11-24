@@ -10133,3 +10133,20 @@ fleetops-ui:
         item-n: Item {n}
         current-odometer-unit: Current Odometer ({unit})
         fuel-reported-on: Fuel reported on {date}
+maintenance-schedule-options:
+  type:
+    oil_change: Oil Change
+    tire_rotation: Tire Rotation
+    inspection: Inspection
+    brake_service: Brake Service
+    air_filter: Air Filter
+    transmission: Transmission
+    coolant: Coolant
+    battery: Battery
+    other: Other
+  priority:
+    low: Low
+    normal: Normal
+    medium: Medium
+    high: High
+    critical: Critical

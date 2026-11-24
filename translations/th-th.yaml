@@ -10005,3 +10005,20 @@ fleetops-ui:
         item-n: รายการที่ {n}
         current-odometer-unit: เลขไมล์ปัจจุบัน ({unit})
         fuel-reported-on: รายงานน้ำมันวันที่ {date}
+maintenance-schedule-options:
+  type:
+    oil_change: เปลี่ยนน้ำมันเครื่อง
+    tire_rotation: สลับยาง
+    inspection: ตรวจสภาพ
+    brake_service: ซ่อมบำรุงเบรก
+    air_filter: ไส้กรองอากาศ
+    transmission: ระบบเกียร์
+    coolant: น้ำหล่อเย็น
+    battery: แบตเตอรี่
+    other: อื่นๆ
+  priority:
+    low: ต่ำ
+    normal: ปกติ
+    medium: ปานกลาง
+    high: สูง
+    critical: วิกฤต

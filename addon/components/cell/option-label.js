@@ -23,9 +23,11 @@ export function optionLabel(intl, column, value) {
     }
 
     if (column?.translationPrefix && intl) {
-        const key = `${column.translationPrefix}${String(value).replace(/_/g, '-')}`;
-        if (intl.exists(key)) {
-            return intl.t(key);
+        for (const suffix of [String(value), String(value).replace(/_/g, '-')]) {
+            const key = `${column.translationPrefix}${suffix}`;
+            if (intl.exists(key)) {
+                return intl.t(key);
+            }
         }
     }
 

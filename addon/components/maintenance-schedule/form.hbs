@@ -24,7 +24,7 @@
                         @disabled={{cannot-write @resource}}
                         as |type|
                     >
-                        {{smart-humanize type}}
+                        {{t (concat "maintenance-schedule-options.type." type)}}
                     </PowerSelect>
                 </div>
             </InputGroup>
@@ -40,7 +40,7 @@
                         @disabled={{cannot-write @resource}}
                         as |status|
                     >
-                        {{smart-humanize status}}
+                        {{t (concat "ember-ui.status." status)}}
                     </PowerSelect>
                 </div>
             </InputGroup>
@@ -213,7 +213,7 @@
                         @disabled={{cannot-write @resource}}
                         as |priority|
                     >
-                        {{smart-humanize priority}}
+                        {{t (concat "maintenance-schedule-options.priority." priority)}}
                     </PowerSelect>
                 </div>
             </InputGroup>
