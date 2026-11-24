@@ -5992,6 +5992,8 @@ fleetops-ui:
                 orders: '{orders_completed} ออเดอร์ · {distance_m}'
         work-order:
             details:
+                normal: ปกติ
+                urgent: ด่วน
                 actual-cost: ค่าใช้จ่ายจริง
                 approved-budget: งบประมาณที่อนุมัติ
                 asset-readings-at-completion: ค่าของทรัพย์สินเมื่องานเสร็จ

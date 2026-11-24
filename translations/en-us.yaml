@@ -6120,6 +6120,8 @@ fleetops-ui:
                 orders: '{orders_completed} orders · {distance_m}'
         work-order:
             details:
+                normal: Normal
+                urgent: Urgent
                 actual-cost: Actual Cost
                 approved-budget: Approved Budget
                 asset-readings-at-completion: Asset Readings at Completion

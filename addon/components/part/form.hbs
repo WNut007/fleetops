@@ -161,13 +161,13 @@
                 <MoneyInput
                     class="w-full"
                     @value={{@resource.unit_cost}}
-                    @currency={{or @resource.currency "USD"}}
+                    @currency={{or @resource.currency (default-currency)}}
                     @onChange={{fn (mut @resource.unit_cost)}}
                     @disabled={{cannot-write @resource}}
                 />
             </InputGroup>
             <InputGroup @name="MSRP">
-                <MoneyInput class="w-full" @value={{@resource.msrp}} @currency={{or @resource.currency "USD"}} @onChange={{fn (mut @resource.msrp)}} @disabled={{cannot-write @resource}} />
+                <MoneyInput class="w-full" @value={{@resource.msrp}} @currency={{or @resource.currency (default-currency)}} @onChange={{fn (mut @resource.msrp)}} @disabled={{cannot-write @resource}} />
             </InputGroup>
         </div>
     </ContentPanel>

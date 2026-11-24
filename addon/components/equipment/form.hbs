@@ -185,7 +185,7 @@
                 <MoneyInput
                     class="w-full"
                     @value={{@resource.purchase_price}}
-                    @currency={{or @resource.currency "USD"}}
+                    @currency={{or @resource.currency (default-currency)}}
                     @onChange={{fn (mut @resource.purchase_price)}}
                     @disabled={{cannot-write @resource}}
                 />

@@ -82,10 +82,17 @@ export default class WorkOrderActionsService extends ResourceActionService {
             return;
         }
 
+        // Closing through the edit form never stamped closed_at (only the server's complete() did).
+        if (!workOrder.closed_at) {
+            workOrder.closed_at = new Date();
+        }
+
         // Ensure values are integers (MoneyInput emits cents already)
         const toIntCents = (value) => {
-            if (value === null || value === undefined) return null;
-            const parsed = parseInt(value, 10);
+            if (value === null || value === undefined || value === '') return null;
+            // Integer cents from MoneyInput; never a formatted display string like "$500.00",
+            // which parseInt turned into null and silently dropped the cost.
+            const parsed = typeof value === 'number' ? Math.round(value) : parseInt(String(value).replace(/[^0-9-]/g, ''), 10);
             return isNaN(parsed) ? null : parsed;
         };
 
@@ -103,7 +110,7 @@ export default class WorkOrderActionsService extends ResourceActionService {
                 parts_cost: partsCostCents,
                 tax: taxCents,
                 total_cost: totalCostCents,
-                currency: workOrder.currency ?? 'USD',
+                currency: workOrder.currency ?? this.currentUser?.company?.currency ?? this.currentUser?.currency ?? 'USD',
                 notes: completionData.notes ?? null,
             },
         };

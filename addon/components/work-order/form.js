@@ -190,13 +190,15 @@ export default class WorkOrderFormComponent extends Component {
         }
     }
 
+    // The inputs pass their DOM event; reading the value from it (instead of binding the
+    // tracked value with fn) keeps what was typed — the old binding reset the field each keystroke.
     @action setCompletionOdometer(value) {
-        this.completionOdometer = value;
+        this.completionOdometer = value?.target ? value.target.value : value;
         this._notifyCompletionChange();
     }
 
     @action setCompletionEngineHours(value) {
-        this.completionEngineHours = value;
+        this.completionEngineHours = value?.target ? value.target.value : value;
         this._notifyCompletionChange();
     }
 
@@ -216,7 +218,7 @@ export default class WorkOrderFormComponent extends Component {
     }
 
     @action setCompletionNotes(value) {
-        this.completionNotes = value;
+        this.completionNotes = value?.target ? value.target.value : value;
         this._notifyCompletionChange();
     }
 }

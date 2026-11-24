@@ -244,46 +244,46 @@
 
                 <InputGroup @name={{t "fleetops-ui.components.work-order.form.odometer-at-completion-km"}}>
                     <Input
-                        @value={{this.completionOdometer}}
+                        @value={{readonly this.completionOdometer}}
                         @type="number"
                         class="w-full form-input"
                         placeholder="e.g. 47250"
-                        {{on "input" (fn this.setCompletionOdometer this.completionOdometer)}}
-                        {{on "change" (fn this.setCompletionOdometer this.completionOdometer)}}
+                        {{on "input" this.setCompletionOdometer}}
+                        {{on "change" this.setCompletionOdometer}}
                     />
                 </InputGroup>
 
                 <InputGroup @name={{t "fleetops-ui.components.work-order.form.engine-hours-at-completion"}}>
                     <Input
-                        @value={{this.completionEngineHours}}
+                        @value={{readonly this.completionEngineHours}}
                         @type="number"
                         class="w-full form-input"
                         placeholder="e.g. 1420"
-                        {{on "input" (fn this.setCompletionEngineHours this.completionEngineHours)}}
-                        {{on "change" (fn this.setCompletionEngineHours this.completionEngineHours)}}
+                        {{on "input" this.setCompletionEngineHours}}
+                        {{on "change" this.setCompletionEngineHours}}
                     />
                 </InputGroup>
 
                 <InputGroup @name={{t "fleetops-ui.components.work-order.form.labour-cost"}}>
-                    <MoneyInput @value={{this.completionLaborCost}} @currency={{or @resource.currency "USD"}} @disabled={{false}} @onChange={{this.setCompletionLaborCost}} />
+                    <MoneyInput @value={{readonly this.completionLaborCost}} @currency={{or @resource.currency (default-currency)}} @disabled={{false}} @onChange={{this.setCompletionLaborCost}} />
                 </InputGroup>
 
                 <InputGroup @name={{t "fleetops-ui.components.work-order.form.parts-cost"}}>
-                    <MoneyInput @value={{this.completionPartsCost}} @currency={{or @resource.currency "USD"}} @disabled={{false}} @onChange={{this.setCompletionPartsCost}} />
+                    <MoneyInput @value={{readonly this.completionPartsCost}} @currency={{or @resource.currency (default-currency)}} @disabled={{false}} @onChange={{this.setCompletionPartsCost}} />
                 </InputGroup>
 
                 <InputGroup @name={{t "fleetops-ui.components.work-order.form.tax"}}>
-                    <MoneyInput @value={{this.completionTax}} @currency={{or @resource.currency "USD"}} @disabled={{false}} @onChange={{this.setCompletionTax}} />
+                    <MoneyInput @value={{readonly this.completionTax}} @currency={{or @resource.currency (default-currency)}} @disabled={{false}} @onChange={{this.setCompletionTax}} />
                 </InputGroup>
 
                 <InputGroup @name={{t "fleetops-ui.components.work-order.form.completion-notes"}} @wrapperClass="col-span-2">
                     <Textarea
-                        @value={{this.completionNotes}}
+                        @value={{readonly this.completionNotes}}
                         class="w-full form-input"
                         rows="3"
                         placeholder={{t "fleetops-ui.components.work-order.form.notes-on-what-was-done-parts"}}
-                        {{on "input" (fn this.setCompletionNotes this.completionNotes)}}
-                        {{on "change" (fn this.setCompletionNotes this.completionNotes)}}
+                        {{on "input" this.setCompletionNotes}}
+                        {{on "change" this.setCompletionNotes}}
                     />
                 </InputGroup>
             </div>
