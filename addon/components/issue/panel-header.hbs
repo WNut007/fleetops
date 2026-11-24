@@ -15,7 +15,7 @@
             {{/if}}
             <div class="issue-panel-header-meta">
                 {{#if this.subtitle}}
-                    <span>{{titleize this.subtitle}}</span>
+                    <span>{{this.subtitle}}</span>
                 {{/if}}
                 {{#if @resource.createdAt}}
                     <span>{{t "fleetops-ui.components.issue.panel-header.reported" createdAt=@resource.createdAt}}</span>

@@ -4663,6 +4663,8 @@ fleetops-ui:
                 'yes': ใช่
         issue:
             details:
+                unknown-reporter: ไม่ทราบผู้แจ้ง
+                unassigned: ยังไม่มอบหมาย
                 assignee: ผู้รับผิดชอบ
                 category: หมวดหมู่
                 classification-ownership-and-reporting-date: การจัดประเภท ความเป็นเจ้าของ และวันที่รายงาน
@@ -8455,6 +8457,9 @@ fleetops-ui:
                 description: แจ้งโดยคนขับหรือจาก console
                 label: ส่งแล้ว
         issueCategories:
+            inspection_failed:
+                description: การตรวจสภาพรถพบรายการที่ไม่ผ่าน
+                label: ตรวจสภาพไม่ผ่าน
             accidents_collisions:
                 description: อุบัติเหตุ/เหตุการณ์ใดๆ ที่เกี่ยวกับรถ
                 label: อุบัติเหตุและการชน
@@ -8692,6 +8697,9 @@ fleetops-ui:
                 description: ยอมรับความเสี่ยง ไม่มีแผนดำเนินการ
                 label: ไม่แก้ไข
         issueTypes:
+            inspection:
+                description: ปัญหาที่เกิดจากการตรวจสภาพรถไม่ผ่าน
+                label: ตรวจสภาพ
             customer:
                 description: บริการลูกค้า การเรียกเก็บเงิน การสื่อสาร และความถูกต้องของออเดอร์
                 label: ลูกค้า

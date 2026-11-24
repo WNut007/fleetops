@@ -1,5 +1,6 @@
 import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
+import { getFleetOpsOptionLabel } from '../../helpers/get-fleet-ops-option-label';
 
 export default class IssuePanelHeaderComponent extends Component {
     @service intl;
@@ -16,9 +17,12 @@ export default class IssuePanelHeaderComponent extends Component {
     }
 
     get subtitle() {
-        return [this.resource?.type, this.resource?.category]
-            .filter(Boolean)
-            .map((value) => value.replace(/[-_]/g, ' '))
+        return [
+            [this.resource?.type, 'issueTypes'],
+            [this.resource?.category, 'issueCategories'],
+        ]
+            .filter(([value]) => Boolean(value))
+            .map(([value, key]) => getFleetOpsOptionLabel(key, value, this.intl) || value.replace(/[-_]/g, ' '))
             .join(' / ');
     }
 }

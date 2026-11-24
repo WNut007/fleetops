@@ -319,6 +319,7 @@ export const issueTypes = [
     { label: 'Customer', value: 'customer', description: 'Customer service, billing, communications, and order accuracy' },
     { label: 'Security', value: 'security', description: 'Unauthorized access, theft, vandalism, and data/security incidents' },
     { label: 'Environmental / Sustainability', value: 'environmental-sustainability', description: 'Environmental hazards, emissions, waste, and green initiatives' },
+    { label: 'Inspection', value: 'inspection', description: 'Issues raised from failed vehicle inspections' },
 ];
 
 export const issueCategories = [
@@ -392,6 +393,8 @@ export const issueCategories = [
     { label: 'Carbon Footprint', value: 'carbon_footprint', description: 'Emissions or footprint tracking issues.', group: 'environmental-sustainability' },
     { label: 'Waste Management', value: 'waste_management', description: 'Handling and disposal of waste.', group: 'environmental-sustainability' },
     { label: 'Green Initiatives Opportunities', value: 'green_initiatives', description: 'Improvements to sustainability programs.', group: 'environmental-sustainability' },
+    // Inspection
+    { label: 'Inspection Failed', value: 'inspection_failed', description: 'A vehicle inspection found failed items', group: 'inspection' },
 ];
 
 export const issuePriorities = [

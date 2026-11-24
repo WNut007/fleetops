@@ -9,11 +9,11 @@
         <dl class="issue-detail-summary-grid">
             <div class="issue-detail-summary-item">
                 <dt>{{t "fleetops-ui.components.issue.details.type"}}</dt>
-                <dd>{{n-a (smart-humanize @resource.type)}}</dd>
+                <dd>{{n-a (or (get-fleet-ops-option-label "issueTypes" @resource.type) (smart-humanize @resource.type))}}</dd>
             </div>
             <div class="issue-detail-summary-item">
                 <dt>{{t "fleetops-ui.components.issue.details.category"}}</dt>
-                <dd>{{n-a (smart-humanize @resource.category)}}</dd>
+                <dd>{{n-a (or (get-fleet-ops-option-label "issueCategories" @resource.category) (smart-humanize @resource.category))}}</dd>
             </div>
             <div class="issue-detail-summary-item">
                 <dt>{{t "fleetops-ui.components.issue.details.reporter"}}</dt>
@@ -115,11 +115,11 @@
                     </div>
                     <div>
                         <dt>{{t "fleetops-ui.components.issue.details.type"}}</dt>
-                        <dd>{{n-a (smart-humanize @resource.type)}}</dd>
+                        <dd>{{n-a (or (get-fleet-ops-option-label "issueTypes" @resource.type) (smart-humanize @resource.type))}}</dd>
                     </div>
                     <div>
                         <dt>{{t "fleetops-ui.components.issue.details.category"}}</dt>
-                        <dd>{{n-a (smart-humanize @resource.category)}}</dd>
+                        <dd>{{n-a (or (get-fleet-ops-option-label "issueCategories" @resource.category) (smart-humanize @resource.category))}}</dd>
                     </div>
                 </dl>
             </section>

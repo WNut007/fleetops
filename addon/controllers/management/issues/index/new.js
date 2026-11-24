@@ -12,7 +12,7 @@ export default class ManagementIssuesIndexNewController extends Controller {
     @service notifications;
     @service events;
     @tracked overlay;
-    @tracked issue = this.issueActions.createNewInstance({ reporter: this.currentUser.user });
+    @tracked issue = this.issueActions.createNewInstance({ reporter: this.currentUser.user, reported_by_uuid: this.currentUser.user?.id });
 
     @task *save(issue) {
         try {
@@ -35,6 +35,6 @@ export default class ManagementIssuesIndexNewController extends Controller {
     }
 
     @action resetForm() {
-        this.issue = this.issueActions.createNewInstance({ reporter: this.currentUser.user });
+        this.issue = this.issueActions.createNewInstance({ reporter: this.currentUser.user, reported_by_uuid: this.currentUser.user?.id });
     }
 }

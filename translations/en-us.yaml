@@ -4791,6 +4791,8 @@ fleetops-ui:
                 'yes': 'Yes'
         issue:
             details:
+                unknown-reporter: Unknown reporter
+                unassigned: Unassigned
                 assignee: Assignee
                 category: Category
                 classification-ownership-and-reporting-date: Classification, ownership, and reporting date.
@@ -8583,6 +8585,9 @@ fleetops-ui:
                 description: Filed by the driver or the console.
                 label: Submitted
         issueCategories:
+            inspection_failed:
+                description: A vehicle inspection found failed items
+                label: Inspection Failed
             accidents_collisions:
                 description: Any accident/incident involving the vehicle.
                 label: Accidents & Collisions
@@ -8820,6 +8825,9 @@ fleetops-ui:
                 description: Accepted risk—no action planned
                 label: Won't Fix
         issueTypes:
+            inspection:
+                description: Issues raised from failed vehicle inspections
+                label: Inspection
             customer:
                 description: Customer service, billing, communications, and order accuracy
                 label: Customer

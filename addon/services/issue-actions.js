@@ -9,11 +9,20 @@ export default class IssueActionsService extends ResourceActionService {
     @service driverActions;
     @service vehicleActions;
 
+    /**
+     * New issues get a "reported on <now>" title worked out when the issue is created: as a
+     * default attribute it was fixed when the service started, in that moment's language,
+     * so every issue carried the same stale English time stamp.
+     */
+    createNewInstance(attributes = {}) {
+        const title = this.intl.t('fleetops-ui.js.services.issue-actions.issue-reported-on-value', { value: format(new Date(), 'dd MMM yy, HH:mm') });
+        return super.createNewInstance({ title, ...attributes });
+    }
+
     constructor() {
         super(...arguments);
         this.initialize('issue', {
             defaultAttributes: {
-                title: this.intl.t('fleetops-ui.js.services.issue-actions.issue-reported-on-value', { value: format(new Date(), 'dd MMM yy, HH:mm') }),
                 status: 'pending',
                 priority: 'low',
                 type: 'operational',

@@ -61,7 +61,7 @@ export default class IssueDetailsComponent extends Component {
     }
 
     get reporterName() {
-        return this.resource?.reporter?.name || this.resource?.reporter_name || 'Unknown reporter';
+        return this.resource?.reporter?.name || this.resource?.reporter_name || this.intl.t('fleetops-ui.components.issue.details.unknown-reporter');
     }
 
     get reporterInitial() {
@@ -69,7 +69,7 @@ export default class IssueDetailsComponent extends Component {
     }
 
     get assigneeName() {
-        return this.resource?.assignee?.name || this.resource?.assignee_name || 'Unassigned';
+        return this.resource?.assignee?.name || this.resource?.assignee_name || this.intl.t('fleetops-ui.components.issue.details.unassigned');
     }
 
     get isResolved() {
