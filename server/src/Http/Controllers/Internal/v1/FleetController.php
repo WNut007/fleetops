@@ -54,7 +54,7 @@ class FleetController extends FleetOpsController
         $with = array_map('strval', (array) $request->input('with', []));
         if (in_array('drivers.jobs', $with, true)) {
             $query->with(['drivers.jobs' => function ($jobs) {
-                $jobs->whereNotIn('status', ['completed', 'canceled'])->with(Order::LIST_RELATIONS);
+                $jobs->whereNotIn('status', ['completed', 'canceled']);
             }]);
         }
 

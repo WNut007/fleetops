@@ -94,7 +94,7 @@ class TrackingNumber extends Model
      */
     public function getLastStatusAttribute()
     {
-        $this->load('status');
+        $this->loadMissing('status');
 
         return data_get($this, 'status.status');
     }
@@ -104,7 +104,7 @@ class TrackingNumber extends Model
      */
     public function getLastStatusCodeAttribute()
     {
-        $this->load('status');
+        $this->loadMissing('status');
 
         return data_get($this, 'status.code');
     }
@@ -114,7 +114,7 @@ class TrackingNumber extends Model
      */
     public function getLastStatusUpdatedAtAttribute()
     {
-        $this->load('status');
+        $this->loadMissing('status');
 
         return data_get($this, 'status.created_at');
     }
@@ -124,7 +124,7 @@ class TrackingNumber extends Model
      */
     public function getLastStatusCompleteAttribute()
     {
-        $this->load('status');
+        $this->loadMissing('status');
 
         return data_get($this, 'status.complete');
     }

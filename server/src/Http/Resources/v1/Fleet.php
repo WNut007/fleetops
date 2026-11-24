@@ -105,7 +105,18 @@ class Fleet extends FleetbaseResource
         $drivers = $this->resource->getRelation('drivers');
 
         if ((Http::isInternalRequest() || $request->has('with.jobs')) && $drivers->isNotEmpty() && !$drivers->first()->relationLoaded('jobs')) {
-            $drivers->load(['jobs' => fn ($jobs) => $jobs->whereNotIn('status', ['completed', 'canceled'])->with(\Fleetbase\FleetOps\Models\Order::LIST_RELATIONS)]);
+            $drivers->load(['jobs' => fn ($jobs) => $jobs->whereNotIn('status', ['completed', 'canceled'])]);
+        }
+
+        // Each driver's name comes from its user, and its vehicle's driver_name from the driver:
+        // give them what is already here instead of a query per row.
+        if ($drivers->isNotEmpty()) {
+            $drivers->loadMissing('user');
+            foreach ($drivers as $driver) {
+                if ($driver->relationLoaded('vehicle') && $driver->vehicle) {
+                    $driver->vehicle->setRelation('driver', $driver);
+                }
+            }
         }
 
         // assigned_orders_count is read for every driver; count them in one query.

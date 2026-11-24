@@ -429,9 +429,11 @@ class Driver extends Model
      */
     public function getAvatarUrlAttribute($value): ?string
     {
-        // if vehicle assigned us the vehicle avatar
-        $this->loadMissing('vehicle');
-        if ($this->vehicle) {
+        // if vehicle assigned us the vehicle avatar (no lookup at all when none is assigned)
+        if ($this->vehicle_uuid || $this->relationLoaded('vehicle')) {
+            $this->loadMissing('vehicle');
+        }
+        if ($this->vehicle_uuid && $this->vehicle) {
             return $this->vehicle->avatar_url;
         }
 
