@@ -142,6 +142,27 @@ test('finalize internal order creation notifies and fires order ready', function
     expect(FleetOpsPurchaseObserverRecorder::$events)->toBe([]);
 });
 
+test('finalize internal order creation tells only the driver set at creation, once', function () {
+    $connection = fleetopsPurchaseObserverBoot();
+    $connection->table('orders')->insert(['uuid' => 'order-1', 'company_uuid' => 'company-1', 'status' => 'created', 'driver_assigned_uuid' => 'driver-1']);
+    $assigned = fn () => collect(FleetOpsPurchaseObserverRecorder::$events)->filter(fn ($event) => $event instanceof Fleetbase\FleetOps\Events\OrderDriverAssigned)->count();
+
+    // Driver set at creation and still assigned: told here
+    FleetOpsPurchaseObserverRecorder::$events = [];
+    (new FinalizeInternalOrderCreation('order-1', 'driver-1'))->handle();
+    expect($assigned())->toBe(1);
+
+    // No driver at creation (one was set later and OrderObserver already told them): not told again
+    FleetOpsPurchaseObserverRecorder::$events = [];
+    (new FinalizeInternalOrderCreation('order-1'))->handle();
+    expect($assigned())->toBe(0);
+
+    // Driver changed while the job waited: the new driver was told by OrderObserver
+    FleetOpsPurchaseObserverRecorder::$events = [];
+    (new FinalizeInternalOrderCreation('order-1', 'driver-0'))->handle();
+    expect($assigned())->toBe(0);
+});
+
 test('order canceled notification builds mail seams and push channels', function () {
     fleetopsPurchaseObserverBoot();
 

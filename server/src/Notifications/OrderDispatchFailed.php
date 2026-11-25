@@ -5,6 +5,7 @@ namespace Fleetbase\FleetOps\Notifications;
 use Fleetbase\FleetOps\Events\OrderDispatchFailed as OrderDispatchFailedEvent;
 use Fleetbase\FleetOps\Http\Resources\v1\Order as OrderResource;
 use Fleetbase\FleetOps\Models\Order;
+use Fleetbase\FleetOps\Support\MailText;
 use Fleetbase\FleetOps\Support\TrackingCode;
 use Fleetbase\FleetOps\Support\Utils;
 use Illuminate\Broadcasting\Channel;
@@ -125,9 +126,9 @@ class OrderDispatchFailed extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage())
-            ->subject($this->title)
-            ->line($this->message)
-            ->action('Track Order', TrackingCode::pageUrl($this->order->trackingNumber->tracking_number, data_get($this, 'order.company_uuid')));
+        $locale   = MailText::localeFor($notifiable);
+        $tracking = $this->order->trackingNumber->tracking_number;
+
+        return MailText::message($locale, MailText::get($locale, 'dispatch_failed.subject', ['tracking' => $tracking]), [$this->reason ? MailText::get($locale, 'reason', ['reason' => $this->reason]) : null], TrackingCode::pageUrl($tracking, data_get($this, 'order.company_uuid')));
     }
 }

@@ -173,7 +173,7 @@ class FleetOpsApiOrderCrudControllerProbe extends OrderController
         return $this->order;
     }
 
-    protected function dispatchFinalizeApiOrderCreation(string $orderUuid, ?string $serviceQuoteUuid, bool $shouldDispatch): void
+    protected function dispatchFinalizeApiOrderCreation(string $orderUuid, ?string $serviceQuoteUuid, bool $shouldDispatch, ?string $assignedDriverUuid = null): void
     {
         $this->finalizedOrders[] = [$orderUuid, $serviceQuoteUuid, $shouldDispatch];
     }

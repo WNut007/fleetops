@@ -4,6 +4,7 @@ namespace Fleetbase\FleetOps\Notifications;
 
 use Fleetbase\FleetOps\Http\Resources\v1\Order as OrderResource;
 use Fleetbase\FleetOps\Models\Order;
+use Fleetbase\FleetOps\Support\MailText;
 use Fleetbase\FleetOps\Support\TrackingCode;
 use Fleetbase\FleetOps\Support\Utils;
 use Fleetbase\Support\PushNotification;
@@ -121,17 +122,15 @@ class OrderAssigned extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $message = (new MailMessage())
-            ->subject($this->title)
-            ->line($this->message);
+        $locale   = MailText::localeFor($notifiable);
+        $tracking = $this->order->trackingNumber->tracking_number;
+        $lines    = [MailText::get($locale, 'assigned.line')];
 
         if ($this->order->isScheduled) {
-            $message->line('Dispatch is scheduled for ' . $this->order->scheduled_at);
+            $lines[] = MailText::get($locale, 'assigned.scheduled', ['date' => MailText::date($this->order->scheduled_at, $locale, data_get($this->order, 'company.timezone'))]);
         }
 
-        $message->action('Track Order', TrackingCode::pageUrl($this->order->trackingNumber->tracking_number, data_get($this, 'order.company_uuid')));
-
-        return $message;
+        return MailText::message($locale, MailText::get($locale, 'assigned.subject', ['tracking' => $tracking]), $lines, TrackingCode::pageUrl($tracking, data_get($this, 'order.company_uuid')));
     }
 
     /**

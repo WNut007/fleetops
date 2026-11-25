@@ -5,6 +5,7 @@ namespace Fleetbase\FleetOps\Notifications;
 use Fleetbase\FleetOps\Http\Resources\v1\Order as OrderResource;
 use Fleetbase\FleetOps\Models\Order;
 use Fleetbase\FleetOps\Models\Waypoint;
+use Fleetbase\FleetOps\Support\MailText;
 use Fleetbase\FleetOps\Support\TrackingCode;
 use Fleetbase\FleetOps\Support\Utils;
 use Fleetbase\Support\PushNotification;
@@ -79,7 +80,7 @@ class OrderFailed extends Notification implements ShouldQueue
         $this->order       = $order;
         $this->reason      = $reason;
         $this->waypoint    = $waypoint;
-        $this->title       = 'Order ' . $this->getTrackingNumber() . ' delivery has has failed';
+        $this->title       = 'Order ' . $this->getTrackingNumber() . ' delivery has failed';
         $this->message     = 'Order ' . $this->getTrackingNumber() . ' delivery has failed.';
         $this->data        = ['id' => $this->order->public_id, 'type' => 'order_canceled'];
     }
@@ -134,12 +135,14 @@ class OrderFailed extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage())
-            ->subject($this->title)
-            ->line($this->message)
-            ->line($this->reason)
-            ->line('No further action is necessary.')
-            ->action('Track Order', TrackingCode::pageUrl($this->getTrackingNumber(), data_get($this, 'order.company_uuid')));
+        $locale   = MailText::localeFor($notifiable);
+        $tracking = $this->getTrackingNumber();
+        $lines    = [
+            MailText::get($locale, 'failed.line', ['tracking' => $tracking]),
+            $this->reason !== '' ? MailText::get($locale, 'reason', ['reason' => $this->reason]) : null,
+        ];
+
+        return MailText::message($locale, MailText::get($locale, 'failed.subject', ['tracking' => $tracking]), $lines, TrackingCode::pageUrl($tracking, data_get($this, 'order.company_uuid')));
     }
 
     /**

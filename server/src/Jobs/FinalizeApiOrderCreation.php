@@ -22,6 +22,7 @@ class FinalizeApiOrderCreation implements ShouldQueue
         public string $orderUuid,
         public ?string $serviceQuoteUuid = null,
         public bool $shouldDispatch = false,
+        public ?string $assignedDriverUuid = null,
     ) {
     }
 
@@ -34,7 +35,12 @@ class FinalizeApiOrderCreation implements ShouldQueue
 
         $serviceQuote = $this->findServiceQuote();
 
-        $order->notifyDriverAssigned();
+        // Only the driver set at creation, and only if still assigned: a driver set or changed while this job
+        // waited was already told by OrderObserver.
+        $creationDriver = isset($this->assignedDriverUuid) ? $this->assignedDriverUuid : null;
+        if ($creationDriver && $order->driver_assigned_uuid === $creationDriver) {
+            $order->notifyDriverAssigned();
+        }
         $order->setPreliminaryDistanceAndTime();
         $order->purchaseServiceQuote($serviceQuote);
 

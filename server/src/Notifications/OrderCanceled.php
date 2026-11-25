@@ -5,6 +5,7 @@ namespace Fleetbase\FleetOps\Notifications;
 use Fleetbase\FleetOps\Http\Resources\v1\Order as OrderResource;
 use Fleetbase\FleetOps\Models\Order;
 use Fleetbase\FleetOps\Models\Waypoint;
+use Fleetbase\FleetOps\Support\MailText;
 use Fleetbase\FleetOps\Support\TrackingCode;
 use Fleetbase\FleetOps\Support\Utils;
 use Fleetbase\Support\PushNotification;
@@ -139,12 +140,15 @@ class OrderCanceled extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage())
-            ->subject($this->title)
-            ->line($this->message)
-            ->line($this->reason)
-            ->line('No further action is necessary.')
-            ->action('Track Order', TrackingCode::pageUrl($this->getTrackingNumber(), data_get($this, 'order.company_uuid')));
+        $locale   = MailText::localeFor($notifiable);
+        $tracking = $this->getTrackingNumber();
+        $lines    = [
+            MailText::get($locale, 'canceled.line', ['tracking' => $tracking]),
+            $this->reason !== '' ? MailText::get($locale, 'reason', ['reason' => $this->reason]) : null,
+            MailText::get($locale, 'no_action'),
+        ];
+
+        return MailText::message($locale, MailText::get($locale, 'canceled.subject', ['tracking' => $tracking]), $lines, TrackingCode::pageUrl($tracking, data_get($this, 'order.company_uuid')));
     }
 
     /**

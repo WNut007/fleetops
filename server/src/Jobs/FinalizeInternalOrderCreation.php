@@ -17,7 +17,12 @@ class FinalizeInternalOrderCreation implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    public function __construct(public string $orderUuid)
+    /**
+     * @param string|null $assignedDriverUuid the driver set when the order was created. The driver is told here only
+     *                                        if still assigned; a driver set or changed after creation was already
+     *                                        told by OrderObserver, so telling them again sent duplicate notifications
+     */
+    public function __construct(public string $orderUuid, public ?string $assignedDriverUuid = null)
     {
     }
 
@@ -28,7 +33,12 @@ class FinalizeInternalOrderCreation implements ShouldQueue
             return;
         }
 
-        $order->notifyDriverAssigned();
+        // Only the driver set at creation, and only if still assigned: a driver set or changed while this job
+        // waited was already told by OrderObserver.
+        $creationDriver = isset($this->assignedDriverUuid) ? $this->assignedDriverUuid : null;
+        if ($creationDriver && $order->driver_assigned_uuid === $creationDriver) {
+            $order->notifyDriverAssigned();
+        }
 
         $this->fireOrderReady($order);
     }
