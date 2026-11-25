@@ -2,6 +2,7 @@
 
 namespace Fleetbase\FleetOps\Notifications;
 
+use Fleetbase\FleetOps\Support\PushChannels;
 use Fleetbase\FleetOps\Models\Order;
 use Fleetbase\Support\PushNotification;
 use Illuminate\Broadcasting\Channel;
@@ -45,7 +46,7 @@ class OrderChanged extends Notification implements ShouldQueue
 
     public function via($notifiable): array
     {
-        return ['broadcast', FcmChannel::class, ApnChannel::class];
+        return PushChannels::filter(['broadcast', FcmChannel::class, ApnChannel::class]);
     }
 
     public function broadcastOn(): array

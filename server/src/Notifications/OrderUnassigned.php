@@ -2,6 +2,7 @@
 
 namespace Fleetbase\FleetOps\Notifications;
 
+use Fleetbase\FleetOps\Support\PushChannels;
 use Fleetbase\FleetOps\Models\Order;
 use Fleetbase\Support\PushNotification;
 use Illuminate\Bus\Queueable;
@@ -41,7 +42,7 @@ class OrderUnassigned extends Notification implements ShouldQueue
 
     public function via($notifiable): array
     {
-        return [FcmChannel::class, ApnChannel::class];
+        return PushChannels::filter([FcmChannel::class, ApnChannel::class]);
     }
 
     public function toArray($notifiable = null): array

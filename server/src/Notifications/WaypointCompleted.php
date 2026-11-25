@@ -2,6 +2,7 @@
 
 namespace Fleetbase\FleetOps\Notifications;
 
+use Fleetbase\FleetOps\Support\PushChannels;
 use Fleetbase\FleetOps\Flow\Activity;
 use Fleetbase\FleetOps\Models\Order;
 use Fleetbase\FleetOps\Models\Waypoint;
@@ -85,7 +86,7 @@ class WaypointCompleted extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['broadcast', 'mail', FcmChannel::class, ApnChannel::class];
+        return PushChannels::filter(['broadcast', 'mail', FcmChannel::class, ApnChannel::class]);
     }
 
     /**

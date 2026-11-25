@@ -2,6 +2,7 @@
 
 namespace Fleetbase\FleetOps\Notifications;
 
+use Fleetbase\FleetOps\Support\PushChannels;
 use Fleetbase\Events\ResourceLifecycleEvent;
 use Fleetbase\FleetOps\Http\Resources\v1\Order as OrderResource;
 use Fleetbase\FleetOps\Models\Order;
@@ -90,7 +91,7 @@ class OrderPing extends Notification implements ShouldQueue
     {
         $this->notifiable = $notifiable;
 
-        return ['broadcast', FcmChannel::class, ApnChannel::class];
+        return PushChannels::filter(['broadcast', FcmChannel::class, ApnChannel::class]);
     }
 
     /**

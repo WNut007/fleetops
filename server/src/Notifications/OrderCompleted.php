@@ -2,6 +2,7 @@
 
 namespace Fleetbase\FleetOps\Notifications;
 
+use Fleetbase\FleetOps\Support\PushChannels;
 use Fleetbase\FleetOps\Http\Resources\v1\Order as OrderResource;
 use Fleetbase\FleetOps\Models\Order;
 use Fleetbase\FleetOps\Models\Waypoint;
@@ -86,7 +87,7 @@ class OrderCompleted extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['broadcast', 'mail', FcmChannel::class, ApnChannel::class];
+        return PushChannels::filter(['broadcast', 'mail', FcmChannel::class, ApnChannel::class]);
     }
 
     /**

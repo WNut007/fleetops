@@ -2,6 +2,7 @@
 
 namespace Fleetbase\FleetOps\Notifications;
 
+use Fleetbase\FleetOps\Support\PushChannels;
 use Fleetbase\FleetOps\Models\Order;
 use Fleetbase\Support\PushNotification;
 use Illuminate\Bus\Queueable;
@@ -27,7 +28,7 @@ class OrderUpdate extends Notification implements ShouldQueue
 
     public function via($notifiable)
     {
-        return [FcmChannel::class, ApnChannel::class];
+        return PushChannels::filter([FcmChannel::class, ApnChannel::class]);
     }
 
     public function toFcm($notifiable)

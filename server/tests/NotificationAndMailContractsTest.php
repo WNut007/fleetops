@@ -703,3 +703,13 @@ test('customer credentials mail reads the portal slug from the customer company 
 
     expect($content->with['customerPortalUrl'])->toBe('https://console.fleetbase.test/customer-access/acme-portal');
 })->with([null, 'other-company']);
+
+test('push channels are dropped until Firebase / APN credentials are configured', function () {
+    $channels = ['broadcast', 'mail', NotificationChannels\Fcm\FcmChannel::class, NotificationChannels\Apn\ApnChannel::class];
+
+    config(['firebase.default' => 'app', 'firebase.projects.app.credentials' => null, 'broadcasting.connections.apn' => []]);
+    expect(Fleetbase\FleetOps\Support\PushChannels::filter($channels))->toBe(['broadcast', 'mail']);
+
+    config(['firebase.projects.app.credentials' => ['project_id' => 'demo'], 'broadcasting.connections.apn' => ['key_id' => 'k', 'team_id' => 't', 'private_key_content' => 'p']]);
+    expect(Fleetbase\FleetOps\Support\PushChannels::filter($channels))->toBe($channels);
+});
