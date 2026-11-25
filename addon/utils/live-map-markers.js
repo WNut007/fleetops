@@ -1,6 +1,6 @@
 import { join } from '@ember/runloop';
-import { computeBearing } from '../components/leaflet-tracking-marker';
-import ensureLeafletDrawEditNamespace from './leaflet-draw-namespace-guard';
+import { debug } from '@ember/debug';
+import { computeBearing, createTrackingMarker } from '../components/leaflet-tracking-marker';
 
 const DEFAULT_PLACE_ICON = '/engines-dist/images/building-marker.png';
 
@@ -81,12 +81,17 @@ export default class LiveMapMarkers {
             if (key == null || seen.has(key)) continue;
             seen.add(key);
 
-            const entry = markers.get(key);
-            if (entry && entry.record === record) {
-                this.#update(type, entry);
-            } else {
-                if (entry) entry.layer.remove();
-                markers.set(key, this.#create(type, record));
+            // One bad record must not stop the rest of the markers from being drawn.
+            try {
+                const entry = markers.get(key);
+                if (entry && entry.record === record) {
+                    this.#update(type, entry);
+                } else {
+                    if (entry) entry.layer.remove();
+                    markers.set(key, this.#create(type, record));
+                }
+            } catch (error) {
+                debug(`[LiveMapMarkers] ${type} ${key}: ${error.message}`);
             }
         }
 
@@ -127,10 +132,9 @@ export default class LiveMapMarkers {
             });
             layer.bindTooltip(() => textElement('span', record.name || record.address), { permanent: false, sticky: true, direction: 'bottom' });
         } else {
-            ensureLeafletDrawEditNamespace(L);
             const rotationAngle = record.heading;
             const bearingAngle = rotationAngle ?? computeBearing([0, 0], location);
-            layer = new L.TrackingMarker(location, { icon, draggable: false, rotationAngle, publicId: record.public_id, bearingAngle });
+            layer = createTrackingMarker(location, { icon, draggable: false, rotationAngle, publicId: record.public_id, bearingAngle });
             layer.on('movestart', (e) => join(() => this.#movestart(e)));
             layer.bindTooltip(() => this.onTooltipOpen(type, record, layer), { permanent: false, sticky: true });
         }

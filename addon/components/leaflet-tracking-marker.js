@@ -172,6 +172,15 @@ L.TrackingMarker = L.Marker.extend({
     },
 });
 
+/**
+ * Create a tracking marker from the Leaflet namespace this module extended. window.L can be
+ * replaced after this module loads (plugin loading), and the new namespace has no TrackingMarker.
+ */
+export function createTrackingMarker(latlng, options) {
+    ensureLeafletDrawEditNamespace(L);
+    return new L.TrackingMarker(latlng, options);
+}
+
 export const computeBearing = (previousPosition = [0, 0], nextPosition) => {
     let bearing = Math.atan2(
         nextPosition[1] - previousPosition[1], // Longitude difference (x-axis)
