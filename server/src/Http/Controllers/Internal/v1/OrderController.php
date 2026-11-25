@@ -94,22 +94,32 @@ class OrderController extends FleetOpsController
 
     /**
      * List queries: load what the index resources read for every row (transaction, driver and
-     * vehicle details, counts) once for the page instead of once per order. Single-record
-     * requests use the full resource, where extra loaded relations would add keys, so they
-     * are left alone.
+     * vehicle details, counts) once for the page instead of once per order. This runs on the
+     * result after the API model cache, not inside the cached query: loaded there, the
+     * transactions and drivers' users were cached with the orders for 5 minutes (the cache is
+     * not cleared when those change), and the per-request vehicle values were lost on a hit.
+     * Single-record requests use the full resource, where extra relations would add keys, so
+     * they keep the default path.
      */
-    public static function onQueryRecord($query, $request): void
+    public function queryRecord(Request $request)
     {
         if ($request->boolean('single')) {
-            return;
+            return parent::queryRecord($request);
         }
 
-        $query->afterQuery(fn ($orders) => static::preloadIndexRows($orders));
+        $data = $this->model->queryFromRequest($request);
+        static::preloadIndexRows($data instanceof \Illuminate\Pagination\AbstractPaginator ? $data->getCollection() : $data);
+
+        $resourceClass = $this->indexResource ?? $this->resource;
+        if (\Fleetbase\Support\Http::isInternalRequest($request)) {
+            $resourceClass::wrap($this->resourcePluralName);
+        }
+
+        return $resourceClass::collection($data);
     }
 
     protected static function preloadIndexRows($orders)
     {
-        // fast-paginate first runs the query for keys only; those rows are not rendered.
         if (!$orders instanceof \Illuminate\Database\Eloquent\Collection || $orders->isEmpty() || count($orders->first()->getAttributes()) <= 1) {
             return $orders;
         }
