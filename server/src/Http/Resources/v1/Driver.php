@@ -45,7 +45,7 @@ class Driver extends FleetbaseResource
             'license_expiry'                => $this->formatDateOnly($this->license_expiry),
             'photo_url'                     => $this->photo_url,
             'avatar_url'                    => $this->avatar_url,
-            'avatar_value'                  => $this->when(Http::isInternalRequest(), $this->getOriginal('avatar_url')),
+            'avatar_value'                  => $this->when(Http::isInternalRequest(), fn () => $this->avatarValue()),
             'vehicle_name'                  => $this->when(Http::isInternalRequest(), $this->vehicle_name),
             'vehicle_avatar'                => $this->vehicle_avatar,
             'vendor_name'                   => $this->when(Http::isInternalRequest(), $this->vendor_name),
@@ -202,5 +202,15 @@ class Driver extends FleetbaseResource
             'updated_at'             => $this->updated_at,
             'created_at'             => $this->created_at,
         ];
+    }
+
+    /**
+     * The stored avatar as the avatar picker expects it. getOriginal() rebuilds a fresh model
+     * to run the accessor on, so every row looked its relations up again (101 vehicle queries
+     * on the live driver list); unless the value was changed it equals the accessor here.
+     */
+    protected function avatarValue()
+    {
+        return $this->resource->isDirty('avatar_url') ? $this->resource->getOriginal('avatar_url') : $this->resource->avatar_url;
     }
 }

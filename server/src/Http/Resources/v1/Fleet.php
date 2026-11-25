@@ -105,7 +105,7 @@ class Fleet extends FleetbaseResource
         $drivers = $this->resource->getRelation('drivers');
 
         if ((Http::isInternalRequest() || $request->has('with.jobs')) && $drivers->isNotEmpty() && !$drivers->first()->relationLoaded('jobs')) {
-            $drivers->load(['jobs' => fn ($jobs) => $jobs->whereNotIn('status', ['completed', 'canceled'])]);
+            $drivers->load(['jobs' => fn ($jobs) => $jobs->whereNotIn('status', ['completed', 'canceled'])->with(\Fleetbase\FleetOps\Models\Order::FLEET_LIST_JOB_RELATIONS)]);
         }
 
         // Each driver's name comes from its user, and its vehicle's driver_name from the driver:
@@ -115,6 +115,27 @@ class Fleet extends FleetbaseResource
             foreach ($drivers as $driver) {
                 if ($driver->relationLoaded('vehicle') && $driver->vehicle) {
                     $driver->vehicle->setRelation('driver', $driver);
+                }
+            }
+        }
+
+        // Point loaded children back at their parents (tracking number -> its order or entity,
+        // entity -> its payload), which the resources otherwise look up one by one.
+        foreach ($drivers as $driver) {
+            if (!$driver->relationLoaded('jobs')) {
+                continue;
+            }
+            foreach ($driver->jobs as $job) {
+                if ($job->relationLoaded('trackingNumber') && $job->trackingNumber) {
+                    $job->trackingNumber->setRelation('owner', $job);
+                }
+                if ($job->relationLoaded('payload') && $job->payload && $job->payload->relationLoaded('entities')) {
+                    foreach ($job->payload->entities as $entity) {
+                        $entity->setRelation('payload', $job->payload);
+                        if ($entity->relationLoaded('trackingNumber') && $entity->trackingNumber) {
+                            $entity->trackingNumber->setRelation('owner', $entity);
+                        }
+                    }
                 }
             }
         }

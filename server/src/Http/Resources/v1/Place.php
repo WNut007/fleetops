@@ -32,7 +32,7 @@ class Place extends FleetbaseResource
             'address'               => $this->address,
             'address_html'          => $this->when(Http::isInternalRequest(), $this->address_html),
             'avatar_url'            => $this->avatar_url,
-            'avatar_value'          => $this->when(Http::isInternalRequest(), $this->getOriginal('avatar_url')),
+            'avatar_value'          => $this->when(Http::isInternalRequest(), fn () => $this->avatarValue()),
             'street1'               => $this->street1 ?? null,
             'street2'               => $this->street2 ?? null,
             'city'                  => $this->city ?? null,
@@ -85,5 +85,15 @@ class Place extends FleetbaseResource
             'updated_at'           => $this->updated_at,
             'created_at'           => $this->created_at,
         ];
+    }
+
+    /**
+     * The stored avatar as the avatar picker expects it. getOriginal() rebuilds a fresh model
+     * to run the accessor on, so every row looked its relations up again (101 vehicle queries
+     * on the live driver list); unless the value was changed it equals the accessor here.
+     */
+    protected function avatarValue()
+    {
+        return $this->resource->isDirty('avatar_url') ? $this->resource->getOriginal('avatar_url') : $this->resource->avatar_url;
     }
 }

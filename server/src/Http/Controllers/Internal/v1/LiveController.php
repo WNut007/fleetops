@@ -166,7 +166,7 @@ class LiveController extends Controller
             // currentOrder is read by the driver resource for every row; loading it here avoids
             // one query per driver.
             $query = Driver::where(['company_uuid' => session('company')])
-                ->with(['user', 'vehicle.devices', 'currentOrder'])
+                ->with(['user', 'vehicle.devices', 'vehicle.vendor:uuid,name', 'currentOrder'])
                 ->withCount('orders')
                 ->applyDirectivesForPermissions('fleet-ops list driver');
 

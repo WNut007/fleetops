@@ -404,6 +404,19 @@ class Order extends Model
         ])->render();
     }
 
+    /**
+     * Relations a job in the fleet list serializes anyway (payload with its stops and entities,
+     * tracking numbers with their latest status), loaded together instead of once per job and
+     * per entity. Only relations whose output is already in the response belong here.
+     */
+    public const FLEET_LIST_JOB_RELATIONS = [
+        'trackingNumber.status',
+        'payload.pickup',
+        'payload.dropoff',
+        'payload.waypoints',
+        'payload.entities.trackingNumber.status',
+    ];
+
     public function orderConfig(): BelongsTo
     {
         return $this->belongsTo(OrderConfig::class)->withTrashed();
