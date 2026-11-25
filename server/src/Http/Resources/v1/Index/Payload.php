@@ -41,15 +41,16 @@ class Payload extends FleetbaseResource
                 return new Place($dropoff);
             }),
 
-            // Entity count instead of full entities
+            // Entity count instead of full entities. The fallbacks are closures: a plain argument
+            // ran a count query for every row even when the relation was already loaded.
             'entities_count' => $this->whenLoaded('entities', function () {
                 return $this->entities->count();
-            }, $this->entities()->count()),
+            }, fn () => $this->entities()->count()),
 
             // Waypoint count for lightweight route-shape summaries.
             'waypoints_count' => $this->whenLoaded('waypoints', function () {
                 return $this->waypoints->count();
-            }, $this->waypoints()->count()),
+            }, fn () => $this->waypoints()->count()),
 
             'type'       => $this->type,
             'created_at' => $this->created_at,

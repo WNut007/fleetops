@@ -56,7 +56,30 @@ class Driver extends FleetbaseResource
 
     protected function assignedOrdersCount(): int
     {
+        // Counted for the whole page by preload() when the list ran it.
+        if (array_key_exists('orders_count', $this->resource->getAttributes())) {
+            return (int) $this->resource->getAttributes()['orders_count'];
+        }
+
         return $this->orders()->count();
+    }
+
+    /**
+     * Load what this resource reads for every driver of a list page in a few queries
+     * instead of several per row. Adds no relation that the resource prints.
+     */
+    public static function preload(\Illuminate\Database\Eloquent\Collection $drivers): void
+    {
+        if ($drivers->isEmpty()) {
+            return;
+        }
+
+        $drivers->loadMissing(['user', 'vehicle', 'currentOrder.trackingNumber']);
+
+        $uncounted = $drivers->filter(fn ($driver) => !array_key_exists('orders_count', $driver->getAttributes()))->values();
+        if ($uncounted->isNotEmpty()) {
+            $uncounted->loadCount('orders');
+        }
     }
 
     protected function currentOrderReference(): ?string

@@ -63,9 +63,73 @@ class Vehicle extends FleetbaseResource
         ];
     }
 
+    /** Request attribute holding the per-vehicle values preload() computed for a list page. */
+    protected const PRELOAD_KEY = 'fleetops.index-vehicle.preload';
+
     protected function assignedOrdersCount(): int
     {
+        $preloaded = static::preloaded('orders_count');
+        if ($preloaded !== null && array_key_exists($this->uuid, $preloaded)) {
+            return $preloaded[$this->uuid];
+        }
+
         return Order::where('vehicle_assigned_uuid', $this->uuid)->count();
+    }
+
+    /**
+     * Load what this resource reads for every vehicle of a list page in a few queries
+     * instead of several per row: the driver with its user and current order, the number
+     * of orders, and the latest unfinished order. Adds no relation that the resource prints.
+     */
+    public static function preload(\Illuminate\Database\Eloquent\Collection $vehicles): void
+    {
+        if ($vehicles->isEmpty()) {
+            return;
+        }
+
+        $vehicles->loadMissing(['driver.user', 'driver.currentOrder.trackingNumber']);
+
+        $uuids  = $vehicles->pluck('uuid')->filter()->unique()->values()->all();
+        $counts = Order::whereIn('vehicle_assigned_uuid', $uuids)
+            ->groupBy('vehicle_assigned_uuid')
+            ->selectRaw('vehicle_assigned_uuid, count(*) as aggregate')
+            ->pluck('aggregate', 'vehicle_assigned_uuid')
+            ->map(fn ($count) => (int) $count)
+            ->all();
+
+        $active = static::activeOrdersQuery()
+            ->whereIn('vehicle_assigned_uuid', $uuids)
+            ->with('trackingNumber')
+            ->get()
+            ->groupBy('vehicle_assigned_uuid')
+            ->map(fn ($orders) => $orders->first())
+            ->all();
+
+        $values = ['orders_count' => [], 'active_order' => []];
+        foreach ($uuids as $uuid) {
+            $values['orders_count'][$uuid] = $counts[$uuid] ?? 0;
+            $values['active_order'][$uuid] = $active[$uuid] ?? null;
+        }
+
+        app('request')->attributes->set(static::PRELOAD_KEY, $values);
+    }
+
+    protected static function preloaded(string $name): ?array
+    {
+        $values = app('request')->attributes->get(static::PRELOAD_KEY);
+
+        return is_array($values) ? ($values[$name] ?? null) : null;
+    }
+
+    /**
+     * Unfinished orders of a vehicle, newest first (id breaks ties between orders created
+     * in the same second, so the bulk and single lookups pick the same one).
+     */
+    protected static function activeOrdersQuery()
+    {
+        return Order::whereNotIn('status', ['completed', 'canceled', 'cancelled'])
+            ->latest()
+            ->orderByDesc('id');
     }
 
     protected function compactDevices(): array
@@ -137,9 +201,13 @@ class Vehicle extends FleetbaseResource
 
     protected function currentVehicleOrder(): ?Order
     {
-        return Order::where('vehicle_assigned_uuid', $this->uuid)
-            ->whereNotIn('status', ['completed', 'canceled', 'cancelled'])
-            ->latest()
+        $preloaded = static::preloaded('active_order');
+        if ($preloaded !== null && array_key_exists($this->uuid, $preloaded)) {
+            return $preloaded[$this->uuid];
+        }
+
+        return static::activeOrdersQuery()
+            ->where('vehicle_assigned_uuid', $this->uuid)
             ->first();
     }
 

@@ -93,6 +93,47 @@ class OrderController extends FleetOpsController
     public $indexResource = OrderIndexResource::class;
 
     /**
+     * List queries: load what the index resources read for every row (transaction, driver and
+     * vehicle details, counts) once for the page instead of once per order. Single-record
+     * requests use the full resource, where extra loaded relations would add keys, so they
+     * are left alone.
+     */
+    public static function onQueryRecord($query, $request): void
+    {
+        if ($request->boolean('single')) {
+            return;
+        }
+
+        $query->afterQuery(fn ($orders) => static::preloadIndexRows($orders));
+    }
+
+    protected static function preloadIndexRows($orders)
+    {
+        // fast-paginate first runs the query for keys only; those rows are not rendered.
+        if (!$orders instanceof \Illuminate\Database\Eloquent\Collection || $orders->isEmpty() || count($orders->first()->getAttributes()) <= 1) {
+            return $orders;
+        }
+
+        $orders->loadMissing(['transaction', 'trackingNumber']);
+
+        $related = function (string $relation) use ($orders) {
+            $models = $orders
+                ->map(fn ($order) => $order->relationLoaded($relation) ? $order->getRelation($relation) : null)
+                ->filter()
+                ->unique(fn ($model) => spl_object_id($model))
+                ->values()
+                ->all();
+
+            return new \Illuminate\Database\Eloquent\Collection($models);
+        };
+
+        \Fleetbase\FleetOps\Http\Resources\v1\Index\Driver::preload($related('driverAssigned'));
+        \Fleetbase\FleetOps\Http\Resources\v1\Index\Vehicle::preload($related('vehicleAssigned'));
+
+        return $orders;
+    }
+
+    /**
      * Handle order waypoint changes if any.
      */
     public function onAfterUpdate($request, $order)

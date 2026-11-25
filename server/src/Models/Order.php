@@ -415,6 +415,9 @@ class Order extends Model
         'payload.dropoff',
         'payload.waypoints',
         'payload.entities.trackingNumber.status',
+        'orderConfig',
+        'comments',
+        'files',
     ];
 
     public function orderConfig(): BelongsTo

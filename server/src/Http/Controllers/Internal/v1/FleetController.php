@@ -56,6 +56,9 @@ class FleetController extends FleetOpsController
             $query->with(['drivers.jobs' => function ($jobs) {
                 $jobs->whereNotIn('status', ['completed', 'canceled'])->with(Order::FLEET_LIST_JOB_RELATIONS);
             }]);
+
+            // What each row reads besides its jobs, loaded once for the page instead of once per fleet.
+            $query->afterQuery(fn ($fleets) => static::preloadFleetListRows($fleets));
         }
 
         if ($request->has('excludeDriverJobs')) {
@@ -99,6 +102,38 @@ class FleetController extends FleetOpsController
                 });
             });
         }
+    }
+
+    /**
+     * Bulk-load what the fleet list serializes for every fleet and driver: vehicle counts,
+     * each driver's user, assigned vehicle and order count. Only relations the response reads
+     * anyway are loaded, so its content does not change. fast-paginate also runs this on its
+     * key-only inner query, where drivers are not loaded; that case is skipped.
+     */
+    protected static function preloadFleetListRows($fleets)
+    {
+        if (!$fleets instanceof \Illuminate\Database\Eloquent\Collection || $fleets->isEmpty() || !$fleets->first()->relationLoaded('drivers')) {
+            return $fleets;
+        }
+
+        $fleets->loadCount(['vehicles', 'vehicles as vehicles_online_count' => fn ($q) => $q->where('online', 1)]);
+
+        $drivers = new \Illuminate\Database\Eloquent\Collection($fleets->flatMap(fn ($fleet) => $fleet->drivers->all())->all());
+        if ($drivers->isEmpty()) {
+            return $fleets;
+        }
+
+        $drivers->loadMissing('user');
+        $drivers->loadCount('orders');
+
+        // Only drivers with a vehicle: the avatar accessor loads it for exactly these, and the
+        // driver's `vehicle` key appears only when the relation is loaded.
+        $withVehicle = $drivers->filter(fn ($driver) => $driver->vehicle_uuid && !$driver->relationLoaded('vehicle'))->values();
+        if ($withVehicle->isNotEmpty()) {
+            $withVehicle->load('vehicle');
+        }
+
+        return $fleets;
     }
 
     /**

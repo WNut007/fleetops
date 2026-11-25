@@ -195,6 +195,11 @@ class Fleet extends Model
      */
     public function getVehiclesCountAttribute()
     {
+        // Counted for the whole page by the list query (loadCount) when it ran.
+        if (array_key_exists('vehicles_count', $this->attributes)) {
+            return (int) $this->attributes['vehicles_count'];
+        }
+
         // Count the loaded relation when there is one: these are read for every fleet in a list.
         if ($this->relationLoaded('vehicles')) {
             return $this->vehicles->count();
@@ -210,6 +215,10 @@ class Fleet extends Model
      */
     public function getVehiclesOnlineCountAttribute()
     {
+        if (array_key_exists('vehicles_online_count', $this->attributes)) {
+            return (int) $this->attributes['vehicles_online_count'];
+        }
+
         // Count the loaded relation when there is one: these are read for every fleet in a list.
         if ($this->relationLoaded('vehicles')) {
             return $this->vehicles->where('online', 1)->count();
