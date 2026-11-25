@@ -2982,6 +2982,7 @@ widget:
         title: Operations Pulse
     revenue-trend:
         title: Revenue Trend
+        revenue: Revenue
     orders-by-status:
         title: Order Volume by Status
     on-time-delivery:

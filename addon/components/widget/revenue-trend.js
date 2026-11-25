@@ -12,6 +12,8 @@ export default class WidgetRevenueTrendComponent extends Component {
     static widgetId = 'fleet-ops-revenue-trend-widget';
 
     @service fetch;
+    @service currentUser;
+    @service intl;
 
     @tracked period = '30d';
     @tracked data = null;
@@ -24,8 +26,12 @@ export default class WidgetRevenueTrendComponent extends Component {
         this.load.perform();
     }
 
+    /**
+     * The chart's options are read before the data arrives, so the fallback is the organization's
+     * currency, not USD: the axis kept "$" after the summary reported THB.
+     */
     get currencyCode() {
-        return this.data?.summary?.currency ?? 'USD';
+        return this.data?.summary?.currency ?? (this.currentUser.company?.currency || this.currentUser.currency || 'USD');
     }
 
     get currency() {
@@ -89,7 +95,7 @@ export default class WidgetRevenueTrendComponent extends Component {
                     callbacks: {
                         label: (context) => {
                             if (this.isRevenueDataset(context.dataset)) {
-                                return `Revenue: ${this.formatChartCurrency(context.parsed?.y ?? context.raw)}`;
+                                return `${this.intl.t('widget.revenue-trend.revenue')}: ${this.formatChartCurrency(context.parsed?.y ?? context.raw)}`;
                             }
 
                             return `${context.dataset?.label ?? 'Value'}: ${context.parsed?.y ?? context.raw}`;

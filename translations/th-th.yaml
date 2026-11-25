@@ -2883,6 +2883,7 @@ widget:
     title: ภาพรวมการปฏิบัติงาน
   revenue-trend:
     title: แนวโน้มรายได้
+    revenue: รายได้
   orders-by-status:
     title: จำนวนออเดอร์ตามสถานะ
   on-time-delivery:
