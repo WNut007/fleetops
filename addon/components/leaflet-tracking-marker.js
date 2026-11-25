@@ -172,7 +172,7 @@ L.TrackingMarker = L.Marker.extend({
     },
 });
 
-const computeBearing = (previousPosition = [0, 0], nextPosition) => {
+export const computeBearing = (previousPosition = [0, 0], nextPosition) => {
     let bearing = Math.atan2(
         nextPosition[1] - previousPosition[1], // Longitude difference (x-axis)
         nextPosition[0] - previousPosition[0] // Latitude difference (y-axis)

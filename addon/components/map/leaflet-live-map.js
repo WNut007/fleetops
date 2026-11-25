@@ -9,7 +9,8 @@ import { camelize, capitalize, dasherize } from '@ember/string';
 import { singularize, pluralize } from 'ember-inflector';
 import { all } from 'rsvp';
 import { task, timeout } from 'ember-concurrency';
-import { next } from '@ember/runloop';
+import { next, schedule } from '@ember/runloop';
+import LiveMapMarkers from '../../utils/live-map-markers';
 import getModelName from '@fleetbase/ember-core/utils/get-model-name';
 import ensureLeafletPluginsReady, { hasLeafletPluginsReady } from '../../utils/leaflet-plugin-loader';
 import { FIT_VEHICLES_MAX_ZOOM, isZoom, positionedBounds } from '../../utils/map-default-view';
@@ -55,6 +56,13 @@ export default class MapLeafletLiveMapComponent extends Component {
     @tracked vehicles = [];
     @tracked places = [];
     @tracked leafletPluginsReady = hasLeafletPluginsReady();
+    /** Set once the Leaflet map exists; driver/vehicle/place markers are synced from then on. */
+    @tracked markersReady = false;
+    /** The record whose marker tooltip is open, rendered into tooltipElement. */
+    @tracked tooltipRecord = null;
+    @tracked tooltipType = null;
+    tooltipElement = document.createElement('div');
+    markers = null;
     _viewportReloadLocks = new Set();
 
     get tileUrl() {
@@ -93,6 +101,8 @@ export default class MapLeafletLiveMapComponent extends Component {
 
     willDestroy() {
         super.willDestroy();
+        this.markers?.destroy();
+        this.markers = null;
 
         // Clean up event listener using stored reference
         if (this._locationUpdateHandler) {
@@ -175,6 +185,28 @@ export default class MapLeafletLiveMapComponent extends Component {
         this.leafletMapManager.setDrawControlFeatureGroup(featureGroup);
         this.mapManager.adapter?.setDrawControl?.(this.leafletMapManager.drawControl, featureGroup);
         this.trigger('onDrawFeatureGroupCreated', ...arguments);
+    }
+
+    /** Add, update or remove markers to match the loaded drivers, vehicles and places. */
+    @action syncMarkers() {
+        this.markers?.sync({ drivers: this.drivers, vehicles: this.vehicles, places: this.places });
+    }
+
+    /**
+     * A driver/vehicle marker tooltip is opening: render its card into the shared element and
+     * let Leaflet re-measure once it is rendered. Only one tooltip is open at a time.
+     */
+    @action openMarkerTooltip(type, record, layer) {
+        if (this.tooltipRecord !== record || this.tooltipType !== type) {
+            this.tooltipType = type;
+            this.tooltipRecord = record;
+            schedule('afterRender', () => {
+                const tooltip = layer.getTooltip?.();
+                if (tooltip && tooltip.isOpen?.()) tooltip.update();
+            });
+        }
+
+        return this.tooltipElement;
     }
 
     @action onDriverAdded(driver, { target: layer }) {
@@ -505,6 +537,10 @@ export default class MapLeafletLiveMapComponent extends Component {
     #setMap(map) {
         set(map, 'livemap', this);
         this.map = map;
+        this.markers?.destroy();
+        this.markers = new LiveMapMarkers({ map, trigger: this.trigger, onTooltipOpen: this.openMarkerTooltip });
+        this.markersReady = true;
+        this.syncMarkers();
         this.leafletMapManager.setMap(map);
         this.mapManager.setLivemap(this);
         // Also register with the provider-agnostic manager so all services can use it

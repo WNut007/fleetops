@@ -13,7 +13,11 @@
     through the provider-agnostic MapManagerService.
 }}
 
-<div class="live-map-component {{@wrapperClass}}" {{did-update this.syncServiceAreaContextMenus this.serviceAreaActions.serviceAreas this.serviceAreaActions.serviceAreas.length}}>
+<div
+    class="live-map-component {{@wrapperClass}}"
+    {{did-update this.syncServiceAreaContextMenus this.serviceAreaActions.serviceAreas this.serviceAreaActions.serviceAreas.length}}
+    {{did-update this.syncMarkers this.markersReady this.drivers this.vehicles this.places}}
+>
 
     {{#if this.shouldUseGoogleMaps}}
         {{! ─── Google Maps branch ──────────────────────────────────────────── }}
@@ -70,63 +74,8 @@
             />
 
             {{#if this.load.isIdle}}
-                {{#each this.drivers as |driver|}}
-                    <layers.tracking-marker
-                        @id={{driver.id}}
-                        @publicId={{driver.public_id}}
-                        @location={{point-to-coordinates driver.location}}
-                        @rotationAngle={{driver.heading}}
-                        @icon={{icon iconUrl=driver.vehicle_avatar iconSize=(array 24 24)}}
-                        @onAdd={{fn this.trigger "onDriverAdded" driver}}
-                        @onClick={{fn this.trigger "onDriverClicked" driver}}
-                        @draggable={{false}}
-                        as |marker|
-                    >
-                        <marker.tooltip @permanent={{false}} @sticky={{true}}>
-                            <Map::MarkerCard::Driver @driver={{driver}} @variant="tooltip" />
-                        </marker.tooltip>
-                    </layers.tracking-marker>
-                {{/each}}
-
-                {{#each this.vehicles as |vehicle|}}
-                    <layers.tracking-marker
-                        @id={{vehicle.id}}
-                        @publicId={{vehicle.public_id}}
-                        @location={{point-to-coordinates vehicle.location}}
-                        @rotationAngle={{vehicle.heading}}
-                        @icon={{icon iconUrl=vehicle.avatar_url iconSize=(array 24 24)}}
-                        @onAdd={{fn this.trigger "onVehicleAdded" vehicle}}
-                        @onClick={{fn this.trigger "onVehicleClicked" vehicle}}
-                        @draggable={{false}}
-                        as |marker|
-                    >
-                        <marker.tooltip @permanent={{false}} @sticky={{true}}>
-                            <Map::MarkerCard::Vehicle @vehicle={{vehicle}} @variant="tooltip" />
-                        </marker.tooltip>
-                    </layers.tracking-marker>
-                {{/each}}
-
-                {{#each this.places as |place|}}
-                    <layers.marker
-                        @id={{place.id}}
-                        @publicId={{place.public_id}}
-                        @location={{point-to-coordinates place.location}}
-                        @icon={{icon iconUrl=(or place.avatar_url "/engines-dist/images/building-marker.png") iconSize=(array 16 16)}}
-                        @riseOnHover={{true}}
-                        @title={{place.address}}
-                        @alt={{place.address}}
-                        @onAdd={{fn this.trigger "onPlaceAdded" place}}
-                        @onClick={{fn this.trigger "onPlaceClicked" place}}
-                        @draggable={{false}}
-                        as |marker|
-                    >
-                        <marker.popup>
-                            <div>{{place.address}}</div>
-                            <div>{{format-point place.location}}</div>
-                        </marker.popup>
-                        <marker.tooltip @permanent={{false}} @sticky={{true}} @direction="bottom">{{or place.name place.address}}</marker.tooltip>
-                    </layers.marker>
-                {{/each}}
+                {{! Driver, vehicle and place markers are drawn by utils/live-map-markers (Leaflet
+                    directly): one ember-leaflet component per marker cost 3-4 s for ~300 markers. }}
 
                 {{#each this.serviceAreaActions.serviceAreas as |serviceArea|}}
                     <layers.polygon
@@ -159,6 +108,16 @@
 
             {{yield layers}}
         </LeafletMap>
+    {{/if}}
+
+    {{#if this.tooltipRecord}}
+        {{#in-element this.tooltipElement}}
+            {{#if (eq this.tooltipType "driver")}}
+                <Map::MarkerCard::Driver @driver={{this.tooltipRecord}} @variant="tooltip" />
+            {{else}}
+                <Map::MarkerCard::Vehicle @vehicle={{this.tooltipRecord}} @variant="tooltip" />
+            {{/if}}
+        {{/in-element}}
     {{/if}}
 
     {{#unless this.ready}}
