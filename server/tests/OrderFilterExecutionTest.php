@@ -300,7 +300,8 @@ test('order filter applies internal and public base scopes with eager loading', 
 
     expect($builder->called('where'))->toBeTrue()
         ->and($builder->methodCalls('where')[0][1])->toBe('orders.company_uuid')
-        ->and($builder->called('whereHas'))->toBeTrue()
+        ->and(array_map(fn ($call) => $call[1], $builder->methodCalls('whereNotNull')))->toContain('orders.payload_uuid', 'orders.tracking_number_uuid')
+        ->and($builder->called('whereExists'))->toBeTrue()
         ->and($builder->called('with'))->toBeTrue();
 });
 

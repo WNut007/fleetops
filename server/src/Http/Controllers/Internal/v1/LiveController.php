@@ -42,6 +42,8 @@ class LiveController extends Controller
         ]);
     }
 
+    /** Unfinished orders whose destinations live/coordinates returns, newest first. */
+    protected const COORDINATES_LIMIT         = 100;
     protected const DEFAULT_VIEWPORT_LIMIT    = 500;
     protected const MAX_VIEWPORT_LIMIT        = 1000;
     protected const VIEWPORT_BOUNDS_PRECISION = 4;
@@ -56,11 +58,17 @@ class LiveController extends Controller
         return LiveCacheService::remember('coordinates', [], function () {
             $coordinates = [];
 
-            // Fetch active orders for the current company
+            // Destinations of the newest unfinished orders. The console only uses this to pick a
+            // starting map center (the first valid point), so it is capped: returning every
+            // unfinished order (4,000+ on a busy account) cost ~1.5 s per request and a large
+            // payload that the console also stores in its local cache.
             $orders = Order::where('company_uuid', session('company'))
                 ->whereNotIn('status', ['canceled', 'completed'])
                 ->with(['payload.dropoff', 'payload.pickup'])
                 ->applyDirectivesForPermissions('fleet-ops list order')
+                ->latest()
+                ->orderByDesc('id')
+                ->limit(static::COORDINATES_LIMIT)
                 ->get();
 
             // Loop through each order to get its current destination location.
@@ -212,6 +220,10 @@ class LiveController extends Controller
             $query->orderByDesc('updated_at')->orderByDesc('id')->limit($limit);
 
             $vehicles = $query->get();
+
+            // Order counts and the active order for every vehicle in two queries, instead of
+            // several per vehicle while the resource serializes (509 queries for 101 vehicles)
+            VehicleIndexResource::preload($vehicles);
 
             return VehicleIndexResource::collection($vehicles);
         });

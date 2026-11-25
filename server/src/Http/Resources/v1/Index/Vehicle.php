@@ -97,13 +97,21 @@ class Vehicle extends FleetbaseResource
             ->map(fn ($count) => (int) $count)
             ->all();
 
-        $active = static::activeOrdersQuery()
+        // Pick each vehicle's newest unfinished order from slim rows, then load only those orders
+        // in full: a busy fleet has thousands of unfinished orders, and hydrating all of them
+        // (with tracking numbers) to keep one per vehicle was most of this request.
+        $newest = static::activeOrdersQuery()
             ->whereIn('vehicle_assigned_uuid', $uuids)
+            ->get(['id', 'uuid', 'vehicle_assigned_uuid', 'created_at'])
+            ->groupBy('vehicle_assigned_uuid')
+            ->map(fn ($orders) => $orders->first()->uuid);
+
+        $orders = $newest->isEmpty() ? collect() : Order::whereIn('uuid', $newest->values()->all())
             ->with('trackingNumber')
             ->get()
-            ->groupBy('vehicle_assigned_uuid')
-            ->map(fn ($orders) => $orders->first())
-            ->all();
+            ->keyBy('uuid');
+
+        $active = $newest->map(fn ($orderUuid) => $orders->get($orderUuid))->all();
 
         $values = ['orders_count' => [], 'active_order' => []];
         foreach ($uuids as $uuid) {
