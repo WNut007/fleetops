@@ -1046,12 +1046,17 @@ test('an order update push carries its title, message and type to the device cha
     expect([$update->title, $update->message])->toBe(['Your driver has arrived', 'Chen is waiting.'])
         ->and($update->data)->toBe(['id' => 'order_one', 'type' => 'order_arrived'])
         ->and($default->data)->toBe(['id' => 'order_one', 'type' => 'order_update'])
-        ->and($update->via(null))->toBe([NotificationChannels\Fcm\FcmChannel::class, NotificationChannels\Apn\ApnChannel::class]);
+        ->and($update->via(null))->toBe([]);
 
     // Building each channel's message hands the push to core's PushNotification, which needs the
     // FCM and APN credentials this harness doesn't configure.
     expect(fn () => $update->toFcm(null))->toThrow(TypeError::class)
         ->and(fn () => $update->toApn(null))->toThrow(Error::class);
+
+    // Push channels only once credentials exist; mail only for a notifiable with an email address
+    config(['firebase.default' => 'app', 'firebase.projects.app.credentials' => ['project_id' => 'demo'], 'broadcasting.connections.apn' => ['key_id' => 'k', 'team_id' => 't', 'private_key_content' => 'p']]);
+    expect($update->via(null))->toBe([NotificationChannels\Fcm\FcmChannel::class, NotificationChannels\Apn\ApnChannel::class])
+        ->and($update->via((object) ['email' => 'customer@example.com']))->toBe([NotificationChannels\Fcm\FcmChannel::class, NotificationChannels\Apn\ApnChannel::class, 'mail']);
 });
 
 test('the notify actions push to the order\'s customer and driver, with placeholders filled in', function () {

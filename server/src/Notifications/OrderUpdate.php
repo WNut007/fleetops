@@ -2,7 +2,9 @@
 
 namespace Fleetbase\FleetOps\Notifications;
 
+use Fleetbase\FleetOps\Support\MailText;
 use Fleetbase\FleetOps\Support\PushChannels;
+use Fleetbase\FleetOps\Support\TrackingCode;
 use Fleetbase\FleetOps\Models\Order;
 use Fleetbase\Support\PushNotification;
 use Illuminate\Bus\Queueable;
@@ -12,8 +14,10 @@ use NotificationChannels\Apn\ApnChannel;
 use NotificationChannels\Fcm\FcmChannel;
 
 /**
- * A push about an order, with the title and message its order config's trigger gave. Sent to
- * the notifiable's own devices, a customer's from `customers/register-device` or a driver's.
+ * A message about an order, with the title and message its order config's trigger gave
+ * (notify_customer / notify_driver actions). Pushed to the notifiable's own devices (a customer's
+ * from `customers/register-device` or a driver's) and emailed when the notifiable has an email
+ * address, so customers without the app still hear about it.
  */
 class OrderUpdate extends Notification implements ShouldQueue
 {
@@ -28,7 +32,21 @@ class OrderUpdate extends Notification implements ShouldQueue
 
     public function via($notifiable)
     {
-        return PushChannels::filter([FcmChannel::class, ApnChannel::class]);
+        $channels = [FcmChannel::class, ApnChannel::class];
+        if (!empty(data_get($notifiable, 'email'))) {
+            $channels[] = 'mail';
+        }
+
+        return PushChannels::filter($channels);
+    }
+
+    public function toMail($notifiable)
+    {
+        $locale   = MailText::localeFor($notifiable);
+        $tracking = data_get($this->order, 'trackingNumber.tracking_number');
+        $subject  = $this->title !== '' ? $this->title : MailText::get($locale, 'update.subject', ['tracking' => $tracking]);
+
+        return MailText::message($locale, $subject, [$this->message], $tracking ? TrackingCode::pageUrl($tracking, $this->order->company_uuid) : null);
     }
 
     public function toFcm($notifiable)

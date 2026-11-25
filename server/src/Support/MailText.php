@@ -35,6 +35,7 @@ class MailText
             'failed.line'          => 'Delivery of order :tracking has failed.',
             'dispatch_failed.subject' => 'Order :tracking dispatch has failed!',
             'reason'               => 'Reason: :reason',
+            'update.subject'       => 'Update on order :tracking',
         ],
         'th' => [
             'greeting'             => 'สวัสดีครับ/ค่ะ',
@@ -55,6 +56,7 @@ class MailText
             'failed.line'          => 'การจัดส่งออเดอร์ :tracking ไม่สำเร็จ',
             'dispatch_failed.subject' => 'ออเดอร์ :tracking จ่ายงานไม่สำเร็จ',
             'reason'               => 'เหตุผล: :reason',
+            'update.subject'       => 'อัปเดตออเดอร์ :tracking',
         ],
     ];
 
