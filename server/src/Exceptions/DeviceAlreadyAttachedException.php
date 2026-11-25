@@ -11,8 +11,8 @@ class DeviceAlreadyAttachedException extends \DomainException
 {
     public static function for(?string $attachedToName): self
     {
-        $target = $attachedToName ? ' to ' . $attachedToName : ' to another asset';
+        $target = $attachedToName ?: \Fleetbase\FleetOps\Support\ServerText::get('device.another_asset');
 
-        return new self('Device is already attached' . $target . '. Detach it before attaching it elsewhere.');
+        return new self(\Fleetbase\FleetOps\Support\ServerText::get('device.already_attached', ['target' => $target]));
     }
 }

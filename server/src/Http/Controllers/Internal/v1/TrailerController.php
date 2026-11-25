@@ -105,7 +105,7 @@ class TrailerController extends FleetOpsController
 
             if ($active) {
                 if ($active->connector_uuid !== $vehicle->uuid) {
-                    return 'Trailer is already attached to another vehicle. Detach it before moving.';
+                    return \Fleetbase\FleetOps\Support\ServerText::get('trailer.already_attached');
                 }
 
                 return $active;

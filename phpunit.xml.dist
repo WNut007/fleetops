@@ -13,4 +13,8 @@
             <directory suffix=".php">./server/src</directory>
         </include>
     </source>
+    <php>
+        <!-- The contract tests assert the English server texts; the deployed default is Thai. -->
+        <env name="FLEETOPS_SERVER_TEXT_LOCALE" value="en"/>
+    </php>
 </phpunit>
