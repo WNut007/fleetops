@@ -53,6 +53,7 @@ Route::prefix(config('fleetops.api.routing.prefix'))->namespace('Fleetbase\Fleet
                 $router->get('me', 'DriverAppController@me');
                 $router->post('me/online', 'DriverAppController@online');
                 $router->post('me/device', 'DriverAppController@device');
+                $router->post('socket/token', 'DriverAppController@socketToken');
                 $router->get('orders', 'DriverAppController@orders');
                 $router->get('orders/{id}', 'DriverAppController@order');
                 $router->get('orders/{id}/next', 'DriverAppController@next');

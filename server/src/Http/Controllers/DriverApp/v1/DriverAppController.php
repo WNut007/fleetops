@@ -12,6 +12,8 @@ use Fleetbase\FleetOps\Models\Order;
 use Fleetbase\FleetOps\Models\Position;
 use Fleetbase\FleetOps\Support\DriverAppToken;
 use Fleetbase\FleetOps\Support\MailText;
+use Fleetbase\FleetOps\Support\SocketChannels;
+use Fleetbase\Support\SocketCluster\SocketToken;
 use Fleetbase\LaravelMysqlSpatial\Types\Point;
 use Fleetbase\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -142,6 +144,26 @@ class DriverAppController extends Controller
     public function device(Request $request)
     {
         return app(ApiDriverController::class)->registerDevice($this->driver($request)->public_id, $request);
+    }
+
+    /**
+     * POST socket/token → a short-lived realtime socket token for this driver. The socket server
+     * lets it subscribe only to the driver's own channels (themselves, their vehicle, their assigned
+     * orders, their positions) — SocketChannels::narrow*. 404 while socket auth is switched off
+     * (the app then connects anonymously, as the console does).
+     */
+    public function socketToken(Request $request)
+    {
+        if (!SocketToken::enabled()) {
+            return response()->json(['error' => 'Socket authentication is not enabled.'], 404);
+        }
+
+        $principal = SocketChannels::driverPrincipal($request, $request->user());
+        if (!$principal) {
+            return $this->error('no_profile', 403, $this->requestLocale($request));
+        }
+
+        return response()->json(SocketToken::issue($principal));
     }
 
     // -----------------------------------------------------------------------------------------
