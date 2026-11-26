@@ -432,6 +432,10 @@ class DriverAppController extends Controller
     protected static function phone(string $identity): string
     {
         $phone = preg_replace('/[\s\-()]/', '', $identity);
+        // +66 followed by the local trunk 0 (an app that kept the 0): +660812345678 → +66812345678
+        if (preg_match('/^\+?660(\d{8,9})$/', $phone, $match)) {
+            return '+66' . $match[1];
+        }
         if (str_starts_with($phone, '0') && strlen($phone) === 10) {
             // Thai local mobile number 0XXXXXXXXX → +66XXXXXXXXX
             return '+66' . substr($phone, 1);
