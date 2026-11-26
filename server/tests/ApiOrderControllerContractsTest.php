@@ -952,7 +952,7 @@ test('api order controller captures base64 photo proofs and links stored files',
             'order_uuid'   => 'order-uuid',
             'subject_uuid' => 'subject-uuid',
             'remarks'      => 'Photo received',
-            'raw_data'     => base64_encode('photo-bytes'),
+            'raw_data'     => null,
             'data'         => ['angle' => 'front'],
         ])
         ->and($controller->createdFiles[0])->toMatchArray([

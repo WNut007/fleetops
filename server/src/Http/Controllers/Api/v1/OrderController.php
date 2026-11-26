@@ -1898,6 +1898,15 @@ class OrderController extends Controller
      */
     public function capturePhoto(Request $request, string $id, ?string $subjectId = null)
     {
+        // Accept data URLs (what a canvas or camera plugin produces) as well as bare Base64
+        $photos = $request->input('photos');
+        if (is_array($photos)) {
+            $request->merge(['photos' => array_map(
+                fn ($photo) => is_string($photo) ? preg_replace('#^data:image/[a-z0-9.+-]+;base64,#i', '', $photo) : $photo,
+                $photos
+            )]);
+        }
+
         // Validate incoming payload
         try {
             $request->validate([
@@ -1941,10 +1950,10 @@ class OrderController extends Controller
 
         // Determine storage disk & bucket
         $disk        = $request->input('disk', config('filesystems.default'));
-        $bucket      = $request->input(
-            "filesystems.disks.{$disk}.bucket",
-            config('filesystems.disks.s3.bucket')
-        );
+        // The request may name a bucket; otherwise the disk's own (none for a local disk)
+        $bucket      = $request->input('bucket')
+            ?? $request->input("filesystems.disks.{$disk}.bucket")
+            ?? config("filesystems.disks.{$disk}.bucket", config('filesystems.disks.s3.bucket'));
 
         // Collect uploads & Base64 strings
         /** @var UploadedFile[] $rawInputs */
@@ -1996,7 +2005,9 @@ class OrderController extends Controller
                 'subject_uuid' => $subject->uuid,
                 'subject_type' => Utils::getModelClassName($subject),
                 'remarks'      => $remarks,
-                'raw_data'     => $item instanceof UploadedFile ? null : $item,
+                // The photo is stored as a file (url); keeping its Base64 in the row as well made
+                // every proof row as large as the photo
+                'raw_data'     => null,
                 'data'         => $data,
             ]);
 
@@ -2023,18 +2034,25 @@ class OrderController extends Controller
      *
      * @return \Feetbase\Models\File
      */
-    protected function storeProofPhoto(Proof $proof, UploadedFile|string $photo, string $disk, string $bucket): File
+    protected function storeProofPhoto(Proof $proof, UploadedFile|string $photo, string $disk, ?string $bucket): File
     {
         $isFile      = $photo instanceof UploadedFile;
         $contents    = $isFile
             ? file_get_contents($photo->getRealPath())
             : base64_decode($photo);
+        // Base64 photos: take the type from the image itself (phone cameras send JPEG)
+        $detected    = $isFile ? null : (@getimagesizefromstring($contents)['mime'] ?? null);
         $extension   = $isFile
             ? $photo->getClientOriginalExtension()
-            : 'png';
+            : match ($detected) {
+                'image/jpeg' => 'jpg',
+                'image/gif'  => 'gif',
+                'image/webp' => 'webp',
+                default      => 'png',
+            };
         $contentType = $isFile
             ? $photo->getClientMimeType()
-            : 'image/png';
+            : ($detected ?? 'image/png');
 
         $company = session('company');
         $path    = "uploads/{$company}/photos/{$proof->public_id}.{$extension}";
