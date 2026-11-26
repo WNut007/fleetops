@@ -3,6 +3,7 @@
 namespace Fleetbase\FleetOps\Http\Resources\v1\Index;
 
 use Fleetbase\FleetOps\Models\Order;
+use Fleetbase\FleetOps\Models\Position;
 use Fleetbase\FleetOps\Support\TrailerSummary;
 use Fleetbase\FleetOps\Support\Utils;
 use Fleetbase\Http\Resources\FleetbaseResource;
@@ -117,6 +118,25 @@ class Vehicle extends FleetbaseResource
         foreach ($uuids as $uuid) {
             $values['orders_count'][$uuid] = $counts[$uuid] ?? 0;
             $values['active_order'][$uuid] = $active[$uuid] ?? null;
+        }
+
+        // Last known position of every vehicle in one round trip per 50 vehicles: one
+        // "newest row for this subject" lookup each (an index range of one row), joined with
+        // UNION ALL instead of a separate query per vehicle while the list serializes
+        foreach ($vehicles->chunk(50) as $chunk) {
+            $query = null;
+            foreach ($chunk as $vehicle) {
+                $single = Position::where('subject_uuid', $vehicle->uuid)
+                    ->where('company_uuid', session('company', $vehicle->company_uuid))
+                    ->latest()
+                    ->limit(1);
+                $query = $query ? $query->unionAll($single) : $single;
+            }
+
+            $positions = $query ? $query->get()->keyBy('subject_uuid') : collect();
+            foreach ($chunk as $vehicle) {
+                $vehicle->setRelation('last_known_position', $positions->get($vehicle->uuid));
+            }
         }
 
         app('request')->attributes->set(static::PRELOAD_KEY, $values);

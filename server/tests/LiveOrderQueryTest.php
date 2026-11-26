@@ -61,6 +61,20 @@ class FleetOpsLiveOrderQueryRecorder extends Builder
         return $this;
     }
 
+    public function whereNotNull($columns, $boolean = 'and')
+    {
+        $this->calls[] = ['whereNotNull', $columns];
+
+        return $this;
+    }
+
+    public function whereExists($callback, $boolean = 'and', $not = false)
+    {
+        $this->calls[] = ['whereExists'];
+
+        return $this;
+    }
+
     public function applyDirectivesForPermissions(string $permission)
     {
         $this->calls[] = ['applyDirectivesForPermissions', $permission];
@@ -112,14 +126,11 @@ test('live order query records base payload tracking permission and relation con
         ->and($calls)->toContain(['whereNull', 'driver_assigned_uuid', 'and', false])
         ->and($calls)->toContain(['whereNull', 'deleted_at', 'and', false]);
 
-    expect(collect($calls)->where(0, 'whereHas')->pluck(1)->all())
-        ->toContain('payload', 'trackingNumber', 'trackingStatuses', 'driverAssigned');
-
-    $payload = collect($calls)->first(fn ($call) => $call[0] === 'whereHas' && $call[1] === 'payload');
-    expect($payload[2][0][0])->toBe('whereNested')
-        ->and($payload[2][0][1])->toContain(['whereHas', 'waypoints', null, '>=', 1])
-        ->and($payload[2][0][1])->toContain(['orWhereHas', 'pickup', '>=', 1])
-        ->and($payload[2][0][1])->toContain(['orWhereHas', 'dropoff', '>=', 1]);
+    // Route and tracking number are column checks (OrderListScope), not per-order whereHas
+    expect(collect($calls)->where(0, 'whereHas')->pluck(1)->all())->toBe(['driverAssigned'])
+        ->and($calls)->toContain(['whereNotNull', 'orders.payload_uuid'])
+        ->and($calls)->toContain(['whereNotNull', 'orders.tracking_number_uuid'])
+        ->and($calls)->toContain(['whereExists']);
 
     $with          = collect($calls)->first(fn ($call) => $call[0] === 'with');
     $withRelations = array_merge(array_values(array_filter($with[1], 'is_string')), array_keys(array_filter($with[1], 'is_callable')));

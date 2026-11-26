@@ -608,7 +608,23 @@ class Order extends Model
      */
     public function getAdhocDistance()
     {
-        return $this->adhoc_distance ?? data_get($this, 'company.options.fleetops.adhoc_distance', 6000);
+        if ($this->adhoc_distance !== null) {
+            return $this->adhoc_distance;
+        }
+
+        if ($this->relationLoaded('company') || !$this->company_uuid) {
+            return data_get($this, 'company.options.fleetops.adhoc_distance', 6000);
+        }
+
+        // Lists serialize this for every order (fleets: 1,500 company lookups per request), so the
+        // company setting is read once per company per request, not per order.
+        $key   = 'fleetops.adhoc-distance.' . $this->company_uuid;
+        $cache = app('request')->attributes;
+        if (!$cache->has($key)) {
+            $cache->set($key, data_get($this, 'company.options.fleetops.adhoc_distance', 6000));
+        }
+
+        return $cache->get($key);
     }
 
     /**

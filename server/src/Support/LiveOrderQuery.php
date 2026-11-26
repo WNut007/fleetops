@@ -21,18 +21,12 @@ class LiveOrderQuery
         $withRelations     = $options['with_relations'] ?? false;
         $applyPermissions  = $options['apply_permissions'] ?? true;
 
+        // Route and tracking number checked on columns (see OrderListScope), not whereHas
+        // subqueries per order that made the live counts grow with the order history
         $query = static::newOrderQuery($companyUuid)
-            ->whereHas('payload', function ($query) {
-                $query->where(function ($q) {
-                    $q->whereHas('waypoints');
-                    $q->orWhereHas('pickup');
-                    $q->orWhereHas('dropoff');
-                });
-            })
             ->whereNotIn('status', static::$baseExcludedStatuses)
-            ->whereHas('trackingNumber')
-            ->whereHas('trackingStatuses')
             ->whereNull('deleted_at');
+        OrderListScope::routeAndTracking($query);
 
         if (!empty($exclude)) {
             $query->whereNotIn('public_id', $exclude);

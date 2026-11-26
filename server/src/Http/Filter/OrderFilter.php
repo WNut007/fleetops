@@ -2,6 +2,7 @@
 
 namespace Fleetbase\FleetOps\Http\Filter;
 
+use Fleetbase\FleetOps\Support\OrderListScope;
 use Fleetbase\FleetOps\Http\Filter\Concerns\ResolvesPublicRelationUuids;
 use Fleetbase\FleetOps\Http\Resources\v1\Index\Customer as CustomerIndexResource;
 use Fleetbase\FleetOps\Models\Contact;
@@ -25,28 +26,8 @@ class OrderFilter extends Filter
         // apply company scope first for indexed filtering
         $this->builder->where('orders.company_uuid', $companyUuid);
 
-        // Only orders with a route (pickup, dropoff or waypoints) and a tracking number. Checked on
-        // the order/payload columns instead of whereHas into places, tracking numbers and tracking
-        // statuses: those correlated subqueries ran for every order of the company on each page's
-        // count (≈6 index lookups per order, 470 ms at 20k orders) and grew with the order history.
-        // Difference: an order whose pickup/dropoff place was later deleted now stays listed.
-        $this->builder->whereNotNull('orders.payload_uuid');
-        $this->builder->whereNotNull('orders.tracking_number_uuid');
-        $this->builder->whereExists(function ($payloadQuery) {
-            $payloadQuery->selectRaw('1')
-                ->from('payloads')
-                ->whereColumn('payloads.uuid', 'orders.payload_uuid')
-                ->where(function ($q) {
-                    $q->whereNotNull('payloads.pickup_uuid')
-                        ->orWhereNotNull('payloads.dropoff_uuid')
-                        ->orWhereExists(function ($w) {
-                            $w->selectRaw('1')
-                                ->from('waypoints')
-                                ->whereColumn('waypoints.payload_uuid', 'payloads.uuid')
-                                ->whereNull('waypoints.deleted_at');
-                        });
-                });
-        });
+        // Only orders with a route and a tracking number (column checks, see OrderListScope)
+        OrderListScope::routeAndTracking($this->builder);
 
         // eager load main relationships to reduce N+1 overhead
         $this->builder->with([
