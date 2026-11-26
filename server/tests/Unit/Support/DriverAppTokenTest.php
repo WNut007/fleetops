@@ -65,26 +65,24 @@ test('driver app hands JSON requests on with the forwarded input, not the origin
         ->and($forward->input('code'))->toBeNull();
 });
 
-test('a GPS fix identical to the current location within 15 seconds counts as a repeat', function () {
+test('a GPS fix identical to the last stored position within 15 seconds counts as a repeat', function () {
     Carbon::setTestNow('2026-11-27 01:00:00');
 
-    $driver = new \Fleetbase\FleetOps\Models\Driver();
-    $driver->setRawAttributes(['updated_at' => '2026-11-27 00:59:55']);
-    $driver->location = new \Fleetbase\LaravelMysqlSpatial\Types\Point(13.7635645, 100.5018);
+    $position = function (string $createdAt) {
+        $position = new \Fleetbase\FleetOps\Models\Position();
+        $position->setRawAttributes(['created_at' => $createdAt]);
+        $position->coordinates = new \Fleetbase\LaravelMysqlSpatial\Types\Point(13.7635645, 100.5018);
 
-    $isRepeat = fn (Fleetbase\FleetOps\Models\Driver $driver, float $lat, float $lng) => (function () use ($driver, $lat, $lng) {
-        return static::isRepeatedFix($driver, $lat, $lng);
+        return $position;
+    };
+    $isRepeat = fn ($last, float $lat, float $lng) => (function () use ($last, $lat, $lng) {
+        return static::isRepeatedFix($last, $lat, $lng);
     })->bindTo(null, DriverAppController::class)();
 
-    expect($isRepeat($driver, 13.7635645, 100.5018))->toBeTrue()
-        ->and($isRepeat($driver, 13.7653, 100.5018))->toBeFalse();
-
-    $driver->setRawAttributes(['updated_at' => '2026-11-27 00:59:30']);
-    $driver->location = new \Fleetbase\LaravelMysqlSpatial\Types\Point(13.7635645, 100.5018);
-    expect($isRepeat($driver, 13.7635645, 100.5018))->toBeFalse();
-
-    $driver->location = null;
-    expect($isRepeat($driver, 13.7635645, 100.5018))->toBeFalse();
+    expect($isRepeat($position('2026-11-27 00:59:55'), 13.7635645, 100.5018))->toBeTrue()
+        ->and($isRepeat($position('2026-11-27 00:59:55'), 13.7653, 100.5018))->toBeFalse()
+        ->and($isRepeat($position('2026-11-27 00:59:30'), 13.7635645, 100.5018))->toBeFalse()
+        ->and($isRepeat(null, 13.7635645, 100.5018))->toBeFalse();
 
     Carbon::setTestNow();
 });

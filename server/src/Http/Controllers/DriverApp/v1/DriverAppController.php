@@ -307,7 +307,13 @@ class DriverAppController extends Controller
 
         // The phone often reports the same fix twice within seconds (first fix + motion change when
         // going online): don't store a duplicate position or re-run the geofence/order triggers.
-        if (static::isRepeatedFix($driver, (float) $request->input('latitude'), (float) $request->input('longitude'))) {
+        // Compared with the last stored position (not the driver's updated_at, which going online
+        // also moves, so the first real fix after going online would be dropped).
+        $lastPosition = Position::where('company_uuid', $driver->company_uuid)
+            ->where('subject_uuid', $driver->uuid)
+            ->orderByDesc('created_at')
+            ->first();
+        if (static::isRepeatedFix($lastPosition, (float) $request->input('latitude'), (float) $request->input('longitude'))) {
             return new DriverResource($driver->loadMissing(['vehicle']));
         }
 
@@ -315,18 +321,18 @@ class DriverAppController extends Controller
     }
 
     /**
-     * Same coordinates (to ~0.1 m) as the driver's current location, updated less than 15 s ago.
+     * Same coordinates (to ~0.1 m) as the last stored position, stored less than 15 s ago.
      */
-    protected static function isRepeatedFix(Driver $driver, float $latitude, float $longitude): bool
+    protected static function isRepeatedFix(?Position $lastPosition, float $latitude, float $longitude): bool
     {
-        $location = $driver->location;
-        if (!$location instanceof Point || !$driver->updated_at) {
+        $point = $lastPosition?->coordinates;
+        if (!$point instanceof Point || !$lastPosition->created_at) {
             return false;
         }
 
-        return round($location->getLat(), 6) === round($latitude, 6)
-            && round($location->getLng(), 6) === round($longitude, 6)
-            && Carbon::parse($driver->updated_at)->diffInSeconds(Carbon::now()) < 15;
+        return round($point->getLat(), 6) === round($latitude, 6)
+            && round($point->getLng(), 6) === round($longitude, 6)
+            && Carbon::parse($lastPosition->created_at)->diffInSeconds(Carbon::now()) < 15;
     }
 
     /**
