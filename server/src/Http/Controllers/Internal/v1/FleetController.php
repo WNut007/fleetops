@@ -56,10 +56,11 @@ class FleetController extends FleetOpsController
             $query->with(['drivers.jobs' => function ($jobs) {
                 $jobs->whereNotIn('status', ['completed', 'canceled'])->with(Order::FLEET_LIST_JOB_RELATIONS);
             }]);
-
-            // What each row reads besides its jobs, loaded once for the page instead of once per fleet.
-            $query->afterQuery(fn ($fleets) => static::preloadFleetListRows($fleets));
         }
+
+        // What each row reads (counts, driver users/vehicles), loaded once for the page instead of
+        // once per fleet, for every fleet list: the fleets page itself does not ask for drivers.jobs
+        $query->afterQuery(fn ($fleets) => static::preloadFleetListRows($fleets));
 
         if ($request->has('excludeDriverJobs')) {
             $excludeJobs = $request->inputArray('excludeDriverJobs');

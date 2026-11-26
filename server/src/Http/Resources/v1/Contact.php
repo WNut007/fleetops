@@ -88,7 +88,8 @@ class Contact extends FleetbaseResource
     }
 
     /**
-     * The login account of a contact in a list, without role, policies and permissions: the full
+     * The login account of a contact in a list, with its plain columns but without role, policies,
+     * permissions and the other per-user lookups (locale, company membership): the full
      * User resource cost ~10 queries per row (role, policies, permissions, company membership),
      * 300 of the 318 queries of a 30-row customer list. Opening one contact returns the full user.
      */
@@ -107,6 +108,11 @@ class Contact extends FleetbaseResource
             'username'          => $user->username,
             'email'             => $user->email,
             'phone'             => $user->phone,
+            'country'           => $user->country,
+            'timezone'          => $user->timezone,
+            'date_of_birth'     => $user->date_of_birth,
+            'ip_address'        => $user->ip_address,
+            'slug'              => $user->slug,
             'avatar_url'        => $user->avatar_url,
             'type'              => $user->type,
             'status'            => $user->status,
