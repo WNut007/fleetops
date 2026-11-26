@@ -41,9 +41,9 @@
         {{#let (cannot "fleet-ops list order") as |unauthorized|}}
             <button type="button" id="map-toolbar-view-orders-button" class="toolbar-button relative {{if unauthorized 'unauthorized'}}" {{on "click" this.orderListOverlay.toggle}}>
                 <div class="active-orders-count absolute top-0 right-0 -mr-2.5 -mt-1">
-                    <div class="relative flex w-5 h-5 rounded-full">
-                        <div class="absolute inset-0 rounded-full w-5 h-5 text-xs bg-blue-500 opacity-75 {{if this.displayedActiveOrderCount 'animate-ping'}}"></div>
-                        <div class="relative inline-flex items-center justify-center rounded-full w-5 h-5 text-xs bg-blue-500 text-white z-10">{{this.displayedActiveOrderCount}}</div>
+                    <div class="relative flex h-5 rounded-full" style="min-width:1.25rem" title={{this.displayedActiveOrderCount}}>
+                        <div class="absolute inset-0 rounded-full text-xs bg-blue-500 opacity-75 {{if this.displayedActiveOrderCount 'animate-ping'}}"></div>
+                        <div class="relative inline-flex items-center justify-center rounded-full h-5 px-1 text-xs leading-none bg-blue-500 text-white z-10 whitespace-nowrap" style="min-width:1.25rem">{{this.activeOrderBadge}}</div>
                     </div>
                 </div>
                 <FaIcon @icon="layer-group" />

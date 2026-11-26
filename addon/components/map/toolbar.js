@@ -38,6 +38,19 @@ export default class MapToolbarComponent extends Component {
         return this.mapManager.zoomOut?.();
     }
 
+    /**
+     * The count as it fits the badge: up to 999 as is, then 1.2k / 12k (the full number is in its title).
+     */
+    get activeOrderBadge() {
+        const count = Number(this.displayedActiveOrderCount) || 0;
+        if (count < 1000) {
+            return count;
+        }
+
+        const thousands = count / 1000;
+        return `${thousands < 10 ? Math.floor(thousands * 10) / 10 : Math.floor(thousands)}k`;
+    }
+
     get displayedActiveOrderCount() {
         if (this.orderListOverlay.isOpen && this.orderListOverlay.loaded) {
             return this.orderListOverlay.activeOrdersCount;
