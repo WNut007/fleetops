@@ -86,6 +86,13 @@ class FleetOpsProviderContractsAppFake
         return false;
     }
 
+    public array $bootedCallbacks = [];
+
+    public function booted(callable $callback): void
+    {
+        $this->bootedCallbacks[] = $callback;
+    }
+
     public function make(string $abstract): never
     {
         throw new RuntimeException("Unexpected make call for {$abstract}");

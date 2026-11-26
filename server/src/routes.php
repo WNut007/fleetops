@@ -38,6 +38,33 @@ Route::prefix(config('fleetops.api.routing.prefix'))->namespace('Fleetbase\Fleet
             $router->post('{number}/share', 'TrackingController@redeemShare');
         });
 
+        // The ShipCode driver app. A driver signs in with their own login (no company API key) and
+        // gets a driver-app token that only reaches these routes, scoped to their own jobs; the
+        // company-wide APIs refuse it (RejectDriverAppTokens). See DriverAppController.
+        $router->prefix('driver/v1')->namespace('DriverApp\v1')->middleware([Fleetbase\FleetOps\Http\Middleware\ForceJsonResponse::class])->group(function ($router) {
+            $router->post('auth/login', 'DriverAppController@login')->middleware('throttle:5,1,driver-app-login');
+
+            $router->middleware([
+                \Illuminate\Session\Middleware\StartSession::class,
+                Fleetbase\FleetOps\Http\Middleware\AuthenticateDriverApp::class,
+                'throttle:240,1,driver-app',
+            ])->group(function ($router) {
+                $router->post('auth/logout', 'DriverAppController@logout');
+                $router->get('me', 'DriverAppController@me');
+                $router->post('me/online', 'DriverAppController@online');
+                $router->post('me/device', 'DriverAppController@device');
+                $router->get('orders', 'DriverAppController@orders');
+                $router->get('orders/{id}', 'DriverAppController@order');
+                $router->get('orders/{id}/next', 'DriverAppController@next');
+                $router->post('orders/{id}/activity', 'DriverAppController@activity');
+                $router->post('orders/{id}/proofs/signature/{subjectId?}', 'DriverAppController@signature');
+                $router->post('orders/{id}/proofs/photo/{subjectId?}', 'DriverAppController@photo');
+                $router->post('orders/{id}/proofs/qr/{subjectId?}', 'DriverAppController@qr');
+                $router->post('location', 'DriverAppController@location');
+                $router->post('locations', 'DriverAppController@locations');
+            });
+        });
+
         $router->prefix('public')->namespace('Public')->middleware([Fleetbase\FleetOps\Http\Middleware\ForceJsonResponse::class, 'throttle:60,1,inspection-public'])->group(function ($router) {
             $router->get('inspections/forms/{id}', 'PublicInspectionController@show');
             $router->post('inspections/forms/{id}/submit', 'PublicInspectionController@submit');

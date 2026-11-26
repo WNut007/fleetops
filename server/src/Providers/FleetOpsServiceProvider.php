@@ -141,6 +141,15 @@ class FleetOpsServiceProvider extends CoreServiceProvider
      */
     public function boot()
     {
+        // Driver-app tokens (/driver/v1) must not open the company-wide public and console APIs.
+        // Prepended once the app has booted, after core-api has defined these groups.
+        $this->app->booted(function () {
+            $router = $this->app->make('router');
+            foreach (['fleetbase.api', 'fleetbase.protected'] as $group) {
+                $router->prependMiddlewareToGroup($group, \Fleetbase\FleetOps\Http\Middleware\RejectDriverAppTokens::class);
+            }
+        });
+
         $this->registerMorphMap();
         $this->registerObservers();
         $this->registerCommands();
