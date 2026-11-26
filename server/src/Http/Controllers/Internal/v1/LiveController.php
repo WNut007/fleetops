@@ -243,8 +243,9 @@ class LiveController extends Controller
                 ->orderBy('id')
                 ->get();
 
+            // driver.user: vehicle rows show driver_name, read from the driver's user (one query per vehicle otherwise)
             $vehicles = Vehicle::where(['company_uuid' => session('company')])
-                ->with(['driver'])
+                ->with(['driver.user'])
                 ->applyDirectivesForPermissions('fleet-ops list vehicle')
                 ->orderBy('id')
                 ->get();

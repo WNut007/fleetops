@@ -45,6 +45,24 @@ class ContactController extends FleetOpsController
     public $resource = 'contact';
 
     /**
+     * Load what the contact resource reads for every row in a few queries: place(s), the login
+     * user and its avatar, and the contact photo (one query per relation per row otherwise).
+     */
+    public static function onQueryRecord($query, $request): void
+    {
+        $query->afterQuery(function ($contacts) {
+            // fast-paginate also runs this callback on its key-only inner query: skip rows without columns
+            if (!$contacts instanceof \Illuminate\Database\Eloquent\Collection || $contacts->isEmpty() || !array_key_exists('name', $contacts->first()->getAttributes())) {
+                return $contacts;
+            }
+
+            $contacts->loadMissing(['place', 'places', 'photo', 'user.avatar']);
+
+            return $contacts;
+        });
+    }
+
+    /**
      * Handle pre-create transactions.
      */
     public function onBeforeCreate(Request $request, array &$input)

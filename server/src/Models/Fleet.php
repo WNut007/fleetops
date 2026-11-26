@@ -165,6 +165,11 @@ class Fleet extends Model
      */
     public function getDriversCountAttribute()
     {
+        // Counted for the whole page by the list query (loadCount) when it ran.
+        if (array_key_exists('drivers_count', $this->attributes)) {
+            return (int) $this->attributes['drivers_count'];
+        }
+
         // Count the loaded relation when there is one: these are read for every fleet in a list.
         if ($this->relationLoaded('drivers')) {
             return $this->drivers->count();
@@ -180,6 +185,11 @@ class Fleet extends Model
      */
     public function getDriversOnlineCountAttribute()
     {
+        // Counted for the whole page by the list query (loadCount) when it ran.
+        if (array_key_exists('drivers_online_count', $this->attributes)) {
+            return (int) $this->attributes['drivers_online_count'];
+        }
+
         // Count the loaded relation when there is one: these are read for every fleet in a list.
         if ($this->relationLoaded('drivers')) {
             return $this->drivers->where('online', 1)->count();

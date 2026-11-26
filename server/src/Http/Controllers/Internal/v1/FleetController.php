@@ -112,11 +112,20 @@ class FleetController extends FleetOpsController
      */
     protected static function preloadFleetListRows($fleets)
     {
-        if (!$fleets instanceof \Illuminate\Database\Eloquent\Collection || $fleets->isEmpty() || !$fleets->first()->relationLoaded('drivers')) {
+        // fast-paginate also runs this callback on its key-only inner query: skip rows without columns
+        if (!$fleets instanceof \Illuminate\Database\Eloquent\Collection || $fleets->isEmpty() || !array_key_exists('name', $fleets->first()->getAttributes())) {
             return $fleets;
         }
 
         $fleets->loadCount(['vehicles', 'vehicles as vehicles_online_count' => fn ($q) => $q->where('online', 1)]);
+
+        // Driver counts for pages that do not load the drivers themselves (the fleets list sends
+        // with[]=parentFleet,serviceArea,zone only: four count queries per fleet otherwise)
+        if (!$fleets->first()->relationLoaded('drivers')) {
+            $fleets->loadCount(['drivers', 'drivers as drivers_online_count' => fn ($q) => $q->where('online', 1)]);
+
+            return $fleets;
+        }
 
         $drivers = new \Illuminate\Database\Eloquent\Collection($fleets->flatMap(fn ($fleet) => $fleet->drivers->all())->all());
         if ($drivers->isEmpty()) {

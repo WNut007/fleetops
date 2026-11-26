@@ -64,14 +64,10 @@ class Vehicle extends FleetbaseResource
         ];
     }
 
-    /** Request attribute holding the per-vehicle values preload() computed for a list page. */
-    protected const PRELOAD_KEY = 'fleetops.index-vehicle.preload';
-
     protected function assignedOrdersCount(): int
     {
-        $preloaded = static::preloaded('orders_count');
-        if ($preloaded !== null && array_key_exists($this->uuid, $preloaded)) {
-            return $preloaded[$this->uuid];
+        if ($this->resource->relationLoaded('index_orders_count')) {
+            return (int) $this->resource->getRelation('index_orders_count');
         }
 
         return Order::where('vehicle_assigned_uuid', $this->uuid)->count();
@@ -114,10 +110,11 @@ class Vehicle extends FleetbaseResource
 
         $active = $newest->map(fn ($orderUuid) => $orders->get($orderUuid))->all();
 
-        $values = ['orders_count' => [], 'active_order' => []];
-        foreach ($uuids as $uuid) {
-            $values['orders_count'][$uuid] = $counts[$uuid] ?? 0;
-            $values['active_order'][$uuid] = $active[$uuid] ?? null;
+        // Kept on the models (not the request) so a cached list (LiveCacheService keeps the
+        // resource collection) still has them on the next request
+        foreach ($vehicles as $vehicle) {
+            $vehicle->setRelation('index_orders_count', $counts[$vehicle->uuid] ?? 0);
+            $vehicle->setRelation('index_active_order', $active[$vehicle->uuid] ?? null);
         }
 
         // Last known position of every vehicle in one round trip per 50 vehicles: one
@@ -139,14 +136,13 @@ class Vehicle extends FleetbaseResource
             }
         }
 
-        app('request')->attributes->set(static::PRELOAD_KEY, $values);
-    }
-
-    protected static function preloaded(string $name): ?array
-    {
-        $values = app('request')->attributes->get(static::PRELOAD_KEY);
-
-        return is_array($values) ? ($values[$name] ?? null) : null;
+        // The order each vehicle's last position belongs to (current order reference)
+        $positionOrderUuids = $vehicles->map(fn ($vehicle) => data_get($vehicle->getRelation('last_known_position'), 'order_uuid'))->filter()->unique()->values()->all();
+        $positionOrders     = empty($positionOrderUuids) ? collect() : Order::whereIn('uuid', $positionOrderUuids)->with('trackingNumber')->get()->keyBy('uuid');
+        foreach ($vehicles as $vehicle) {
+            $orderUuid = data_get($vehicle->getRelation('last_known_position'), 'order_uuid');
+            $vehicle->setRelation('index_position_order', $orderUuid ? $positionOrders->get($orderUuid) : null);
+        }
     }
 
     /**
@@ -222,6 +218,10 @@ class Vehicle extends FleetbaseResource
 
     protected function currentPositionOrder(): ?Order
     {
+        if ($this->resource->relationLoaded('index_position_order')) {
+            return $this->resource->getRelation('index_position_order');
+        }
+
         $orderUuid = data_get($this->lastKnownPosition(), 'order_uuid');
 
         return $orderUuid ? Order::where('uuid', $orderUuid)->first() : null;
@@ -229,9 +229,8 @@ class Vehicle extends FleetbaseResource
 
     protected function currentVehicleOrder(): ?Order
     {
-        $preloaded = static::preloaded('active_order');
-        if ($preloaded !== null && array_key_exists($this->uuid, $preloaded)) {
-            return $preloaded[$this->uuid];
+        if ($this->resource->relationLoaded('index_active_order')) {
+            return $this->resource->getRelation('index_active_order');
         }
 
         return static::activeOrdersQuery()
