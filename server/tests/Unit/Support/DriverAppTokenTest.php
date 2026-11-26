@@ -64,3 +64,27 @@ test('driver app hands JSON requests on with the forwarded input, not the origin
         ->and($forward->input('proof'))->toBe('proof_1')
         ->and($forward->input('code'))->toBeNull();
 });
+
+test('a GPS fix identical to the current location within 15 seconds counts as a repeat', function () {
+    Carbon::setTestNow('2026-11-27 01:00:00');
+
+    $driver = new \Fleetbase\FleetOps\Models\Driver();
+    $driver->setRawAttributes(['updated_at' => '2026-11-27 00:59:55']);
+    $driver->location = new \Fleetbase\LaravelMysqlSpatial\Types\Point(13.7635645, 100.5018);
+
+    $isRepeat = fn (Fleetbase\FleetOps\Models\Driver $driver, float $lat, float $lng) => (function () use ($driver, $lat, $lng) {
+        return static::isRepeatedFix($driver, $lat, $lng);
+    })->bindTo(null, DriverAppController::class)();
+
+    expect($isRepeat($driver, 13.7635645, 100.5018))->toBeTrue()
+        ->and($isRepeat($driver, 13.7653, 100.5018))->toBeFalse();
+
+    $driver->setRawAttributes(['updated_at' => '2026-11-27 00:59:30']);
+    $driver->location = new \Fleetbase\LaravelMysqlSpatial\Types\Point(13.7635645, 100.5018);
+    expect($isRepeat($driver, 13.7635645, 100.5018))->toBeFalse();
+
+    $driver->location = null;
+    expect($isRepeat($driver, 13.7635645, 100.5018))->toBeFalse();
+
+    Carbon::setTestNow();
+});

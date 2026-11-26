@@ -303,7 +303,30 @@ class DriverAppController extends Controller
             return $this->error('bad_location', 422, $this->requestLocale($request));
         }
 
-        return app(ApiDriverController::class)->track($this->driver($request)->public_id, $request);
+        $driver = $this->driver($request);
+
+        // The phone often reports the same fix twice within seconds (first fix + motion change when
+        // going online): don't store a duplicate position or re-run the geofence/order triggers.
+        if (static::isRepeatedFix($driver, (float) $request->input('latitude'), (float) $request->input('longitude'))) {
+            return new DriverResource($driver->loadMissing(['vehicle']));
+        }
+
+        return app(ApiDriverController::class)->track($driver->public_id, $request);
+    }
+
+    /**
+     * Same coordinates (to ~0.1 m) as the driver's current location, updated less than 15 s ago.
+     */
+    protected static function isRepeatedFix(Driver $driver, float $latitude, float $longitude): bool
+    {
+        $location = $driver->location;
+        if (!$location instanceof Point || !$driver->updated_at) {
+            return false;
+        }
+
+        return round($location->getLat(), 6) === round($latitude, 6)
+            && round($location->getLng(), 6) === round($longitude, 6)
+            && Carbon::parse($driver->updated_at)->diffInSeconds(Carbon::now()) < 15;
     }
 
     /**
