@@ -44,6 +44,9 @@ class DriverAppController extends Controller
             'activity_unknown' => 'This step is not available for the order right now.',
             'bad_location'     => 'The location is not valid.',
             'too_many_points'  => 'Send at most :max locations at a time.',
+            'proof_required'   => 'Proof of delivery is required for this step.',
+            'step_not_allowed' => 'This step is not a permitted next step for the order.',
+            'order_finished'   => 'This order has already finished.',
         ],
         'th' => [
             'login_failed'     => 'อีเมล/เบอร์โทร หรือรหัสผ่านไม่ถูกต้อง',
@@ -53,6 +56,9 @@ class DriverAppController extends Controller
             'activity_unknown' => 'ขั้นตอนนี้ยังทำไม่ได้สำหรับออเดอร์นี้',
             'bad_location'     => 'ตำแหน่งไม่ถูกต้อง',
             'too_many_points'  => 'ส่งตำแหน่งได้ครั้งละไม่เกิน :max จุด',
+            'proof_required'   => 'ขั้นตอนนี้ต้องมีหลักฐานการส่งมอบ (POD)',
+            'step_not_allowed' => 'ขั้นตอนนี้ไม่ใช่ขั้นถัดไปที่ทำได้ของออเดอร์',
+            'order_finished'   => 'ออเดอร์นี้เสร็จสิ้นไปแล้ว',
         ],
     ];
 
@@ -219,7 +225,19 @@ class DriverAppController extends Controller
             'waypoint' => $request->input('waypoint'),
         ], fn ($value) => $value !== null));
 
-        return app(ApiOrderController::class)->updateActivity($order->public_id, $forward);
+        $response = app(ApiOrderController::class)->updateActivity($order->public_id, $forward);
+
+        // The order config's refusals are English sentences: answer them in the driver's language
+        if ($response instanceof JsonResponse && $response->getStatusCode() >= 400) {
+            $text = json_encode($response->getData(true), JSON_UNESCAPED_UNICODE);
+            foreach (['Proof of delivery is required' => 'proof_required', 'not a permitted next step' => 'step_not_allowed', 'already finished' => 'order_finished', 'already completed' => 'order_finished'] as $needle => $key) {
+                if (str_contains((string) $text, $needle)) {
+                    return $this->error($key, $response->getStatusCode(), $locale);
+                }
+            }
+        }
+
+        return $response;
     }
 
     public function signature(Request $request, string $id, ?string $subjectId = null)
