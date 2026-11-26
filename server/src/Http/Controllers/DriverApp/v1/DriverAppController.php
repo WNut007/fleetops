@@ -213,12 +213,11 @@ class DriverAppController extends Controller
             return $this->error('activity_unknown', 422, $locale);
         }
 
-        $forward = $request->duplicate(null, array_filter([
+        $forward = static::forwardRequest($request, array_filter([
             'activity' => $step,
             'proof'    => $request->input('proof_id'),
             'waypoint' => $request->input('waypoint'),
         ], fn ($value) => $value !== null));
-        $forward->setUserResolver($request->getUserResolver());
 
         return app(ApiOrderController::class)->updateActivity($order->public_id, $forward);
     }
@@ -325,7 +324,7 @@ class DriverAppController extends Controller
             }
 
             $latest  = $valid->last();
-            $forward = $request->duplicate(null, array_intersect_key($latest, array_flip(['latitude', 'longitude', 'heading', 'speed', 'altitude'])));
+            $forward = static::forwardRequest($request, array_intersect_key($latest, array_flip(['latitude', 'longitude', 'heading', 'speed', 'altitude'])));
             app(ApiDriverController::class)->track($driver->public_id, $forward);
             $stored++;
         }
@@ -339,6 +338,23 @@ class DriverAppController extends Controller
     // -----------------------------------------------------------------------------------------
     // Helpers
     // -----------------------------------------------------------------------------------------
+
+    /**
+     * A new request carrying only the given input, for handing work to the public API controllers.
+     * Request::duplicate() would keep the original JSON body, and Laravel reads a JSON request's
+     * input from that body, so the forwarded input was silently ignored for JSON clients.
+     */
+    protected static function forwardRequest(Request $request, array $input): Request
+    {
+        $forward = Request::create($request->getUri(), $request->getMethod(), $input, [], [], ['HTTP_ACCEPT' => 'application/json']);
+        $forward->setUserResolver($request->getUserResolver());
+        $forward->setRouteResolver($request->getRouteResolver());
+        if ($request->hasSession()) {
+            $forward->setLaravelSession($request->session());
+        }
+
+        return $forward;
+    }
 
     protected function driver(Request $request): Driver
     {

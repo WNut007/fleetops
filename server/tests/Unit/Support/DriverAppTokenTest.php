@@ -52,3 +52,15 @@ test('driver app accepts only real coordinates and normalizes Thai phone numbers
         ->and($phone->invoke(null, '+66812345678'))->toBe('+66812345678')
         ->and($phone->invoke(null, '66812345678'))->toBe('+66812345678');
 });
+
+test('driver app hands JSON requests on with the forwarded input, not the original body', function () {
+    $original = Illuminate\Http\Request::create('/driver/v1/orders/order_x/activity', 'POST', [], [], [], ['CONTENT_TYPE' => 'application/json'], json_encode(['code' => 'started']));
+    $forward  = (new ReflectionMethod(DriverAppController::class, 'forwardRequest'))
+        ->invoke(null, $original, ['activity' => ['code' => 'started', 'status' => 'Order Started'], 'proof' => 'proof_1']);
+
+    expect($original->isJson())->toBeTrue()
+        ->and($original->input('activity'))->toBeNull()
+        ->and($forward->input('activity'))->toBe(['code' => 'started', 'status' => 'Order Started'])
+        ->and($forward->input('proof'))->toBe('proof_1')
+        ->and($forward->input('code'))->toBeNull();
+});
