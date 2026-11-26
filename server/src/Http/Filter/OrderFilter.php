@@ -57,6 +57,27 @@ class OrderFilter extends Filter
 
     public function query(?string $query)
     {
+        // An identifier (letters and digits, no spaces, e.g. DSV48…, order_1jw…, SCALE-0005) is
+        // looked up by prefix on the order's own ids and tracking number, which indexes answer.
+        // The general search below is '%term%' over 28 order/place columns through correlated
+        // subqueries: ~1 s at 20k orders and growing with the history. Pure numbers (phones,
+        // postal codes) and words still use it.
+        if (static::looksLikeIdentifier($query)) {
+            $prefix = addcslashes(trim($query), '%_\\') . '%';
+            $this->builder->where(function ($builder) use ($prefix) {
+                $builder->where('orders.public_id', 'like', $prefix)
+                    ->orWhere('orders.internal_id', 'like', $prefix)
+                    ->orWhereIn('orders.tracking_number_uuid', function ($trackingNumbers) use ($prefix) {
+                        $trackingNumbers->select('uuid')
+                            ->from('tracking_numbers')
+                            ->where('tracking_number', 'like', $prefix)
+                            ->whereNull('deleted_at');
+                    });
+            });
+
+            return;
+        }
+
         $this->builder->search($query, function ($builder, $query) {
             // also query for payload addresses
             $builder->orWhere(function ($builder) use ($query) {
@@ -75,6 +96,19 @@ class OrderFilter extends Filter
                 });
             });
         });
+    }
+
+    /**
+     * Letters and digits together, no spaces: tracking numbers and order ids, not names or phones.
+     */
+    public static function looksLikeIdentifier(?string $query): bool
+    {
+        $query = trim((string) $query);
+
+        return strlen($query) >= 3
+            && (bool) preg_match('/^[A-Za-z0-9_\-]+$/', $query)
+            && (bool) preg_match('/[A-Za-z]/', $query)
+            && (bool) preg_match('/[0-9]/', $query);
     }
 
     public function unassigned(bool $unassigned)

@@ -322,6 +322,22 @@ test('order filter search and assignment status filters execute nested query bra
         ->and($builder->called('whereHas'))->toBeTrue();
 });
 
+test('order filter looks identifiers up by prefix and keeps the full search for words and numbers', function () {
+    expect(Fleetbase\FleetOps\Http\Filter\OrderFilter::looksLikeIdentifier('DSV48'))->toBeTrue()
+        ->and(Fleetbase\FleetOps\Http\Filter\OrderFilter::looksLikeIdentifier('order_1jw2'))->toBeTrue()
+        ->and(Fleetbase\FleetOps\Http\Filter\OrderFilter::looksLikeIdentifier('SCALE-000050'))->toBeTrue()
+        ->and(Fleetbase\FleetOps\Http\Filter\OrderFilter::looksLikeIdentifier('0812345678'))->toBeFalse()
+        ->and(Fleetbase\FleetOps\Http\Filter\OrderFilter::looksLikeIdentifier('สมชาย'))->toBeFalse()
+        ->and(Fleetbase\FleetOps\Http\Filter\OrderFilter::looksLikeIdentifier('Bangkok 10'))->toBeFalse()
+        ->and(Fleetbase\FleetOps\Http\Filter\OrderFilter::looksLikeIdentifier('a1'))->toBeFalse();
+
+    $builder = new FleetOpsRecordingOrderFilterBuilder();
+    fleetopsOrderFilter($builder)->query('DSV48');
+
+    expect($builder->called('search'))->toBeFalse()
+        ->and($builder->called('where'))->toBeTrue();
+});
+
 test('order filter identity and relation filters support uuid and public identifiers', function () {
     $builder = new FleetOpsRecordingOrderFilterBuilder();
     $filter  = fleetopsOrderFilter($builder);
