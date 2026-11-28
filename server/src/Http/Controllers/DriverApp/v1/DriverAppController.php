@@ -7,9 +7,11 @@ use Fleetbase\FleetOps\Http\Controllers\Api\v1\OrderController as ApiOrderContro
 use Fleetbase\FleetOps\Http\Middleware\AuthenticateDriverApp;
 use Fleetbase\FleetOps\Http\Resources\v1\Driver as DriverResource;
 use Fleetbase\FleetOps\Http\Resources\v1\Order as OrderResource;
+use Fleetbase\FleetOps\Http\Resources\v1\Proof as ProofResource;
 use Fleetbase\FleetOps\Models\Driver;
 use Fleetbase\FleetOps\Models\Order;
 use Fleetbase\FleetOps\Models\Position;
+use Fleetbase\FleetOps\Models\Proof;
 use Fleetbase\FleetOps\Support\DriverAppToken;
 use Fleetbase\FleetOps\Support\MailText;
 use Fleetbase\FleetOps\Support\SocketChannels;
@@ -47,6 +49,7 @@ class DriverAppController extends Controller
             'bad_location'     => 'The location is not valid.',
             'too_many_points'  => 'Send at most :max locations at a time.',
             'proof_required'   => 'Proof of delivery is required for this step.',
+            'manual_photo_required' => 'Take a photo of the label or the goods when entering the code by hand.',
             'step_not_allowed' => 'This step is not a permitted next step for the order.',
             'order_finished'   => 'This order has already finished.',
         ],
@@ -59,6 +62,7 @@ class DriverAppController extends Controller
             'bad_location'     => 'ตำแหน่งไม่ถูกต้อง',
             'too_many_points'  => 'ส่งตำแหน่งได้ครั้งละไม่เกิน :max จุด',
             'proof_required'   => 'ขั้นตอนนี้ต้องมีหลักฐานการส่งมอบ (POD)',
+            'manual_photo_required' => 'เมื่อพิมพ์รหัสเอง ต้องถ่ายรูปป้ายหรือสินค้าแนบด้วย',
             'step_not_allowed' => 'ขั้นตอนนี้ไม่ใช่ขั้นถัดไปที่ทำได้ของออเดอร์',
             'order_finished'   => 'ออเดอร์นี้เสร็จสิ้นไปแล้ว',
         ],
@@ -286,7 +290,50 @@ class DriverAppController extends Controller
             return $this->notFound($request);
         }
 
+        if ($request->boolean('manual')) {
+            return $this->manualCode($request, $order, $subjectId);
+        }
+
         return app(ApiOrderController::class)->captureQrScan($request, $order->public_id, $subjectId);
+    }
+
+    /**
+     * QR code typed by hand (label damaged, camera trouble): the code must still match, a photo of the
+     * label or goods is required, and the proof is marked as entered manually so the office can see it.
+     * Returns the code proof (its id goes into the activity's proof_id); the photo is stored next to it.
+     */
+    protected function manualCode(Request $request, Order $order, ?string $subjectId)
+    {
+        $photo = $request->input('photo');
+        if (!is_string($photo) || trim($photo) === '') {
+            return $this->error('manual_photo_required', 422, $this->requestLocale($request));
+        }
+
+        $codeResponse = app(ApiOrderController::class)->captureQrScan(
+            static::forwardRequest($request, ['code' => $request->input('code'), 'data' => ['method' => 'manual_entry']]),
+            $order->public_id,
+            $subjectId
+        );
+
+        $codeProof = $codeResponse instanceof ProofResource ? $codeResponse->resource : null;
+        if (!$codeProof instanceof Proof) {
+            // code didn't match (or no subject): pass the original error through
+            return $codeResponse;
+        }
+
+        $codeProof->update(['remarks' => 'Verified by manually entered code (no scan)']);
+
+        app(ApiOrderController::class)->capturePhoto(
+            static::forwardRequest($request, [
+                'photos'  => [$photo],
+                'remarks' => 'Photo for manually entered code',
+                'data'    => ['manual_entry_for' => $codeProof->public_id],
+            ]),
+            $order->public_id,
+            $subjectId
+        );
+
+        return new ProofResource($codeProof->refresh());
     }
 
     // -----------------------------------------------------------------------------------------
